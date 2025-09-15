@@ -204,7 +204,27 @@ section[data-page]{display:none}section[data-page].active{display:block}
     </div>
   </div>
 </section>
-
+<section id="benefits" class="container reveal">
+  <h2 class="h2">Benefits of Online Classes over Offline</h2>
+  <div class="grid cols-2">
+    <div class="card">
+      <h3 class="h3">Flexibility</h3>
+      <p>Attend from anywhere, save commute time, and fit classes into your schedule.</p>
+    </div>
+    <div class="card">
+      <h3 class="h3">Personalization</h3>
+      <p>Get access to 1:1 sessions, recordings, and AI-powered reports tailored to your learning.</p>
+    </div>
+    <div class="card">
+      <h3 class="h3">Global Reach</h3>
+      <p>Learn from the best tutors around the world without leaving your home.</p>
+    </div>
+    <div class="card">
+      <h3 class="h3">Cost Efficient</h3>
+      <p>Save on travel, printed material, and still access high-quality education.</p>
+    </div>
+  </div>
+</section>
 <!-- CONTACT -->
 <section class='section' data-page='contact'>
   <div class='container'>
@@ -213,11 +233,12 @@ section[data-page]{display:none}section[data-page].active{display:block}
     <div class='grid cols-2' style='margin-top:20px'>
         <form id="contactForm" class="form card reveal">
           <input type="hidden" name="form" value="Contact">
-        <input class='input' name='name' placeholder='Your name' required>
-        <input class='input' name='email' type='email' placeholder='Your email' required>
-        <textarea class='input' name='message' rows='6' placeholder='Your message' required></textarea>
-        <button class='btn teal' type='submit'>Send</button>
-      </form>
+          <input class="input" name="name" placeholder="Your name" required>
+          <input class="input" name="email" type="email" placeholder="Your email" required>
+          <input class="input" name="phone" type="tel" placeholder="Your phone number" required>
+          <textarea class="input" name="message" placeholder="Your message"></textarea>
+          <button class="btn teal" type="submit">Send</button>
+        </form>
         <div id="contactFormThanks" class="small" style="display:none;margin-top:12px;color:green;">✅ Got it! We’ll reply soon.</div>
       <div class='card reveal'><h3 style='margin:0 0 8px'>Other ways to reach us</h3><p class='small'>WhatsApp: <strong>+91 6366026928</strong></p><p class='small'>Email: <strong>hello@tutorhive.in</strong></p><p class='small'>Website: <strong>tutorhive.in</strong></p></div>
     </div>
