@@ -269,7 +269,7 @@ const track = document.getElementById('track');
 if(track){ let pos=0; setInterval(()=>{ pos+=2; if(pos>=track.scrollWidth-track.clientWidth) pos=0; track.scrollTo({left:pos,behavior:'smooth'}); },60); }
 </script>
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxv6dttqt5RlQp8QQanLj2ybHUraO6bL7gfh2QLpy-SKctKYP4_F5jcWpRGB7wkcEI/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyRLzjZIr4c9pwZmJjnhD_3NrzuWskMWI1jbKdrUc-9ZxfI1fOzRLjOWLEhq8rxq8_thw/exec";
 
 function wireForm(formId){
   const form = document.getElementById(formId);
@@ -277,29 +277,26 @@ function wireForm(formId){
   form.addEventListener("submit", async (e)=>{
     e.preventDefault();
     const data = Object.fromEntries(new FormData(form).entries());
+    const body = new URLSearchParams(data).toString(); // urlencoded to avoid preflight
     try{
       const res  = await fetch(SCRIPT_URL, {
         method: "POST",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify(data)
+        headers: {"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
+        body
       });
       if(!res.ok) throw new Error(await res.text());
-
-      // show inline thanks if present
       const thanks = document.getElementById(formId + "Thanks");
       if(thanks) thanks.style.display = "block";
       form.reset();
-      // optionally hide the form:
-      // form.style.display = "none";
     }catch(err){
       console.error("Submit error:", err);
       alert("❌ Something went wrong. Please try again.");
     }
   });
 }
-
 ["trialForm","contactForm","tutorForm"].forEach(wireForm);
 </script>
+
 
 </body>
 </html>
