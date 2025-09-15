@@ -1,0 +1,85 @@
+/* TutorHive Mobile Fixes — minimal-change, drop-in overrides
+   HOW IT WORKS: Targets only small screens; uses broad selectors and !important
+   so you don't need to refactor existing HTML. Place this after your current CSS.
+*/
+@media (max-width: 768px) {
+  html, body { margin:0; padding:0; overflow-x:hidden !important; }
+  body { -webkit-text-size-adjust:100%; font-size:16px; line-height:1.5; }
+  img, video, canvas, svg { max-width:100% !important; height:auto !important; }
+  /* Universal text safety */
+  h1, h2, h3, h4, h5, h6 { 
+    line-height:1.15 !important; 
+    margin:0.5rem 0 !important; 
+    word-break:break-word !important; 
+    overflow-wrap:anywhere !important;
+  }
+  h1 { font-size: clamp(24px, 6vw, 34px) !important; }
+  h2 { font-size: clamp(20px, 5.2vw, 28px) !important; }
+  h3 { font-size: clamp(18px, 4.6vw, 24px) !important; }
+  p, li { 
+    font-size: clamp(14px, 3.8vw, 17px) !important; 
+    margin: .5rem 0 !important; 
+    overflow-wrap:anywhere !important;
+  }
+  /* Container padding */
+  .container, [class*="container"], [class*="wrap"], main, section, header, footer {
+    padding-left: clamp(12px, 4vw, 20px) !important;
+    padding-right: clamp(12px, 4vw, 20px) !important;
+  }
+  /* Grid & rows collapse to single column */
+  .row, [class*="row"], .grid, [class*="grid"], .columns, [class*="cols"] {
+    display: block !important;
+  }
+  .grid, [class*="grid"] { 
+    grid-template-columns: 1fr !important; 
+  }
+  .row > *, [class*="row"] > *, .columns > *, [class*="cols"] > * {
+    width: 100% !important; 
+    max-width: 100% !important; 
+  }
+  /* Cards & blocks */
+  .card, [class*="card"], .box, [class*="tile"] {
+    margin-bottom: 16px !important;
+  }
+  /* Buttons */
+  .btn, button, [class*="btn"] {
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:auto !important;
+    max-width:100% !important;
+    padding: .8rem 1rem !important;
+    white-space:nowrap !important;
+  }
+  /* Navbars: stack items, enable scrolling if needed */
+  nav, .navbar, [class*="nav"] {
+    position: relative !important;
+    overflow-x: auto !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+  }
+  /* Hero overlays → stack text, avoid absolute overlaps */
+  .hero, [class*="hero"] { 
+    min-height: auto !important; 
+    padding-top: clamp(16px, 6vw, 28px) !important; 
+    padding-bottom: clamp(16px, 6vw, 28px) !important; 
+  }
+  .overlay, [class*="overlay"], .absolute, [class*="absolute"], .hero-text, [class*="hero-text"] {
+    position: static !important; 
+    transform: none !important; 
+    top:auto !important; left:auto !important; right:auto !important; bottom:auto !important;
+    margin-top: 10px !important;
+  }
+  .hero h1, [class*="hero"] h1 { margin-bottom: 8px !important; }
+  .hero p,  [class*="hero"] p  { margin-bottom: 12px !important; }
+  /* Forms */
+  input, select, textarea {
+    font-size: 16px !important; /* iOS zoom prevention */
+    width: 100% !important;
+  }
+  /* Tables → scrollable */
+  table { display:block !important; width:100% !important; overflow-x:auto !important; }
+  /* Spacing utilities fallback */
+  .mt-0{margin-top:0!important}.mb-0{margin-bottom:0!important}.pt-0{padding-top:0!important}.pb-0{padding-bottom:0!important}
+}
