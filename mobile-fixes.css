@@ -1,0 +1,37 @@
+/* TutorHive Mobile Fixes (v3) */
+@media (max-width: 768px) {
+  /* Stack header */
+  .nav .row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    height: auto !important;
+  }
+  .menu {
+    width: 100% !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+  }
+  .nav .btn {
+    align-self: stretch !important;
+    justify-content: center !important;
+    margin-top: 6px !important;
+  }
+
+  /* Tabbar fixes */
+  .tabbar .container {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  /* Typography */
+  .h1 { font-size: clamp(26px, 6vw, 34px) !important; line-height:1.2 !important; }
+  .h2 { font-size: clamp(20px, 5vw, 26px) !important; }
+  .small, p { font-size: clamp(14px, 4vw, 17px) !important; line-height:1.5 !important; }
+
+  /* Grids collapse */
+  .grid { display:block !important; }
+  .grid > * { width:100% !important; margin-bottom:16px !important; }
+}
+
