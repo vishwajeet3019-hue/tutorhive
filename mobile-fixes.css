@@ -35,30 +35,17 @@
   .grid > * { width:100% !important; margin-bottom:16px !important; }
 }
 
-/* Benefits section styling */
-#benefits {
-  margin: 60px auto;           /* more breathing room */
-  padding: 20px 0;
-}
 
-#benefits .h2 {
-  text-align: center;
-  margin-bottom: 30px;
-}
 
-#benefits .grid {
-  gap: 20px;                   /* space between cards */
-}
-
+/* Benefits section polish */
+#benefits { margin: 60px auto; padding: 20px 0; }
+#benefits .h2 { text-align: center; margin-bottom: 30px; }
+#benefits .grid { gap: 20px; }
 #benefits .card {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  padding: 20px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.05);
+  padding:20px; transition:transform .2s ease, box-shadow .2s ease;
 }
-
-#benefits .card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
+#benefits .card:hover { transform: translateY(-6px); box-shadow:0 8px 20px rgba(0,0,0,.1); }
+/* optional reveal animation if you're using .reveal/.show */
+#benefits .card { opacity:0; transform:translateY(30px); }
+#benefits .card.show { opacity:1; transform:none; transition:all .6s ease; }
