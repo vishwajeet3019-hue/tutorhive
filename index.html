@@ -191,7 +191,8 @@ section[data-page]{display:none}section[data-page].active{display:block}
     <p class='small'>We’ll reply by email/WhatsApp with a Zoom link and timing options within 24 hours.</p>
     <div class='grid cols-2' style='margin-top:20px'>
       <div class='card reveal'><h2 class='h2' style='margin:0 0 8px'>What you’ll get</h2><ul class='small'><li>1:1 or small group trial (your choice)</li><li>Topic of your choice</li><li>Post‑class summary email</li></ul></div>
-      <form class='form card reveal' onsubmit="event.preventDefault(); alert('Thanks! We will contact you soon.');">
+      <form id="trialForm" class="form card reveal">
+        <input type="hidden" name="form" value="Trial Request">
         <input class='input' name='parent' placeholder='Parent name' required>
         <input class='input' name='phone' placeholder='Phone' required>
         <input class='input' name='email' type='email' placeholder='Email' required>
@@ -199,6 +200,7 @@ section[data-page]{display:none}section[data-page].active{display:block}
         <textarea class='input' name='notes' rows='4' placeholder='Anything we should know?'></textarea>
         <button class='btn teal' type='submit'>Request Trial</button>
       </form>
+      <div id="trialFormThanks"  class="small" style="display:none;margin-top:12px;color:green;">✅ Thank you! We’ll contact you within 24 hours.</div>
     </div>
   </div>
 </section>
@@ -209,13 +211,15 @@ section[data-page]{display:none}section[data-page].active{display:block}
     <h1 class='h1'>Contact us</h1>
     <p class='small'>We’re online-first. Reach us anytime.</p>
     <div class='grid cols-2' style='margin-top:20px'>
-      <form class='form card reveal' onsubmit="event.preventDefault(); alert('Thanks! We will contact you soon.');">
+        <form id="contactForm" class="form card reveal">
+          <input type="hidden" name="form" value="Contact">
         <input class='input' name='name' placeholder='Your name' required>
         <input class='input' name='email' type='email' placeholder='Your email' required>
         <textarea class='input' name='message' rows='6' placeholder='Your message' required></textarea>
         <button class='btn teal' type='submit'>Send</button>
       </form>
-      <div class='card reveal'><h3 style='margin:0 0 8px'>Other ways to reach us</h3><p class='small'>WhatsApp: <strong>+91 00000 00000</strong></p><p class='small'>Email: <strong>hello@tutorhive.in</strong></p><p class='small'>Website: <strong>tutorhive.in</strong></p></div>
+        <div id="contactFormThanks" class="small" style="display:none;margin-top:12px;color:green;">✅ Got it! We’ll reply soon.</div>
+      <div class='card reveal'><h3 style='margin:0 0 8px'>Other ways to reach us</h3><p class='small'>WhatsApp: <strong>+91 6366026928</strong></p><p class='small'>Email: <strong>hello@tutorhive.in</strong></p><p class='small'>Website: <strong>tutorhive.in</strong></p></div>
     </div>
   </div>
 </section>
@@ -227,7 +231,8 @@ section[data-page]{display:none}section[data-page].active{display:block}
     <p class='small'>Teach motivated students across Classes 1–8. Flexible schedules. Fair pay.</p>
     <div class='grid cols-2' style='margin-top:20px'>
       <div class='card reveal'><h3 style='margin:0 0 8px'>Why teach with us?</h3><ul class='small'><li>Flexible hours — choose your slots</li><li>Verified profile & parent trust</li><li>Curriculum-aligned resources</li><li>Fast support on scheduling</li></ul></div>
-      <form class='form card reveal' onsubmit="event.preventDefault(); alert('Thanks! We will review your profile.');">
+      <form id="tutorForm" class="form card reveal">
+        <input type="hidden" name="form" value="Tutor Application">
         <input class='input' name='name' placeholder='Full name' required>
         <input class='input' name='email' type='email' placeholder='Email' required>
         <input class='input' name='phone' placeholder='Phone' required>
@@ -235,6 +240,7 @@ section[data-page]{display:none}section[data-page].active{display:block}
         <textarea class='input' name='notes' rows='4' placeholder='Tell us about your teaching style'></textarea>
         <button class='btn teal' type='submit'>Apply</button>
       </form>
+      <div id="tutorFormThanks"   class="small" style="display:none;margin-top:12px;color:green;">✅ Thanks! We’ll review your profile.</div>
     </div>
   </div>
 </section>
@@ -262,5 +268,38 @@ document.querySelectorAll('.reveal,.fade-up').forEach(el=>observer.observe(el));
 const track = document.getElementById('track');
 if(track){ let pos=0; setInterval(()=>{ pos+=2; if(pos>=track.scrollWidth-track.clientWidth) pos=0; track.scrollTo({left:pos,behavior:'smooth'}); },60); }
 </script>
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxv6dttqt5RlQp8QQanLj2ybHUraO6bL7gfh2QLpy-SKctKYP4_F5jcWpRGB7wkcEI/exec";
+
+function wireForm(formId){
+  const form = document.getElementById(formId);
+  if(!form) return;
+  form.addEventListener("submit", async (e)=>{
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form).entries());
+    try{
+      const res  = await fetch(SCRIPT_URL, {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(data)
+      });
+      if(!res.ok) throw new Error(await res.text());
+
+      // show inline thanks if present
+      const thanks = document.getElementById(formId + "Thanks");
+      if(thanks) thanks.style.display = "block";
+      form.reset();
+      // optionally hide the form:
+      // form.style.display = "none";
+    }catch(err){
+      console.error("Submit error:", err);
+      alert("❌ Something went wrong. Please try again.");
+    }
+  });
+}
+
+["trialForm","contactForm","tutorForm"].forEach(wireForm);
+</script>
+
 </body>
 </html>
