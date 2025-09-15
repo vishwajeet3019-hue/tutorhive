@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>TutorHive — Full Preview (All Pages in One)</title>
+<link rel='icon' href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"%3E%3Ccircle cx="32" cy="32" r="30" fill="%2322d3ee"/%3E%3Ccircle cx="32" cy="32" r="22" fill="%230ea5a3"/%3E%3C/svg%3E'>
+<style>
+:root{--brand:#0ea5a3;--brand2:#22d3ee;--honey:#fbbf24;--ink:#0f172a;--sub:#475569;--muted:#f7fafc;--border:#e5e7eb;--bg:#ffffff;--shadow:0 18px 50px rgba(2,8,23,.12)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--ink);background:var(--bg);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.container{max-width:1160px;margin:0 auto;padding:0 18px}
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:12px 18px;border-radius:999px;border:1px solid var(--border);background:#fff;font-weight:800;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn.primary{border:none;color:#0b3c3b;background:linear-gradient(120deg,var(--honey),#ffe082)}
+.btn.teal{border:none;color:#fff;background:linear-gradient(120deg,var(--brand),var(--brand2))}
+.badge{display:inline-block;border:1px dashed var(--brand);background:#ecfeff;border-radius:999px;padding:6px 10px;font-weight:700}
+.small{color:#64748b;font-size:14px;line-height:1.5}
+.h1{font-size:clamp(34px,6.3vw,62px);margin:8px 0 0;line-height:1.08;letter-spacing:-.02em}
+.h2{font-size:clamp(22px,3.2vw,36px);margin:0 0 10px}
+.impact{background:linear-gradient(90deg,#0ea5a3,#22d3ee,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
+.card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:0 12px 30px rgba(2,8,23,.06)}
+.section{padding:90px 0}.section.alt{background:var(--muted)}
+.grid{display:grid;gap:18px}.grid.cols-2{grid-template-columns:1fr}.grid.cols-3{grid-template-columns:1fr}
+@media(min-width:900px){.grid.cols-2{grid-template-columns:1.2fr 1fr}.grid.cols-3{grid-template-columns:repeat(3,1fr)}}
+.tile{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;transition:.2s ease}
+.tile:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.icon-wrap{width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#ecfeff;border:1px solid #d9f2f5}
+/* header */
+.topbar{background:linear-gradient(90deg,#ecfeff,#fff);font-weight:800;color:#0b3c3b}
+.topbar .container{padding:10px 0;text-align:center}
+.nav{border-bottom:1px solid var(--border);background:#fff;position:sticky;top:0;z-index:50;backdrop-filter:saturate(140%) blur(6px)}
+.nav .row{height:68px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900}
+.menu{display:flex;gap:10px;flex-wrap:wrap}
+.menu a{padding:8px 12px;border-radius:10px;position:relative}
+.menu a:after{content:"";position:absolute;left:10px;right:10px;bottom:4px;height:2px;background:linear-gradient(90deg,var(--brand),var(--brand2));border-radius:2px;transform:scaleX(0);transition:transform .18s ease}
+.menu a:hover:after{transform:scaleX(1)}.menu a.active{font-weight:900}
+.hero-grid{display:grid;gap:28px;align-items:center}@media(min-width:900px){.hero-grid{grid-template-columns:1.1fr .9fr}}
+.hero-illus{border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+.carousel{position:relative;overflow:hidden}.carousel-track{display:flex;gap:18px;scroll-snap-type:x mandatory;overflow-x:auto;padding-bottom:8px}.carousel .card{min-width:300px;scroll-snap-align:start}
+/* animations */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}.reveal.show{opacity:1;transform:none}
+.fade-up{opacity:0;transform:translateY(12px);transition:opacity .6s ease, transform .6s ease}.fade-up.show{opacity:1;transform:none}
+/* forms */
+.form{display:grid;gap:10px}.input,select,textarea{width:100%;padding:14px;border:1px solid var(--border);border-radius:14px;background:#fff}
+/* footer */
+footer{border-top:1px solid var(--border);padding:22px 0}.row{display:flex;gap:16px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+/* SPA pages */
+section[data-page]{display:none}section[data-page].active{display:block}
+.tabbar{position:sticky;top:68px;background:#fff;border-bottom:1px dashed var(--border);z-index:40}
+.tabbar .container{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0}
+.tabbar a{font-weight:800;padding:8px 12px;border-radius:10px;border:1px solid var(--border)}.tabbar a.active{background:#ecfeff;border-color:#bae6fd}
+</style>
+</head>
+<body>
+<div class='topbar'><div class='container'>🎉 Free 30‑min trial class — live on Zoom.</div></div>
+<div class='nav'><div class='container row'><div class='brand'>🐝 TutorHive</div><div class='menu'>
+<a href='#home' class='active' data-link='home'>Home</a>
+<a href='#subjects' data-link='subjects'>Subjects</a>
+<a href='#pricing' data-link='pricing'>Pricing</a>
+<a href='#book' data-link='book'>Book Trial</a>
+<a href='#contact' data-link='contact'>Contact</a>
+<a href='#tutor' data-link='tutor'>Become a Tutor</a>
+</div><a class='btn teal' href='#book' data-link='book'>Book Free Class</a></div></div>
+<div class='tabbar'><div class='container'>
+  <a href='#home' class='active' data-link='home'>Home</a>
+  <a href='#subjects' data-link='subjects'>Subjects</a>
+  <a href='#pricing' data-link='pricing'>Pricing</a>
+  <a href='#book' data-link='book'>Book</a>
+  <a href='#contact' data-link='contact'>Contact</a>
+  <a href='#tutor' data-link='tutor'>Tutor</a>
+</div></div>
+
+<!-- HOME -->
+<section class='section active' data-page='home'>
+  <div class='container hero-grid'>
+    <div class='reveal'>
+      <span class='badge'>TutorHive · tutorhive.in</span>
+      <h1 class='h1'>Building <span class='impact'>brighter futures</span>, one lesson at a time.</h1>
+      <p class='small' style='font-size:16px;color:var(--sub)'>Live online tutoring for Classes 1–8 (CBSE • ICSE • IGCSE • IB). Simple Zoom links, flexible schedules, weekly parent updates.</p>
+      <div style='display:flex;gap:10px;flex-wrap:wrap;margin-top:12px'>
+        <a class='btn primary' href='#book' data-link='book'>Book Free Trial</a>
+        <a class='btn' href='#subjects' data-link='subjects'>Explore Subjects</a>
+      </div>
+    </div>
+    <div class='hero-illus fade-up'>
+      <svg viewBox='0 0 880 540' xmlns='http://www.w3.org/2000/svg' role='img' aria-label='Honeycomb learning illustration'>
+        <defs>
+          <linearGradient id='panel' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#e0f7ff'/><stop offset='1' stop-color='#fdf2f8'/></linearGradient>
+          <linearGradient id='hexgrad' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#22d3ee'/><stop offset='1' stop-color='#fbbf24'/></linearGradient>
+          <g id='hex'><polygon points='20,0 40,12 40,36 20,48 0,36 0,12' fill='url(#hexgrad)' opacity='0.2'/></g>
+        </defs>
+        <rect width='880' height='540' rx='28' fill='url(#panel)'/>
+        <g transform='translate(40,40)'>
+          <g><use href='#hex'/><use href='#hex' x='50'/><use href='#hex' x='100'/><use href='#hex' x='150'/><use href='#hex' x='200'/><use href='#hex' x='250'/><use href='#hex' x='300'/><use href='#hex' x='350'/><use href='#hex' x='400'/><use href='#hex' x='450'/></g>
+          <g transform='translate(25,44)'><use href='#hex'/><use href='#hex' x='50'/><use href='#hex' x='100'/><use href='#hex' x='150'/><use href='#hex' x='200'/><use href='#hex' x='250'/><use href='#hex' x='300'/><use href='#hex' x='350'/><use href='#hex' x='400'/><use href='#hex' x='450'/></g>
+          <g transform='translate(0,88)'><use href='#hex'/><use href='#hex' x='50'/><use href='#hex' x='100'/><use href='#hex' x='150'/><use href='#hex' x='200'/><use href='#hex' x='250'/><use href='#hex' x='300'/><use href='#hex' x='350'/><use href='#hex' x='400'/><use href='#hex' x='450'/></g>
+        </g>
+        <g>
+          <rect x='520' y='170' width='270' height='210' rx='18' fill='#0ea5a3'/>
+          <rect x='535' y='190' width='240' height='140' rx='12' fill='#fff'/>
+          <rect x='535' y='335' width='240' height='26' rx='8' fill='#14b8a6'/>
+          <circle cx='560' cy='348' r='6' fill='#fff'/><circle cx='582' cy='348' r='6' fill='#fff'/><circle cx='604' cy='348' r='6' fill='#fff'/>
+          <rect x='555' y='212' width='190' height='16' rx='8' fill='#e2e8f0'/>
+          <rect x='555' y='238' width='150' height='12' rx='6' fill='#e2e8f0'/>
+          <rect x='555' y='260' width='168' height='12' rx='6' fill='#e2e8f0'/>
+          <rect x='555' y='282' width='120' height='12' rx='6' fill='#e2e8f0'/>
+        </g>
+        <g><circle cx='330' cy='270' r='70' fill='url(#hexgrad)' opacity='.9'/><circle cx='330' cy='255' r='28' fill='#fff'/><rect x='295' y='285' width='70' height='34' rx='14' fill='#fff'/></g>
+        <animateTransform attributeName='transform' type='translate' from='0 0' to='0 12' dur='6s' repeatCount='indefinite' additive='sum'/>
+      </svg>
+    </div>
+  </div>
+
+  <div class='container' style='margin-top:40px'>
+    <h2 class='h2 reveal'>What parents say</h2>
+    <div class='carousel'><div class='carousel-track' id='track'>
+      <div class='card'><div class='small'>“TutorHive made math fun. Weekly updates keep us in the loop.”</div><div class='small' style='font-weight:800;margin-top:6px'>— Asha, Class 5 parent ★★★★★</div></div>
+      <div class='card'><div class='small'>“English sessions improved writing and confidence. Highly recommend!”</div><div class='small' style='font-weight:800;margin-top:6px'>— Vikram, Class 7 parent ★★★★★</div></div>
+      <div class='card'><div class='small'>“Simple scheduling and Zoom links. No extra portals to manage.”</div><div class='small' style='font-weight:800;margin-top:6px'>— Nidhi, Class 3 parent ★★★★★</div></div>
+      <div class='card'><div class='small'>“Patient tutors, clear plans. My daughter looks forward to sessions.”</div><div class='small' style='font-weight:800;margin-top:6px'>— Raj, Class 4 parent ★★★★★</div></div>
+    </div></div>
+  </div>
+
+  <div class='section alt'><div class='container'>
+    <h2 class='h2 reveal'>Verified tutors</h2>
+    <div class='grid cols-3'>
+      <div class='tile reveal'><strong>Screened & interviewed</strong><p class='small'>Each tutor passes a structured interview and demo class.</p></div>
+      <div class='tile reveal'><strong>Curriculum-aligned</strong><p class='small'>CBSE/ICSE/IB/IGCSE — experienced with Classes 1–8.</p></div>
+      <div class='tile reveal'><strong>Trial class first</strong><p class='small'>Meet your tutor in a free 30‑min trial before subscribing.</p></div>
+    </div>
+  </div></div>
+
+  <div class='container section'>
+    <h2 class='h2 reveal'>Outcomes parents care about</h2>
+    <div class='grid cols-3' style='margin-top:12px'>
+      <div class='tile reveal' style='display:flex;align-items:center;gap:12px'>
+        <svg width='100' height='100' viewBox='0 0 120 120'><circle cx='60' cy='60' r='46' stroke='#e5e7eb' stroke-width='12' fill='none'/><circle cx='60' cy='60' r='46' stroke='#0ea5a3' stroke-width='12' fill='none' stroke-linecap='round' transform='rotate(-90 60 60)' stroke-dasharray='220 290'/><text x='60' y='66' text-anchor='middle' font-size='22' font-weight='900' fill='#0f172a'>2×</text></svg>
+        <div><strong>Homework completion</strong><div class='small'>vs baseline*</div></div>
+      </div>
+      <div class='tile reveal' style='display:flex;align-items:center;gap:12px'>
+        <svg width='100' height='100' viewBox='0 0 120 120'><circle cx='60' cy='60' r='46' stroke='#e5e7eb' stroke-width='12' fill='none'/><circle cx='60' cy='60' r='46' stroke='#fbbf24' stroke-width='12' fill='none' stroke-linecap='round' transform='rotate(-90 60 60)' stroke-dasharray='165 290'/><text x='60' y='66' text-anchor='middle' font-size='22' font-weight='900' fill='#0f172a'>+25%</text></svg>
+        <div><strong>Problem solving speed</strong><div class='small'>improvement*</div></div>
+      </div>
+      <div class='tile reveal' style='display:flex;align-items:center;gap:12px'>
+        <svg width='100' height='100' viewBox='0 0 120 120'><circle cx='60' cy='60' r='46' stroke='#e5e7eb' stroke-width='12' fill='none'/><circle cx='60' cy='60' r='46' stroke='#22d3ee' stroke-width='12' fill='none' stroke-linecap='round' transform='rotate(-90 60 60)' stroke-dasharray='275 290'/><text x='60' y='66' text-anchor='middle' font-size='22' font-weight='900' fill='#0f172a'>95%</text></svg>
+        <div><strong>Parent recommendation</strong><div class='small'>rate*</div></div>
+      </div>
+    </div>
+    <div class='card small reveal' style='margin-top:16px'>*Illustrative starter metrics — replace with your real results.</div>
+  </div>
+</section>
+
+<!-- SUBJECTS -->
+<section class='section' data-page='subjects'>
+  <div class='container'>
+    <h1 class='h1'>Subjects we cover (Classes 1–8)</h1>
+    <p class='small'>We tailor topics to your child’s level and board syllabus.</p>
+    <div class='grid cols-3' style='margin-top:20px'>
+      <div class='tile reveal'><div class='icon-wrap'>➕</div><strong>Mathematics</strong><p class='small'>Number sense, arithmetic, fractions, algebra, geometry, word problems.</p></div>
+      <div class='tile reveal'><div class='icon-wrap'>🔬</div><strong>Science</strong><p class='small'>Physics basics, chemistry basics, life sciences, experiments.</p></div>
+      <div class='tile reveal'><div class='icon-wrap'>📘</div><strong>English</strong><p class='small'>Grammar, writing, comprehension, literature.</p></div>
+      <div class='tile reveal'><div class='icon-wrap'>🗺️</div><strong>Social Studies</strong><p class='small'>History, civics, geography — timelines, maps, projects.</p></div>
+      <div class='tile reveal'><div class='icon-wrap'>📝</div><strong>Hindi</strong><p class='small'>Reading, grammar, vocabulary, composition.</p></div>
+      <div class='tile reveal'><div class='icon-wrap'>💻</div><strong>Coding</strong><p class='small'>Scratch → Python/JS, logic & algorithms, projects.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class='section' data-page='pricing'>
+  <div class='container'>
+    <h1 class='h1'>Simple, transparent pricing</h1>
+    <p class='small'>Lessons are 60‑min live on Zoom. Cancel anytime.</p>
+    <div class='grid cols-3' style='margin-top:20px'>
+      <div class='tile reveal'><strong>Starter</strong><div class='small'>Great to begin</div><div style='font-size:28px;font-weight:900;margin:6px 0'>₹1,999<span class='small'> /mo</span></div><ul class='small'><li>4 classes</li><li>Weekly email</li><li>WhatsApp doubt help</li></ul><a class='btn teal' href='#book' data-link='book'>Choose Starter</a></div>
+      <div class='tile reveal' style='border-color:#bae6fd'><div class='small' style='display:inline-block;background:var(--brand);color:#fff;border-radius:999px;padding:4px 8px;font-weight:900'>Most Popular</div><strong>Standard</strong><div style='font-size:28px;font-weight:900;margin:6px 0'>₹4,999<span class='small'> /mo</span></div><ul class='small'><li>12 classes</li><li>Focus report</li><li>Reschedule friendly</li></ul><a class='btn teal' href='#book' data-link='book'>Choose Standard</a></div>
+      <div class='tile reveal'><strong>Pro</strong><div class='small'>For ambitious learners</div><div style='font-size:28px;font-weight:900;margin:6px 0'>₹8,999<span class='small'> /mo</span></div><ul class='small'><li>20 classes</li><li>Priority support</li><li>Parent review call</li></ul><a class='btn teal' href='#book' data-link='book'>Choose Pro</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK -->
+<section class='section' data-page='book'>
+  <div class='container'>
+    <h1 class='h1'>Book a free 30‑min trial class</h1>
+    <p class='small'>We’ll reply by email/WhatsApp with a Zoom link and timing options within 24 hours.</p>
+    <div class='grid cols-2' style='margin-top:20px'>
+      <div class='card reveal'><h2 class='h2' style='margin:0 0 8px'>What you’ll get</h2><ul class='small'><li>1:1 or small group trial (your choice)</li><li>Topic of your choice</li><li>Post‑class summary email</li></ul></div>
+      <form class='form card reveal' onsubmit="event.preventDefault(); alert('Thanks! We will contact you soon.');">
+        <input class='input' name='parent' placeholder='Parent name' required>
+        <input class='input' name='phone' placeholder='Phone' required>
+        <input class='input' name='email' type='email' placeholder='Email' required>
+        <select name='subject' class='input'><option>Preferred Subject</option><option>Mathematics</option><option>Science</option><option>English</option><option>Social Studies</option><option>Hindi</option><option>Coding</option></select>
+        <textarea class='input' name='notes' rows='4' placeholder='Anything we should know?'></textarea>
+        <button class='btn teal' type='submit'>Request Trial</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class='section' data-page='contact'>
+  <div class='container'>
+    <h1 class='h1'>Contact us</h1>
+    <p class='small'>We’re online-first. Reach us anytime.</p>
+    <div class='grid cols-2' style='margin-top:20px'>
+      <form class='form card reveal' onsubmit="event.preventDefault(); alert('Thanks! We will contact you soon.');">
+        <input class='input' name='name' placeholder='Your name' required>
+        <input class='input' name='email' type='email' placeholder='Your email' required>
+        <textarea class='input' name='message' rows='6' placeholder='Your message' required></textarea>
+        <button class='btn teal' type='submit'>Send</button>
+      </form>
+      <div class='card reveal'><h3 style='margin:0 0 8px'>Other ways to reach us</h3><p class='small'>WhatsApp: <strong>+91 00000 00000</strong></p><p class='small'>Email: <strong>hello@tutorhive.in</strong></p><p class='small'>Website: <strong>tutorhive.in</strong></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TUTOR -->
+<section class='section' data-page='tutor'>
+  <div class='container'>
+    <h1 class='h1'>Become a Tutor at TutorHive</h1>
+    <p class='small'>Teach motivated students across Classes 1–8. Flexible schedules. Fair pay.</p>
+    <div class='grid cols-2' style='margin-top:20px'>
+      <div class='card reveal'><h3 style='margin:0 0 8px'>Why teach with us?</h3><ul class='small'><li>Flexible hours — choose your slots</li><li>Verified profile & parent trust</li><li>Curriculum-aligned resources</li><li>Fast support on scheduling</li></ul></div>
+      <form class='form card reveal' onsubmit="event.preventDefault(); alert('Thanks! We will review your profile.');">
+        <input class='input' name='name' placeholder='Full name' required>
+        <input class='input' name='email' type='email' placeholder='Email' required>
+        <input class='input' name='phone' placeholder='Phone' required>
+        <select class='input' name='subject'><option>Subject Expertise</option><option>Mathematics</option><option>Science</option><option>English</option><option>Social Studies</option><option>Hindi</option><option>Coding</option></select>
+        <textarea class='input' name='notes' rows='4' placeholder='Tell us about your teaching style'></textarea>
+        <button class='btn teal' type='submit'>Apply</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer><div class='container row'><div class='brand'>🐝 TutorHive</div><div class='small'>© 2025 TutorHive · Home · Subjects · Pricing · Book · Contact · Tutor</div></div></footer>
+
+<script>
+// SPA navigation
+const pages = document.querySelectorAll('section[data-page]');
+const links = document.querySelectorAll('[data-link]');
+function showPage(key){
+  pages.forEach(p=>p.classList.toggle('active', p.dataset.page===key));
+  links.forEach(a=>a.classList.toggle('active', a.dataset.link===key));
+  history.replaceState(null, "", "#"+key);
+  document.querySelectorAll('.reveal,.fade-up').forEach(el=>{ el.classList.remove('show'); observer.observe(el); });
+}
+links.forEach(a=>a.addEventListener('click', e=>{ e.preventDefault(); showPage(a.dataset.link); }));
+if(location.hash && document.querySelector("[data-page='"+location.hash.slice(1)+"']")) showPage(location.hash.slice(1));
+
+// reveal animations
+const observer = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); observer.unobserve(e.target); } }); }, {threshold:0.14});
+document.querySelectorAll('.reveal,.fade-up').forEach(el=>observer.observe(el));
+
+// auto-scroll carousel
+const track = document.getElementById('track');
+if(track){ let pos=0; setInterval(()=>{ pos+=2; if(pos>=track.scrollWidth-track.clientWidth) pos=0; track.scrollTo({left:pos,behavior:'smooth'}); },60); }
+</script>
+</body>
+</html>
