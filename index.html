@@ -1,61 +1,80 @@
 <!DOCTYPE html>
 <html lang='en'>
-<head>
-<meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'>
-<title>TutorHive — Full Preview (All Pages in One)</title>
-<link rel='icon' href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"%3E%3Ccircle cx="32" cy="32" r="30" fill="%2322d3ee"/%3E%3Ccircle cx="32" cy="32" r="22" fill="%230ea5a3"/%3E%3C/svg%3E'>
-<link rel="stylesheet" href="mobile-fixes.css">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<style>
-:root{--brand:#0ea5a3;--brand2:#22d3ee;--honey:#fbbf24;--ink:#0f172a;--sub:#475569;--muted:#f7fafc;--border:#e5e7eb;--bg:#ffffff;--shadow:0 18px 50px rgba(2,8,23,.12)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--ink);background:var(--bg);overflow-x:hidden}
-a{color:inherit;text-decoration:none}
-.container{max-width:1160px;margin:0 auto;padding:0 18px}
-.btn{display:inline-flex;align-items:center;gap:.6rem;padding:12px 18px;border-radius:999px;border:1px solid var(--border);background:#fff;font-weight:800;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease}
-.btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-.btn.primary{border:none;color:#0b3c3b;background:linear-gradient(120deg,var(--honey),#ffe082)}
-.btn.teal{border:none;color:#fff;background:linear-gradient(120deg,var(--brand),var(--brand2))}
-.badge{display:inline-block;border:1px dashed var(--brand);background:#ecfeff;border-radius:999px;padding:6px 10px;font-weight:700}
-.small{color:#64748b;font-size:14px;line-height:1.5}
-.h1{font-size:clamp(34px,6.3vw,62px);margin:8px 0 0;line-height:1.08;letter-spacing:-.02em}
-.h2{font-size:clamp(22px,3.2vw,36px);margin:0 0 10px}
-.impact{background:linear-gradient(90deg,#0ea5a3,#22d3ee,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
-.card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:0 12px 30px rgba(2,8,23,.06)}
-.section{padding:90px 0}.section.alt{background:var(--muted)}
-.grid{display:grid;gap:18px}.grid.cols-2{grid-template-columns:1fr}.grid.cols-3{grid-template-columns:1fr}
-@media(min-width:900px){.grid.cols-2{grid-template-columns:1.2fr 1fr}.grid.cols-3{grid-template-columns:repeat(3,1fr)}}
-.tile{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;transition:.2s ease}
-.tile:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
-.icon-wrap{width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#ecfeff;border:1px solid #d9f2f5}
-/* header */
-.topbar{background:linear-gradient(90deg,#ecfeff,#fff);font-weight:800;color:#0b3c3b}
-.topbar .container{padding:10px 0;text-align:center}
-.nav{border-bottom:1px solid var(--border);background:#fff;position:sticky;top:0;z-index:50;backdrop-filter:saturate(140%) blur(6px)}
-.nav .row{height:68px;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:10px;font-weight:900}
-.menu{display:flex;gap:10px;flex-wrap:wrap}
-.menu a{padding:8px 12px;border-radius:10px;position:relative}
-.menu a:after{content:"";position:absolute;left:10px;right:10px;bottom:4px;height:2px;background:linear-gradient(90deg,var(--brand),var(--brand2));border-radius:2px;transform:scaleX(0);transition:transform .18s ease}
-.menu a:hover:after{transform:scaleX(1)}.menu a.active{font-weight:900}
-.hero-grid{display:grid;gap:28px;align-items:center}@media(min-width:900px){.hero-grid{grid-template-columns:1.1fr .9fr}}
-.hero-illus{border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
-.carousel{position:relative;overflow:hidden}.carousel-track{display:flex;gap:18px;scroll-snap-type:x mandatory;overflow-x:auto;padding-bottom:8px}.carousel .card{min-width:300px;scroll-snap-align:start}
-/* animations */
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}.reveal.show{opacity:1;transform:none}
-.fade-up{opacity:0;transform:translateY(12px);transition:opacity .6s ease, transform .6s ease}.fade-up.show{opacity:1;transform:none}
-/* forms */
-.form{display:grid;gap:10px}.input,select,textarea{width:100%;padding:14px;border:1px solid var(--border);border-radius:14px;background:#fff}
-/* footer */
-footer{border-top:1px solid var(--border);padding:22px 0}.row{display:flex;gap:16px;justify-content:space-between;align-items:center;flex-wrap:wrap}
-/* SPA pages */
-section[data-page]{display:none}section[data-page].active{display:block}
-.tabbar{position:sticky;top:68px;background:#fff;border-bottom:1px dashed var(--border);z-index:40}
-.tabbar .container{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0}
-.tabbar a{font-weight:800;padding:8px 12px;border-radius:10px;border:1px solid var(--border)}.tabbar a.active{background:#ecfeff;border-color:#bae6fd}
-</style>
-</head>
+      <!-- ✅ SEO Title & Description -->
+      <title>1:1 Online Tutoring for Classes 1–8 | TutorHive Free Trial</title>
+      <meta name="description" content="TutorHive offers personalized online tutoring for CBSE, ICSE, IGCSE, and IB students. Free 30-min trial, flexible schedules, and weekly parent updates.">
+
+      <!-- ✅ Keywords -->
+      <meta name="keywords" content="online tutoring India, CBSE tutor, ICSE tutor, IGCSE tutor, IB tutor, free trial online classes, 1:1 tutoring">
+
+      <!-- ✅ Social Sharing (Open Graph) -->
+      <meta property="og:title" content="1:1 Online Tutoring for Classes 1–8 | TutorHive">
+      <meta property="og:description" content="Free 30-min trial class. Flexible schedules, expert tutors, weekly parent updates.">
+      <meta property="og:url" content="https://tutorhive.in">
+      <meta property="og:type" content="website">
+      <meta property="og:image" content="https://tutorhive.in/logo.png">
+
+      <!-- ✅ Favicon -->
+      <link rel="icon" href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"%3E%3Ccircle cx="32" cy="32" r="30" fill="%2322d3ee"/%3E%3Ccircle cx="32" cy="32" r="22" fill="%230ea5a3"/%3E%3C/svg%3E'>
+
+      <!-- ✅ Stylesheet -->
+      <link rel="stylesheet" href="mobile-fixes.css">
+
+      <!-- ✅ Existing Inline Styles (keep as is) -->
+      <style>
+        :root{--brand:#0ea5a3;--brand2:#22d3ee;--honey:#fbbf24;--ink:#0f172a;--sub:#475569;--muted:#f7fafc;--border:#e5e7eb;--bg:#ffffff;--shadow:0 18px 50px rgba(2,8,23,.12)}
+        *{box-sizing:border-box}html{scroll-behavior:smooth}
+        body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--ink);background:var(--bg);overflow-x:hidden}
+        a{color:inherit;text-decoration:none}
+        .container{max-width:1160px;margin:0 auto;padding:0 18px}
+        .btn{display:inline-flex;align-items:center;gap:.6rem;padding:12px 18px;border-radius:999px;border:1px solid var(--border);background:#fff;font-weight:800;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease}
+        .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+        .btn.primary{border:none;color:#0b3c3b;background:linear-gradient(120deg,var(--honey),#ffe082)}
+        .btn.teal{border:none;color:#fff;background:linear-gradient(120deg,var(--brand),var(--brand2))}
+        .badge{display:inline-block;border:1px dashed var(--brand);background:#ecfeff;border-radius:999px;padding:6px 10px;font-weight:700}
+        .small{color:#64748b;font-size:14px;line-height:1.5}
+        .h1{font-size:clamp(34px,6.3vw,62px);margin:8px 0 0;line-height:1.08;letter-spacing:-.02em}
+        .h2{font-size:clamp(22px,3.2vw,36px);margin:0 0 10px}
+        .impact{background:linear-gradient(90deg,#0ea5a3,#22d3ee,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
+        .card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:0 12px 30px rgba(2,8,23,.06)}
+        .section{padding:90px 0}.section.alt{background:var(--muted)}
+        .grid{display:grid;gap:18px}.grid.cols-2{grid-template-columns:1fr}.grid.cols-3{grid-template-columns:1fr}
+        @media(min-width:900px){.grid.cols-2{grid-template-columns:1.2fr 1fr}.grid.cols-3{grid-template-columns:repeat(3,1fr)}}
+        .tile{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;transition:.2s ease}
+        .tile:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+        .icon-wrap{width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#ecfeff;border:1px solid #d9f2f5}
+        /* header */
+        .topbar{background:linear-gradient(90deg,#ecfeff,#fff);font-weight:800;color:#0b3c3b}
+        .topbar .container{padding:10px 0;text-align:center}
+        .nav{border-bottom:1px solid var(--border);background:#fff;position:sticky;top:0;z-index:50;backdrop-filter:saturate(140%) blur(6px)}
+        .nav .row{height:68px;display:flex;align-items:center;justify-content:space-between}
+        .brand{display:flex;align-items:center;gap:10px;font-weight:900}
+        .menu{display:flex;gap:10px;flex-wrap:wrap}
+        .menu a{padding:8px 12px;border-radius:10px;position:relative}
+        .menu a:after{content:"";position:absolute;left:10px;right:10px;bottom:4px;height:2px;background:linear-gradient(90deg,var(--brand),var(--brand2));border-radius:2px;transform:scaleX(0);transition:transform .18s ease}
+        .menu a:hover:after{transform:scaleX(1)}.menu a.active{font-weight:900}
+        .hero-grid{display:grid;gap:28px;align-items:center}@media(min-width:900px){.hero-grid{grid-template-columns:1.1fr .9fr}}
+        .hero-illus{border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+        .carousel{position:relative;overflow:hidden}.carousel-track{display:flex;gap:18px;scroll-snap-type:x mandatory;overflow-x:auto;padding-bottom:8px}.carousel .card{min-width:300px;scroll-snap-align:start}
+        /* animations */
+        .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}.reveal.show{opacity:1;transform:none}
+        .fade-up{opacity:0;transform:translateY(12px);transition:opacity .6s ease, transform .6s ease}.fade-up.show{opacity:1;transform:none}
+        /* forms */
+        .form{display:grid;gap:10px}.input,select,textarea{width:100%;padding:14px;border:1px solid var(--border);border-radius:14px;background:#fff}
+        /* footer */
+        footer{border-top:1px solid var(--border);padding:22px 0}.row{display:flex;gap:16px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+        /* SPA pages */
+        section[data-page]{display:none}section[data-page].active{display:block}
+        .tabbar{position:sticky;top:68px;background:#fff;border-bottom:1px dashed var(--border);z-index:40}
+        .tabbar .container{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0}
+        .tabbar a{font-weight:800;padding:8px 12px;border-radius:10px;border:1px solid var(--border)}.tabbar a.active{background:#ecfeff;border-color:#bae6fd}
+      </style>
+    </head>
+
 <body>
 <div class='topbar'><div class='container'>🎉 Free 30‑min trial class — live on Zoom.</div></div>
 <div class='nav'><div class='container row'><div class='brand'>🐝 TutorHive</div><div class='menu'>
