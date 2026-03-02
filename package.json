@@ -1,0 +1,24 @@
+{
+  "name": "tutorhive-relaunch",
+  "version": "2.1.0",
+  "description": "TutorHive relaunch: full-stack tutoring platform",
+  "private": true,
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js",
+    "start:pm2": "pm2-runtime ecosystem.config.cjs",
+    "check": "node --check server.js && node --check server/api.js && node --check server/constants.js && node --check server/engine.js && node --check server/store.js && node --check mock-api.js && node --check app.js && node --check admin.js",
+    "docker:build": "docker build -t tutorhive:latest .",
+    "docker:run": "docker run --rm -p 4173:4173 --env-file .env tutorhive:latest"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "compression": "^1.8.1",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "pm2": "^5.4.3"
+  }
+}

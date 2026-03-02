@@ -1,346 +1,395 @@
 <!DOCTYPE html>
-<html lang='en'>
-    <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TutorHive Relaunch | Intelligent Learning Platform</title>
+    <meta
+      name="description"
+      content="TutorHive relaunch: intelligent online tutoring with lead scoring, learning blueprints, and a live parent-tutor operations system."
+    />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="mock-api.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="orb orb-a" aria-hidden="true"></div>
+    <div class="orb orb-b" aria-hidden="true"></div>
 
-      <!-- ✅ SEO Title & Description -->
-      <title>TutorHive | Online Tutoring for Classes 1–8 (Free Trial)</title>
-      <!-- ✅ Favicon -->
-      <link rel="icon" type="image/png" href="favicon.png">
-      <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="#hero">
+          <span class="brand-mark">TH</span>
+          <span>
+            TutorHive
+            <small>Relaunch 2.0</small>
+          </span>
+        </a>
 
+        <nav class="nav-links">
+          <a href="#planner">Planner</a>
+          <a href="#programs">Programs</a>
+          <a href="#sessions">Sessions</a>
+          <a href="#sessions">Tutor Network</a>
+          <a href="#contact">Contact</a>
+        </nav>
 
-          <meta name="description" content="TutorHive — official site for 1:1 online tutoring. Free trial classes for CBSE, ICSE, IGCSE, and IB students. Flexible schedules, expert tutors, and weekly parent updates.">
-      <!-- ✅ Keywords -->
-      <meta name="keywords" content="online tutoring India, CBSE tutor, ICSE tutor, IGCSE tutor, IB tutor, free trial online classes, 1:1 tutoring">
-
-      <!-- ✅ Social Sharing (Open Graph) -->
-      <meta property="og:title" content="1:1 Online Tutoring for Classes 1–8 | TutorHive">
-      <meta property="og:description" content="Free 30-min trial class. Flexible schedules, expert tutors, weekly parent updates.">
-      <meta property="og:url" content="https://tutorhive.in">
-      <meta property="og:type" content="website">
-      <meta property="og:image" content="https://tutorhive.in/logo.png">
-
-      <!-- ✅ Stylesheet -->
-      <link rel="stylesheet" href="mobile-fixes.css">
-
-      <!-- ✅ Existing Inline Styles (keep as is) -->
-      <style>
-        :root{--brand:#0ea5a3;--brand2:#22d3ee;--honey:#fbbf24;--ink:#0f172a;--sub:#475569;--muted:#f7fafc;--border:#e5e7eb;--bg:#ffffff;--shadow:0 18px 50px rgba(2,8,23,.12)}
-        *{box-sizing:border-box}html{scroll-behavior:smooth}
-        body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--ink);background:var(--bg);overflow-x:hidden}
-        a{color:inherit;text-decoration:none}
-        .container{max-width:1160px;margin:0 auto;padding:0 18px}
-        .btn{display:inline-flex;align-items:center;gap:.6rem;padding:12px 18px;border-radius:999px;border:1px solid var(--border);background:#fff;font-weight:800;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease}
-        .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-        .btn.primary{border:none;color:#0b3c3b;background:linear-gradient(120deg,var(--honey),#ffe082)}
-        .btn.teal{border:none;color:#fff;background:linear-gradient(120deg,var(--brand),var(--brand2))}
-        .badge{display:inline-block;border:1px dashed var(--brand);background:#ecfeff;border-radius:999px;padding:6px 10px;font-weight:700}
-        .small{color:#64748b;font-size:14px;line-height:1.5}
-        .h1{font-size:clamp(34px,6.3vw,62px);margin:8px 0 0;line-height:1.08;letter-spacing:-.02em}
-        .h2{font-size:clamp(22px,3.2vw,36px);margin:0 0 10px}
-        .impact{background:linear-gradient(90deg,#0ea5a3,#22d3ee,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
-        .card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:0 12px 30px rgba(2,8,23,.06)}
-        .section{padding:90px 0}.section.alt{background:var(--muted)}
-        .grid{display:grid;gap:18px}.grid.cols-2{grid-template-columns:1fr}.grid.cols-3{grid-template-columns:1fr}
-        @media(min-width:900px){.grid.cols-2{grid-template-columns:1.2fr 1fr}.grid.cols-3{grid-template-columns:repeat(3,1fr)}}
-        .tile{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;transition:.2s ease}
-        .tile:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
-        .icon-wrap{width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#ecfeff;border:1px solid #d9f2f5}
-        /* header */
-        .topbar{background:linear-gradient(90deg,#ecfeff,#fff);font-weight:800;color:#0b3c3b}
-        .topbar .container{padding:10px 0;text-align:center}
-        .nav{border-bottom:1px solid var(--border);background:#fff;position:sticky;top:0;z-index:50;backdrop-filter:saturate(140%) blur(6px)}
-        .nav .row{height:68px;display:flex;align-items:center;justify-content:space-between}
-        .brand{display:flex;align-items:center;gap:10px;font-weight:900}
-        .menu{display:flex;gap:10px;flex-wrap:wrap}
-        .menu a{padding:8px 12px;border-radius:10px;position:relative}
-        .menu a:after{content:"";position:absolute;left:10px;right:10px;bottom:4px;height:2px;background:linear-gradient(90deg,var(--brand),var(--brand2));border-radius:2px;transform:scaleX(0);transition:transform .18s ease}
-        .menu a:hover:after{transform:scaleX(1)}.menu a.active{font-weight:900}
-        .hero-grid{display:grid;gap:28px;align-items:center}@media(min-width:900px){.hero-grid{grid-template-columns:1.1fr .9fr}}
-        .hero-illus{border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
-        .carousel{position:relative;overflow:hidden}.carousel-track{display:flex;gap:18px;scroll-snap-type:x mandatory;overflow-x:auto;padding-bottom:8px}.carousel .card{min-width:300px;scroll-snap-align:start}
-        /* animations */
-        .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}.reveal.show{opacity:1;transform:none}
-        .fade-up{opacity:0;transform:translateY(12px);transition:opacity .6s ease, transform .6s ease}.fade-up.show{opacity:1;transform:none}
-        /* forms */
-        .form{display:grid;gap:10px}.input,select,textarea{width:100%;padding:14px;border:1px solid var(--border);border-radius:14px;background:#fff}
-        /* footer */
-        footer{border-top:1px solid var(--border);padding:22px 0}.row{display:flex;gap:16px;justify-content:space-between;align-items:center;flex-wrap:wrap}
-        /* SPA pages */
-        section[data-page]{display:none}section[data-page].active{display:block}
-        .tabbar{position:sticky;top:68px;background:#fff;border-bottom:1px dashed var(--border);z-index:40}
-        .tabbar .container{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0}
-        .tabbar a{font-weight:800;padding:8px 12px;border-radius:10px;border:1px solid var(--border)}.tabbar a.active{background:#ecfeff;border-color:#bae6fd}
-      </style>
-    </head>
-
-<body>
-<div class='topbar'><div class='container'>🎉 Free 30‑min trial class — live on Zoom.</div></div>
-<div class='nav'><div class='container row'><div class="brand">
-    <img src="logo.png" alt="TutorHive Logo" style="height:80px; width:90px;">
-  </div>
-<div class='menu'>
-<a href='#home' class='active' data-link='home'>Home</a>
-<a href='#subjects' data-link='subjects'>Subjects</a>
-<a href='#pricing' data-link='pricing'>Pricing</a>
-<a href='#book' data-link='book'>Book Trial</a>
-<a href='#contact' data-link='contact'>Contact</a>
-<a href='#tutor' data-link='tutor'>Become a Tutor</a>
-</div><a class='btn teal' href='#book' data-link='book'>Book Free Class</a></div></div>
-<div class='tabbar'><div class='container'>
-  <a href='#home' class='active' data-link='home'>Home</a>
-  <a href='#subjects' data-link='subjects'>Subjects</a>
-  <a href='#pricing' data-link='pricing'>Pricing</a>
-  <a href='#book' data-link='book'>Book</a>
-  <a href='#contact' data-link='contact'>Contact</a>
-  <a href='#tutor' data-link='tutor'>Tutor</a>
-</div></div>
-
-<!-- HOME -->
-<section class='section active' data-page='home'>
-  <div class='container hero-grid'>
-    <div class='reveal'>
-      <span class='badge'>TutorHive · tutorhive.in</span>
-      <h1 class='h1'>Building <span class='impact'>brighter futures</span>, one lesson at a time.</h1>
-      <p class='small' style='font-size:16px;color:var(--sub)'>Live online tutoring for Classes 1–8 (CBSE • ICSE • IGCSE • IB). Simple Zoom links, flexible schedules, weekly parent updates.</p>
-      <div style='display:flex;gap:10px;flex-wrap:wrap;margin-top:12px'>
-        <a class='btn primary' href='#book' data-link='book'>Book Free Trial</a>
-        <a class='btn' href='#subjects' data-link='subjects'>Explore Subjects</a>
+        <div class="nav-actions">
+          <span id="runtimeBadge" class="runtime-badge">Checking runtime...</span>
+          <a class="btn btn-solid" href="/admin">Admin Console</a>
+        </div>
       </div>
-    </div>
-    <div class='hero-illus fade-up'>
-      <svg viewBox='0 0 880 540' xmlns='http://www.w3.org/2000/svg' role='img' aria-label='Honeycomb learning illustration'>
-        <defs>
-          <linearGradient id='panel' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#e0f7ff'/><stop offset='1' stop-color='#fdf2f8'/></linearGradient>
-          <linearGradient id='hexgrad' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#22d3ee'/><stop offset='1' stop-color='#fbbf24'/></linearGradient>
-          <g id='hex'><polygon points='20,0 40,12 40,36 20,48 0,36 0,12' fill='url(#hexgrad)' opacity='0.2'/></g>
-        </defs>
-        <rect width='880' height='540' rx='28' fill='url(#panel)'/>
-        <g transform='translate(40,40)'>
-          <g><use href='#hex'/><use href='#hex' x='50'/><use href='#hex' x='100'/><use href='#hex' x='150'/><use href='#hex' x='200'/><use href='#hex' x='250'/><use href='#hex' x='300'/><use href='#hex' x='350'/><use href='#hex' x='400'/><use href='#hex' x='450'/></g>
-          <g transform='translate(25,44)'><use href='#hex'/><use href='#hex' x='50'/><use href='#hex' x='100'/><use href='#hex' x='150'/><use href='#hex' x='200'/><use href='#hex' x='250'/><use href='#hex' x='300'/><use href='#hex' x='350'/><use href='#hex' x='400'/><use href='#hex' x='450'/></g>
-          <g transform='translate(0,88)'><use href='#hex'/><use href='#hex' x='50'/><use href='#hex' x='100'/><use href='#hex' x='150'/><use href='#hex' x='200'/><use href='#hex' x='250'/><use href='#hex' x='300'/><use href='#hex' x='350'/><use href='#hex' x='400'/><use href='#hex' x='450'/></g>
-        </g>
-        <g>
-          <rect x='520' y='170' width='270' height='210' rx='18' fill='#0ea5a3'/>
-          <rect x='535' y='190' width='240' height='140' rx='12' fill='#fff'/>
-          <rect x='535' y='335' width='240' height='26' rx='8' fill='#14b8a6'/>
-          <circle cx='560' cy='348' r='6' fill='#fff'/><circle cx='582' cy='348' r='6' fill='#fff'/><circle cx='604' cy='348' r='6' fill='#fff'/>
-          <rect x='555' y='212' width='190' height='16' rx='8' fill='#e2e8f0'/>
-          <rect x='555' y='238' width='150' height='12' rx='6' fill='#e2e8f0'/>
-          <rect x='555' y='260' width='168' height='12' rx='6' fill='#e2e8f0'/>
-          <rect x='555' y='282' width='120' height='12' rx='6' fill='#e2e8f0'/>
-        </g>
-        <g><circle cx='330' cy='270' r='70' fill='url(#hexgrad)' opacity='.9'/><circle cx='330' cy='255' r='28' fill='#fff'/><rect x='295' y='285' width='70' height='34' rx='14' fill='#fff'/></g>
-        <animateTransform attributeName='transform' type='translate' from='0 0' to='0 12' dur='6s' repeatCount='indefinite' additive='sum'/>
-      </svg>
-    </div>
-  </div>
+    </header>
 
-  <div class='container' style='margin-top:40px'>
-    <h2 class='h2 reveal'>What parents say</h2>
-    <div class='carousel'><div class='carousel-track' id='track'>
-      <div class='card'><div class='small'>“TutorHive made math fun. Weekly updates keep us in the loop.”</div><div class='small' style='font-weight:800;margin-top:6px'>— Asha, Class 5 parent ★★★★★</div></div>
-      <div class='card'><div class='small'>“English sessions improved writing and confidence. Highly recommend!”</div><div class='small' style='font-weight:800;margin-top:6px'>— Vikram, Class 7 parent ★★★★★</div></div>
-      <div class='card'><div class='small'>“Simple scheduling and Zoom links. No extra portals to manage.”</div><div class='small' style='font-weight:800;margin-top:6px'>— Nidhi, Class 3 parent ★★★★★</div></div>
-      <div class='card'><div class='small'>“Patient tutors, clear plans. My daughter looks forward to sessions.”</div><div class='small' style='font-weight:800;margin-top:6px'>— Raj, Class 4 parent ★★★★★</div></div>
-    </div></div>
-  </div>
+    <main>
+      <section class="hero section" id="hero">
+        <div class="container hero-grid">
+          <div>
+            <span class="eyebrow">TutorHive Relaunch</span>
+            <h1>
+              Intelligent tutoring that runs like a
+              <span>mission control system</span>
+            </h1>
+            <p>
+              New frontend, new backend, and new operations engine. Parents get
+              real-time visibility. Students get personalized learning
+              blueprints. Tutors work in a data-driven delivery system.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-solid" href="#planner">Generate Trial Blueprint</a>
+              <a class="btn btn-outline" href="#programs">Explore Programs</a>
+            </div>
+            <div class="chip-row" id="pipelineChips"></div>
+          </div>
 
-  <div class='section alt'><div class='container'>
-    <h2 class='h2 reveal'>Verified tutors</h2>
-    <div class='grid cols-3'>
-      <div class='tile reveal'><strong>Screened & interviewed</strong><p class='small'>Each tutor passes a structured interview and demo class.</p></div>
-      <div class='tile reveal'><strong>Curriculum-aligned</strong><p class='small'>CBSE/ICSE/IB/IGCSE — experienced with Classes 1–8.</p></div>
-      <div class='tile reveal'><strong>Trial class first</strong><p class='small'>Meet your tutor in a free 30‑min trial before subscribing.</p></div>
-    </div>
-  </div></div>
+          <aside class="hero-panel">
+            <h2>Operations Pulse</h2>
+            <div class="metric-grid">
+              <article>
+                <p>Total Leads</p>
+                <strong id="metricTotalLeads">0</strong>
+              </article>
+              <article>
+                <p>Conversion</p>
+                <strong id="metricConversion">0%</strong>
+              </article>
+              <article>
+                <p>Average Lead Score</p>
+                <strong id="metricLeadScore">0</strong>
+              </article>
+              <article>
+                <p>Active Tutors</p>
+                <strong id="metricTutors">0</strong>
+              </article>
+            </div>
+            <p class="muted">
+              Live values are served directly from the backend analytics API.
+            </p>
+          </aside>
+        </div>
+      </section>
 
-  <div class='container section'>
-    <h2 class='h2 reveal'>Outcomes parents care about</h2>
-    <div class='grid cols-3' style='margin-top:12px'>
-      <div class='tile reveal' style='display:flex;align-items:center;gap:12px'>
-        <svg width='100' height='100' viewBox='0 0 120 120'><circle cx='60' cy='60' r='46' stroke='#e5e7eb' stroke-width='12' fill='none'/><circle cx='60' cy='60' r='46' stroke='#0ea5a3' stroke-width='12' fill='none' stroke-linecap='round' transform='rotate(-90 60 60)' stroke-dasharray='220 290'/><text x='60' y='66' text-anchor='middle' font-size='22' font-weight='900' fill='#0f172a'>2×</text></svg>
-        <div><strong>Homework completion</strong><div class='small'>vs baseline*</div></div>
+      <section class="section" id="planner">
+        <div class="container split">
+          <article class="panel">
+            <span class="eyebrow">Smart Trial Planner</span>
+            <h2>Build a personalized launch plan in seconds</h2>
+            <p>
+              Submit basic learner context and TutorHive generates a lead score,
+              priority, tutor match, and learning blueprint.
+            </p>
+
+            <form id="trialPlannerForm" class="form-grid">
+              <label>
+                Parent Name
+                <input name="parentName" required placeholder="Anita Sharma" />
+              </label>
+              <label>
+                Student Name
+                <input name="studentName" required placeholder="Ishaan Sharma" />
+              </label>
+              <label>
+                Grade
+                <select name="grade" required>
+                  <option value="">Select grade</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+              </label>
+              <label>
+                Board
+                <select name="board" required>
+                  <option value="">Select board</option>
+                  <option>CBSE</option>
+                  <option>ICSE</option>
+                  <option>IGCSE</option>
+                  <option>IB</option>
+                </select>
+              </label>
+              <label>
+                Priority Subject
+                <select name="subject" required>
+                  <option value="">Select subject</option>
+                  <option>Mathematics</option>
+                  <option>Science</option>
+                  <option>English</option>
+                  <option>Social Studies</option>
+                  <option>Hindi</option>
+                  <option>Coding</option>
+                </select>
+              </label>
+              <label>
+                Study Hours / Week
+                <input name="weeklyHours" type="number" min="1" max="12" value="3" required />
+              </label>
+              <label>
+                Preferred Slot
+                <select name="preferredTime" required>
+                  <option value="">Select slot</option>
+                  <option>Weekday Morning</option>
+                  <option>Weekday Afternoon</option>
+                  <option>Weekday Evening</option>
+                  <option>Weekend Morning</option>
+                  <option>Weekend Afternoon</option>
+                  <option>Weekend Evening</option>
+                </select>
+              </label>
+              <label>
+                Start In (Days)
+                <input name="startInDays" type="number" min="1" max="45" value="7" />
+              </label>
+              <label class="wide">
+                Learning Goals
+                <textarea
+                  name="goals"
+                  rows="4"
+                  placeholder="Example: improve fractions, build exam confidence, and start coding fundamentals"
+                ></textarea>
+              </label>
+              <button type="submit" class="btn btn-solid wide">Generate Blueprint</button>
+            </form>
+            <p id="trialPlannerStatus" class="status"></p>
+          </article>
+
+          <article class="panel result" id="plannerResult">
+            <span class="eyebrow">Generated Output</span>
+            <h3 id="resultLeadId">Lead ID: Pending</h3>
+            <div class="result-kpis">
+              <div>
+                <p>Lead Score</p>
+                <strong id="resultLeadScore">-</strong>
+              </div>
+              <div>
+                <p>Priority</p>
+                <strong id="resultPriority">-</strong>
+              </div>
+              <div>
+                <p>Assigned Tutor</p>
+                <strong id="resultTutor">-</strong>
+              </div>
+            </div>
+            <p id="resultNextAction" class="muted">No action generated yet.</p>
+            <div id="resultPlan" class="timeline"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="simulator">
+        <div class="container panel simulator">
+          <div>
+            <span class="eyebrow">Growth Simulator</span>
+            <h2>Project learning growth before enrollment</h2>
+            <p>
+              This widget calls the backend simulation API and predicts score
+              progression by weekly effort and timeline.
+            </p>
+          </div>
+          <div class="sim-grid">
+            <label>
+              Baseline Score
+              <input id="simBaseline" type="range" min="20" max="95" value="52" />
+              <small id="simBaselineValue">52</small>
+            </label>
+            <label>
+              Weekly Study Hours
+              <input id="simHours" type="range" min="1" max="12" value="3" />
+              <small id="simHoursValue">3 hrs</small>
+            </label>
+            <label>
+              Plan Duration
+              <input id="simWeeks" type="range" min="2" max="24" value="8" />
+              <small id="simWeeksValue">8 weeks</small>
+            </label>
+          </div>
+          <div class="sim-output">
+            <article>
+              <p>Projected Score</p>
+              <strong id="simProjected">-</strong>
+            </article>
+            <article>
+              <p>Projected Gain</p>
+              <strong id="simGain">-</strong>
+            </article>
+            <article>
+              <p>Confidence</p>
+              <strong id="simConfidence">-</strong>
+            </article>
+          </div>
+          <p id="simNarrative" class="muted"></p>
+        </div>
+      </section>
+
+      <section class="section" id="programs">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">Program Engine</span>
+              <h2>Adaptive offerings for every board</h2>
+            </div>
+            <div class="filter-row" id="programFilters">
+              <button data-board-filter="All" class="active">All Boards</button>
+              <button data-board-filter="CBSE">CBSE</button>
+              <button data-board-filter="ICSE">ICSE</button>
+              <button data-board-filter="IGCSE">IGCSE</button>
+              <button data-board-filter="IB">IB</button>
+            </div>
+          </div>
+          <div class="program-grid" id="programGrid"></div>
+        </div>
+      </section>
+
+      <section class="section" id="sessions">
+        <div class="container split">
+          <article class="panel">
+            <span class="eyebrow">Parent Visibility</span>
+            <h2>Upcoming live sessions</h2>
+            <p>
+              Parents can monitor what is coming next and who is leading each
+              session.
+            </p>
+            <div class="session-list" id="sessionList"></div>
+          </article>
+
+          <article class="panel">
+            <span class="eyebrow">Tutor Network</span>
+            <h2>Apply to teach with TutorHive</h2>
+            <form id="tutorApplicationForm" class="form-grid">
+              <label>
+                Full Name
+                <input name="name" required placeholder="Rohit Verma" />
+              </label>
+              <label>
+                Email
+                <input name="email" type="email" required placeholder="you@example.com" />
+              </label>
+              <label>
+                Phone
+                <input name="phone" placeholder="+91 99999 88888" />
+              </label>
+              <label>
+                Primary Subject
+                <select name="subject" required>
+                  <option value="">Select subject</option>
+                  <option>Mathematics</option>
+                  <option>Science</option>
+                  <option>English</option>
+                  <option>Social Studies</option>
+                  <option>Hindi</option>
+                  <option>Coding</option>
+                </select>
+              </label>
+              <label>
+                Experience (Years)
+                <input name="experienceYears" type="number" min="0" max="30" required />
+              </label>
+              <label>
+                Availability
+                <select name="availability" required>
+                  <option value="">Select availability</option>
+                  <option>Weekday Morning</option>
+                  <option>Weekday Afternoon</option>
+                  <option>Weekday Evening</option>
+                  <option>Weekend Morning</option>
+                  <option>Weekend Afternoon</option>
+                  <option>Weekend Evening</option>
+                </select>
+              </label>
+              <label class="wide">
+                Teaching Note
+                <textarea
+                  name="message"
+                  rows="4"
+                  placeholder="Share your teaching style and strongest outcomes."
+                ></textarea>
+              </label>
+              <button type="submit" class="btn btn-solid wide">Submit Application</button>
+            </form>
+            <p id="tutorApplicationStatus" class="status"></p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container panel contact-panel">
+          <div>
+            <span class="eyebrow">Support Desk</span>
+            <h2>Need help planning enrollment?</h2>
+            <p>
+              Submit your query and the TutorHive team will respond with custom
+              guidance.
+            </p>
+          </div>
+          <form id="contactForm" class="form-grid contact-form">
+            <label>
+              Name
+              <input name="name" required placeholder="Your name" />
+            </label>
+            <label>
+              Email
+              <input name="email" type="email" required placeholder="you@example.com" />
+            </label>
+            <label>
+              Phone
+              <input name="phone" placeholder="Optional" />
+            </label>
+            <label class="wide">
+              Message
+              <textarea
+                name="message"
+                rows="4"
+                required
+                placeholder="Tell us what support you need."
+              ></textarea>
+            </label>
+            <button type="submit" class="btn btn-solid">Create Ticket</button>
+          </form>
+          <p id="contactStatus" class="status"></p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-wrap">
+        <p>© 2026 TutorHive. Relaunched full-stack learning operations platform.</p>
+        <div>
+          <a href="#hero">Home</a>
+          <a href="#planner">Planner</a>
+          <a href="/admin">Admin</a>
+        </div>
       </div>
-      <div class='tile reveal' style='display:flex;align-items:center;gap:12px'>
-        <svg width='100' height='100' viewBox='0 0 120 120'><circle cx='60' cy='60' r='46' stroke='#e5e7eb' stroke-width='12' fill='none'/><circle cx='60' cy='60' r='46' stroke='#fbbf24' stroke-width='12' fill='none' stroke-linecap='round' transform='rotate(-90 60 60)' stroke-dasharray='165 290'/><text x='60' y='66' text-anchor='middle' font-size='22' font-weight='900' fill='#0f172a'>+25%</text></svg>
-        <div><strong>Problem solving speed</strong><div class='small'>improvement*</div></div>
-      </div>
-      <div class='tile reveal' style='display:flex;align-items:center;gap:12px'>
-        <svg width='100' height='100' viewBox='0 0 120 120'><circle cx='60' cy='60' r='46' stroke='#e5e7eb' stroke-width='12' fill='none'/><circle cx='60' cy='60' r='46' stroke='#22d3ee' stroke-width='12' fill='none' stroke-linecap='round' transform='rotate(-90 60 60)' stroke-dasharray='275 290'/><text x='60' y='66' text-anchor='middle' font-size='22' font-weight='900' fill='#0f172a'>95%</text></svg>
-        <div><strong>Parent recommendation</strong><div class='small'>rate*</div></div>
-      </div>
-    </div>
-    <div class='card small reveal' style='margin-top:16px'>*Illustrative starter metrics — replace with your real results.</div>
-  </div>
-  <section id="benefits" class="container reveal">
-    <h2 class="h2">Benefits of Online Classes over Offline</h2>
-    <div class="grid cols-2">
-      <div class="card reveal">
-        <h3 class="h3">Flexibility</h3>
-        <p>Attend from anywhere, save commute time, and fit classes into your schedule.</p>
-      </div>
-      <div class="card reveal">
-        <h3 class="h3">Personalization</h3>
-        <p>Get access to 1:1 sessions, recordings, and AI-powered reports tailored to your learning.</p>
-      </div>
-      <div class="card reveal">
-        <h3 class="h3">Global Reach</h3>
-        <p>Learn from the best tutors around the world without leaving your home.</p>
-      </div>
-      <div class="card reveal">
-        <h3 class="h3">Cost Efficient</h3>
-        <p>Save on travel, printed material, and still access high-quality education.</p>
-      </div>
-    </div>
-  </section>
-</section>
-
-<!-- SUBJECTS -->
-<section class='section' data-page='subjects'>
-  <div class='container'>
-    <h1 class='h1'>Subjects we cover (Classes 1–8)</h1>
-    <p class='small'>We tailor topics to your child’s level and board syllabus.</p>
-    <div class='grid cols-3' style='margin-top:20px'>
-      <div class='tile reveal'><div class='icon-wrap'>➕</div><strong>Mathematics</strong><p class='small'>Number sense, arithmetic, fractions, algebra, geometry, word problems.</p></div>
-      <div class='tile reveal'><div class='icon-wrap'>🔬</div><strong>Science</strong><p class='small'>Physics basics, chemistry basics, life sciences, experiments.</p></div>
-      <div class='tile reveal'><div class='icon-wrap'>📘</div><strong>English</strong><p class='small'>Grammar, writing, comprehension, literature.</p></div>
-      <div class='tile reveal'><div class='icon-wrap'>🗺️</div><strong>Social Studies</strong><p class='small'>History, civics, geography — timelines, maps, projects.</p></div>
-      <div class='tile reveal'><div class='icon-wrap'>📝</div><strong>Hindi</strong><p class='small'>Reading, grammar, vocabulary, composition.</p></div>
-      <div class='tile reveal'><div class='icon-wrap'>💻</div><strong>Coding</strong><p class='small'>Scratch → Python/JS, logic & algorithms, projects.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section class='section' data-page='pricing'>
-  <div class='container'>
-    <h1 class='h1'>Simple, transparent pricing</h1>
-    <p class='small'>Lessons are 60‑min live on Zoom. Cancel anytime.</p>
-    <div class='grid cols-3' style='margin-top:20px'>
-      <div class='tile reveal'><strong>Starter</strong><div class='small'>Great to begin</div><div style='font-size:28px;font-weight:900;margin:6px 0'>₹1,000<span class='small'> /mo</span></div><ul class='small'><li>4 classes</li><li>Weekly email</li><li>WhatsApp doubt help</li></ul><a class='btn teal' href='#book' data-link='book'>Choose Starter</a></div>
-      <div class='tile reveal' style='border-color:#bae6fd'><div class='small' style='display:inline-block;background:var(--brand);color:#fff;border-radius:999px;padding:4px 8px;font-weight:900'>Most Popular</div><strong>Standard</strong><div style='font-size:28px;font-weight:900;margin:6px 0'>₹2,500<span class='small'> /mo</span></div><ul class='small'><li>12 classes</li><li>Focus report</li><li>Reschedule friendly</li></ul><a class='btn teal' href='#book' data-link='book'>Choose Standard</a></div>
-      <div class='tile reveal'><strong>Pro</strong><div class='small'>For ambitious learners</div><div style='font-size:28px;font-weight:900;margin:6px 0'>₹4,000<span class='small'> /mo</span></div><ul class='small'><li>20 classes</li><li>Priority support</li><li>Parent review call</li></ul><a class='btn teal' href='#book' data-link='book'>Choose Pro</a></div>
-    </div>
-  </div>
-</section>
-
-<!-- BOOK -->
-<section class='section' data-page='book'>
-  <div class='container'>
-    <h1 class='h1'>Book a free 30‑min trial class</h1>
-    <p class='small'>We’ll reply by email/WhatsApp with a Zoom link and timing options within 24 hours.</p>
-    <div class='grid cols-2' style='margin-top:20px'>
-      <div class='card reveal'><h2 class='h2' style='margin:0 0 8px'>What you’ll get</h2><ul class='small'><li>1:1 or small group trial (your choice)</li><li>Topic of your choice</li><li>Post‑class summary email</li></ul></div>
-      <form id="trialForm" class="form card reveal">
-        <input type="hidden" name="form" value="Trial Request">
-        <input class='input' name='parent' placeholder='Parent name' required>
-        <input class='input' name='phone' placeholder='Phone' required>
-        <input class='input' name='email' type='email' placeholder='Email' required>
-        <select name='subject' class='input'><option>Preferred Subject</option><option>Mathematics</option><option>Science</option><option>English</option><option>Social Studies</option><option>Hindi</option><option>Coding</option></select>
-        <textarea class='input' name='notes' rows='4' placeholder='Anything we should know?'></textarea>
-        <button class='btn teal' type='submit'>Request Trial</button>
-      </form>
-      <div id="trialFormThanks"  class="small" style="display:none;margin-top:12px;color:green;">✅ Thank you! We’ll contact you within 24 hours.</div>
-    </div>
-  </div>
-</section>
-<!-- CONTACT -->
-<section class='section' data-page='contact'>
-  <div class='container'>
-    <h1 class='h1'>Contact us</h1>
-    <p class='small'>We’re online-first. Reach us anytime.</p>
-    <div class='grid cols-2' style='margin-top:20px'>
-        <form id="contactForm" class="form card reveal">
-          <input type="hidden" name="form" value="Contact">
-          <input class="input" name="name" placeholder="Your name" required>
-          <input class="input" name="email" type="email" placeholder="Your email" required>
-          <input class="input" name="phone" type="tel" placeholder="Your phone number" required>
-          <textarea class="input" name="message" placeholder="Your message"></textarea>
-          <button class="btn teal" type="submit">Send</button>
-        </form>
-        <div id="contactFormThanks" class="small" style="display:none;margin-top:12px;color:green;">✅ Got it! We’ll reply soon.</div>
-      <div class='card reveal'><h3 style='margin:0 0 8px'>Other ways to reach us</h3><p class='small'>WhatsApp: <strong>+91 6366026928</strong></p><p class='small'>Email: <strong>hello@tutorhive.in</strong></p><p class='small'>Website: <strong>tutorhive.in</strong></p></div>
-    </div>
-  </div>
-</section>
-
-<!-- TUTOR -->
-<section class='section' data-page='tutor'>
-  <div class='container'>
-    <h1 class='h1'>Become a Tutor at TutorHive</h1>
-    <p class='small'>Teach motivated students across Classes 1–8. Flexible schedules. Fair pay.</p>
-    <div class='grid cols-2' style='margin-top:20px'>
-      <div class='card reveal'><h3 style='margin:0 0 8px'>Why teach with us?</h3><ul class='small'><li>Flexible hours — choose your slots</li><li>Verified profile & parent trust</li><li>Curriculum-aligned resources</li><li>Fast support on scheduling</li></ul></div>
-      <form id="tutorForm" class="form card reveal">
-        <input type="hidden" name="form" value="Tutor Application">
-        <input class='input' name='name' placeholder='Full name' required>
-        <input class='input' name='email' type='email' placeholder='Email' required>
-        <input class='input' name='phone' placeholder='Phone' required>
-        <select class='input' name='subject'><option>Subject Expertise</option><option>Mathematics</option><option>Science</option><option>English</option><option>Social Studies</option><option>Hindi</option><option>Coding</option></select>
-        <textarea class='input' name='notes' rows='4' placeholder='Tell us about your teaching style'></textarea>
-        <button class='btn teal' type='submit'>Apply</button>
-      </form>
-      <div id="tutorFormThanks"   class="small" style="display:none;margin-top:12px;color:green;">✅ Thanks! We’ll review your profile.</div>
-    </div>
-  </div>
-</section>
-
-<footer><div class='container row'><div class='brand'>🐝 TutorHive</div><div class='small'>© 2025 TutorHive · Home · Subjects · Pricing · Book · Contact · Tutor</div></div></footer>
-
-<script>
-// SPA navigation
-const pages = document.querySelectorAll('section[data-page]');
-const links = document.querySelectorAll('[data-link]');
-function showPage(key){
-  pages.forEach(p=>p.classList.toggle('active', p.dataset.page===key));
-  links.forEach(a=>a.classList.toggle('active', a.dataset.link===key));
-  history.replaceState(null, "", "#"+key);
-  document.querySelectorAll('.reveal,.fade-up').forEach(el=>{ el.classList.remove('show'); observer.observe(el); });
-}
-links.forEach(a=>a.addEventListener('click', e=>{ e.preventDefault(); showPage(a.dataset.link); }));
-if(location.hash && document.querySelector("[data-page='"+location.hash.slice(1)+"']")) showPage(location.hash.slice(1));
-
-// reveal animations
-const observer = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); observer.unobserve(e.target); } }); }, {threshold:0.14});
-document.querySelectorAll('.reveal,.fade-up').forEach(el=>observer.observe(el));
-
-// auto-scroll carousel
-const track = document.getElementById('track');
-if(track){ let pos=0; setInterval(()=>{ pos+=2; if(pos>=track.scrollWidth-track.clientWidth) pos=0; track.scrollTo({left:pos,behavior:'smooth'}); },60); }
-</script>
-<script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyRLzjZIr4c9pwZmJjnhD_3NrzuWskMWI1jbKdrUc-9ZxfI1fOzRLjOWLEhq8rxq8_thw/exec";
-
-function wireForm(formId){
-  const form = document.getElementById(formId);
-  if(!form) return;
-  form.addEventListener("submit", async (e)=>{
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(form).entries());
-    const body = new URLSearchParams(data).toString(); // urlencoded to avoid preflight
-    try{
-      const res  = await fetch(SCRIPT_URL, {
-        method: "POST",
-        headers: {"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
-        body
-      });
-      if(!res.ok) throw new Error(await res.text());
-      const thanks = document.getElementById(formId + "Thanks");
-      if(thanks) thanks.style.display = "block";
-      form.reset();
-    }catch(err){
-      console.error("Submit error:", err);
-      alert("❌ Something went wrong. Please try again.");
-    }
-  });
-}
-["trialForm","contactForm","tutorForm"].forEach(wireForm);
-</script>
-
-
-</body>
+    </footer>
+  </body>
 </html>

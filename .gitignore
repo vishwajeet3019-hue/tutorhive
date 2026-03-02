@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+
+# Node
+node_modules/
+.npm-cache/
+
+# Runtime data
+/data/store.json
+
+# Logs
+npm-debug.log*

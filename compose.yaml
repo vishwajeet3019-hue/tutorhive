@@ -1,0 +1,21 @@
+services:
+  tutorhive:
+    build: .
+    image: tutorhive:latest
+    container_name: tutorhive_app
+    restart: unless-stopped
+    ports:
+      - "4173:4173"
+    env_file:
+      - .env
+    volumes:
+      - tutorhive_data:/app/data
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:4173/api/health"]
+      interval: 20s
+      timeout: 3s
+      retries: 5
+      start_period: 20s
+
+volumes:
+  tutorhive_data:

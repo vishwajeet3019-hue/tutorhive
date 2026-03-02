@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: tutorhive-platform
+    runtime: docker
+    plan: starter
+    autoDeploy: true
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 4173
+      - key: TRUST_PROXY
+        value: "1"
+      - key: APP_URL
+        value: https://tutorhive.in
+      - key: ALLOWED_ORIGINS
+        value: https://tutorhive.in,https://www.tutorhive.in
+    disk:
+      name: tutorhive-data
+      mountPath: /app/data
+      sizeGB: 1

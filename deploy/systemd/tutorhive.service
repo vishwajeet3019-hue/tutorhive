@@ -1,0 +1,18 @@
+[Unit]
+Description=TutorHive Platform
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/var/www/tutorhive
+ExecStart=/usr/bin/node /var/www/tutorhive/server.js
+Restart=always
+RestartSec=5
+Environment=NODE_ENV=production
+Environment=PORT=4173
+EnvironmentFile=/var/www/tutorhive/.env
+User=www-data
+Group=www-data
+
+[Install]
+WantedBy=multi-user.target
