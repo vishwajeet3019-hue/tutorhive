@@ -25,7 +25,7 @@ npm run dev
 ```
 
 - Main site: `http://localhost:4173/`
-- Admin console: `http://localhost:4173/admin.html` (or `/admin` on backend mode)
+- Admin console: `http://localhost:4173/admin`
 
 ## Production options
 
