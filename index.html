@@ -75,8 +75,8 @@
         .tabbar{display:none;position:sticky;top:78px;background:#fff;border-bottom:1px dashed var(--border);z-index:40}
         .tabbar .container{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0}
         .tabbar a{font-weight:800;padding:8px 12px;border-radius:10px;border:1px solid var(--border)}.tabbar a.active{background:#ecfeff;border-color:#bae6fd}
-        @media(max-width:1020px){.nav .row{grid-template-columns:auto 1fr}.menu{display:none}.nav-actions{justify-content:flex-end}.tabbar{display:block}}
-        @media(max-width:640px){.nav .row{grid-template-columns:1fr}.brand,.nav-actions{justify-content:center}.brand img{height:64px;width:74px}.nav-actions .btn{width:auto}.tabbar{top:133px}}
+        @media(max-width:1020px){.nav .row{grid-template-columns:auto 1fr}.menu{display:none}.nav-actions{justify-content:flex-end}.tabbar{display:block}.tabbar .container{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.tabbar .container::-webkit-scrollbar{display:none}.tabbar a{white-space:nowrap}}
+        @media(max-width:640px){.container{width:min(100% - 32px,1360px)}.topbar .container{font-size:13px;padding:8px 0}.nav .row{grid-template-columns:1fr;gap:8px;min-height:0;padding:8px 0 10px}.brand,.nav-actions{justify-content:center}.brand img{height:74px;width:86px}.nav-actions{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:8px}.nav-actions .btn{width:100%;padding:10px 12px;font-size:14px;margin:0}.tabbar{position:static}.tabbar .container{padding:8px 0}.tabbar a{font-size:14px;padding:8px 11px}.section{padding:48px 0}.hero-grid{gap:24px}.hero-illus{display:none}.h1{font-size:clamp(32px,10vw,42px)}}
       </style>
     </head>
 

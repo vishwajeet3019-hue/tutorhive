@@ -13,6 +13,7 @@
     justify-content: center !important;
   }
   .menu {
+    display: none !important;
     width: 100% !important;
     flex-wrap: wrap !important;
     justify-content: flex-start !important;
@@ -26,7 +27,8 @@
 
   /* Tabbar fixes */
   .tabbar .container {
-    flex-wrap: wrap !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
     gap: 8px !important;
   }
 
@@ -54,5 +56,4 @@
 /* optional reveal animation if you're using .reveal/.show */
 #benefits .card.reveal { opacity: 0; transform: translateY(30px); }
 #benefits .card.reveal.show { opacity: 1; transform: none; transition: all .6s ease; }
-
 

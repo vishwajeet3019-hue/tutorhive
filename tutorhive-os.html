@@ -14,7 +14,7 @@
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--ink);background:#fff}
     a{color:inherit;text-decoration:none}.container{width:min(100% - 40px,1360px);margin:0 auto}
     .nav{border-bottom:1px solid var(--border);background:#fff;position:sticky;top:0;z-index:20}.row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}.nav .row{min-height:74px}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:900}.brand img{height:64px;width:74px;object-fit:contain}.brand-lockup{display:grid;gap:2px}.brand-title{font-size:20px;line-height:1;font-weight:1000}.brand-sub{font-size:10px;line-height:1;text-transform:uppercase;letter-spacing:.12em;color:var(--brand);font-weight:1000}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:900}.brand img{height:64px;width:74px;object-fit:contain}.brand-os{font-size:22px;line-height:1;font-weight:1000;letter-spacing:-.03em;background:linear-gradient(120deg,#0f172a 0%,#0ea5a3 52%,#22d3ee 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
     .btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;padding:12px 18px;border-radius:999px;border:1px solid var(--border);background:#fff;font-weight:900;cursor:pointer}.btn.primary{border:none;color:#0b3c3b;background:linear-gradient(120deg,var(--honey),#ffe082)}.btn.teal{border:none;color:#fff;background:linear-gradient(120deg,var(--brand),var(--brand2))}.btn.dark{border:none;background:#0f172a;color:#fff}
     .section{padding:78px 0}.alt{background:var(--muted)}.hero{min-height:calc(100vh - 74px);display:grid;align-items:center;background:linear-gradient(135deg,#ecfeff 0%,#fff 55%,#fff8df 100%)}
     .grid{display:grid;gap:22px}.two{grid-template-columns:1.05fr .95fr}.three{grid-template-columns:repeat(3,1fr)}
@@ -23,7 +23,7 @@
     .sample-site{border-radius:18px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--border);background:#fff}.sample-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 22px;border-bottom:1px solid var(--border);background:#fff}.sample-brand{font-weight:1000;color:#0f172a;font-size:20px}.sample-url{color:var(--sub);font-size:13px;font-weight:800}
     .sample-hero{padding:28px 24px 22px;background:linear-gradient(135deg,#f3fffe 0%,#fff 58%,#fff7dc 100%);display:grid;gap:18px;text-align:left}.sample-kicker{color:#0b3c3b;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}.sample-title{font-size:30px;line-height:1.08;margin:8px 0;color:#05070d;max-width:560px}.sample-visual{display:grid;grid-template-columns:.95fr 1.05fr;gap:16px;align-items:center}.sample-photo{height:190px;border-radius:18px;overflow:hidden;box-shadow:0 16px 36px rgba(2,8,23,.12)}.sample-photo img{width:100%;height:100%;object-fit:cover;display:block}.sample-points{display:grid;gap:10px}.sample-point{border:1px solid var(--border);border-radius:12px;background:#fff;padding:11px;font-weight:900}.sample-body{padding:18px 24px;border-top:1px solid var(--border);background:#fff}.sample-columns{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.sample-mini{border:1px solid var(--border);border-radius:12px;padding:12px;background:#fff}.sample-mini strong{display:block;margin-bottom:4px}
     .form{display:grid;gap:10px}.input{width:100%;padding:14px;border:1px solid var(--border);border-radius:12px;background:#fff}footer{border-top:1px solid var(--border);padding:22px 0}
-    .auth-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;margin-top:22px}.auth-card{height:100%}.auth-card h3{margin:0 0 4px;font-size:22px}.auth-card .btn{width:100%}.auth-intro{max-width:860px}.form-note{margin:0;color:var(--sub);font-size:14px;line-height:1.5}
+    .auth-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;margin-top:22px}.auth-card{height:100%;padding:18px}.auth-card h3{margin:0 0 4px;font-size:22px}.auth-card .input{padding:11px 13px;font-size:15px;border-radius:11px}.auth-card .btn{width:100%;padding:11px 16px}.auth-intro{max-width:860px}.form-note{margin:0;color:var(--sub);font-size:14px;line-height:1.5}
     .error{display:none;color:#b91c1c;font-weight:800}.error.active{display:block}
     @media(max-width:900px){.two,.three,.sample-visual,.sample-columns,.auth-grid{grid-template-columns:1fr}.hero{min-height:auto;padding:48px 0}.section{padding:56px 0}.btn{width:100%}.nav .btn{width:auto}.sample-url{display:none}.sample-title{font-size:28px}.sample-photo{height:220px}}
   </style>
@@ -31,7 +31,7 @@
 <body>
   <nav class="nav">
     <div class="container row">
-      <a class="brand" href="index.html"><img src="logo.png" alt="TutorHive Logo"><span class="brand-lockup"><span class="brand-title">TutorHive OS</span><span class="brand-sub">Website Builder</span></span></a>
+      <a class="brand" href="index.html"><img src="logo.png" alt="TutorHive Logo"><span class="brand-os">TutorHive OS</span></a>
       <div class="row"><a class="btn" href="index.html">Back to TutorHive</a><a class="btn teal" href="#signup">Sign Up</a></div>
     </div>
   </nav>
@@ -97,7 +97,7 @@
     </section>
   </main>
 
-  <footer><div class="container row"><div class="brand"><img src="logo.png" alt=""><span class="brand-lockup"><span class="brand-title">TutorHive OS</span><span class="brand-sub">Website Builder</span></span></div><div class="small">Professional website infrastructure for solo tutors.</div></div></footer>
+  <footer><div class="container row"><div class="brand"><img src="logo.png" alt=""><span class="brand-os">TutorHive OS</span></div><div class="small">Professional online presence for solo tutors.</div></div></footer>
 
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyRLzjZIr4c9pwZmJjnhD_3NrzuWskMWI1jbKdrUc-9ZxfI1fOzRLjOWLEhq8rxq8_thw/exec";
