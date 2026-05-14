@@ -10,6 +10,7 @@ TutorHive OS now needs dynamic hosting. GitHub Pages can still host static Tutor
    - `NODE_ENV=production`
    - `HOST=0.0.0.0`
    - `DATABASE_URL=<your postgres connection string>`
+   - `SITE_BASE_DOMAIN=tutorhive.in`
 4. Point `tutorhive.in` DNS to the Node service instead of GitHub Pages when ready.
 5. Keep the original TutorHive pages served by this same Node app:
    - `/`
@@ -17,6 +18,7 @@ TutorHive OS now needs dynamic hosting. GitHub Pages can still host static Tutor
    - `/tutorhive-os.html`
    - `/tutorhive-dashboard.html`
    - `/site/:slug`
+   - `:slug.tutorhive.in`
 
 ## Production Routes
 
@@ -32,10 +34,25 @@ TutorHive OS now needs dynamic hosting. GitHub Pages can still host static Tutor
 - `POST /api/site/:slug/enquiries`
 - `POST /api/domain/verify`
 - `GET /site/:slug`
+- `GET /` on `:slug.tutorhive.in`
 
 ## Domain Routing
 
-The server already checks the incoming `Host` header and can render the matching published website for a saved custom domain. Production DNS verification should check:
+TutorHive OS preview sites are designed to publish at:
+
+- `bright-minds.tutorhive.in`
+
+Keep `/site/bright-minds` as a fallback route for debugging and old links.
+
+To enable subdomain previews in production:
+
+- Add `*.tutorhive.in` as a custom domain on Render for the same web service.
+- Add a wildcard DNS record in GoDaddy:
+  - Type: `CNAME`
+  - Name: `*`
+  - Value: `tutorhive-vxdj.onrender.com`
+
+The server also checks the incoming `Host` header and can render the matching published website for a saved custom domain. Production DNS verification should check:
 
 - CNAME `www` points to the hosting target.
 - TXT `tutorhive-verify` matches the website slug or generated verification token.

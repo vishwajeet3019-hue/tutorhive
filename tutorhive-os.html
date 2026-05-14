@@ -122,6 +122,7 @@
         return;
       }
       delete data.confirmPassword;
+      localStorage.setItem("tutorhiveOsSignup", JSON.stringify(data));
       if (IS_LIVE_SITE) {
         fetch(SCRIPT_URL, {method:"POST", headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"}, body:new URLSearchParams(data).toString()}).catch(() => {});
       }

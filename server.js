@@ -9,6 +9,7 @@ const ROOT = __dirname;
 const DB_FILE = path.join(ROOT, "tutorhive-db.json");
 const PUBLIC_FILES = new Set(["/", "/index.html", "/tutorhive-os.html", "/tutorhive-dashboard.html", "/mobile-fixes.css", "/logo.png", "/favicon.ico", "/robots.txt", "/sitemap.xml", "/CNAME"]);
 const DATABASE_URL = process.env.DATABASE_URL || "";
+const SITE_BASE_DOMAIN = process.env.SITE_BASE_DOMAIN || "tutorhive.in";
 let pgPool = null;
 
 const defaultImage = "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1100&q=80";
@@ -260,6 +261,23 @@ function stars(count) {
   return "★★★★★".slice(0, Number(count || 5));
 }
 
+function cleanHost(host) {
+  return String(host || "").toLowerCase().split(":")[0];
+}
+
+function subdomainSlug(host) {
+  const clean = cleanHost(host);
+  const suffix = `.${SITE_BASE_DOMAIN}`;
+  if (!clean.endsWith(suffix)) return "";
+  const label = clean.slice(0, -suffix.length);
+  if (!label || label === "www" || label.includes(".")) return "";
+  return label;
+}
+
+function publicSiteUrl(slug) {
+  return `https://${slugify(slug)}.${SITE_BASE_DOMAIN}`;
+}
+
 function renderSite(website) {
   const t = website.publishedTemplate;
   if (!t) return null;
@@ -366,7 +384,7 @@ async function handleApi(req, res, url) {
     website.publishedTemplate = { ...website.draftTemplate, publishedAt: new Date().toISOString() };
     website.publishedAt = website.publishedTemplate.publishedAt;
     await writeDb(db);
-    return sendJson(res, 200, { website: publicWebsite(website), publicUrl: `/site/${website.slug}` });
+    return sendJson(res, 200, { website: publicWebsite(website), publicUrl: publicSiteUrl(website.slug) });
   }
   if (req.method === "POST" && url.pathname === "/api/domain/verify") {
     const tutor = requireTutor(req, res, db);
@@ -410,6 +428,14 @@ const server = http.createServer(async (req, res) => {
   try {
     const url = new URL(req.url, `http://${req.headers.host || "localhost"}`);
     if (url.pathname.startsWith("/api/")) return handleApi(req, res, url);
+    const hostSlug = subdomainSlug(req.headers.host);
+    if (hostSlug && url.pathname === "/") {
+      const db = await readDb();
+      const website = db.websites.find(item => item.slug === hostSlug && item.publishedTemplate);
+      const html = website && renderSite(website);
+      if (!html) return send(res, 404, "<h1>Website not published yet</h1>");
+      return send(res, 200, html);
+    }
     const siteMatch = url.pathname.match(/^\/site\/([^/]+)$/);
     if (siteMatch) {
       const db = await readDb();
@@ -419,7 +445,7 @@ const server = http.createServer(async (req, res) => {
       return send(res, 200, html);
     }
     const db = await readDb();
-    const domainWebsite = db.websites.find(item => item.customDomain && item.customDomain === req.headers.host && item.publishedTemplate);
+    const domainWebsite = db.websites.find(item => item.customDomain && cleanHost(item.customDomain) === cleanHost(req.headers.host) && item.publishedTemplate);
     if (domainWebsite && url.pathname === "/") return send(res, 200, renderSite(domainWebsite));
     if (serveFile(req, res, url)) return;
     notFound(res);

@@ -71,7 +71,7 @@
   <main>
     <section class="setup" id="setup">
       <div class="card step active" id="stepName">
-        <span class="badge">Step 1 of 2</span>
+        <span class="badge">Step 1 of 3</span>
         <h1 class="h1">What should we call you?</h1>
         <p class="small">This is your personal tutor name. It will appear inside the website, but it will not automatically become your institute name.</p>
         <form class="form" id="nameForm" autocomplete="off">
@@ -81,11 +81,24 @@
       </div>
 
       <div class="card step" id="stepInstitute">
-        <span class="badge">Step 2 of 2</span>
+        <span class="badge">Step 2 of 3</span>
         <h1 class="h1" id="helloName">Hey, name your institute</h1>
         <p class="small">This becomes the website brand and shareable URL. You can edit it later.</p>
         <form class="form" id="instituteForm">
           <div><label for="instituteName">Name your institute</label><input id="instituteName" class="input" name="instituteName" placeholder="Bright Minds Maths" required></div>
+          <button class="btn teal" type="submit">Next</button>
+        </form>
+      </div>
+
+      <div class="card step" id="stepDetails">
+        <span class="badge">Step 3 of 3</span>
+        <h1 class="h1">Tell us what you teach</h1>
+        <p class="small">TutorHive OS will use this to generate a stronger first version of your website.</p>
+        <form class="form" id="detailsForm">
+          <div><label for="primarySubject">Main subject</label><input id="primarySubject" class="input" name="primarySubject" placeholder="Maths, English, Coding..." required></div>
+          <div><label for="gradesTaught">Grades taught</label><input id="gradesTaught" class="input" name="gradesTaught" placeholder="Grades 6-10" required></div>
+          <div><label for="teachingMode">Class mode</label><select id="teachingMode" class="input" name="teachingMode"><option>Online and home tuition</option><option>Online only</option><option>Home tuition only</option></select></div>
+          <div><label for="idealStudent">Best for</label><input id="idealStudent" class="input" name="idealStudent" placeholder="Students who need concept clarity and exam confidence" required></div>
           <button class="btn teal" type="submit">Create Website Preview</button>
         </form>
       </div>
@@ -552,7 +565,7 @@
     }
     function publicUrl(){
       if (state.customDomain) return `https://${state.customDomain.replace(/^https?:\/\//,"")}`;
-      return `https://tutorhive.in/site/${state.siteSlug || slugify(state.instituteName)}`;
+      return `https://${state.siteSlug || slugify(state.instituteName)}.tutorhive.in`;
     }
     async function loadEnquiries(){
       const list = document.getElementById("enquiryList");
@@ -602,7 +615,21 @@
       window.scrollTo({top:0,behavior:"smooth"});
     }
     nameForm.addEventListener("submit",(event)=>{event.preventDefault();state.tutorName=new FormData(nameForm).get("tutorName");document.getElementById("helloName").textContent=`Hey ${state.tutorName}, name your institute`;show("stepInstitute")});
-    instituteForm.addEventListener("submit",(event)=>{event.preventDefault();state.instituteName=new FormData(instituteForm).get("instituteName");state.siteSlug=slugify(state.instituteName);fillBuilder();updatePreview();showPreview()});
+    instituteForm.addEventListener("submit",(event)=>{event.preventDefault();state.instituteName=new FormData(instituteForm).get("instituteName");state.siteSlug=slugify(state.instituteName);show("stepDetails")});
+    detailsForm.addEventListener("submit",(event)=>{
+      event.preventDefault();
+      const details = Object.fromEntries(new FormData(detailsForm).entries());
+      const subject = details.primarySubject || "Tutoring";
+      state.kicker = `${signup.location || "Your city"} ${subject} tutor`;
+      state.headline = `${subject} support for ${details.idealStudent.toLowerCase()}.`;
+      state.subhead = `${details.gradesTaught} · ${details.teachingMode}`;
+      state.service1 = subject;
+      state.service2 = "Concept clarity";
+      state.service3 = "Exam prep";
+      fillBuilder();
+      updatePreview();
+      showPreview();
+    });
     builderForm.addEventListener("input",()=>{
       const data = Object.fromEntries(new FormData(builderForm).entries());
       state={...state,...data,showExperienceBadge:data.showExperienceBadge || "off",showPricingBadge:data.showPricingBadge || "off",inquiryName:data.inquiryName || "off",inquiryPhone:data.inquiryPhone || "off",inquiryEmail:data.inquiryEmail || "off",inquiryMessage:data.inquiryMessage || "off"};
