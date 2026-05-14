@@ -17,6 +17,16 @@
   </url>
 
   <url>
+    <loc>https://tutorhive.in/tutorhive-os.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tutorhive.in/tutorhive-dashboard.html</loc>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
     <loc>https://tutorhive.in/#contact</loc>
     <priority>0.7</priority>
   </url>

@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TutorHive OS Dashboard | Create Your Website</title>
+  <meta name="description" content="Create and customize your TutorHive OS tutor website.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    :root{--brand:#0ea5a3;--brand2:#22d3ee;--honey:#fbbf24;--ink:#0f172a;--sub:#475569;--muted:#f7fafc;--border:#e5e7eb;--shadow:0 18px 50px rgba(2,8,23,.12)}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--ink);background:#f6f9fb}
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1160px,calc(100% - 36px));margin:0 auto}
+    .nav{height:76px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;position:sticky;top:0;z-index:20}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900}.brand img{height:58px;width:68px;object-fit:contain}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--border);border-radius:999px;background:#fff;font-weight:900;padding:12px 18px;cursor:pointer}
+    .btn.teal{border:none;color:#fff;background:linear-gradient(120deg,var(--brand),var(--brand2))}
+    .btn.dark{border:none;background:#0f172a;color:#fff}
+    .setup{min-height:calc(100vh - 76px);display:grid;place-items:center;padding:46px 0}
+    .card{width:min(680px,100%);background:#fff;border:1px solid var(--border);border-radius:18px;padding:30px;box-shadow:var(--shadow)}
+    .badge{display:inline-flex;border:1px dashed var(--brand);background:#ecfeff;border-radius:999px;padding:7px 11px;font-weight:900;color:#0b3c3b}
+    .h1{font-size:clamp(34px,5vw,54px);line-height:1.04;margin:14px 0}.h2{font-size:clamp(26px,3.4vw,38px);line-height:1.12;margin:12px 0}.small{font-size:15px;line-height:1.6;color:var(--sub)}
+    .form{display:grid;gap:14px;margin-top:22px}.input{width:100%;border:1px solid var(--border);border-radius:14px;padding:15px;background:#fff;font-size:16px}label{font-weight:900;font-size:14px}
+    .step{display:none}.step.active{display:block}
+    .preview-wrap{display:none;padding:28px 0}.preview-wrap.active{display:block}
+    body.published .nav, body.published .preview-top, body.published .editor{display:none}
+    body.published .preview-wrap{display:block;padding:0}
+    body.published .container{width:100%;max-width:none}
+    body.published .site{border:0;border-radius:0;box-shadow:none}
+    .publish-toolbar{display:none;position:fixed;right:18px;bottom:18px;z-index:50;background:#fff;border:1px solid var(--border);border-radius:999px;box-shadow:var(--shadow);padding:8px;gap:8px}
+    body.published .publish-toolbar{display:flex}
+    .modal{position:fixed;inset:0;background:rgba(15,23,42,.54);display:none;align-items:center;justify-content:center;z-index:80;padding:18px}.modal.active{display:flex}.modal-card{width:min(520px,100%);background:#fff;border-radius:18px;border:1px solid var(--border);box-shadow:var(--shadow);padding:22px}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.icon-btn{border:1px solid var(--border);border-radius:999px;background:#fff;width:36px;height:36px;cursor:pointer;font-weight:900}
+    .preview-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}.status-pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border);border-radius:999px;background:#fff;padding:8px 12px;font-size:13px;font-weight:900;color:var(--sub)}.status-dot{width:8px;height:8px;border-radius:50%;background:#f59e0b}.status-dot.live{background:#10b981}
+    .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.tab-btn{border:1px solid var(--border);border-radius:999px;background:#fff;padding:10px 14px;font-weight:900;cursor:pointer}.tab-btn.active{background:#0f172a;color:#fff;border-color:#0f172a}.panel{display:none}.panel.active{display:block}.dashboard-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:var(--shadow);margin-bottom:20px}.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}.data-list{display:grid;gap:10px;margin-top:14px}.data-row{border:1px solid var(--border);border-radius:14px;padding:14px;background:#fff;display:grid;gap:6px}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}.notice{border:1px solid #bae6fd;background:#eff6ff;border-radius:14px;padding:14px;color:#1e3a8a;font-weight:800}
+    .workspace{display:grid;grid-template-columns:1fr;gap:20px;align-items:start}.workspace.editing{grid-template-columns:minmax(340px,430px) minmax(0,1fr)}
+    .site{overflow:hidden;border:1px solid var(--border);border-radius:22px;background:#fff;box-shadow:var(--shadow)}
+    .site-nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 28px;border-bottom:1px solid var(--border);background:#fff}
+    .site-brand{display:flex;align-items:center;gap:10px;font-size:24px;font-weight:1000}.site-logo{display:none;width:42px;height:42px;border-radius:10px;object-fit:cover}.site-logo.active{display:block}.site-links{display:flex;gap:22px;color:var(--sub);font-weight:900}.site-pill{background:#0f172a;color:#fff;border-radius:999px;padding:11px 16px;font-weight:900}
+    .site-hero{display:grid;grid-template-columns:1.03fr .97fr;gap:34px;align-items:center;padding:54px 42px;background:linear-gradient(135deg,#f3fffe 0%,#fff 55%,#fff7dc 100%)}
+    .kicker{font-size:13px;font-weight:1000;text-transform:uppercase;letter-spacing:.07em;color:#0b3c3b}.title{font-size:clamp(40px,5vw,66px);line-height:1.02;margin:12px 0;color:#071126}.lead{font-size:18px;line-height:1.7;color:var(--sub);max-width:560px}
+    .photo{position:relative;height:380px;border-radius:30px;overflow:hidden;box-shadow:0 24px 60px rgba(2,8,23,.16)}.photo img{width:100%;height:100%;object-fit:cover}.float{position:absolute;border:1px solid var(--border);border-radius:18px;background:#fff;box-shadow:0 14px 32px rgba(2,8,23,.14);padding:14px;font-weight:900}.float.left{left:var(--exp-x,-8px);top:var(--exp-y,24px)}.float.right{right:var(--price-x,18px);bottom:var(--price-y,24px)}
+    .band{padding:34px 42px;border-top:1px solid var(--border)}.band.tint{background:linear-gradient(135deg,#f8fbff,#f4fdfc)}.columns{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.mini{border:1px solid var(--border);border-radius:16px;padding:18px;background:#fff;cursor:grab}.mini.dragging,.drag-item.dragging{opacity:.45}.contact{display:flex;align-items:center;justify-content:space-between;gap:18px;background:#0f172a;color:#fff}.contact .small{color:#dbeafe}
+    .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:16px}.review-card{border:1px solid var(--border);border-radius:16px;background:#fff;padding:18px}.review-card p{white-space:pre-line}.stars{color:#f6b51e;letter-spacing:1px;font-weight:1000}
+    .custom-content{white-space:pre-line}
+    .editor{display:none;background:#fff;border:1px solid var(--border);border-radius:18px;padding:18px;max-height:calc(100vh - 120px);overflow:auto;position:sticky;top:96px}.editor.active{display:block}.edit-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.full{grid-column:1/-1}.theme-row,.swatch-row,.image-actions{display:flex;gap:9px;flex-wrap:wrap}.theme-btn,.swatch-btn{width:38px;height:38px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1px var(--border);cursor:pointer}.theme-btn.active,.swatch-btn.active{box-shadow:0 0 0 3px var(--ink)}.picker-control{position:relative;width:44px;height:44px;border:1px solid var(--border);border-radius:14px;background:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 12px rgba(2,8,23,.06)}.picker-control span{font-size:22px;line-height:1}.picker-control input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}.choice-btn{border:1px solid var(--border);border-radius:999px;background:#fff;padding:9px 12px;font-weight:900;cursor:pointer}
+    .editor-tools{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}.tool-box{border:1px solid var(--border);border-radius:16px;padding:14px;background:#fbfdff}.drag-list,.manage-list{display:grid;gap:8px}.drag-item,.manage-item{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--border);border-radius:12px;background:#fff;padding:10px 11px;font-weight:900}.drag-item{cursor:grab}.drag-actions{display:flex;gap:6px;flex-wrap:wrap}.mini-btn{border:1px solid var(--border);background:#fff;border-radius:8px;font-weight:900;cursor:pointer;padding:4px 8px}.mini-btn.danger{color:#b91c1c}.review-form{display:grid;grid-template-columns:1fr;gap:10px}.hint{font-size:13px;color:var(--sub)}.empty{border:1px dashed var(--border);border-radius:12px;padding:12px;color:var(--sub);font-size:14px}
+    @media(max-width:1050px){.workspace.editing{grid-template-columns:1fr}.editor{position:static;max-height:none}}
+    @media(max-width:900px){.site-hero,.columns,.reviews-grid,.edit-grid,.editor-tools,.review-form,.split{grid-template-columns:1fr}.site-links,.site-pill,.float{display:none}.site-nav{height:auto;padding:18px}.photo{height:260px}.contact{display:grid}.band,.site-hero{padding:28px 20px}.btn{width:100%}.title{font-size:clamp(34px,11vw,48px)}.tabs{display:grid;grid-template-columns:1fr 1fr}.tab-btn{width:100%}}
+    @media(max-width:560px){.container{width:min(100% - 24px,1160px)}body.published .container{width:100%}.site-nav{align-items:flex-start;gap:10px}.site-brand{font-size:20px}.site-hero{padding:24px 16px}.band{padding:24px 16px !important}.title{font-size:34px;line-height:1.08}.lead{font-size:16px}.photo{height:220px;border-radius:20px}.preview-top{align-items:flex-start}.publish-toolbar{left:12px;right:12px;justify-content:center}.publish-toolbar .btn{width:auto}.card{padding:22px}.h1{font-size:36px}}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container row">
+      <a class="brand" href="tutorhive-os.html"><img src="logo.png" alt="TutorHive logo"><span>TutorHive OS</span></a>
+      <div class="row">
+        <a class="btn" href="tutorhive-os.html">Back to OS</a>
+        <button class="btn" type="button" id="logoutBtn">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="setup" id="setup">
+      <div class="card step active" id="stepName">
+        <span class="badge">Step 1 of 2</span>
+        <h1 class="h1">What should we call you?</h1>
+        <p class="small">This is your personal tutor name. It will appear inside the website, but it will not automatically become your institute name.</p>
+        <form class="form" id="nameForm" autocomplete="off">
+          <div><label for="tutorName">Your name</label><input id="tutorName" class="input" name="tutorName" placeholder="Enter your name" autocomplete="off" required></div>
+          <button class="btn teal" type="submit">Next</button>
+        </form>
+      </div>
+
+      <div class="card step" id="stepInstitute">
+        <span class="badge">Step 2 of 2</span>
+        <h1 class="h1" id="helloName">Hey, name your institute</h1>
+        <p class="small">This becomes the website brand and shareable URL. You can edit it later.</p>
+        <form class="form" id="instituteForm">
+          <div><label for="instituteName">Name your institute</label><input id="instituteName" class="input" name="instituteName" placeholder="Bright Minds Maths" required></div>
+          <button class="btn teal" type="submit">Create Website Preview</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="preview-wrap" id="previewPage">
+      <div class="container">
+        <div class="preview-top">
+          <div><span class="badge">Website preview</span><h2 class="h2">Your tutor website is ready</h2><div class="status-pill" id="siteStatus"><span class="status-dot"></span><span>Draft saved locally</span></div></div>
+          <div class="row"><button class="btn" id="editBtn">Edit Template</button><button class="btn teal" id="publishBtn">Publish Website</button></div>
+        </div>
+        <div class="tabs" aria-label="Dashboard sections">
+          <button class="tab-btn active" type="button" data-tab="builder">Website Builder</button>
+          <button class="tab-btn" type="button" data-tab="enquiries">Enquiries</button>
+          <button class="tab-btn" type="button" data-tab="domain">Domain</button>
+          <button class="tab-btn" type="button" data-tab="settings">Settings</button>
+        </div>
+
+        <div class="panel active" id="builderPanel">
+        <div class="workspace" id="workspace">
+        <section class="editor" id="editor">
+          <h2 class="h2">Edit anything</h2>
+          <form class="form" id="builderForm">
+            <div>
+              <label>Theme color</label>
+              <div class="theme-row" style="margin-top:8px">
+                <label class="picker-control" aria-label="Choose custom theme color"><span>🎨</span><input id="themePicker" type="color"></label>
+                <button class="theme-btn active" type="button" data-theme="#0ea5a3" style="background:#0ea5a3"></button>
+                <button class="theme-btn" type="button" data-theme="#2563eb" style="background:#2563eb"></button>
+                <button class="theme-btn" type="button" data-theme="#7c3aed" style="background:#7c3aed"></button>
+                <button class="theme-btn" type="button" data-theme="#db2777" style="background:#db2777"></button>
+              </div>
+            </div>
+            <div class="edit-grid">
+              <div><label>Your name</label><input class="input" name="tutorName"></div>
+              <div><label>Institute name</label><input class="input" name="instituteName"></div>
+              <div class="full"><label>Location + subject</label><input class="input" name="kicker"></div>
+              <div class="full"><label>Headline</label><input class="input" name="headline"></div>
+              <div class="full"><label>Subheading</label><input class="input" name="subhead"></div>
+              <div><label>Experience badge</label><input class="input" name="experience"></div>
+              <div><label>Pricing badge</label><input class="input" name="pricing"></div>
+              <label style="display:flex;align-items:center;gap:8px"><input name="showExperienceBadge" type="checkbox"> Show experience badge</label>
+              <label style="display:flex;align-items:center;gap:8px"><input name="showPricingBadge" type="checkbox"> Show pricing badge</label>
+              <div><label>Experience badge X</label><input class="input" name="experienceX" type="range" min="-40" max="120"></div>
+              <div><label>Experience badge Y</label><input class="input" name="experienceY" type="range" min="0" max="180"></div>
+              <div><label>Pricing badge X</label><input class="input" name="pricingX" type="range" min="0" max="140"></div>
+              <div><label>Pricing badge Y</label><input class="input" name="pricingY" type="range" min="0" max="180"></div>
+              <div><label>Service 1</label><input class="input" name="service1"></div>
+              <div><label>Service 2</label><input class="input" name="service2"></div>
+              <div><label>Service 3</label><input class="input" name="service3"></div>
+              <div><label>CTA button</label><input class="input" name="ctaButton"></div>
+              <div class="full"><label>Testimonial</label><textarea class="input" name="testimonial" rows="3"></textarea></div>
+              <div class="full">
+                <label>Hero image</label>
+                <div class="image-actions" style="margin-top:8px">
+                  <button class="choice-btn" type="button" data-image-preset="https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1100&q=80">Tutoring</button>
+                  <button class="choice-btn" type="button" data-image-preset="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1100&q=80">Classroom</button>
+                  <button class="choice-btn" type="button" data-image-preset="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1100&q=80">Study Desk</button>
+                </div>
+                <input class="input" name="imageUrl" placeholder="Paste image URL" style="margin-top:10px">
+                <input class="input" id="imageUpload" type="file" accept="image/*" style="margin-top:10px">
+              </div>
+              <div class="full">
+                <label>Institute logo optional</label>
+                <input class="input" name="logoUrl" placeholder="Paste logo URL">
+                <input class="input" id="logoUpload" type="file" accept="image/*" style="margin-top:10px">
+              </div>
+              <div>
+                <label>Page background</label>
+                <input type="hidden" name="pageBg">
+                <div class="swatch-row" data-color-target="pageBg" style="margin-top:8px">
+                  <label class="picker-control" aria-label="Choose page background color"><span>🎨</span><input type="color" data-picker-target="pageBg"></label>
+                  <button class="swatch-btn" type="button" data-color="#ffffff" style="background:#ffffff"></button>
+                  <button class="swatch-btn" type="button" data-color="#f6f9fb" style="background:#f6f9fb"></button>
+                  <button class="swatch-btn" type="button" data-color="#fffaf0" style="background:#fffaf0"></button>
+                  <button class="swatch-btn" type="button" data-color="#f4fdfc" style="background:#f4fdfc"></button>
+                </div>
+              </div>
+              <div>
+                <label>Section background</label>
+                <input type="hidden" name="sectionBg">
+                <div class="swatch-row" data-color-target="sectionBg" style="margin-top:8px">
+                  <label class="picker-control" aria-label="Choose section background color"><span>🎨</span><input type="color" data-picker-target="sectionBg"></label>
+                  <button class="swatch-btn" type="button" data-color="#f4fdfc" style="background:#f4fdfc"></button>
+                  <button class="swatch-btn" type="button" data-color="#f8fbff" style="background:#f8fbff"></button>
+                  <button class="swatch-btn" type="button" data-color="#fff7dc" style="background:#fff7dc"></button>
+                  <button class="swatch-btn" type="button" data-color="#f7f3ff" style="background:#f7f3ff"></button>
+                </div>
+              </div>
+              <div class="full"><label>Section spacing</label><input class="input" name="spacing" type="range" min="20" max="72"></div>
+            </div>
+            <div class="editor-tools">
+              <div class="tool-box">
+                <h3 class="h2" style="font-size:22px">Drag sections</h3>
+                <p class="hint">Drag to reorder the website sections.</p>
+                <div class="drag-list" id="sectionList"></div>
+              </div>
+              <div class="tool-box">
+                <h3 class="h2" style="font-size:22px">Add student review</h3>
+                <div class="review-form">
+                  <input class="input" id="reviewAuthor" placeholder="Reviewer name">
+                  <textarea class="input" id="reviewText" rows="3" placeholder="Parent/student review"></textarea>
+                  <select class="input" id="reviewStars">
+                    <option value="5">5 stars</option>
+                    <option value="4">4 stars</option>
+                    <option value="3">3 stars</option>
+                    <option value="2">2 stars</option>
+                    <option value="1">1 star</option>
+                  </select>
+                  <button class="btn" type="button" id="addReview">Add</button>
+                  <div class="manage-list" id="reviewList"></div>
+                </div>
+              </div>
+              <div class="tool-box">
+                <h3 class="h2" style="font-size:22px">Add section</h3>
+                <div class="review-form">
+                  <input class="input" id="sectionTitle" placeholder="Section title">
+                  <textarea class="input" id="sectionText" rows="3" placeholder="Section content"></textarea>
+                  <label style="display:flex;align-items:center;gap:8px"><input id="sectionInNav" type="checkbox"> Show this section in navbar</label>
+                  <button class="btn" type="button" id="addSection">Add Section</button>
+                  <button class="btn" type="button" id="cancelSectionEdit" style="display:none">Cancel Edit</button>
+                </div>
+              </div>
+              <div class="tool-box">
+                <h3 class="h2" style="font-size:22px">Inquiry form</h3>
+                <div class="review-form">
+                  <input class="input" name="inquiryTitle" placeholder="Inquiry form title">
+                  <label style="display:flex;align-items:center;gap:8px"><input name="inquiryName" type="checkbox"> Ask for parent/student name</label>
+                  <label style="display:flex;align-items:center;gap:8px"><input name="inquiryPhone" type="checkbox"> Ask for phone</label>
+                  <label style="display:flex;align-items:center;gap:8px"><input name="inquiryEmail" type="checkbox"> Ask for email</label>
+                  <label style="display:flex;align-items:center;gap:8px"><input name="inquiryMessage" type="checkbox"> Ask for message</label>
+                </div>
+              </div>
+            </div>
+            <button class="btn dark" type="button" id="saveBtn">Save Draft</button>
+          </form>
+        </section>
+
+        <article class="site">
+          <nav class="site-nav"><strong class="site-brand"><img class="site-logo" data-preview-logo alt=""><span data-preview="instituteName"></span></strong><div class="site-links" id="siteNavLinks"></div><a class="site-pill inquiry-trigger" href="#contact">Get started</a></nav>
+          <section class="site-hero">
+            <div>
+              <div class="kicker" data-preview="kicker"></div>
+              <h1 class="title" data-preview="headline"></h1>
+              <p class="lead" data-preview="subhead"></p>
+              <a class="btn dark inquiry-trigger" href="#contact" data-preview="ctaButton"></a>
+            </div>
+            <div class="photo"><img src="https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1100&q=80" alt="Tutor helping a student study"><div class="float left" id="experienceBadge"><span data-preview="experience"></span><br><span class="small">Structured learning</span></div><div class="float right" id="pricingBadge"><span data-preview="pricing"></span><br><span class="small">Demo available</span></div></div>
+          </section>
+          <div id="siteSections">
+            <section class="band tint" id="programs" data-section="services"><strong>Programs</strong><div class="columns" id="servicesGrid"></div></section>
+            <section class="band" id="reviews" data-section="reviews"><strong>What students say</strong><div class="reviews-grid" id="reviewsGrid"></div></section>
+            <section class="band contact" id="contact" data-section="contact"><div><strong>Ready for a demo class?</strong><p class="small">Send an inquiry and get timing options on WhatsApp.</p></div><button class="btn teal inquiry-trigger" type="button">Send Inquiry</button></section>
+          </div>
+        </article>
+        </div>
+        </div>
+
+        <section class="panel dashboard-card" id="enquiriesPanel">
+          <div class="row">
+            <div><span class="badge">Lead inbox</span><h2 class="h2">Enquiries</h2><p class="small">All enquiry form submissions from the preview are captured here for testing.</p></div>
+            <button class="btn" type="button" id="clearEnquiries">Clear Test Enquiries</button>
+          </div>
+          <div class="data-list" id="enquiryList"></div>
+        </section>
+
+        <section class="panel dashboard-card" id="domainPanel">
+          <span class="badge">Whitelabel domain</span>
+          <h2 class="h2">Connect a custom domain</h2>
+          <p class="small">Tutors can publish first on a TutorHive OS preview URL, then connect their own domain when they are ready.</p>
+          <div class="split">
+            <form class="form" id="domainForm">
+              <div><label>Custom domain</label><input class="input" name="customDomain" placeholder="www.yourinstitute.com"></div>
+              <button class="btn teal" type="submit">Save Domain</button>
+              <button class="btn" type="button" id="verifyDomain">Verify DNS</button>
+            </form>
+            <div class="notice">
+              DNS setup for production:<br>
+              Add CNAME <span class="mono">www</span> pointing to <span class="mono">sites.tutorhive.in</span><br>
+              Add TXT <span class="mono">tutorhive-verify</span> with your website slug.
+            </div>
+          </div>
+          <div class="data-list" id="domainStatus"></div>
+        </section>
+
+        <section class="panel dashboard-card" id="settingsPanel">
+          <span class="badge">Website settings</span>
+          <h2 class="h2">Public URL and account</h2>
+          <div class="split">
+            <form class="form" id="settingsForm">
+              <div><label>Website slug</label><input class="input" name="siteSlug" placeholder="bright-minds-maths"></div>
+              <div><label>WhatsApp number</label><input class="input" name="whatsapp" placeholder="+91 98765 43210"></div>
+              <button class="btn teal" type="submit">Save Settings</button>
+            </form>
+            <div class="data-row">
+              <strong>Public preview URL</strong>
+              <span class="small mono" id="publicUrl"></span>
+              <button class="btn" type="button" id="copyPublicUrl">Copy Public URL</button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </section>
+  </main>
+  <div class="publish-toolbar">
+    <button class="btn" id="editPublished">Edit Website</button>
+    <button class="btn teal" id="copyLink">Copy Link</button>
+  </div>
+  <div class="modal" id="inquiryModal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2 class="h2" id="inquiryModalTitle" style="margin:0">Send an inquiry</h2>
+        <button class="icon-btn" type="button" id="closeInquiry">×</button>
+      </div>
+      <form class="form" id="inquiryForm"></form>
+    </div>
+  </div>
+
+  <script>
+    const signup = JSON.parse(localStorage.getItem("tutorhiveOsSignup") || "{}");
+    const defaultImage = "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1100&q=80";
+    const defaults = {
+      tutorName: "",
+      instituteName: "",
+      kicker: `${signup.location || "Your city"} ${signup.subject || "subject"} tutor`,
+      headline: `${signup.subject || "Tutoring"} support that feels personal, clear, and confidence-building.`,
+      subhead: "Grades 6-10 · Online and home tuition",
+      experience: "7 years experience",
+      pricing: "₹700/class",
+      showExperienceBadge: "on",
+      showPricingBadge: "on",
+      experienceX: "18",
+      experienceY: "18",
+      pricingX: "24",
+      pricingY: "24",
+      service1: signup.subject || "Maths",
+      service2: "Concept clarity",
+      service3: "Exam prep",
+      testimonial: '"The classes are structured, clear, and helped my child gain confidence."',
+      ctaButton: "Book Demo",
+      inquiryTitle: "Send an inquiry",
+      inquiryName: "on",
+      inquiryPhone: "on",
+      inquiryEmail: "on",
+      inquiryMessage: "on",
+      customDomain: "",
+      siteSlug: "",
+      whatsapp: signup.phone || "",
+      publishedAt: "",
+      imageUrl: defaultImage,
+      logoUrl: "",
+      pageBg: "#ffffff",
+      sectionBg: "#f4fdfc",
+      spacing: "34",
+      sectionOrder: ["services", "reviews", "contact"],
+      serviceOrder: ["service1", "service2", "service3"],
+      reviews: [
+        {text: '"The classes are structured, clear, and helped my child gain confidence."', stars: 5},
+        {text: '"Concepts are explained patiently with useful practice after every class."', stars: 5},
+        {text: '"The demo class helped us understand the teaching style quickly."', stars: 4}
+      ],
+      customSections: []
+    };
+    const isFreshSetup = new URLSearchParams(location.search).get("new") === "1";
+    let state = {...defaults, ...JSON.parse(localStorage.getItem("tutorhiveOsTemplate") || "{}")};
+    state.customSections = (state.customSections || []).map(section => ({showInNav: false, ...section}));
+    if (!state.siteSlug && state.instituteName) state.siteSlug = slugify(state.instituteName);
+    if (isFreshSetup) {
+      state.tutorName = "";
+      state.instituteName = "";
+      history.replaceState(null, "", "tutorhive-dashboard.html");
+    }
+    const nameForm = document.getElementById("nameForm");
+    const instituteForm = document.getElementById("instituteForm");
+    const builderForm = document.getElementById("builderForm");
+    let editingSectionId = null;
+    let currentWebsite = null;
+    let saveTimer = null;
+    async function api(path, options = {}) {
+      const res = await fetch(path, {headers: {"Content-Type":"application/json", ...(options.headers || {})}, ...options});
+      const payload = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(payload.error || "Request failed");
+      return payload;
+    }
+    function slugify(value){
+      return String(value || "my-tutor-site").toLowerCase().trim().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"") || "my-tutor-site";
+    }
+    function escapeHtml(value){
+      return String(value || "").replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[char]));
+    }
+    function sectionLabel(key){
+      if (key === "services") return "Programs / subjects";
+      if (key === "reviews") return "Student reviews";
+      if (key === "contact") return "Inquiry CTA";
+      return (state.customSections.find(section => section.id === key) || {}).title || "Custom section";
+    }
+    function navLabel(key){
+      if (key === "services") return "Programs";
+      if (key === "reviews") return "Results";
+      if (key === "contact") return "Contact";
+      return (state.customSections.find(section => section.id === key) || {}).title || "Page";
+    }
+    const serviceDescriptions = {service1: "Focused concept clarity", service2: "Practice and feedback", service3: "Exam-ready revision"};
+    function show(id){document.querySelectorAll(".step").forEach(el=>el.classList.toggle("active",el.id===id))}
+    function showPreview(){document.getElementById("setup").style.display="none";document.getElementById("previewPage").classList.add("active");window.scrollTo({top:0,behavior:"smooth"})}
+    function fillBuilder(){
+      Object.entries(state).forEach(([key,value])=>{
+        if(!builderForm.elements[key]) return;
+        if(builderForm.elements[key].type === "checkbox") builderForm.elements[key].checked = value === "on" || value === true;
+        else builderForm.elements[key].value=value;
+      })
+      if (document.forms.domainForm) document.forms.domainForm.customDomain.value = state.customDomain || "";
+      if (document.forms.settingsForm) {
+        document.forms.settingsForm.siteSlug.value = state.siteSlug || slugify(state.instituteName);
+        document.forms.settingsForm.whatsapp.value = state.whatsapp || "";
+      }
+    }
+    function save(){
+      localStorage.setItem("tutorhiveOsTemplate",JSON.stringify(state));
+      if (!currentWebsite) return;
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(() => {
+        api("/api/website", {method:"PATCH", body:JSON.stringify({draftTemplate: state, slug: state.siteSlug, customDomain: state.customDomain})}).catch(console.warn);
+      }, 450);
+    }
+    function markDraft(){state.publishedAt = ""}
+    function stars(count){return "★★★★★".slice(0, Number(count || 5))}
+    function renderSections(){
+      const wrapper = document.getElementById("siteSections");
+      state.sectionOrder.forEach(key => {
+        const section = wrapper.querySelector(`[data-section="${key}"]`);
+        if (section) wrapper.appendChild(section);
+      });
+      const list = document.getElementById("sectionList");
+      list.innerHTML = "";
+      state.sectionOrder.forEach(key => {
+        const item = document.createElement("div");
+        item.className = "drag-item";
+        item.draggable = true;
+        item.dataset.sectionKey = key;
+        const custom = state.customSections.some(section => section.id === key);
+        item.innerHTML = `<span>${escapeHtml(sectionLabel(key))}</span><span class="drag-actions">${custom ? `<button class="mini-btn" type="button" data-edit-section="${key}">Edit</button><button class="mini-btn danger" type="button" data-remove-section="${key}">Remove</button>` : ""}<button class="mini-btn" type="button" data-move-section="${key}" data-dir="-1">↑</button><button class="mini-btn" type="button" data-move-section="${key}" data-dir="1">↓</button></span>`;
+        list.appendChild(item);
+      });
+    }
+    function renderCustomSections(){
+      const wrapper = document.getElementById("siteSections");
+      wrapper.querySelectorAll("[data-custom-section='true']").forEach(section => section.remove());
+      state.customSections.forEach(section => {
+        const node = document.createElement("section");
+        node.className = "band";
+        node.dataset.section = section.id;
+        node.dataset.customSection = "true";
+        node.id = section.id;
+        node.innerHTML = `<strong>${escapeHtml(section.title)}</strong><p class="small custom-content">${escapeHtml(section.text)}</p>`;
+        wrapper.appendChild(node);
+      });
+    }
+    function renderNavLinks(){
+      const nav = document.getElementById("siteNavLinks");
+      nav.innerHTML = "";
+      state.sectionOrder.forEach(key => {
+        const customSection = state.customSections.find(section => section.id === key);
+        if (customSection && !customSection.showInNav) return;
+        const href = key === "services" ? "#programs" : `#${key}`;
+        const link = document.createElement("a");
+        link.href = href;
+        link.textContent = navLabel(key);
+        nav.appendChild(link);
+      });
+    }
+    function renderServices(){
+      const grid = document.getElementById("servicesGrid");
+      grid.innerHTML = "";
+      state.serviceOrder.forEach(key => {
+        const card = document.createElement("div");
+        card.className = "mini";
+        card.draggable = true;
+        card.dataset.serviceKey = key;
+        card.innerHTML = `<strong>${escapeHtml(state[key])}</strong><p class="small">${escapeHtml(serviceDescriptions[key])}</p>`;
+        grid.appendChild(card);
+      });
+    }
+    function renderReviews(){
+      const grid = document.getElementById("reviewsGrid");
+      grid.innerHTML = "";
+      state.reviews.forEach(review => {
+        const card = document.createElement("div");
+        card.className = "review-card";
+        card.innerHTML = `<div class="stars">${stars(review.stars)}</div><p class="small">${escapeHtml(review.text)}</p>${review.author ? `<strong class="small">- ${escapeHtml(review.author)}</strong>` : ""}`;
+        grid.appendChild(card);
+      });
+      const list = document.getElementById("reviewList");
+      list.innerHTML = "";
+      if (!state.reviews.length) {
+        list.innerHTML = '<div class="empty">No reviews added yet.</div>';
+        return;
+      }
+      state.reviews.forEach((review, index) => {
+        const item = document.createElement("div");
+        item.className = "manage-item";
+        item.innerHTML = `<span>${stars(review.stars)} ${escapeHtml(review.author || "Review")}</span><button class="mini-btn danger" type="button" data-remove-review="${index}">Remove</button>`;
+        list.appendChild(item);
+      });
+    }
+    function renderInquiryForm(){
+      const form = document.getElementById("inquiryForm");
+      document.getElementById("inquiryModalTitle").textContent = state.inquiryTitle || "Send an inquiry";
+      const fields = [];
+      if (state.inquiryName === "on" || state.inquiryName === true) fields.push('<input class="input" name="name" placeholder="Name" required>');
+      if (state.inquiryPhone === "on" || state.inquiryPhone === true) fields.push('<input class="input" name="phone" placeholder="Phone / WhatsApp" required>');
+      if (state.inquiryEmail === "on" || state.inquiryEmail === true) fields.push('<input class="input" name="email" type="email" placeholder="Email">');
+      if (state.inquiryMessage === "on" || state.inquiryMessage === true) fields.push('<textarea class="input" name="message" rows="4" placeholder="What help do you need?"></textarea>');
+      if (state.whatsapp) fields.push(`<input type="hidden" name="whatsappDestination" value="${escapeHtml(state.whatsapp)}">`);
+      form.innerHTML = `${fields.join("")}<button class="btn teal" type="submit">Submit Inquiry</button><div class="small" id="inquiryThanks" style="display:none;color:green;font-weight:900">Inquiry captured in the dashboard.</div>`;
+    }
+    function updatePreview(){
+      Object.entries(state).forEach(([key,value])=>document.querySelectorAll(`[data-preview="${key}"]`).forEach(node=>node.textContent=value));
+      document.querySelector('[data-preview="subhead"]').textContent = `By ${state.tutorName || "Tutor"} · ${state.subhead}`;
+      document.querySelector(".site").style.background = state.pageBg;
+      document.body.style.background = state.pageBg;
+      document.querySelector(".site-hero").style.background = `linear-gradient(135deg, ${state.sectionBg} 0%, #fff 55%, #fff7dc 100%)`;
+      document.querySelectorAll(".band").forEach(section => section.style.padding = `${state.spacing}px 42px`);
+      document.querySelector(".photo").style.setProperty("--exp-x", `${state.experienceX}px`);
+      document.querySelector(".photo").style.setProperty("--exp-y", `${state.experienceY}px`);
+      document.querySelector(".photo").style.setProperty("--price-x", `${state.pricingX}px`);
+      document.querySelector(".photo").style.setProperty("--price-y", `${state.pricingY}px`);
+      document.getElementById("experienceBadge").style.display = state.showExperienceBadge === "on" || state.showExperienceBadge === true ? "block" : "none";
+      document.getElementById("pricingBadge").style.display = state.showPricingBadge === "on" || state.showPricingBadge === true ? "block" : "none";
+      document.querySelector(".photo img").src = state.imageUrl || defaultImage;
+      const logo = document.querySelector("[data-preview-logo]");
+      if (state.logoUrl) {
+        logo.src = state.logoUrl;
+        logo.classList.add("active");
+      } else {
+        logo.removeAttribute("src");
+        logo.classList.remove("active");
+      }
+      document.querySelectorAll("[data-color-target]").forEach(row => {
+        const target = row.dataset.colorTarget;
+        row.querySelectorAll(".swatch-btn").forEach(button => button.classList.toggle("active", button.dataset.color === state[target]));
+        const picker = row.querySelector("[data-picker-target]");
+        if (picker) picker.value = state[target];
+      });
+      renderCustomSections();
+      renderSections();
+      renderNavLinks();
+      renderServices();
+      renderReviews();
+      renderInquiryForm();
+      renderStatus();
+      renderEnquiries();
+      renderDomain();
+      renderSettings();
+      save();
+    }
+    function renderStatus(){
+      const status = document.getElementById("siteStatus");
+      const dot = status.querySelector(".status-dot");
+      const label = status.querySelector("span:last-child");
+      dot.classList.toggle("live", Boolean(state.publishedAt));
+      label.textContent = state.publishedAt ? `Published preview · ${new Date(state.publishedAt).toLocaleString()}` : "Draft saved locally";
+    }
+    function publicUrl(){
+      if (state.customDomain) return `https://${state.customDomain.replace(/^https?:\/\//,"")}`;
+      return `https://tutorhive.in/site/${state.siteSlug || slugify(state.instituteName)}`;
+    }
+    async function loadEnquiries(){
+      const list = document.getElementById("enquiryList");
+      if (!list) return;
+      let items = [];
+      try {
+        items = (await api("/api/enquiries")).enquiries || [];
+      } catch (error) {
+        items = JSON.parse(localStorage.getItem("tutorhiveOsInquiries") || "[]").filter(item => !item.instituteName || item.instituteName === state.instituteName);
+      }
+      if (!items.length) {
+        list.innerHTML = '<div class="empty">No enquiries yet. Open the website preview, click Book Demo or Send Inquiry, and submit the form.</div>';
+        return;
+      }
+      list.innerHTML = "";
+      items.slice().reverse().forEach(item => {
+        const row = document.createElement("div");
+        row.className = "data-row";
+        row.innerHTML = `<strong>${escapeHtml(item.name || "New enquiry")}</strong><span class="small">${escapeHtml(item.phone || "")} ${item.email ? "· " + escapeHtml(item.email) : ""}</span><p class="small">${escapeHtml(item.message || "No message added.")}</p><span class="small">${item.createdAt ? new Date(item.createdAt).toLocaleString() : ""}</span>`;
+        list.appendChild(row);
+      });
+    }
+    function renderEnquiries(){loadEnquiries()}
+    function renderDomain(){
+      const status = document.getElementById("domainStatus");
+      if (!status) return;
+      const domain = state.customDomain || "No custom domain saved yet";
+      status.innerHTML = `<div class="data-row"><strong>Current domain</strong><span class="mono small">${escapeHtml(domain)}</span><span class="small">Status: ${state.customDomain ? "DNS pending verification in production" : "Using TutorHive OS preview URL"}</span></div>`;
+    }
+    function renderSettings(){
+      const output = document.getElementById("publicUrl");
+      if (output) output.textContent = publicUrl();
+    }
+    function applyTheme(color){
+      document.querySelectorAll(".theme-btn").forEach(btn=>btn.classList.toggle("active",btn.dataset.theme===color));
+      document.getElementById("themePicker").value = color;
+      document.querySelectorAll(".btn.teal").forEach(btn=>btn.style.background=`linear-gradient(120deg, ${color}, #22d3ee)`);
+      document.querySelectorAll(".kicker,.badge").forEach(node=>node.style.color=color);
+      localStorage.setItem("tutorhiveOsTheme",color);
+    }
+    function openEditor(){
+      document.body.classList.remove("published");
+      document.getElementById("previewPage").classList.add("active");
+      document.getElementById("editor").classList.add("active");
+      document.getElementById("workspace").classList.add("editing");
+      document.getElementById("editBtn").textContent = "Hide Editor";
+      window.scrollTo({top:0,behavior:"smooth"});
+    }
+    nameForm.addEventListener("submit",(event)=>{event.preventDefault();state.tutorName=new FormData(nameForm).get("tutorName");document.getElementById("helloName").textContent=`Hey ${state.tutorName}, name your institute`;show("stepInstitute")});
+    instituteForm.addEventListener("submit",(event)=>{event.preventDefault();state.instituteName=new FormData(instituteForm).get("instituteName");state.siteSlug=slugify(state.instituteName);fillBuilder();updatePreview();showPreview()});
+    builderForm.addEventListener("input",()=>{
+      const data = Object.fromEntries(new FormData(builderForm).entries());
+      state={...state,...data,showExperienceBadge:data.showExperienceBadge || "off",showPricingBadge:data.showPricingBadge || "off",inquiryName:data.inquiryName || "off",inquiryPhone:data.inquiryPhone || "off",inquiryEmail:data.inquiryEmail || "off",inquiryMessage:data.inquiryMessage || "off"};
+      markDraft();
+      updatePreview();
+    });
+    document.getElementById("editBtn").addEventListener("click",()=>{
+      const editor = document.getElementById("editor");
+      const isOpen = editor.classList.toggle("active");
+      document.getElementById("workspace").classList.toggle("editing", isOpen);
+      document.getElementById("editBtn").textContent = isOpen ? "Hide Editor" : "Edit Template";
+      if (isOpen) editor.scrollIntoView({behavior:"smooth", block:"start"});
+    });
+    document.querySelectorAll("[data-tab]").forEach(button=>button.addEventListener("click",()=>{
+      const tab = button.dataset.tab;
+      document.querySelectorAll("[data-tab]").forEach(item=>item.classList.toggle("active", item === button));
+      document.querySelectorAll(".panel").forEach(panel=>panel.classList.toggle("active", panel.id === `${tab}Panel`));
+      if (tab === "builder") fillBuilder();
+      renderEnquiries();
+      renderDomain();
+      renderSettings();
+    }));
+    document.getElementById("saveBtn").addEventListener("click",()=>{updatePreview();document.getElementById("saveBtn").textContent="Draft Saved";setTimeout(()=>document.getElementById("saveBtn").textContent="Save Draft",1400)});
+    document.getElementById("addReview").addEventListener("click",()=>{
+      const author = document.getElementById("reviewAuthor").value.trim();
+      const text = document.getElementById("reviewText").value.trim();
+      const starsValue = document.getElementById("reviewStars").value;
+      if (!text) return;
+      state.reviews.push({author, text, stars: Number(starsValue)});
+      markDraft();
+      document.getElementById("reviewAuthor").value = "";
+      document.getElementById("reviewText").value = "";
+      updatePreview();
+    });
+    document.getElementById("addSection").addEventListener("click",()=>{
+      const title = document.getElementById("sectionTitle").value.trim();
+      const text = document.getElementById("sectionText").value.trim();
+      const showInNav = document.getElementById("sectionInNav").checked;
+      if (!title || !text) return;
+      if (editingSectionId) {
+        const section = state.customSections.find(item => item.id === editingSectionId);
+        if (section) Object.assign(section, {title, text, showInNav});
+        editingSectionId = null;
+        document.getElementById("addSection").textContent = "Add Section";
+        document.getElementById("cancelSectionEdit").style.display = "none";
+        document.getElementById("sectionTitle").value = "";
+        document.getElementById("sectionText").value = "";
+        document.getElementById("sectionInNav").checked = false;
+        markDraft();
+        updatePreview();
+        return;
+      }
+      const id = `section-${Date.now()}`;
+      state.customSections.push({id, title, text, showInNav});
+      state.sectionOrder.splice(Math.max(state.sectionOrder.length - 1, 0), 0, id);
+      document.getElementById("sectionTitle").value = "";
+      document.getElementById("sectionText").value = "";
+      document.getElementById("sectionInNav").checked = false;
+      markDraft();
+      updatePreview();
+    });
+    document.getElementById("cancelSectionEdit").addEventListener("click",()=>{
+      editingSectionId = null;
+      document.getElementById("sectionTitle").value = "";
+      document.getElementById("sectionText").value = "";
+      document.getElementById("sectionInNav").checked = false;
+      document.getElementById("addSection").textContent = "Add Section";
+      document.getElementById("cancelSectionEdit").style.display = "none";
+    });
+    document.querySelectorAll("[data-image-preset]").forEach(button=>button.addEventListener("click",()=>{
+      state.imageUrl = button.dataset.imagePreset;
+      builderForm.elements.imageUrl.value = state.imageUrl;
+      markDraft();
+      updatePreview();
+    }));
+    document.getElementById("imageUpload").addEventListener("change",(event)=>{
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        state.imageUrl = reader.result;
+        builderForm.elements.imageUrl.value = reader.result;
+        markDraft();
+        updatePreview();
+      };
+      reader.readAsDataURL(file);
+    });
+    document.getElementById("logoUpload").addEventListener("change",(event)=>{
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        state.logoUrl = reader.result;
+        builderForm.elements.logoUrl.value = reader.result;
+        markDraft();
+        updatePreview();
+      };
+      reader.readAsDataURL(file);
+    });
+    document.querySelectorAll("[data-color-target] .swatch-btn").forEach(button=>button.addEventListener("click",()=>{
+      const target = button.closest("[data-color-target]").dataset.colorTarget;
+      state[target] = button.dataset.color;
+      builderForm.elements[target].value = state[target];
+      document.querySelectorAll(`[data-color-target="${target}"] .swatch-btn`).forEach(item=>item.classList.toggle("active", item === button));
+      markDraft();
+      updatePreview();
+    }));
+    document.addEventListener("click",(event)=>{
+      const editor = event.target.closest("[data-edit-section]");
+      if (editor) {
+        const section = state.customSections.find(item => item.id === editor.dataset.editSection);
+        if (!section) return;
+        editingSectionId = section.id;
+        document.getElementById("sectionTitle").value = section.title;
+        document.getElementById("sectionText").value = section.text;
+        document.getElementById("sectionInNav").checked = Boolean(section.showInNav);
+        document.getElementById("addSection").textContent = "Update Section";
+        document.getElementById("cancelSectionEdit").style.display = "inline-flex";
+        return;
+      }
+      const remover = event.target.closest("[data-remove-section]");
+      if (remover) {
+        const key = remover.dataset.removeSection;
+        state.customSections = state.customSections.filter(section => section.id !== key);
+        state.sectionOrder = state.sectionOrder.filter(sectionKey => sectionKey !== key);
+        if (editingSectionId === key) document.getElementById("cancelSectionEdit").click();
+        markDraft();
+        updatePreview();
+        return;
+      }
+      const reviewRemover = event.target.closest("[data-remove-review]");
+      if (reviewRemover) {
+        state.reviews.splice(Number(reviewRemover.dataset.removeReview), 1);
+        markDraft();
+        updatePreview();
+        return;
+      }
+      const mover = event.target.closest("[data-move-section]");
+      if (!mover) return;
+      const key = mover.dataset.moveSection;
+      const dir = Number(mover.dataset.dir);
+      const index = state.sectionOrder.indexOf(key);
+      const next = index + dir;
+      if (next < 0 || next >= state.sectionOrder.length) return;
+      state.sectionOrder.splice(index, 1);
+      state.sectionOrder.splice(next, 0, key);
+      markDraft();
+      updatePreview();
+    });
+    document.addEventListener("dragstart",(event)=>{
+      const sectionItem = event.target.closest("[data-section-key]");
+      const serviceItem = event.target.closest("[data-service-key]");
+      if (sectionItem) {
+        event.dataTransfer.setData("text/section", sectionItem.dataset.sectionKey);
+        sectionItem.classList.add("dragging");
+      }
+      if (serviceItem) {
+        event.dataTransfer.setData("text/service", serviceItem.dataset.serviceKey);
+        serviceItem.classList.add("dragging");
+      }
+    });
+    document.addEventListener("dragend",()=>document.querySelectorAll(".dragging").forEach(item=>item.classList.remove("dragging")));
+    document.addEventListener("dragover",(event)=>{
+      if (event.target.closest("#sectionList") || event.target.closest("#servicesGrid")) event.preventDefault();
+    });
+    document.addEventListener("drop",(event)=>{
+      const sectionTarget = event.target.closest("[data-section-key]");
+      const serviceTarget = event.target.closest("[data-service-key]");
+      const sectionKey = event.dataTransfer.getData("text/section");
+      const serviceKey = event.dataTransfer.getData("text/service");
+      if (sectionKey && sectionTarget) {
+        const targetKey = sectionTarget.dataset.sectionKey;
+        state.sectionOrder = state.sectionOrder.filter(key => key !== sectionKey);
+        state.sectionOrder.splice(state.sectionOrder.indexOf(targetKey), 0, sectionKey);
+        markDraft();
+        updatePreview();
+      }
+      if (serviceKey && serviceTarget) {
+        const targetKey = serviceTarget.dataset.serviceKey;
+        state.serviceOrder = state.serviceOrder.filter(key => key !== serviceKey);
+        state.serviceOrder.splice(state.serviceOrder.indexOf(targetKey), 0, serviceKey);
+        markDraft();
+        updatePreview();
+      }
+    });
+    document.querySelectorAll(".theme-btn").forEach(btn=>btn.addEventListener("click",()=>{markDraft();applyTheme(btn.dataset.theme);updatePreview()}));
+    document.getElementById("themePicker").addEventListener("input",(event)=>{markDraft();applyTheme(event.target.value);updatePreview()});
+    document.querySelectorAll("[data-picker-target]").forEach(picker=>picker.addEventListener("input",()=>{
+      const target = picker.dataset.pickerTarget;
+      state[target] = picker.value;
+      builderForm.elements[target].value = state[target];
+      markDraft();
+      updatePreview();
+    }));
+    document.getElementById("publishBtn").addEventListener("click",async ()=>{
+      state.publishedAt = new Date().toISOString();
+      updatePreview();
+      try {
+        const result = await api("/api/publish", {method:"POST", body:"{}"});
+        currentWebsite = result.website;
+        state.publishedAt = result.website.publishedAt;
+        updatePreview();
+      } catch (error) {
+        alert(error.message);
+        return;
+      }
+      document.body.classList.add("published");
+      window.scrollTo({top:0,behavior:"smooth"});
+    });
+    document.addEventListener("click",(event)=>{
+      if (!event.target.closest(".inquiry-trigger")) return;
+      event.preventDefault();
+      renderInquiryForm();
+      document.getElementById("inquiryModal").classList.add("active");
+    });
+    document.getElementById("closeInquiry").addEventListener("click",()=>document.getElementById("inquiryModal").classList.remove("active"));
+    document.getElementById("inquiryModal").addEventListener("click",(event)=>{
+      if (event.target.id === "inquiryModal") event.currentTarget.classList.remove("active");
+    });
+    document.getElementById("inquiryForm").addEventListener("submit",async (event)=>{
+      event.preventDefault();
+      const inquiry = Object.fromEntries(new FormData(event.currentTarget).entries());
+      try {
+        await api(`/api/site/${state.siteSlug || slugify(state.instituteName)}/enquiries`, {method:"POST", body:JSON.stringify(inquiry)});
+      } catch (error) {
+        const inquiries = JSON.parse(localStorage.getItem("tutorhiveOsInquiries") || "[]");
+        inquiries.push({...inquiry, websiteSlug: state.siteSlug || slugify(state.instituteName), instituteName: state.instituteName, createdAt: new Date().toISOString()});
+        localStorage.setItem("tutorhiveOsInquiries", JSON.stringify(inquiries));
+      }
+      const thanks = document.getElementById("inquiryThanks");
+      if (thanks) thanks.style.display = "block";
+      event.currentTarget.reset();
+      loadEnquiries();
+    });
+    document.getElementById("editPublished").addEventListener("click",openEditor);
+    document.getElementById("copyLink").addEventListener("click",()=>{
+      navigator.clipboard?.writeText(publicUrl());
+      document.getElementById("copyLink").textContent = "Copied";
+      setTimeout(()=>document.getElementById("copyLink").textContent = "Copy Link",1200);
+    });
+    document.getElementById("clearEnquiries").addEventListener("click",async ()=>{
+      try { await api("/api/enquiries", {method:"DELETE"}); } catch (error) {}
+      const remaining = JSON.parse(localStorage.getItem("tutorhiveOsInquiries") || "[]").filter(item => item.instituteName && item.instituteName !== state.instituteName);
+      localStorage.setItem("tutorhiveOsInquiries", JSON.stringify(remaining));
+      renderEnquiries();
+    });
+    document.getElementById("domainForm").addEventListener("submit",(event)=>{
+      event.preventDefault();
+      state.customDomain = new FormData(event.currentTarget).get("customDomain").replace(/^https?:\/\//,"").replace(/\/.*$/,"").trim();
+      markDraft();
+      updatePreview();
+    });
+    document.getElementById("verifyDomain").addEventListener("click",async ()=>{
+      try {
+        const result = await api("/api/domain/verify", {method:"POST", body:"{}"});
+        currentWebsite = result.website;
+        alert(result.message);
+        renderDomain();
+      } catch (error) {
+        alert(error.message);
+      }
+    });
+    document.getElementById("settingsForm").addEventListener("submit",(event)=>{
+      event.preventDefault();
+      const data = Object.fromEntries(new FormData(event.currentTarget).entries());
+      state.siteSlug = slugify(data.siteSlug);
+      state.whatsapp = data.whatsapp.trim();
+      markDraft();
+      fillBuilder();
+      updatePreview();
+    });
+    document.getElementById("copyPublicUrl").addEventListener("click",()=>{
+      navigator.clipboard?.writeText(publicUrl());
+      document.getElementById("copyPublicUrl").textContent = "Copied";
+      setTimeout(()=>document.getElementById("copyPublicUrl").textContent = "Copy Public URL",1200);
+    });
+    document.getElementById("logoutBtn").addEventListener("click",async ()=>{
+      await api("/api/logout", {method:"POST", body:"{}"}).catch(()=>{});
+      window.location.href = "tutorhive-os.html#signup";
+    });
+    async function init(){
+      try {
+        const session = await api("/api/me");
+        currentWebsite = session.website;
+        if (currentWebsite?.draftTemplate) {
+          state = {...defaults, ...currentWebsite.draftTemplate};
+          state.publishedAt = currentWebsite.publishedAt || state.publishedAt || "";
+          state.siteSlug = currentWebsite.slug || state.siteSlug || slugify(state.instituteName);
+          state.customDomain = currentWebsite.customDomain || state.customDomain || "";
+        }
+      } catch (error) {
+        window.location.href = "tutorhive-os.html#signup";
+        return;
+      }
+      applyTheme(localStorage.getItem("tutorhiveOsTheme") || "#0ea5a3");
+      if(state.tutorName && state.instituteName){fillBuilder();updatePreview();showPreview()} else if(state.tutorName){document.getElementById("tutorName").value=state.tutorName;document.getElementById("helloName").textContent=`Hey ${state.tutorName}, name your institute`;show("stepInstitute")}
+      if (!state.tutorName) setTimeout(()=>{document.getElementById("tutorName").value = ""}, 80);
+    }
+    init();
+  </script>
+</body>
+</html>
