@@ -2,10 +2,15 @@
 @media (max-width: 768px) {
   /* Stack header */
   .nav .row {
-    flex-direction: column !important;
-    align-items: flex-start !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    align-items: center !important;
     gap: 10px !important;
     height: auto !important;
+  }
+  .brand,
+  .nav-actions {
+    justify-content: center !important;
   }
   .menu {
     width: 100% !important;
@@ -49,6 +54,5 @@
 /* optional reveal animation if you're using .reveal/.show */
 #benefits .card.reveal { opacity: 0; transform: translateY(30px); }
 #benefits .card.reveal.show { opacity: 1; transform: none; transition: all .6s ease; }
-
 
 

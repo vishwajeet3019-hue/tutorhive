@@ -200,7 +200,7 @@ function requireTutor(req, res, db) {
 
 function templateFromSignup(data) {
   return {
-    tutorName: "",
+    tutorName: data.name || "",
     instituteName: "",
     kicker: `${data.location || "Your city"} ${data.subject || "subject"} tutor`,
     headline: `${data.subject || "Tutoring"} support that feels personal, clear, and confidence-building.`,
