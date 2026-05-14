@@ -14,7 +14,7 @@
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--ink);background:#fff}
     a{color:inherit;text-decoration:none}.container{width:min(100% - 40px,1360px);margin:0 auto}
     .nav{border-bottom:1px solid var(--border);background:#fff;position:sticky;top:0;z-index:20}.row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}.nav .row{min-height:74px}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:900}.brand img{height:64px;width:74px;object-fit:contain}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:900}.brand img{height:64px;width:74px;object-fit:contain}.brand-lockup{display:grid;gap:2px}.brand-title{font-size:20px;line-height:1;font-weight:1000}.brand-sub{font-size:10px;line-height:1;text-transform:uppercase;letter-spacing:.12em;color:var(--brand);font-weight:1000}
     .btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;padding:12px 18px;border-radius:999px;border:1px solid var(--border);background:#fff;font-weight:900;cursor:pointer}.btn.primary{border:none;color:#0b3c3b;background:linear-gradient(120deg,var(--honey),#ffe082)}.btn.teal{border:none;color:#fff;background:linear-gradient(120deg,var(--brand),var(--brand2))}.btn.dark{border:none;background:#0f172a;color:#fff}
     .section{padding:78px 0}.alt{background:var(--muted)}.hero{min-height:calc(100vh - 74px);display:grid;align-items:center;background:linear-gradient(135deg,#ecfeff 0%,#fff 55%,#fff8df 100%)}
     .grid{display:grid;gap:22px}.two{grid-template-columns:1.05fr .95fr}.three{grid-template-columns:repeat(3,1fr)}
@@ -31,7 +31,7 @@
 <body>
   <nav class="nav">
     <div class="container row">
-      <a class="brand" href="index.html"><img src="logo.png" alt="TutorHive Logo"><span>TutorHive OS</span></a>
+      <a class="brand" href="index.html"><img src="logo.png" alt="TutorHive Logo"><span class="brand-lockup"><span class="brand-title">TutorHive OS</span><span class="brand-sub">Website Builder</span></span></a>
       <div class="row"><a class="btn" href="index.html">Back to TutorHive</a><a class="btn teal" href="#signup">Sign Up</a></div>
     </div>
   </nav>
@@ -40,7 +40,6 @@
     <section class="hero">
       <div class="container grid two">
         <div>
-          <span class="badge">New vertical by TutorHive</span>
           <h1 class="h1">Instant websites for solo tutors who want to grow independently.</h1>
           <p class="lead">TutorHive OS helps independent tutors sign up, create a professional online presence, share one trusted link, collect inquiries, and look credible without building a website from scratch.</p>
           <div class="row" style="justify-content:flex-start;margin-top:24px"><a class="btn primary" href="#signup">Sign Up to Create Your Website</a><a class="btn" href="#how">See how it works</a></div>
@@ -97,7 +96,7 @@
     </section>
   </main>
 
-  <footer><div class="container row"><div class="brand"><img src="logo.png" alt=""> TutorHive OS</div><div class="small">A separate product vertical by TutorHive for solo tutors.</div></div></footer>
+  <footer><div class="container row"><div class="brand"><img src="logo.png" alt=""><span class="brand-lockup"><span class="brand-title">TutorHive OS</span><span class="brand-sub">Website Builder</span></span></div><div class="small">Professional website infrastructure for solo tutors.</div></div></footer>
 
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyRLzjZIr4c9pwZmJjnhD_3NrzuWskMWI1jbKdrUc-9ZxfI1fOzRLjOWLEhq8rxq8_thw/exec";
