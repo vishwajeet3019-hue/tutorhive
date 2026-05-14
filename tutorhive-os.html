@@ -23,8 +23,9 @@
     .sample-site{border-radius:18px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--border);background:#fff}.sample-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 22px;border-bottom:1px solid var(--border);background:#fff}.sample-brand{font-weight:1000;color:#0f172a;font-size:20px}.sample-url{color:var(--sub);font-size:13px;font-weight:800}
     .sample-hero{padding:28px 24px 22px;background:linear-gradient(135deg,#f3fffe 0%,#fff 58%,#fff7dc 100%);display:grid;gap:18px;text-align:left}.sample-kicker{color:#0b3c3b;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}.sample-title{font-size:30px;line-height:1.08;margin:8px 0;color:#05070d;max-width:560px}.sample-visual{display:grid;grid-template-columns:.95fr 1.05fr;gap:16px;align-items:center}.sample-photo{height:190px;border-radius:18px;overflow:hidden;box-shadow:0 16px 36px rgba(2,8,23,.12)}.sample-photo img{width:100%;height:100%;object-fit:cover;display:block}.sample-points{display:grid;gap:10px}.sample-point{border:1px solid var(--border);border-radius:12px;background:#fff;padding:11px;font-weight:900}.sample-body{padding:18px 24px;border-top:1px solid var(--border);background:#fff}.sample-columns{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.sample-mini{border:1px solid var(--border);border-radius:12px;padding:12px;background:#fff}.sample-mini strong{display:block;margin-bottom:4px}
     .form{display:grid;gap:10px}.input{width:100%;padding:14px;border:1px solid var(--border);border-radius:12px;background:#fff}footer{border-top:1px solid var(--border);padding:22px 0}
+    .auth-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;margin-top:22px}.auth-card{height:100%}.auth-card h3{margin:0 0 4px;font-size:22px}.auth-card .btn{width:100%}.auth-intro{max-width:860px}.form-note{margin:0;color:var(--sub);font-size:14px;line-height:1.5}
     .error{display:none;color:#b91c1c;font-weight:800}.error.active{display:block}
-    @media(max-width:900px){.two,.three,.sample-visual,.sample-columns{grid-template-columns:1fr}.hero{min-height:auto;padding:48px 0}.section{padding:56px 0}.btn{width:100%}.nav .btn{width:auto}.sample-url{display:none}.sample-title{font-size:28px}.sample-photo{height:220px}}
+    @media(max-width:900px){.two,.three,.sample-visual,.sample-columns,.auth-grid{grid-template-columns:1fr}.hero{min-height:auto;padding:48px 0}.section{padding:56px 0}.btn{width:100%}.nav .btn{width:auto}.sample-url{display:none}.sample-title{font-size:28px}.sample-photo{height:220px}}
   </style>
 </head>
 <body>
@@ -67,26 +68,31 @@
     </section>
 
     <section class="section" id="signup">
-      <div class="container grid two">
-        <div><h2 class="h2">Sign up to access TutorHive OS</h2><p class="lead">After signup, TutorHive OS opens a dashboard that guides you step by step into your website preview and editor.</p></div>
-        <form id="osForm" class="form card">
-          <input type="hidden" name="form" value="TutorHive OS Signup">
-          <input class="input" name="email" type="email" placeholder="Email address" required>
-          <input class="input" name="phone" placeholder="WhatsApp number" required>
-          <input class="input" name="subject" placeholder="Main subject you teach" required>
-          <input class="input" name="location" placeholder="City / area" required>
-          <input class="input" name="password" type="password" placeholder="Create password" required>
-          <button class="btn teal" type="submit">Create Account</button>
-          <p class="error" id="signupError"></p>
-          <div class="small">Already signed up? Use the login form below.</div>
-        </form>
-        <form id="loginForm" class="form card">
-          <strong>Login to TutorHive OS</strong>
-          <input class="input" name="email" type="email" placeholder="Email address" required>
-          <input class="input" name="password" type="password" placeholder="Password" required>
-          <button class="btn dark" type="submit">Login</button>
-          <p class="error" id="loginError"></p>
-        </form>
+      <div class="container">
+        <div class="auth-intro"><h2 class="h2">Access TutorHive OS</h2><p class="lead">Create an account or sign in to manage your tutor website, publish updates, and view enquiries.</p></div>
+        <div class="auth-grid">
+          <form id="osForm" class="form card auth-card" autocomplete="off">
+            <h3>Create your account</h3>
+            <p class="form-note">Start with only the essentials. Website details come after login.</p>
+            <input type="hidden" name="form" value="TutorHive OS Signup">
+            <input type="hidden" name="subject" value="Tutoring">
+            <input class="input" name="email" type="email" placeholder="Email address" autocomplete="off" required>
+            <input class="input" name="phone" placeholder="WhatsApp number" autocomplete="off" required>
+            <input class="input" name="location" placeholder="City" autocomplete="off" required>
+            <input class="input" name="password" type="password" placeholder="Set password" autocomplete="new-password" required>
+            <input class="input" name="confirmPassword" type="password" placeholder="Confirm password" autocomplete="new-password" required>
+            <button class="btn teal" type="submit">Create Account</button>
+            <p class="error" id="signupError"></p>
+          </form>
+          <form id="loginForm" class="form card auth-card" autocomplete="off">
+            <h3>Sign in</h3>
+            <p class="form-note">Continue editing your website and checking enquiries.</p>
+            <input class="input" name="email" type="email" placeholder="Email address" autocomplete="email" required>
+            <input class="input" name="password" type="password" placeholder="Password" autocomplete="current-password" required>
+            <button class="btn dark" type="submit">Login</button>
+            <p class="error" id="loginError"></p>
+          </form>
+        </div>
       </div>
     </section>
   </main>
@@ -110,6 +116,12 @@
     document.getElementById("osForm").addEventListener("submit", (event) => {
       event.preventDefault();
       const data = Object.fromEntries(new FormData(event.currentTarget).entries());
+      document.getElementById("signupError").classList.remove("active");
+      if (data.password !== data.confirmPassword) {
+        showError("signupError", "Passwords do not match.");
+        return;
+      }
+      delete data.confirmPassword;
       if (IS_LIVE_SITE) {
         fetch(SCRIPT_URL, {method:"POST", headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"}, body:new URLSearchParams(data).toString()}).catch(() => {});
       }
@@ -119,6 +131,7 @@
     });
     document.getElementById("loginForm").addEventListener("submit", (event) => {
       event.preventDefault();
+      document.getElementById("loginError").classList.remove("active");
       api("/api/login", Object.fromEntries(new FormData(event.currentTarget).entries()))
         .then(() => { window.location.href = "tutorhive-dashboard.html"; })
         .catch(error => showError("loginError", error.message));
