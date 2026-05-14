@@ -15,7 +15,7 @@ let pgPool = null;
 const defaultImage = "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1100&q=80";
 
 function initialDb() {
-  return { tutors: [], sessions: [], websites: [], enquiries: [] };
+  return { tutors: [], sessions: [], websites: [], enquiries: [], analytics: [] };
 }
 
 async function ensurePostgres() {
@@ -59,6 +59,13 @@ async function ensurePostgres() {
         status text,
         created_at timestamptz NOT NULL
       );
+      CREATE TABLE IF NOT EXISTS analytics_events (
+        id text PRIMARY KEY,
+        website_id text REFERENCES websites(id) ON DELETE CASCADE,
+        slug text,
+        event_type text,
+        created_at timestamptz NOT NULL
+      );
     `);
   }
   return pgPool;
@@ -67,17 +74,19 @@ async function ensurePostgres() {
 async function readDb() {
   const pool = await ensurePostgres();
   if (pool) {
-    const [tutors, sessions, websites, enquiries] = await Promise.all([
+    const [tutors, sessions, websites, enquiries, analytics] = await Promise.all([
       pool.query("SELECT * FROM tutors"),
       pool.query("SELECT * FROM sessions"),
       pool.query("SELECT * FROM websites"),
-      pool.query("SELECT * FROM enquiries ORDER BY created_at ASC")
+      pool.query("SELECT * FROM enquiries ORDER BY created_at ASC"),
+      pool.query("SELECT * FROM analytics_events ORDER BY created_at ASC")
     ]);
     return {
       tutors: tutors.rows.map(row => ({ id: row.id, email: row.email, phone: row.phone || "", passwordHash: row.password_hash, createdAt: row.created_at.toISOString() })),
       sessions: sessions.rows.map(row => ({ token: row.token, tutorId: row.tutor_id, createdAt: row.created_at.toISOString(), expiresAt: row.expires_at.toISOString() })),
       websites: websites.rows.map(row => ({ id: row.id, tutorId: row.tutor_id, slug: row.slug || "", customDomain: row.custom_domain || "", domainStatus: row.domain_status || "not_connected", draftTemplate: row.draft_template, publishedTemplate: row.published_template, publishedAt: row.published_at ? row.published_at.toISOString() : "", lastDomainCheckAt: row.last_domain_check_at ? row.last_domain_check_at.toISOString() : "" })),
-      enquiries: enquiries.rows.map(row => ({ id: row.id, websiteId: row.website_id, slug: row.slug || "", name: row.name || "", phone: row.phone || "", email: row.email || "", message: row.message || "", status: row.status || "new", createdAt: row.created_at.toISOString() }))
+      enquiries: enquiries.rows.map(row => ({ id: row.id, websiteId: row.website_id, slug: row.slug || "", name: row.name || "", phone: row.phone || "", email: row.email || "", message: row.message || "", status: row.status || "new", createdAt: row.created_at.toISOString() })),
+      analytics: analytics.rows.map(row => ({ id: row.id, websiteId: row.website_id, slug: row.slug || "", eventType: row.event_type || "", createdAt: row.created_at.toISOString() }))
     };
   }
   if (!fs.existsSync(DB_FILE)) return initialDb();
@@ -115,6 +124,13 @@ async function writeDb(db) {
         await client.query(
           "INSERT INTO enquiries (id,website_id,slug,name,phone,email,message,status,created_at) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)",
           [enquiry.id, enquiry.websiteId, enquiry.slug || "", enquiry.name || "", enquiry.phone || "", enquiry.email || "", enquiry.message || "", enquiry.status || "new", enquiry.createdAt]
+        );
+      }
+      await client.query("DELETE FROM analytics_events");
+      for (const event of db.analytics || []) {
+        await client.query(
+          "INSERT INTO analytics_events (id,website_id,slug,event_type,created_at) VALUES ($1,$2,$3,$4,$5)",
+          [event.id, event.websiteId, event.slug || "", event.eventType || "", event.createdAt]
         );
       }
       await client.query("COMMIT");
@@ -278,6 +294,20 @@ function publicSiteUrl(slug) {
   return `https://${slugify(slug)}.${SITE_BASE_DOMAIN}`;
 }
 
+function recordAnalytics(db, website, eventType) {
+  db.analytics = db.analytics || [];
+  db.analytics.push({ id: id("evt"), websiteId: website.id, slug: website.slug, eventType, createdAt: new Date().toISOString() });
+}
+
+function analyticsSummary(db, website) {
+  const events = (db.analytics || []).filter(item => item.websiteId === website.id);
+  return {
+    visits: events.filter(item => item.eventType === "visit").length,
+    enquiries: db.enquiries.filter(item => item.websiteId === website.id).length,
+    whatsappClicks: events.filter(item => item.eventType === "whatsapp_click").length
+  };
+}
+
 function renderSite(website) {
   const t = website.publishedTemplate;
   if (!t) return null;
@@ -303,9 +333,9 @@ function renderSite(website) {
     return `<a href="${href}">${escapeHtml(label)}</a>`;
   }).join("");
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${escapeHtml(t.instituteName)} | TutorHive OS</title><meta name="description" content="${escapeHtml(t.headline)}"><style>
-  *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;color:#0f172a;background:${escapeHtml(t.pageBg || "#fff")}}a{text-decoration:none;color:inherit}.site-nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 28px;border-bottom:1px solid #e5e7eb;background:#fff}.brand{display:flex;align-items:center;gap:10px;font-size:24px;font-weight:1000}.brand img{width:42px;height:42px;border-radius:10px;object-fit:cover}.links{display:flex;gap:22px;color:#475569;font-weight:900}.pill,.btn{border:0;border-radius:999px;background:#0f172a;color:#fff;font-weight:900;padding:12px 18px;cursor:pointer}.teal{background:linear-gradient(120deg,#0ea5a3,#22d3ee)}.hero{display:grid;grid-template-columns:1.03fr .97fr;gap:34px;align-items:center;padding:54px 42px;background:linear-gradient(135deg,${escapeHtml(t.sectionBg || "#f4fdfc")} 0%,#fff 55%,#fff7dc 100%)}.kicker{font-size:13px;font-weight:1000;text-transform:uppercase;letter-spacing:.07em;color:#0ea5a3}.title{font-size:clamp(40px,5vw,66px);line-height:1.02;margin:12px 0}.lead{font-size:18px;line-height:1.7;color:#475569;max-width:560px}.photo{position:relative;height:380px;border-radius:30px;overflow:hidden;box-shadow:0 24px 60px rgba(2,8,23,.16)}.photo img{width:100%;height:100%;object-fit:cover}.float{position:absolute;border:1px solid #e5e7eb;border-radius:18px;background:#fff;box-shadow:0 14px 32px rgba(2,8,23,.14);padding:14px;font-weight:900}.left{left:${Number(t.experienceX || 18)}px;top:${Number(t.experienceY || 18)}px}.right{right:${Number(t.pricingX || 24)}px;bottom:${Number(t.pricingY || 24)}px}.band{padding:${Number(t.spacing || 34)}px 42px;border-top:1px solid #e5e7eb}.tint{background:linear-gradient(135deg,#f8fbff,#f4fdfc)}.columns,.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.mini,.review-card{border:1px solid #e5e7eb;border-radius:16px;padding:18px;background:#fff}.stars{color:#f6b51e}.contact{display:flex;align-items:center;justify-content:space-between;gap:18px;background:#0f172a;color:#fff}.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(15,23,42,.54);padding:18px}.modal.active{display:flex}.card{width:min(520px,100%);background:#fff;color:#0f172a;border-radius:18px;padding:22px}.form{display:grid;gap:12px}.input{width:100%;border:1px solid #e5e7eb;border-radius:14px;padding:14px;font-size:16px}@media(max-width:900px){.hero,.columns,.reviews-grid{grid-template-columns:1fr}.links,.pill,.float{display:none}.hero,.band{padding:28px 20px}.photo{height:260px}.contact{display:grid}.btn{width:100%}}
+  *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;color:#0f172a;background:${escapeHtml(t.pageBg || "#fff")}}a{text-decoration:none;color:inherit}.site-nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 max(24px,calc((100vw - 1180px)/2));border-bottom:1px solid #e5e7eb;background:#fff}.brand{display:flex;align-items:center;gap:10px;font-size:24px;font-weight:1000;min-width:0}.brand span{overflow-wrap:anywhere}.brand img{width:42px;height:42px;border-radius:10px;object-fit:cover}.links{display:flex;gap:22px;color:#475569;font-weight:900}.pill,.btn{border:0;border-radius:999px;background:#0f172a;color:#fff;font-weight:900;padding:12px 18px;cursor:pointer}.teal{background:linear-gradient(120deg,#0ea5a3,#22d3ee)}.hero{display:grid;grid-template-columns:1.03fr .97fr;gap:34px;align-items:center;padding:54px max(24px,calc((100vw - 1180px)/2));background:linear-gradient(135deg,${escapeHtml(t.sectionBg || "#f4fdfc")} 0%,#fff 55%,#fff7dc 100%)}.kicker{font-size:13px;font-weight:1000;text-transform:uppercase;letter-spacing:.07em;color:#0ea5a3}.title{font-size:clamp(38px,5.2vw,64px);line-height:1.03;margin:12px 0}.lead{font-size:18px;line-height:1.7;color:#475569;max-width:560px}.photo{position:relative;height:380px;border-radius:30px;overflow:hidden;box-shadow:0 24px 60px rgba(2,8,23,.16)}.photo img{width:100%;height:100%;object-fit:cover;display:block}.float{position:absolute;border:1px solid #e5e7eb;border-radius:18px;background:#fff;box-shadow:0 14px 32px rgba(2,8,23,.14);padding:14px;font-weight:900}.left{left:${Number(t.experienceX || 18)}px;top:${Number(t.experienceY || 18)}px}.right{right:${Number(t.pricingX || 24)}px;bottom:${Number(t.pricingY || 24)}px}.band{padding:${Number(t.spacing || 34)}px max(24px,calc((100vw - 1180px)/2));border-top:1px solid #e5e7eb}.tint{background:linear-gradient(135deg,#f8fbff,#f4fdfc)}.columns,.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.mini,.review-card{border:1px solid #e5e7eb;border-radius:16px;padding:18px;background:#fff}.review-card p{white-space:pre-line}.stars{color:#f6b51e}.contact{display:flex;align-items:center;justify-content:space-between;gap:18px;background:#0f172a;color:#fff}.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(15,23,42,.54);padding:18px}.modal.active{display:flex}.card{width:min(520px,100%);background:#fff;color:#0f172a;border-radius:18px;padding:22px}.form{display:grid;gap:12px}.input{width:100%;border:1px solid #e5e7eb;border-radius:14px;padding:14px;font-size:16px}@media(max-width:900px){.site-nav{align-items:flex-start;flex-direction:column;padding:18px 20px}.hero,.columns,.reviews-grid{grid-template-columns:1fr}.links{flex-wrap:wrap;gap:12px}.pill{display:none}.float{display:none}.hero,.band{padding:28px 20px}.photo{height:260px;border-radius:22px}.contact{display:grid}.btn{width:100%}.title{font-size:clamp(34px,11vw,48px)}}@media(max-width:560px){.site-nav{gap:12px}.brand{font-size:22px}.links{font-size:15px}.hero{gap:24px}.lead{font-size:16px}.photo{height:230px}.band{padding:24px 16px}.hero{padding:28px 16px}.title{font-size:38px}}
   </style></head><body><nav class="site-nav"><strong class="brand">${t.logoUrl ? `<img src="${escapeHtml(t.logoUrl)}" alt="">` : ""}<span>${escapeHtml(t.instituteName)}</span></strong><div class="links">${nav}</div><a class="pill" href="#contact">Get started</a></nav><main><section class="hero"><div><div class="kicker">${escapeHtml(t.kicker)}</div><h1 class="title">${escapeHtml(t.headline)}</h1><p class="lead">By ${escapeHtml(t.tutorName || "Tutor")} · ${escapeHtml(t.subhead)}</p><button class="btn" id="heroInquiry">${escapeHtml(t.ctaButton || "Book Demo")}</button></div><div class="photo"><img src="${escapeHtml(t.imageUrl || defaultImage)}" alt="Tutor website image">${t.showExperienceBadge === "on" ? `<div class="float left">${escapeHtml(t.experience)}<br><span>Structured learning</span></div>` : ""}${t.showPricingBadge === "on" ? `<div class="float right">${escapeHtml(t.pricing)}<br><span>Demo available</span></div>` : ""}</div></section>${sections}</main><div class="modal" id="modal"><div class="card"><h2>${escapeHtml(t.inquiryTitle || "Send an inquiry")}</h2><form class="form" id="inquiryForm">${t.inquiryName === "on" ? '<input class="input" name="name" placeholder="Name" required>' : ""}${t.inquiryPhone === "on" ? '<input class="input" name="phone" placeholder="Phone / WhatsApp" required>' : ""}${t.inquiryEmail === "on" ? '<input class="input" name="email" type="email" placeholder="Email">' : ""}${t.inquiryMessage === "on" ? '<textarea class="input" name="message" rows="4" placeholder="What help do you need?"></textarea>' : ""}<button class="btn teal" type="submit">Submit Inquiry</button><button class="btn" type="button" id="closeModal">Close</button><p id="thanks" style="display:none;color:green;font-weight:900">Inquiry sent.</p></form></div></div><script>
-  const modal=document.getElementById("modal");document.getElementById("openInquiry")?.addEventListener("click",()=>modal.classList.add("active"));document.getElementById("heroInquiry")?.addEventListener("click",()=>modal.classList.add("active"));document.getElementById("closeModal").addEventListener("click",()=>modal.classList.remove("active"));document.getElementById("inquiryForm").addEventListener("submit",async e=>{e.preventDefault();const data=Object.fromEntries(new FormData(e.currentTarget).entries());await fetch("/api/site/${escapeHtml(website.slug)}/enquiries",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});document.getElementById("thanks").style.display="block";e.currentTarget.reset()});
+  const modal=document.getElementById("modal");const track=type=>fetch("/api/site/${escapeHtml(website.slug)}/track",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({type})}).catch(()=>{});document.getElementById("openInquiry")?.addEventListener("click",()=>modal.classList.add("active"));document.getElementById("heroInquiry")?.addEventListener("click",()=>modal.classList.add("active"));document.getElementById("closeModal").addEventListener("click",()=>modal.classList.remove("active"));document.getElementById("inquiryForm").addEventListener("submit",async e=>{e.preventDefault();const data=Object.fromEntries(new FormData(e.currentTarget).entries());await fetch("/api/site/${escapeHtml(website.slug)}/enquiries",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});document.getElementById("thanks").style.display="block";e.currentTarget.reset()});document.querySelectorAll('a[href*="wa.me"],a[href*="whatsapp"]').forEach(link=>link.addEventListener("click",()=>track("whatsapp_click")));
   </script></body></html>`;
 }
 
@@ -402,6 +432,20 @@ async function handleApi(req, res, url) {
     const website = db.websites.find(item => item.tutorId === tutor.id);
     return sendJson(res, 200, { enquiries: db.enquiries.filter(item => item.websiteId === website.id) });
   }
+  const enquiryStatusMatch = url.pathname.match(/^\/api\/enquiries\/([^/]+)$/);
+  if (req.method === "PATCH" && enquiryStatusMatch) {
+    const tutor = requireTutor(req, res, db);
+    if (!tutor) return;
+    const website = db.websites.find(item => item.tutorId === tutor.id);
+    const enquiry = db.enquiries.find(item => item.id === enquiryStatusMatch[1] && item.websiteId === website.id);
+    if (!enquiry) return sendJson(res, 404, { error: "Enquiry not found" });
+    const data = await bodyJson(req);
+    const allowed = new Set(["new", "contacted", "demo_scheduled", "converted"]);
+    if (!allowed.has(data.status)) return sendJson(res, 400, { error: "Invalid enquiry status" });
+    enquiry.status = data.status;
+    await writeDb(db);
+    return sendJson(res, 200, { enquiry });
+  }
   if (req.method === "DELETE" && url.pathname === "/api/enquiries") {
     const tutor = requireTutor(req, res, db);
     if (!tutor) return;
@@ -410,16 +454,35 @@ async function handleApi(req, res, url) {
     await writeDb(db);
     return sendJson(res, 200, { ok: true });
   }
+  if (req.method === "GET" && url.pathname === "/api/analytics") {
+    const tutor = requireTutor(req, res, db);
+    if (!tutor) return;
+    const website = db.websites.find(item => item.tutorId === tutor.id);
+    return sendJson(res, 200, { analytics: analyticsSummary(db, website) });
+  }
   const enquiryMatch = url.pathname.match(/^\/api\/site\/([^/]+)\/enquiries$/);
   if (req.method === "POST" && enquiryMatch) {
     const slug = enquiryMatch[1];
-    const website = db.websites.find(item => item.slug === slug || item.customDomain === req.headers.host);
+    const website = db.websites.find(item => item.slug === slug || cleanHost(item.customDomain) === cleanHost(req.headers.host));
     if (!website || !website.publishedTemplate) return sendJson(res, 404, { error: "Published website not found" });
     const data = await bodyJson(req);
     const enquiry = { id: id("enq"), websiteId: website.id, slug: website.slug, name: data.name || "", phone: data.phone || "", email: data.email || "", message: data.message || "", createdAt: new Date().toISOString(), status: "new" };
     db.enquiries.push(enquiry);
+    recordAnalytics(db, website, "enquiry");
     await writeDb(db);
     return sendJson(res, 201, { enquiry });
+  }
+  const trackMatch = url.pathname.match(/^\/api\/site\/([^/]+)\/track$/);
+  if (req.method === "POST" && trackMatch) {
+    const slug = trackMatch[1];
+    const website = db.websites.find(item => item.slug === slug || cleanHost(item.customDomain) === cleanHost(req.headers.host));
+    if (!website || !website.publishedTemplate) return sendJson(res, 404, { error: "Published website not found" });
+    const data = await bodyJson(req);
+    const allowed = new Set(["visit", "whatsapp_click"]);
+    if (!allowed.has(data.type)) return sendJson(res, 400, { error: "Invalid analytics event" });
+    recordAnalytics(db, website, data.type);
+    await writeDb(db);
+    return sendJson(res, 200, { ok: true });
   }
   notFound(res);
 }
@@ -434,6 +497,8 @@ const server = http.createServer(async (req, res) => {
       const website = db.websites.find(item => item.slug === hostSlug && item.publishedTemplate);
       const html = website && renderSite(website);
       if (!html) return send(res, 404, "<h1>Website not published yet</h1>");
+      recordAnalytics(db, website, "visit");
+      await writeDb(db);
       return send(res, 200, html);
     }
     const siteMatch = url.pathname.match(/^\/site\/([^/]+)$/);
@@ -442,11 +507,17 @@ const server = http.createServer(async (req, res) => {
       const website = db.websites.find(item => item.slug === siteMatch[1]);
       const html = website && renderSite(website);
       if (!html) return send(res, 404, "<h1>Website not published yet</h1>");
+      recordAnalytics(db, website, "visit");
+      await writeDb(db);
       return send(res, 200, html);
     }
     const db = await readDb();
     const domainWebsite = db.websites.find(item => item.customDomain && cleanHost(item.customDomain) === cleanHost(req.headers.host) && item.publishedTemplate);
-    if (domainWebsite && url.pathname === "/") return send(res, 200, renderSite(domainWebsite));
+    if (domainWebsite && url.pathname === "/") {
+      recordAnalytics(db, domainWebsite, "visit");
+      await writeDb(db);
+      return send(res, 200, renderSite(domainWebsite));
+    }
     if (serveFile(req, res, url)) return;
     notFound(res);
   } catch (error) {
