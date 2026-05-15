@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TutorHive OS Dashboard | Create Your Website</title>
-  <meta name="description" content="Create and customize your TutorHive OS tutor website.">
+  <title>TutorHive OS Dashboard | Launch Your Presence</title>
+  <meta name="description" content="Launch and grow your tutoring presence with TutorHive OS.">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <style>
@@ -42,6 +42,7 @@
     .preview-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}.status-pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border);border-radius:999px;background:#fff;padding:8px 12px;font-size:13px;font-weight:900;color:var(--sub)}.status-dot{width:8px;height:8px;border-radius:50%;background:#f59e0b}.status-dot.live{background:#10b981}
     .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.tab-btn{border:1px solid var(--border);border-radius:999px;background:#fff;padding:10px 14px;font-weight:900;cursor:pointer}.tab-btn.active{background:#0f172a;color:#fff;border-color:#0f172a}.panel{display:none}.panel.active{display:block}.dashboard-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:var(--shadow);margin-bottom:20px}.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}.data-list{display:grid;gap:10px;margin-top:14px}.data-row{border:1px solid var(--border);border-radius:14px;padding:14px;background:#fff;display:grid;gap:6px}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}.notice{border:1px solid #bae6fd;background:#eff6ff;border-radius:14px;padding:14px;color:#1e3a8a;font-weight:800}
     .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}.stat-card{border:1px solid var(--border);border-radius:16px;background:#fff;padding:18px}.stat-card strong{display:block;font-size:34px;line-height:1}.status-select{width:max-content;min-width:170px;border:1px solid var(--border);border-radius:999px;padding:9px 12px;background:#fff;font-weight:900}.upgrade-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.upgrade-plan{border:1px solid var(--border);border-radius:16px;padding:16px;background:#fff}.upgrade-plan.pro{border-color:#67e8f9;background:linear-gradient(135deg,#ecfeff,#fff)}
+    .launch-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:16px}.launch-score{display:grid;place-items:center;text-align:center;min-height:220px;border:1px solid var(--border);border-radius:18px;background:linear-gradient(135deg,#ecfeff,#fff7dc)}.launch-score strong{display:block;font-size:58px;line-height:1}.checklist{display:grid;gap:10px}.check-item{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--border);border-radius:14px;background:#fff;padding:14px}.check-mark{display:grid;place-items:center;flex:0 0 28px;height:28px;border-radius:50%;background:#e2e8f0;font-weight:1000}.check-item.done .check-mark{background:#ccfbf1;color:#0f766e}.growth-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}.growth-card{border:1px solid var(--border);border-radius:16px;background:#fff;padding:16px;display:grid;gap:10px}.copy-box{border:1px solid var(--border);border-radius:14px;background:#fbfdff;padding:14px;white-space:pre-line}.copy-actions{display:flex;gap:8px;flex-wrap:wrap}
     .workspace{display:grid;grid-template-columns:1fr;gap:20px;align-items:start}.workspace.editing{grid-template-columns:minmax(340px,430px) minmax(0,1fr)}
     .site{overflow:hidden;border:1px solid var(--border);border-radius:22px;background:#fff;box-shadow:var(--shadow)}
     .site-nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 28px;border-bottom:1px solid var(--border);background:#fff}
@@ -55,7 +56,7 @@
     .editor{display:none;background:#fff;border:1px solid var(--border);border-radius:18px;padding:18px;max-height:calc(100vh - 120px);overflow:auto;position:sticky;top:96px}.editor.active{display:block}.edit-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.full{grid-column:1/-1}.theme-row,.swatch-row,.image-actions{display:flex;gap:9px;flex-wrap:wrap}.theme-btn,.swatch-btn{width:38px;height:38px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1px var(--border);cursor:pointer}.theme-btn.active,.swatch-btn.active{box-shadow:0 0 0 3px var(--ink)}.picker-control{position:relative;width:44px;height:44px;border:1px solid var(--border);border-radius:14px;background:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 12px rgba(2,8,23,.06)}.picker-control span{font-size:22px;line-height:1}.picker-control input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}.choice-btn{border:1px solid var(--border);border-radius:999px;background:#fff;padding:9px 12px;font-weight:900;cursor:pointer}
     .editor-tools{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}.tool-box{border:1px solid var(--border);border-radius:16px;padding:14px;background:#fbfdff}.drag-list,.manage-list{display:grid;gap:8px}.drag-item,.manage-item{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--border);border-radius:12px;background:#fff;padding:10px 11px;font-weight:900}.drag-item{cursor:grab}.drag-actions{display:flex;gap:6px;flex-wrap:wrap}.mini-btn{border:1px solid var(--border);background:#fff;border-radius:8px;font-weight:900;cursor:pointer;padding:4px 8px}.mini-btn.danger{color:#b91c1c}.review-form{display:grid;grid-template-columns:1fr;gap:10px}.hint{font-size:13px;color:var(--sub)}.empty{border:1px dashed var(--border);border-radius:12px;padding:12px;color:var(--sub);font-size:14px}
     @media(max-width:1050px){.workspace.editing{grid-template-columns:1fr}.editor{position:static;max-height:none}}
-    @media(max-width:900px){.site-hero,.columns,.reviews-grid,.edit-grid,.editor-tools,.review-form,.split,.stat-grid,.upgrade-grid{grid-template-columns:1fr}.site-links,.site-pill,.float{display:none}.site-nav{height:auto;padding:18px}.photo{height:260px}.contact{display:grid}.band,.site-hero{padding:28px 20px}.btn{width:100%}.title{font-size:clamp(34px,11vw,48px)}.tabs{display:grid;grid-template-columns:1fr 1fr}.tab-btn{width:100%}}
+    @media(max-width:900px){.site-hero,.columns,.reviews-grid,.edit-grid,.editor-tools,.review-form,.split,.stat-grid,.upgrade-grid,.launch-grid,.growth-grid{grid-template-columns:1fr}.site-links,.site-pill,.float{display:none}.site-nav{height:auto;padding:18px}.photo{height:260px}.contact{display:grid}.band,.site-hero{padding:28px 20px}.btn{width:100%}.title{font-size:clamp(34px,11vw,48px)}.tabs{display:grid;grid-template-columns:1fr 1fr}.tab-btn{width:100%}}
     @media(max-width:560px){.container{width:min(100% - 24px,1160px)}body.published .container{width:100%}.site-nav{align-items:flex-start;gap:10px}.site-brand{font-size:20px}.site-hero{padding:24px 16px}.band{padding:24px 16px !important}.title{font-size:34px;line-height:1.08}.lead{font-size:16px}.photo{height:220px;border-radius:20px}.preview-top{align-items:flex-start}.publish-toolbar{left:12px;right:12px;justify-content:center}.publish-toolbar .btn{width:auto}.card{padding:22px}.h1{font-size:36px}}
   </style>
 </head>
@@ -111,16 +112,49 @@
     <section class="preview-wrap" id="previewPage">
       <div class="container">
         <div class="preview-top">
-          <div><span class="badge">Website preview</span><h2 class="h2">Your tutor website is ready</h2><div class="status-pill" id="siteStatus"><span class="status-dot"></span><span>Draft saved locally</span></div></div>
+          <div><span class="badge">Presence launch</span><h2 class="h2">Your tutoring presence is taking shape</h2><div class="status-pill" id="siteStatus"><span class="status-dot"></span><span>Draft saved locally</span></div></div>
           <div class="row"><button class="btn" id="editBtn">Edit Template</button><button class="btn teal" id="publishBtn">Publish Website</button></div>
         </div>
         <div class="tabs" aria-label="Dashboard sections">
           <button class="tab-btn active" type="button" data-tab="builder">Website</button>
+          <button class="tab-btn" type="button" data-tab="launch">Launch Center</button>
           <button class="tab-btn" type="button" data-tab="enquiries">Enquiries</button>
           <button class="tab-btn" type="button" data-tab="analytics">Analytics</button>
           <button class="tab-btn" type="button" data-tab="domain">Domain</button>
           <button class="tab-btn" type="button" data-tab="settings">Settings</button>
         </div>
+
+        <section class="panel dashboard-card" id="launchPanel">
+          <span class="badge">Launch Center</span>
+          <h2 class="h2">Get student-ready in minutes</h2>
+          <p class="small">TutorHive OS should not stop at making a page. Finish the pieces that make parents trust you, contact you, and remember you.</p>
+          <div class="launch-grid">
+            <div class="launch-score">
+              <div><strong id="launchScore">0%</strong><span class="small">launch readiness</span></div>
+            </div>
+            <div class="checklist" id="launchChecklist"></div>
+          </div>
+          <div class="growth-grid">
+            <div class="growth-card">
+              <strong>Share your launch</strong>
+              <p class="small">Use this in WhatsApp groups, parent communities, and direct messages.</p>
+              <div class="copy-box small" id="shareCopy"></div>
+              <button class="btn" type="button" data-copy-target="shareCopy">Copy launch message</button>
+            </div>
+            <div class="growth-card">
+              <strong>Ask for a review</strong>
+              <p class="small">A few honest reviews do more for trust than decorative marketing ever will.</p>
+              <div class="copy-box small" id="reviewCopy"></div>
+              <button class="btn" type="button" data-copy-target="reviewCopy">Copy review request</button>
+            </div>
+            <div class="growth-card">
+              <strong>Google profile starter</strong>
+              <p class="small">Copy this into your Google Business Profile description when you set it up.</p>
+              <div class="copy-box small" id="googleCopy"></div>
+              <button class="btn" type="button" data-copy-target="googleCopy">Copy profile text</button>
+            </div>
+          </div>
+        </section>
 
         <div class="panel active" id="builderPanel">
         <div class="workspace" id="workspace">
@@ -356,11 +390,12 @@
       <div class="upgrade-grid">
         <div class="upgrade-plan">
           <strong>Free launch</strong>
-          <p class="small">TutorHive subdomain, website builder, enquiry inbox, and basic analytics.</p>
+          <p class="small">TutorHive subdomain, live presence, enquiry inbox, launch center, and basic analytics.</p>
+          <button class="btn" type="button" id="openLaunchCenter">Open Launch Center</button>
         </div>
         <div class="upgrade-plan pro">
           <strong>Growth plan</strong>
-          <p class="small">Custom domain support, stronger analytics, priority templates, and future marketing tools.</p>
+          <p class="small">Custom domain support, stronger analytics, local visibility tools, and deeper marketing automation.</p>
           <button class="btn teal" type="button" id="upgradeInterest">I want this</button>
         </div>
       </div>
@@ -397,6 +432,7 @@
       customDomain: "",
       siteSlug: "",
       whatsapp: signup.phone || "",
+      idealStudent: "",
       publishedAt: "",
       imageUrl: defaultImage,
       logoUrl: "",
@@ -643,6 +679,7 @@
       renderEnquiries();
       renderDomain();
       renderSettings();
+      renderLaunchCenter();
       save();
     }
     function renderStatus(){
@@ -698,6 +735,30 @@
     function renderSettings(){
       const output = document.getElementById("publicUrl");
       if (output) output.textContent = publicUrl();
+    }
+    function launchItems(){
+      return [
+        {label:"Publish your website", detail:"Make the public site live so parents have somewhere credible to land.", done:Boolean(state.publishedAt)},
+        {label:"Add a WhatsApp number", detail:"Give interested parents the fastest path to contact you.", done:Boolean(state.whatsapp)},
+        {label:"Add at least one review", detail:"Social proof makes a solo tutor feel real before the first conversation.", done:(state.reviews || []).some(review => review.author || review.text)},
+        {label:"Finish your offer", detail:"Your headline, city, teaching mode, and CTA should tell parents exactly what you do.", done:Boolean(state.headline && state.kicker && state.subhead && state.ctaButton)},
+        {label:"Choose your public URL", detail:"A clean tutor link is easier to share in chats, bios, and posters.", done:Boolean(state.siteSlug || state.customDomain)}
+      ];
+    }
+    function renderLaunchCenter(){
+      const checklist = document.getElementById("launchChecklist");
+      if (!checklist) return;
+      const items = launchItems();
+      const complete = items.filter(item => item.done).length;
+      document.getElementById("launchScore").textContent = `${Math.round((complete / items.length) * 100)}%`;
+      checklist.innerHTML = items.map(item => `<div class="check-item ${item.done ? "done" : ""}"><span class="check-mark">${item.done ? "✓" : "·"}</span><div><strong>${escapeHtml(item.label)}</strong><div class="small">${escapeHtml(item.detail)}</div></div></div>`).join("");
+      const publicLink = publicUrl();
+      const institute = state.instituteName || "my tutoring studio";
+      const tutor = state.tutorName || "Tutor";
+      const subjectLine = state.kicker || "private tutor";
+      document.getElementById("shareCopy").textContent = `Hi, I have launched ${institute} for students looking for ${subjectLine.toLowerCase()} support.\n\nYou can view details, subjects, and request a demo here:\n${publicLink}`;
+      document.getElementById("reviewCopy").textContent = `Hi, thank you for learning with me. If the classes have helped, could you share a short review about your experience? A few lines from you will help other parents understand what to expect from ${institute}.`;
+      document.getElementById("googleCopy").textContent = `${institute} helps students with ${state.service1 || "focused tutoring"} through ${state.subhead || "personal classes"}. Led by ${tutor}, the sessions are designed for ${state.idealStudent || "students who want clearer concepts, confidence, and steady progress"}.`;
     }
     function applyTheme(color){
       document.querySelectorAll(".theme-btn").forEach(btn=>btn.classList.toggle("active",btn.dataset.theme===color));
@@ -761,6 +822,7 @@
       loadAnalytics();
       renderDomain();
       renderSettings();
+      renderLaunchCenter();
     }));
     document.getElementById("saveBtn").addEventListener("click",()=>{updatePreview();document.getElementById("saveBtn").textContent="Draft Saved";setTimeout(()=>document.getElementById("saveBtn").textContent="Save Draft",1400)});
     document.getElementById("addReview").addEventListener("click",()=>{
@@ -1028,11 +1090,27 @@
       document.getElementById("copyPublicUrl").textContent = "Copied";
       setTimeout(()=>document.getElementById("copyPublicUrl").textContent = "Copy Public URL",1200);
     });
+    document.addEventListener("click",(event)=>{
+      const button = event.target.closest("[data-copy-target]");
+      if (!button) return;
+      const target = document.getElementById(button.dataset.copyTarget);
+      if (!target) return;
+      navigator.clipboard?.writeText(target.textContent || "");
+      const original = button.textContent;
+      button.textContent = "Copied";
+      setTimeout(()=>button.textContent = original,1200);
+    });
     document.getElementById("logoutBtn").addEventListener("click",async ()=>{
       await api("/api/logout", {method:"POST", body:"{}"}).catch(()=>{});
       window.location.href = "tutorhive-os.html#signup";
     });
     document.getElementById("closeUpgrade").addEventListener("click",()=>document.getElementById("upgradeModal").classList.remove("active"));
+    document.getElementById("openLaunchCenter").addEventListener("click",()=>{
+      document.getElementById("upgradeModal").classList.remove("active");
+      document.body.classList.remove("published");
+      document.querySelector('[data-tab="launch"]').click();
+      window.scrollTo({top:0,behavior:"smooth"});
+    });
     document.getElementById("upgradeInterest").addEventListener("click",()=>{
       document.getElementById("upgradeInterest").textContent = "Interest saved";
       setTimeout(()=>document.getElementById("upgradeModal").classList.remove("active"), 900);

@@ -28,8 +28,10 @@ async function ensurePostgres() {
     await pgPool.query(`
       CREATE TABLE IF NOT EXISTS tutors (
         id text PRIMARY KEY,
+        name text,
         email text UNIQUE NOT NULL,
         phone text,
+        city text,
         password_hash text NOT NULL,
         created_at timestamptz NOT NULL
       );
@@ -69,6 +71,8 @@ async function ensurePostgres() {
         created_at timestamptz NOT NULL
       );
     `);
+    await pgPool.query("ALTER TABLE tutors ADD COLUMN IF NOT EXISTS name text");
+    await pgPool.query("ALTER TABLE tutors ADD COLUMN IF NOT EXISTS city text");
   }
   return pgPool;
 }
@@ -84,7 +88,7 @@ async function readDb() {
       pool.query("SELECT * FROM analytics_events ORDER BY created_at ASC")
     ]);
     return {
-      tutors: tutors.rows.map(row => ({ id: row.id, email: row.email, phone: row.phone || "", passwordHash: row.password_hash, createdAt: row.created_at.toISOString() })),
+      tutors: tutors.rows.map(row => ({ id: row.id, name: row.name || "", email: row.email, phone: row.phone || "", city: row.city || "", passwordHash: row.password_hash, createdAt: row.created_at.toISOString() })),
       sessions: sessions.rows.map(row => ({ token: row.token, tutorId: row.tutor_id, createdAt: row.created_at.toISOString(), expiresAt: row.expires_at.toISOString() })),
       websites: websites.rows.map(row => ({ id: row.id, tutorId: row.tutor_id, slug: row.slug || "", customDomain: row.custom_domain || "", domainStatus: row.domain_status || "not_connected", draftTemplate: row.draft_template, publishedTemplate: row.published_template, publishedAt: row.published_at ? row.published_at.toISOString() : "", lastDomainCheckAt: row.last_domain_check_at ? row.last_domain_check_at.toISOString() : "" })),
       enquiries: enquiries.rows.map(row => ({ id: row.id, websiteId: row.website_id, slug: row.slug || "", name: row.name || "", phone: row.phone || "", email: row.email || "", message: row.message || "", status: row.status || "new", createdAt: row.created_at.toISOString() })),
@@ -103,10 +107,10 @@ async function writeDb(db) {
       await client.query("BEGIN");
       for (const tutor of db.tutors) {
         await client.query(
-          `INSERT INTO tutors (id,email,phone,password_hash,created_at)
-           VALUES ($1,$2,$3,$4,$5)
-           ON CONFLICT (id) DO UPDATE SET email=EXCLUDED.email, phone=EXCLUDED.phone, password_hash=EXCLUDED.password_hash`,
-          [tutor.id, tutor.email, tutor.phone || "", tutor.passwordHash, tutor.createdAt]
+          `INSERT INTO tutors (id,name,email,phone,city,password_hash,created_at)
+           VALUES ($1,$2,$3,$4,$5,$6,$7)
+           ON CONFLICT (id) DO UPDATE SET name=EXCLUDED.name, email=EXCLUDED.email, phone=EXCLUDED.phone, city=EXCLUDED.city, password_hash=EXCLUDED.password_hash`,
+          [tutor.id, tutor.name || "", tutor.email, tutor.phone || "", tutor.city || "", tutor.passwordHash, tutor.createdAt]
         );
       }
       await client.query("DELETE FROM sessions");
@@ -257,6 +261,7 @@ function templateFromSignup(data) {
     customDomain: "",
     siteSlug: "",
     whatsapp: data.phone || "",
+    idealStudent: "",
     publishedAt: "",
     imageUrl: defaultImage,
     logoUrl: "",
@@ -373,14 +378,14 @@ async function handleApi(req, res, url) {
     if (!email || !data.password) return sendJson(res, 400, { error: "Email and password required" });
     let tutor = db.tutors.find(item => item.email === email);
     if (tutor) return sendJson(res, 409, { error: "Account already exists. Please log in." });
-    tutor = { id: id("tutor"), email, phone: data.phone || "", passwordHash: hashPassword(data.password), createdAt: new Date().toISOString() };
+    tutor = { id: id("tutor"), name: data.name || "", email, phone: data.phone || "", city: data.location || "", passwordHash: hashPassword(data.password), createdAt: new Date().toISOString() };
     const website = { id: id("site"), tutorId: tutor.id, slug: "", customDomain: "", domainStatus: "not_connected", draftTemplate: templateFromSignup(data), publishedTemplate: null, publishedAt: "" };
     db.tutors.push(tutor);
     db.websites.push(website);
     const token = id("sess");
     db.sessions.push({ token, tutorId: tutor.id, createdAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30).toISOString() });
     await writeDb(db);
-    return sendJson(res, 201, { tutor: { id: tutor.id, email: tutor.email }, website: publicWebsite(website) }, {...corsHeaders(req), "Set-Cookie": `th_session=${encodeURIComponent(token)}; HttpOnly; Path=/; SameSite=Lax${COOKIE_SECURE}; Max-Age=2592000`});
+    return sendJson(res, 201, { tutor: { id: tutor.id, name: tutor.name, email: tutor.email, city: tutor.city }, website: publicWebsite(website) }, {...corsHeaders(req), "Set-Cookie": `th_session=${encodeURIComponent(token)}; HttpOnly; Path=/; SameSite=Lax${COOKIE_SECURE}; Max-Age=2592000`});
   }
   if (req.method === "POST" && url.pathname === "/api/login") {
     const data = await bodyJson(req);
@@ -389,7 +394,7 @@ async function handleApi(req, res, url) {
     const token = id("sess");
     db.sessions.push({ token, tutorId: tutor.id, createdAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30).toISOString() });
     await writeDb(db);
-    return sendJson(res, 200, { tutor: { id: tutor.id, email: tutor.email } }, {...corsHeaders(req), "Set-Cookie": `th_session=${encodeURIComponent(token)}; HttpOnly; Path=/; SameSite=Lax${COOKIE_SECURE}; Max-Age=2592000`});
+    return sendJson(res, 200, { tutor: { id: tutor.id, name: tutor.name || "", email: tutor.email, city: tutor.city || "" } }, {...corsHeaders(req), "Set-Cookie": `th_session=${encodeURIComponent(token)}; HttpOnly; Path=/; SameSite=Lax${COOKIE_SECURE}; Max-Age=2592000`});
   }
   if (req.method === "POST" && url.pathname === "/api/logout") {
     const token = parseCookies(req).th_session;
@@ -401,7 +406,7 @@ async function handleApi(req, res, url) {
     const tutor = requireTutor(req, res, db);
     if (!tutor) return;
     const website = db.websites.find(item => item.tutorId === tutor.id);
-    return sendJson(res, 200, { tutor: { id: tutor.id, email: tutor.email, phone: tutor.phone }, website: publicWebsite(website) });
+    return sendJson(res, 200, { tutor: { id: tutor.id, name: tutor.name || "", email: tutor.email, phone: tutor.phone, city: tutor.city || "" }, website: publicWebsite(website) });
   }
   if (url.pathname === "/api/website") {
     const tutor = requireTutor(req, res, db);
