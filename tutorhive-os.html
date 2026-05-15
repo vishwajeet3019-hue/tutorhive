@@ -116,8 +116,9 @@
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyRLzjZIr4c9pwZmJjnhD_3NrzuWskMWI1jbKdrUc-9ZxfI1fOzRLjOWLEhq8rxq8_thw/exec";
     const IS_LIVE_SITE = ["tutorhive.in", "www.tutorhive.in"].includes(window.location.hostname);
+    const API_BASE = ["tutorhive.in", "www.tutorhive.in"].includes(window.location.hostname) ? "https://api.tutorhive.in" : "";
     async function api(path, data) {
-      const res = await fetch(path, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(data)});
+      const res = await fetch(`${API_BASE}${path}`, {method:"POST", credentials:"include", headers:{"Content-Type":"application/json"}, body:JSON.stringify(data)});
       const payload = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(payload.error || "Something went wrong");
       return payload;

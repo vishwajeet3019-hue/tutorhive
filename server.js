@@ -10,6 +10,8 @@ const DB_FILE = path.join(ROOT, "tutorhive-db.json");
 const PUBLIC_FILES = new Set(["/", "/index.html", "/tutorhive-os.html", "/tutorhive-dashboard.html", "/mobile-fixes.css", "/logo.png", "/favicon.ico", "/robots.txt", "/sitemap.xml", "/CNAME"]);
 const DATABASE_URL = process.env.DATABASE_URL || "";
 const SITE_BASE_DOMAIN = process.env.SITE_BASE_DOMAIN || "tutorhive.in";
+const ALLOWED_ORIGINS = new Set((process.env.ALLOWED_ORIGINS || "https://tutorhive.in,https://www.tutorhive.in").split(",").map(value => value.trim()).filter(Boolean));
+const COOKIE_SECURE = process.env.NODE_ENV === "production" ? "; Secure" : "";
 let pgPool = null;
 
 const defaultImage = "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1100&q=80";
@@ -178,6 +180,18 @@ function send(res, status, body, headers = {}) {
 
 function sendJson(res, status, body, headers = {}) {
   send(res, status, body, {"Content-Type": "application/json", ...headers});
+}
+
+function corsHeaders(req) {
+  const origin = req.headers.origin;
+  if (!origin || !ALLOWED_ORIGINS.has(origin)) return {};
+  return {
+    "Access-Control-Allow-Origin": origin,
+    "Access-Control-Allow-Credentials": "true",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "GET,POST,PATCH,DELETE,OPTIONS",
+    "Vary": "Origin"
+  };
 }
 
 function notFound(res) {
@@ -351,6 +365,7 @@ function serveFile(req, res, url) {
 }
 
 async function handleApi(req, res, url) {
+  if (req.method === "OPTIONS") return sendJson(res, 204, {}, corsHeaders(req));
   const db = await readDb();
   if (req.method === "POST" && url.pathname === "/api/signup") {
     const data = await bodyJson(req);
@@ -365,7 +380,7 @@ async function handleApi(req, res, url) {
     const token = id("sess");
     db.sessions.push({ token, tutorId: tutor.id, createdAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30).toISOString() });
     await writeDb(db);
-    return sendJson(res, 201, { tutor: { id: tutor.id, email: tutor.email }, website: publicWebsite(website) }, {"Set-Cookie": `th_session=${encodeURIComponent(token)}; HttpOnly; Path=/; SameSite=Lax; Max-Age=2592000`});
+    return sendJson(res, 201, { tutor: { id: tutor.id, email: tutor.email }, website: publicWebsite(website) }, {...corsHeaders(req), "Set-Cookie": `th_session=${encodeURIComponent(token)}; HttpOnly; Path=/; SameSite=Lax${COOKIE_SECURE}; Max-Age=2592000`});
   }
   if (req.method === "POST" && url.pathname === "/api/login") {
     const data = await bodyJson(req);
@@ -374,13 +389,13 @@ async function handleApi(req, res, url) {
     const token = id("sess");
     db.sessions.push({ token, tutorId: tutor.id, createdAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30).toISOString() });
     await writeDb(db);
-    return sendJson(res, 200, { tutor: { id: tutor.id, email: tutor.email } }, {"Set-Cookie": `th_session=${encodeURIComponent(token)}; HttpOnly; Path=/; SameSite=Lax; Max-Age=2592000`});
+    return sendJson(res, 200, { tutor: { id: tutor.id, email: tutor.email } }, {...corsHeaders(req), "Set-Cookie": `th_session=${encodeURIComponent(token)}; HttpOnly; Path=/; SameSite=Lax${COOKIE_SECURE}; Max-Age=2592000`});
   }
   if (req.method === "POST" && url.pathname === "/api/logout") {
     const token = parseCookies(req).th_session;
     const next = { ...db, sessions: db.sessions.filter(session => session.token !== token) };
     await writeDb(next);
-    return sendJson(res, 200, { ok: true }, {"Set-Cookie": "th_session=; HttpOnly; Path=/; SameSite=Lax; Max-Age=0"});
+    return sendJson(res, 200, { ok: true }, {...corsHeaders(req), "Set-Cookie": `th_session=; HttpOnly; Path=/; SameSite=Lax${COOKIE_SECURE}; Max-Age=0`});
   }
   if (req.method === "GET" && url.pathname === "/api/me") {
     const tutor = requireTutor(req, res, db);
@@ -490,6 +505,7 @@ async function handleApi(req, res, url) {
 const server = http.createServer(async (req, res) => {
   try {
     const url = new URL(req.url, `http://${req.headers.host || "localhost"}`);
+    Object.entries(corsHeaders(req)).forEach(([key, value]) => res.setHeader(key, value));
     if (url.pathname.startsWith("/api/")) return handleApi(req, res, url);
     const hostSlug = subdomainSlug(req.headers.host);
     if (hostSlug && url.pathname === "/") {

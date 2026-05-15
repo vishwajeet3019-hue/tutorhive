@@ -465,8 +465,9 @@
     let editingSectionId = null;
     let currentWebsite = null;
     let saveTimer = null;
+    const API_BASE = ["tutorhive.in", "www.tutorhive.in"].includes(window.location.hostname) ? "https://api.tutorhive.in" : "";
     async function api(path, options = {}) {
-      const res = await fetch(path, {headers: {"Content-Type":"application/json", ...(options.headers || {})}, ...options});
+      const res = await fetch(`${API_BASE}${path}`, {credentials:"include", headers: {"Content-Type":"application/json", ...(options.headers || {})}, ...options});
       const payload = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(payload.error || "Request failed");
       return payload;

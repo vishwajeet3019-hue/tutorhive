@@ -13,3 +13,5 @@ services:
         value: 0.0.0.0
       - key: DATABASE_URL
         sync: false
+      - key: ALLOWED_ORIGINS
+        value: https://tutorhive.in,https://www.tutorhive.in
