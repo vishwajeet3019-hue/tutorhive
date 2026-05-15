@@ -25,6 +25,7 @@
     .form{display:grid;gap:10px}.input{width:100%;padding:14px;border:1px solid var(--border);border-radius:12px;background:#fff}footer{border-top:1px solid var(--border);padding:22px 0}
     .auth-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;margin-top:22px}.auth-card{padding:18px;align-content:start}.auth-card h3{margin:0 0 4px;font-size:22px}.auth-card .input{height:46px;padding:10px 13px;font-size:15px;border-radius:11px}.auth-card .btn{width:100%;min-height:46px;padding:10px 16px}.auth-intro{max-width:860px}.form-note{margin:0;color:var(--sub);font-size:14px;line-height:1.5}
     .error{display:none;color:#b91c1c;font-weight:800}.error.active{display:block}
+    .loading-screen{position:fixed;inset:0;z-index:90;display:none;place-items:center;padding:24px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px)}.loading-screen.active{display:grid}.loading-card{width:min(420px,100%);text-align:center}.hive-loader{width:92px;height:84px;margin:0 auto 18px;position:relative}.cell{position:absolute;width:42px;height:46px;background:linear-gradient(135deg,var(--brand),var(--brand2));clip-path:polygon(25% 6%,75% 6%,100% 50%,75% 94%,25% 94%,0 50%);animation:pulse 1.2s ease-in-out infinite}.cell.one{left:25px;top:0}.cell.two{left:0;top:38px;animation-delay:.16s}.cell.three{left:50px;top:38px;animation-delay:.32s}.loading-title{margin:0 0 8px;font-size:28px;line-height:1.1}.loading-copy{margin:0;color:var(--sub);line-height:1.6}.loading-track{height:8px;margin-top:22px;border-radius:999px;background:#e2e8f0;overflow:hidden}.loading-track span{display:block;width:40%;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--brand),var(--brand2),var(--honey));animation:travel 1.15s ease-in-out infinite}@keyframes pulse{0%,100%{transform:scale(.88);opacity:.55}50%{transform:scale(1);opacity:1}}@keyframes travel{0%{transform:translateX(-120%)}100%{transform:translateX(360%)}}
     @media(max-width:900px){.two,.three,.sample-visual,.sample-columns,.auth-grid{grid-template-columns:1fr}.hero{min-height:auto;padding:48px 0}.section{padding:56px 0}.btn{width:100%}.nav .btn{width:auto}.sample-url{display:none}.sample-title{font-size:28px}.sample-photo{height:220px}}
   </style>
 </head>
@@ -98,6 +99,14 @@
   </main>
 
   <footer><div class="container row"><div class="brand"><img src="logo.png" alt=""><span class="brand-os">TutorHive OS</span></div><div class="small">Professional online presence for solo tutors.</div></div></footer>
+  <div class="loading-screen" id="authLoader" aria-live="polite">
+    <div class="loading-card">
+      <div class="hive-loader"><span class="cell one"></span><span class="cell two"></span><span class="cell three"></span></div>
+      <h2 class="loading-title" id="authLoaderTitle">Opening TutorHive OS</h2>
+      <p class="loading-copy" id="authLoaderCopy">Preparing your workspace.</p>
+      <div class="loading-track"><span></span></div>
+    </div>
+  </div>
 
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyRLzjZIr4c9pwZmJjnhD_3NrzuWskMWI1jbKdrUc-9ZxfI1fOzRLjOWLEhq8rxq8_thw/exec";
@@ -113,6 +122,12 @@
       node.textContent = message;
       node.classList.add("active");
     }
+    function showAuthLoader(title, copy, nextUrl) {
+      document.getElementById("authLoaderTitle").textContent = title;
+      document.getElementById("authLoaderCopy").textContent = copy;
+      document.getElementById("authLoader").classList.add("active");
+      setTimeout(() => { window.location.href = nextUrl; }, 3400);
+    }
     document.getElementById("osForm").addEventListener("submit", (event) => {
       event.preventDefault();
       const data = Object.fromEntries(new FormData(event.currentTarget).entries());
@@ -127,14 +142,14 @@
         fetch(SCRIPT_URL, {method:"POST", headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"}, body:new URLSearchParams(data).toString()}).catch(() => {});
       }
       api("/api/signup", data)
-        .then(() => { window.location.href = "tutorhive-dashboard.html?new=1"; })
+        .then(() => { showAuthLoader("Welcome to TutorHive OS", "Setting up your workspace and getting your first website ready.", "tutorhive-dashboard.html?new=1"); })
         .catch(error => showError("signupError", error.message));
     });
     document.getElementById("loginForm").addEventListener("submit", (event) => {
       event.preventDefault();
       document.getElementById("loginError").classList.remove("active");
       api("/api/login", Object.fromEntries(new FormData(event.currentTarget).entries()))
-        .then(() => { window.location.href = "tutorhive-dashboard.html"; })
+        .then(() => { showAuthLoader("Welcome back", "Opening your website, enquiries, and growth tools.", "tutorhive-dashboard.html"); })
         .catch(error => showError("loginError", error.message));
     });
   </script>

@@ -37,6 +37,7 @@
     body.published .site-hero, body.published .band{padding-left:max(42px,calc((100vw - 1360px)/2 + 42px));padding-right:max(42px,calc((100vw - 1360px)/2 + 42px))}
     .publish-toolbar{display:none;position:fixed;right:18px;bottom:18px;z-index:50;background:#fff;border:1px solid var(--border);border-radius:999px;box-shadow:var(--shadow);padding:8px;gap:8px}
     body.published .publish-toolbar{display:flex}
+    .loading-screen{position:fixed;inset:0;z-index:90;display:none;place-items:center;padding:24px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px)}.loading-screen.active{display:grid}.loading-card{width:min(440px,100%);text-align:center}.hive-loader{width:92px;height:84px;margin:0 auto 18px;position:relative}.cell{position:absolute;width:42px;height:46px;background:linear-gradient(135deg,var(--brand),var(--brand2));clip-path:polygon(25% 6%,75% 6%,100% 50%,75% 94%,25% 94%,0 50%);animation:pulse 1.2s ease-in-out infinite}.cell.one{left:25px;top:0}.cell.two{left:0;top:38px;animation-delay:.16s}.cell.three{left:50px;top:38px;animation-delay:.32s}.loading-title{margin:0 0 8px;font-size:28px;line-height:1.1}.loading-copy{margin:0;color:var(--sub);line-height:1.6}.loading-track{height:8px;margin-top:22px;border-radius:999px;background:#e2e8f0;overflow:hidden}.loading-track span{display:block;width:40%;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--brand),var(--brand2),var(--honey));animation:travel 1.15s ease-in-out infinite}@keyframes pulse{0%,100%{transform:scale(.88);opacity:.55}50%{transform:scale(1);opacity:1}}@keyframes travel{0%{transform:translateX(-120%)}100%{transform:translateX(360%)}}
     .modal{position:fixed;inset:0;background:rgba(15,23,42,.54);display:none;align-items:center;justify-content:center;z-index:80;padding:18px}.modal.active{display:flex}.modal-card{width:min(520px,100%);background:#fff;border-radius:18px;border:1px solid var(--border);box-shadow:var(--shadow);padding:22px}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.icon-btn{border:1px solid var(--border);border-radius:999px;background:#fff;width:36px;height:36px;cursor:pointer;font-weight:900}
     .preview-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}.status-pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border);border-radius:999px;background:#fff;padding:8px 12px;font-size:13px;font-weight:900;color:var(--sub)}.status-dot{width:8px;height:8px;border-radius:50%;background:#f59e0b}.status-dot.live{background:#10b981}
     .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.tab-btn{border:1px solid var(--border);border-radius:999px;background:#fff;padding:10px 14px;font-weight:900;cursor:pointer}.tab-btn.active{background:#0f172a;color:#fff;border-color:#0f172a}.panel{display:none}.panel.active{display:block}.dashboard-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:var(--shadow);margin-bottom:20px}.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}.data-list{display:grid;gap:10px;margin-top:14px}.data-row{border:1px solid var(--border);border-radius:14px;padding:14px;background:#fff;display:grid;gap:6px}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}.notice{border:1px solid #bae6fd;background:#eff6ff;border-radius:14px;padding:14px;color:#1e3a8a;font-weight:800}
@@ -323,6 +324,14 @@
   <div class="publish-toolbar">
     <button class="btn" id="editPublished">Edit Website</button>
     <button class="btn teal" id="copyLink">Copy Link</button>
+  </div>
+  <div class="loading-screen" id="siteLoader" aria-live="polite">
+    <div class="loading-card">
+      <div class="hive-loader"><span class="cell one"></span><span class="cell two"></span><span class="cell three"></span></div>
+      <h2 class="loading-title">Building your first website</h2>
+      <p class="loading-copy">Choosing the right template, shaping your headline, and preparing your preview.</p>
+      <div class="loading-track"><span></span></div>
+    </div>
   </div>
   <div class="modal" id="inquiryModal">
     <div class="modal-card">
@@ -718,7 +727,11 @@
       state.idealStudent = details.idealStudent;
       fillBuilder();
       updatePreview();
-      showPreview();
+      document.getElementById("siteLoader").classList.add("active");
+      setTimeout(()=>{
+        document.getElementById("siteLoader").classList.remove("active");
+        showPreview();
+      }, 3400);
     });
     builderForm.addEventListener("input",()=>{
       const data = Object.fromEntries(new FormData(builderForm).entries());
