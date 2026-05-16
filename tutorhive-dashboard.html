@@ -122,6 +122,7 @@
           <button class="tab-btn" type="button" data-tab="analytics">Analytics</button>
           <button class="tab-btn" type="button" data-tab="domain">Domain</button>
           <button class="tab-btn" type="button" data-tab="settings">Settings</button>
+          <button class="tab-btn" type="button" data-tab="feedback">Feedback</button>
         </div>
 
         <section class="panel dashboard-card" id="launchPanel">
@@ -352,6 +353,43 @@
           </div>
         </section>
 
+        <section class="panel dashboard-card" id="feedbackPanel">
+          <span class="badge">Feedback</span>
+          <h2 class="h2">Send feedback</h2>
+          <p class="small">Tell us what felt useful, confusing, or missing while building your online presence.</p>
+          <div class="split">
+            <form class="form" id="feedbackForm">
+              <input type="hidden" name="form" value="TutorHive OS Feedback">
+              <div>
+                <label>Overall experience</label>
+                <select class="input" name="rating" required>
+                  <option value="">Choose a rating</option>
+                  <option value="5">5 - Excellent</option>
+                  <option value="4">4 - Good</option>
+                  <option value="3">3 - Okay</option>
+                  <option value="2">2 - Needs work</option>
+                  <option value="1">1 - Poor</option>
+                </select>
+              </div>
+              <div>
+                <label>What worked well?</label>
+                <textarea class="input" name="liked" rows="4" placeholder="What did you like or find useful?"></textarea>
+              </div>
+              <div>
+                <label>What should we improve?</label>
+                <textarea class="input" name="improve" rows="4" placeholder="What felt confusing, slow, or missing?"></textarea>
+              </div>
+              <button class="btn teal" type="submit">Send Feedback</button>
+              <p class="small" id="feedbackThanks" style="display:none;color:green;font-weight:900">Thanks. Your feedback has been sent.</p>
+              <p class="small" id="feedbackError" style="display:none;color:#b91c1c;font-weight:900"></p>
+            </form>
+            <div class="notice">
+              We read every note.<br>
+              The most useful feedback tells us what helped, what slowed you down, and what would make TutorHive OS feel more valuable next time.
+            </div>
+          </div>
+        </section>
+
       </div>
     </section>
   </main>
@@ -404,6 +442,8 @@
 
   <script>
     const signup = JSON.parse(localStorage.getItem("tutorhiveOsSignup") || "{}");
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyRLzjZIr4c9pwZmJjnhD_3NrzuWskMWI1jbKdrUc-9ZxfI1fOzRLjOWLEhq8rxq8_thw/exec";
+    const IS_LIVE_SITE = ["tutorhive.in", "www.tutorhive.in"].includes(window.location.hostname);
     const defaultImage = "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1100&q=80";
     const defaults = {
       tutorName: "",
@@ -499,6 +539,7 @@
     const instituteForm = document.getElementById("instituteForm");
     const builderForm = document.getElementById("builderForm");
     let editingSectionId = null;
+    let currentTutor = null;
     let currentWebsite = null;
     let saveTimer = null;
     const API_BASE = ["tutorhive.in", "www.tutorhive.in"].includes(window.location.hostname) ? "https://api.tutorhive.in" : "";
@@ -1085,6 +1126,38 @@
       fillBuilder();
       updatePreview();
     });
+    document.getElementById("feedbackForm").addEventListener("submit",async (event)=>{
+      event.preventDefault();
+      const form = event.currentTarget;
+      const data = Object.fromEntries(new FormData(form).entries());
+      const thanks = document.getElementById("feedbackThanks");
+      const error = document.getElementById("feedbackError");
+      thanks.style.display = "none";
+      error.style.display = "none";
+      const payload = {
+        form: data.form,
+        name: currentTutor?.name || state.tutorName || "",
+        phone: currentTutor?.phone || signup.phone || "",
+        email: currentTutor?.email || signup.email || "",
+        subject: `TutorHive OS feedback - ${data.rating}/5`,
+        message: `Rating: ${data.rating}/5\nWhat worked well: ${data.liked || "Not provided"}\nWhat should improve: ${data.improve || "Not provided"}`
+      };
+      try {
+        if (IS_LIVE_SITE) {
+          const response = await fetch(SCRIPT_URL, {
+            method:"POST",
+            headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
+            body:new URLSearchParams(payload).toString()
+          });
+          if (!response.ok) throw new Error("Feedback could not be sent.");
+        }
+        thanks.style.display = "block";
+        form.reset();
+      } catch (submitError) {
+        error.textContent = submitError.message || "Something went wrong. Please try again.";
+        error.style.display = "block";
+      }
+    });
     document.getElementById("copyPublicUrl").addEventListener("click",()=>{
       navigator.clipboard?.writeText(publicUrl());
       document.getElementById("copyPublicUrl").textContent = "Copied";
@@ -1118,6 +1191,7 @@
     async function init(){
       try {
         const session = await api("/api/me");
+        currentTutor = session.tutor || null;
         currentWebsite = session.website;
         if (currentWebsite?.draftTemplate) {
           state = {...defaults, ...currentWebsite.draftTemplate};
