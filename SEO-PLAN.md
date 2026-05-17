@@ -60,7 +60,7 @@ Each page includes:
 | Page | SEO title | Meta description |
 | --- | --- | --- |
 | Home | `Personalized Online Tuition for School Students \| TutorHive` | `Personalized online tuition for school students in India. Expert-guided maths, science, English, and CBSE support with a Free Demo Class for Classes 1-10.` |
-| Classes 1-10 | `Online Tuition for Class 1-10 \| Free Demo Class \| TutorHive` | `Personalized online tuition for Class 1-10 students in India. Build strong foundations in maths, science, and English with expert-guided classes and a Free Demo Class.` |
+| Classes 1-10 | `Online Tuition for Classes 1-10 \| Free Demo Class \| TutorHive` | `Personalized online tuition for Classes 1-10 in India. Build strong foundations in maths, science, and English with expert-guided classes and a Free Demo Class.` |
 | Maths | `Online Maths Tuition in India \| Free Demo Class \| TutorHive` | `Online maths tuition for school students in India. Improve concept clarity, problem-solving, and marks with personalized classes and a Free Demo Class.` |
 | Science | `Online Science Tuition for School Students \| TutorHive` | `Online science tuition for school students in India. Personalized physics, chemistry, biology, and revision support with a Free Demo Class.` |
 | English | `English Tuition for Kids \| Online Classes \| TutorHive` | `English tuition for kids with personalized online classes for reading, grammar, writing, comprehension, and school confidence. Book a Free Demo Class.` |
