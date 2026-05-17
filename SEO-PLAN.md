@@ -12,7 +12,7 @@ Primary parent-facing promises:
 - Personalized learning for every student
 - Free Demo Class
 - Maths, science, English, and CBSE support
-- Classes 1-10, with a dedicated Class 1-8 acquisition page
+- Classes 1-10, with a dedicated Class 1-10 acquisition page
 
 ## Homepage copy now used
 
@@ -36,7 +36,7 @@ Secondary CTA:
 
 | Intent | URL |
 | --- | --- |
-| Online tuition for younger learners | `/online-tuition-class-1-8/` |
+| Online tuition for younger learners | `/online-tuition-class-1-10/` |
 | Online maths tuition | `/online-maths-tuition/` |
 | Online science tuition | `/online-science-tuition/` |
 | English tuition for kids | `/english-tuition-for-kids/` |
@@ -60,7 +60,7 @@ Each page includes:
 | Page | SEO title | Meta description |
 | --- | --- | --- |
 | Home | `Personalized Online Tuition for School Students \| TutorHive` | `Personalized online tuition for school students in India. Expert-guided maths, science, English, and CBSE support with a Free Demo Class for Classes 1-10.` |
-| Classes 1-8 | `Online Tuition for Class 1-8 \| Free Demo Class \| TutorHive` | `Personalized online tuition for Class 1-8 students in India. Build strong foundations in maths, science, and English with expert-guided classes and a Free Demo Class.` |
+| Classes 1-10 | `Online Tuition for Class 1-10 \| Free Demo Class \| TutorHive` | `Personalized online tuition for Class 1-10 students in India. Build strong foundations in maths, science, and English with expert-guided classes and a Free Demo Class.` |
 | Maths | `Online Maths Tuition in India \| Free Demo Class \| TutorHive` | `Online maths tuition for school students in India. Improve concept clarity, problem-solving, and marks with personalized classes and a Free Demo Class.` |
 | Science | `Online Science Tuition for School Students \| TutorHive` | `Online science tuition for school students in India. Personalized physics, chemistry, biology, and revision support with a Free Demo Class.` |
 | English | `English Tuition for Kids \| Online Classes \| TutorHive` | `English tuition for kids with personalized online classes for reading, grammar, writing, comprehension, and school confidence. Book a Free Demo Class.` |
@@ -76,9 +76,9 @@ Homepage:
 
 Subject pages:
 
-- Maths page links to CBSE, Classes 1-8, and science pages
+- Maths page links to CBSE, Classes 1-10, and science pages
 - Science page links to Class 8 science, CBSE, and maths pages
-- English page links to Classes 1-8, maths, and CBSE pages
+- English page links to Classes 1-10, maths, and CBSE pages
 - CBSE page links to maths, science, and English pages
 
 Blog:
@@ -86,7 +86,7 @@ Blog:
 - Every future post should include 2-3 contextual links into the tuition cluster
 - Posts about maths should point to `/online-maths-tuition/`
 - Posts about CBSE should point to `/cbse-online-tuition/`
-- Posts about younger children should point to `/online-tuition-class-1-8/`
+- Posts about younger children should point to `/online-tuition-class-1-10/`
 
 ## 20 parent-focused blog titles
 
@@ -108,7 +108,7 @@ Blog:
 16. How Personalized Learning Helps School Students
 17. Reading Habits That Improve English Fluency
 18. How to Prepare for Unit Tests Without Last-Minute Panic
-19. Class 1-8 Learning Milestones Parents Should Notice
+19. Class 1-10 Learning Milestones Parents Should Notice
 20. Questions to Ask Before Choosing an Online Tuition Platform
 
 Seed posts already created:
@@ -133,7 +133,7 @@ Seed posts already created:
 
 ## Breadcrumb pattern
 
-- Home > Online Tuition for Class 1-8
+- Home > Online Tuition for Class 1-10
 - Home > Online Maths Tuition
 - Home > Online Science Tuition
 - Home > English Tuition for Kids
