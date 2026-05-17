@@ -5,25 +5,102 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- ✅ SEO Title & Description -->
-      <title>TutorHive | Online Tutoring for Classes 1–10 (Free Trial)</title>
+      <title>Personalized Online Tuition for School Students | TutorHive</title>
       <!-- ✅ Favicon -->
       <link rel="icon" type="image/png" href="favicon.png">
       <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
 
-          <meta name="description" content="TutorHive offers expert-guided online tutoring and personalized learning for every student. Free trial classes for CBSE, ICSE, IGCSE, and IB students.">
+          <meta name="description" content="Personalized online tuition for school students in India. Expert-guided maths, science, English, and CBSE support with a Free Demo Class for Classes 1-10.">
       <!-- ✅ Keywords -->
-      <meta name="keywords" content="online tutoring India, CBSE tutor, ICSE tutor, IGCSE tutor, IB tutor, free trial online classes, 1:1 tutoring">
+      <meta name="keywords" content="online tuition India, online maths tuition, science tutor online India, CBSE online tuition, tuition for class 1-8, online tutoring for kids, 1-on-1 online classes">
 
       <!-- ✅ Social Sharing (Open Graph) -->
-      <meta property="og:title" content="1:1 Online Tutoring for Classes 1–10 | TutorHive">
-      <meta property="og:description" content="Expert-guided online tutoring with personalized learning for every student. Free 30-min trial class available.">
+      <meta property="og:title" content="Personalized Online Tuition for School Students | TutorHive">
+      <meta property="og:description" content="Trusted online tuition for parents seeking maths, science, English, and CBSE support. Book a Free Demo Class for Classes 1-10.">
       <meta property="og:url" content="https://tutorhive.in">
       <meta property="og:type" content="website">
       <meta property="og:image" content="https://tutorhive.in/logo.png">
 
       <!-- ✅ Stylesheet -->
       <link rel="stylesheet" href="mobile-fixes.css">
+      <link rel="canonical" href="https://tutorhive.in/">
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "EducationalOrganization",
+            "@id": "https://tutorhive.in/#organization",
+            "name": "TutorHive",
+            "url": "https://tutorhive.in/",
+            "logo": "https://tutorhive.in/logo.png",
+            "description": "Personalized online tuition for school students in India with maths, science, English, and CBSE support.",
+            "areaServed": "IN"
+          },
+          {
+            "@type": "LocalBusiness",
+            "@id": "https://tutorhive.in/#localbusiness",
+            "name": "TutorHive",
+            "url": "https://tutorhive.in/",
+            "image": "https://tutorhive.in/logo.png",
+            "description": "Online tuition platform for school students in India.",
+            "areaServed": "India",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "IN"
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://tutorhive.in/#website",
+            "url": "https://tutorhive.in/",
+            "name": "TutorHive",
+            "publisher": {
+              "@id": "https://tutorhive.in/#organization"
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://tutorhive.in/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Which classes does TutorHive support?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "TutorHive provides online tuition for school students from Classes 1 to 10."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do you offer maths, science, and English tuition?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. TutorHive offers personalized online tuition for maths, science, English, and other school subjects."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is TutorHive suitable for CBSE students?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. TutorHive supports CBSE students with curriculum-aligned online classes, revision help, and parent updates."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can parents book a free demo class?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Parents can book a Free Demo Class before choosing a tuition plan."
+                }
+              }
+            ]
+          }
+        ]
+      }
+      </script>
 
       <!-- ✅ Existing Inline Styles (keep as is) -->
       <style>
@@ -48,6 +125,14 @@
         @media(min-width:900px){.grid.cols-2{grid-template-columns:1.2fr 1fr}.grid.cols-3{grid-template-columns:repeat(3,1fr)}}
         .tile{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;transition:.2s ease}
         .tile:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+        .topic-card{min-height:180px}
+        .topic-card a{display:inline-flex;margin-top:auto;font-weight:900;color:#0f766e}
+        .trust-grid{display:grid;gap:18px}
+        .trust-point{display:flex;gap:12px;align-items:flex-start}
+        .trust-point strong{display:block;margin-bottom:4px}
+        .faq-grid{display:grid;gap:14px}
+        .faq-item{border:1px solid var(--border);border-radius:16px;padding:18px;background:#fff}
+        .faq-item h3{margin:0 0 8px;font-size:18px}
         .price-note{margin-top:auto;padding-top:4px;color:#0f172a;font-weight:800}
         .icon-wrap{width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#ecfeff;border:1px solid #d9f2f5}
         /* header */
@@ -107,7 +192,6 @@
 <a href='#pricing' data-link='pricing'>Pricing</a>
 <a href='#book' data-link='book'>Book Trial</a>
 <a href='#contact' data-link='contact'>Contact</a>
-<a href='#tutor' data-link='tutor'>Become a Tutor</a>
 </div><div class='nav-actions'><a class='btn' href='tutorhive-os.html'>Grow as a Solo Tutor</a><a class='btn teal' href='#book' data-link='book'>Book Free Class</a></div></div></div>
 <div class='tabbar'><div class='container'>
   <a href='#home' class='active' data-link='home'>Home</a>
@@ -115,7 +199,6 @@
   <a href='#pricing' data-link='pricing'>Pricing</a>
   <a href='#book' data-link='book'>Book</a>
   <a href='#contact' data-link='contact'>Contact</a>
-  <a href='#tutor' data-link='tutor'>Tutor</a>
   <a href='tutorhive-os.html'>Grow Solo</a>
 </div></div>
 
@@ -123,16 +206,16 @@
 <section class='section active' data-page='home'>
   <div class='container hero-grid'>
     <div class='reveal'>
-      <span class='badge'>TutorHive · tutorhive.in</span>
-      <h1 class='h1'>Building <span class='impact'>brighter futures</span>, one lesson at a time.</h1>
-      <p class='small' style='font-size:16px;color:var(--sub)'>Live online tutoring for Classes 1–10 (CBSE • ICSE • IGCSE • IB). Simple Zoom links, flexible schedules, weekly parent updates.</p>
+      <span class='badge'>Trusted online tuition in India</span>
+      <h1 class='h1'>Personalized Online Tuition for School Students</h1>
+      <p class='small' style='font-size:16px;color:var(--sub)'>Expert-guided online classes for Classes 1-10 with maths, science, English, and CBSE support. Built for parents who want clearer concepts, stronger marks, and steady academic confidence.</p>
       <div class='usp-row'>
         <span class='usp-pill'>Personalized learning for every student</span>
         <span class='usp-pill'>Expert-guided online tutoring</span>
       </div>
       <div style='display:flex;gap:10px;flex-wrap:wrap;margin-top:12px'>
-        <a class='btn primary' href='#book' data-link='book'>Book Free Trial</a>
-        <a class='btn' href='#subjects' data-link='subjects'>Explore Subjects</a>
+        <a class='btn primary' href='#book' data-link='book'>Book Free Demo Class</a>
+        <a class='btn' href='online-tuition-class-1-8/'>Explore Online Tuition</a>
       </div>
     </div>
     <div class='hero-illus'>
@@ -191,8 +274,21 @@
     </div></div>
   </div>
 
+  <div class='container section'>
+    <h2 class='h2 reveal'>Online tuition parents are actually searching for</h2>
+    <p class='small reveal'>Choose the support your child needs now, with subject-focused classes and parent-friendly communication.</p>
+    <div class='grid cols-3' style='margin-top:18px'>
+      <article class='tile topic-card reveal'><strong>Maths Tuition</strong><p class='small'>Build number sense, problem-solving confidence, and exam readiness with personalized maths support.</p><a href='online-maths-tuition/'>View online maths tuition</a></article>
+      <article class='tile topic-card reveal'><strong>Science Tuition</strong><p class='small'>Strengthen concepts in physics, chemistry, and biology through clear explanations and revision support.</p><a href='online-science-tuition/'>View online science tuition</a></article>
+      <article class='tile topic-card reveal'><strong>English Tuition</strong><p class='small'>Improve reading, grammar, writing, and confidence for school assessments and everyday communication.</p><a href='english-tuition-for-kids/'>View English tuition for kids</a></article>
+      <article class='tile topic-card reveal'><strong>CBSE Support</strong><p class='small'>Curriculum-aligned tuition for school students who need regular practice, revision, and parent updates.</p><a href='cbse-online-tuition/'>View CBSE online tuition</a></article>
+      <article class='tile topic-card reveal'><strong>Classes 1-8</strong><p class='small'>Gentle, structured online tuition for younger learners who need strong foundations early.</p><a href='online-tuition-class-1-8/'>View tuition for Classes 1-8</a></article>
+      <article class='tile topic-card reveal'><strong>1-on-1 Classes</strong><p class='small'>Personalized attention, flexible pace, and clear parent feedback after learning milestones.</p><a href='#book' data-link='book'>Book a Free Demo Class</a></article>
+    </div>
+  </div>
+
   <div class='section alt'><div class='container'>
-    <h2 class='h2 reveal'>Verified tutors</h2>
+    <h2 class='h2 reveal'>Why parents trust TutorHive</h2>
     <div class='grid cols-3'>
       <div class='tile reveal'><strong>Expert-guided online tutoring</strong><p class='small'>Each tutor is screened, interviewed, and demo-tested before teaching.</p></div>
       <div class='tile reveal'><strong>Curriculum-aligned</strong><p class='small'>CBSE/ICSE/IB/IGCSE — experienced with Classes 1–10.</p></div>
@@ -219,24 +315,34 @@
     <div class='card small reveal' style='margin-top:16px'>*Illustrative starter metrics — replace with your real results.</div>
   </div>
   <section id="benefits" class="container reveal">
-    <h2 class="h2">Benefits of Online Classes over Offline</h2>
+    <h2 class="h2">What changes for your child</h2>
     <div class="grid cols-2">
       <div class="card reveal">
-        <h3 class="h3">Flexibility</h3>
-        <p>Attend from anywhere, save commute time, and fit classes into your schedule.</p>
+        <h3 class="h3">Concept clarity</h3>
+        <p>Lessons slow down where needed, fix gaps early, and help children understand instead of memorize.</p>
       </div>
       <div class="card reveal">
-        <h3 class="h3">Personalization</h3>
-        <p>Get access to 1:1 sessions, recordings, and AI-powered reports tailored to your learning.</p>
+        <h3 class="h3">Better study rhythm</h3>
+        <p>Regular classes, homework guidance, and parent updates make learning more consistent week by week.</p>
       </div>
       <div class="card reveal">
-        <h3 class="h3">Global Reach</h3>
-        <p>Learn from the best tutors around the world without leaving your home.</p>
+        <h3 class="h3">1-on-1 attention</h3>
+        <p>Students ask more questions, receive faster feedback, and learn at a pace matched to their level.</p>
       </div>
       <div class="card reveal">
-        <h3 class="h3">Cost Efficient</h3>
-        <p>Save on travel, printed material, and still access high-quality education.</p>
+        <h3 class="h3">School-aligned support</h3>
+        <p>CBSE-focused help for classwork, revision, tests, and long-term academic improvement.</p>
       </div>
+    </div>
+  </section>
+
+  <section class='container section'>
+    <h2 class='h2 reveal'>Frequently asked by parents</h2>
+    <div class='faq-grid'>
+      <article class='faq-item reveal'><h3>Which classes does TutorHive support?</h3><p class='small'>TutorHive supports school students from Classes 1 to 10 with online tuition built around each child's current level.</p></article>
+      <article class='faq-item reveal'><h3>Can my child take only maths or science tuition?</h3><p class='small'>Yes. Parents can choose subject-specific support such as maths tuition, science tuition, English tuition, or broader CBSE support.</p></article>
+      <article class='faq-item reveal'><h3>How do I know if the tutor is right for my child?</h3><p class='small'>Start with a Free Demo Class, discuss your child's needs, and review the tutor's teaching approach before continuing.</p></article>
+      <article class='faq-item reveal'><h3>Do parents receive updates?</h3><p class='small'>Yes. TutorHive is designed around parent trust, with clear communication, progress visibility, and responsive support.</p></article>
     </div>
   </section>
 </section>
@@ -244,12 +350,12 @@
 <!-- SUBJECTS -->
 <section class='section' data-page='subjects'>
   <div class='container'>
-    <h1 class='h1'>Subjects we cover (Classes 1–10)</h1>
-    <p class='small'>We tailor topics to your child’s level and board syllabus.</p>
+    <h1 class='h1'>Subjects we cover for school students</h1>
+    <p class='small'>Explore subject-specific online tuition for Classes 1-10, tailored to your child's level and board syllabus.</p>
     <div class='grid cols-3' style='margin-top:20px'>
-      <div class='tile reveal'><div class='icon-wrap'>➕</div><strong>Mathematics</strong><p class='small'>Number sense, arithmetic, fractions, algebra, geometry, word problems.</p></div>
-      <div class='tile reveal'><div class='icon-wrap'>🔬</div><strong>Science</strong><p class='small'>Physics basics, chemistry basics, life sciences, experiments.</p></div>
-      <div class='tile reveal'><div class='icon-wrap'>📘</div><strong>English</strong><p class='small'>Grammar, writing, comprehension, literature.</p></div>
+      <div class='tile reveal'><div class='icon-wrap'>➕</div><strong>Mathematics</strong><p class='small'>Number sense, arithmetic, fractions, algebra, geometry, word problems.</p><a href='online-maths-tuition/'>Online maths tuition</a></div>
+      <div class='tile reveal'><div class='icon-wrap'>🔬</div><strong>Science</strong><p class='small'>Physics basics, chemistry basics, life sciences, experiments.</p><a href='online-science-tuition/'>Online science tuition</a></div>
+      <div class='tile reveal'><div class='icon-wrap'>📘</div><strong>English</strong><p class='small'>Grammar, writing, comprehension, literature.</p><a href='english-tuition-for-kids/'>English tuition for kids</a></div>
       <div class='tile reveal'><div class='icon-wrap'>🗺️</div><strong>Social Studies</strong><p class='small'>History, civics, geography — timelines, maps, projects.</p></div>
       <div class='tile reveal'><div class='icon-wrap'>📝</div><strong>Hindi</strong><p class='small'>Reading, grammar, vocabulary, composition.</p></div>
       <div class='tile reveal'><div class='icon-wrap'>💻</div><strong>Coding</strong><p class='small'>Scratch → Python/JS, logic & algorithms, projects.</p></div>
@@ -310,28 +416,7 @@
   </div>
 </section>
 
-<!-- TUTOR -->
-<section class='section' data-page='tutor'>
-  <div class='container'>
-    <h1 class='h1'>Become a Tutor at TutorHive</h1>
-    <p class='small'>Teach motivated students across Classes 1–10. Flexible schedules. Fair pay.</p>
-    <div class='grid cols-2' style='margin-top:20px'>
-      <div class='card reveal'><h3 style='margin:0 0 8px'>Why teach with us?</h3><ul class='small'><li>Flexible hours — choose your slots</li><li>Verified profile & parent trust</li><li>Curriculum-aligned resources</li><li>Fast support on scheduling</li></ul><div style='margin-top:14px'><a class='btn primary' href='tutorhive-os.html'>Grow independently with TutorHive OS</a></div></div>
-      <form id="tutorForm" class="form card reveal">
-        <input type="hidden" name="form" value="Tutor Application">
-        <input class='input' name='name' placeholder='Full name' required>
-        <input class='input' name='email' type='email' placeholder='Email' required>
-        <input class='input' name='phone' placeholder='Phone' required>
-        <select class='input' name='subject'><option>Subject Expertise</option><option>Mathematics</option><option>Science</option><option>English</option><option>Social Studies</option><option>Hindi</option><option>Coding</option></select>
-        <textarea class='input' name='notes' rows='4' placeholder='Tell us about your teaching style'></textarea>
-        <button class='btn teal' type='submit'>Apply</button>
-      </form>
-      <div id="tutorFormThanks"   class="small" style="display:none;margin-top:12px;color:green;">✅ Thanks! We’ll review your profile.</div>
-    </div>
-  </div>
-</section>
-
-<footer><div class='container row'><div class='brand'>🐝 TutorHive</div><div class='small'>© 2025 TutorHive · Home · Subjects · Pricing · Book · Contact · Tutor</div></div></footer>
+<footer><div class='container row'><div class='brand'>🐝 TutorHive</div><div class='small'>© 2026 TutorHive · Home · Subjects · Pricing · Book · Contact · <a href='blog/'>Blog</a> · <a href='teach/'>Teach</a> · <a href='careers/'>Careers</a></div></div></footer>
 
 <script>
 // SPA navigation
@@ -387,7 +472,7 @@ function wireForm(formId){
     }
   });
 }
-["trialForm","contactForm","tutorForm"].forEach(wireForm);
+["trialForm","contactForm"].forEach(wireForm);
 </script>
 
 

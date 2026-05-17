@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /tutorhive-dashboard.html
 
 Sitemap: https://tutorhive.in/sitemap.xml
