@@ -471,6 +471,10 @@ function wireForm(formId){
         body
       });
       if(!res.ok) throw new Error(await res.text());
+      if(formId === "trialForm"){
+        window.location.href = "trial-thank-you.html";
+        return;
+      }
       const thanks = document.getElementById(formId + "Thanks");
       if(thanks) thanks.style.display = "block";
       form.reset();
