@@ -7,7 +7,7 @@ const PORT = Number(process.env.PORT || 8091);
 const HOST = process.env.HOST || "0.0.0.0";
 const ROOT = __dirname;
 const DB_FILE = path.join(ROOT, "tutorhive-db.json");
-const PUBLIC_FILES = new Set(["/", "/index.html", "/tutorhive-os.html", "/tutorhive-dashboard.html", "/mobile-fixes.css", "/seo-pages.css", "/logo.png", "/favicon.ico", "/robots.txt", "/sitemap.xml", "/CNAME"]);
+const PUBLIC_FILES = new Set(["/", "/index.html", "/trial-thank-you.html", "/tutorhive-os.html", "/tutorhive-dashboard.html", "/mobile-fixes.css", "/seo-pages.css", "/logo.png", "/favicon.ico", "/robots.txt", "/sitemap.xml", "/CNAME"]);
 const DATABASE_URL = process.env.DATABASE_URL || "";
 const SITE_BASE_DOMAIN = process.env.SITE_BASE_DOMAIN || "tutorhive.in";
 const ALLOWED_ORIGINS = new Set((process.env.ALLOWED_ORIGINS || "https://tutorhive.in,https://www.tutorhive.in").split(",").map(value => value.trim()).filter(Boolean));
