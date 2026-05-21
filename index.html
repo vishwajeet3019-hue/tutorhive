@@ -463,14 +463,14 @@ function wireForm(formId){
   form.addEventListener("submit", async (e)=>{
     e.preventDefault();
     const data = Object.fromEntries(new FormData(form).entries());
-    const body = new URLSearchParams(data).toString(); // urlencoded to avoid preflight
+    const body = new URLSearchParams(data).toString();
     try{
-      const res  = await fetch(SCRIPT_URL, {
+      await fetch(SCRIPT_URL, {
         method: "POST",
+        mode: "no-cors",
         headers: {"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
         body
       });
-      if(!res.ok) throw new Error(await res.text());
       if(formId === "trialForm"){
         window.location.href = "trial-thank-you.html";
         return;
