@@ -10,7 +10,7 @@ function doPost(e) {
     const sheet = SHEET_NAME ? spreadsheet.getSheetByName(SHEET_NAME) : spreadsheet.getSheets()[0];
     if (!sheet) throw new Error("Sheet not found");
 
-    const data = e.parameter || {};
+    const data = (e && e.parameter) || {};
     sheet.appendRow([
       new Date(),
       data.form || "",
@@ -31,4 +31,17 @@ function doPost(e) {
   } finally {
     lock.releaseLock();
   }
+}
+
+function testWrite() {
+  return doPost({
+    parameter: {
+      form: "Trial Request",
+      parent: "Apps Script Test",
+      phone: "0000000000",
+      email: "test@example.com",
+      subject: "Mathematics",
+      notes: "If this row appears, the script can write to the sheet."
+    }
+  });
 }
