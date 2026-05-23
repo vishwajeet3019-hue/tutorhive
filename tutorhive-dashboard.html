@@ -451,7 +451,7 @@
 
   <script>
     const signup = JSON.parse(localStorage.getItem("tutorhiveOsSignup") || "{}");
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyRLzjZIr4c9pwZmJjnhD_3NrzuWskMWI1jbKdrUc-9ZxfI1fOzRLjOWLEhq8rxq8_thw/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxT36vhIrw0yGRojuAE69i7d2OMlSgcQ9mvG1vl-JExEkQ-s9A1epJ2iN83dGKiYGh5VQ/exec";
     const IS_LIVE_SITE = ["tutorhive.in", "www.tutorhive.in"].includes(window.location.hostname);
     const defaultImage = "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1100&q=80";
     const defaults = {
@@ -1152,13 +1152,13 @@
         message: `Rating: ${data.rating}/5\nWhat worked well: ${data.liked || "Not provided"}\nWhat should improve: ${data.improve || "Not provided"}`
       };
       try {
+        await api("/api/feedback", {method:"POST", body:JSON.stringify({rating: data.rating, liked: data.liked || "", improve: data.improve || ""})});
         if (IS_LIVE_SITE) {
-          const response = await fetch(SCRIPT_URL, {
+          fetch(SCRIPT_URL, {
             method:"POST",
             headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
             body:new URLSearchParams(payload).toString()
-          });
-          if (!response.ok) throw new Error("Feedback could not be sent.");
+          }).catch(() => {});
         }
         thanks.style.display = "block";
         form.reset();

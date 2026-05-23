@@ -101,6 +101,20 @@
         <div class="empty" id="enquiriesEmpty" hidden>No enquiries yet.</div>
       </div>
     </section>
+
+    <section class="panel enquiries">
+      <div class="panel-head">
+        <h2>Recent feedback</h2>
+        <span class="pill" id="feedbackCount">0 feedbacks</span>
+      </div>
+      <div class="panel-body">
+        <table>
+          <thead><tr><th>Tutor</th><th>Rating</th><th>Liked</th><th>Improve</th><th>Received</th></tr></thead>
+          <tbody id="feedbackTable"></tbody>
+        </table>
+        <div class="empty" id="feedbackEmpty" hidden>No feedback yet.</div>
+      </div>
+    </section>
   </main>
 
   <script>
@@ -143,6 +157,7 @@
         stat("Site visits", totals.visits),
         stat("Enquiries", totals.enquiries),
         stat("WhatsApp clicks", totals.whatsappClicks),
+        stat("Feedbacks", totals.feedbacks || 0),
         stat("Activity 24h", totals.activity24h)
       ].join("");
     }
@@ -189,12 +204,28 @@
       `).join("");
       document.getElementById("enquiriesEmpty").hidden = enquiries.length > 0;
     }
+    function renderFeedback(){
+      const rows = document.getElementById("feedbackTable");
+      const feedbacks = state.data?.feedbacks || [];
+      document.getElementById("feedbackCount").textContent = `${feedbacks.length} feedbacks`;
+      rows.innerHTML = feedbacks.map(item => `
+        <tr>
+          <td><div class="name">${escapeHtml(item.tutor?.name || item.tutor?.email || "Tutor")}</div><div class="muted">${escapeHtml(item.tutor?.email || "")}</div></td>
+          <td><span class="pill">${escapeHtml(item.rating || "")}/5</span></td>
+          <td>${escapeHtml(item.liked || "")}</td>
+          <td>${escapeHtml(item.improve || "")}</td>
+          <td>${escapeHtml(fmtDate(item.createdAt))}</td>
+        </tr>
+      `).join("");
+      document.getElementById("feedbackEmpty").hidden = feedbacks.length > 0;
+    }
     function render(){
       if (!state.data) return;
       renderStats(state.data.totals);
       renderUsers();
       renderActivity();
       renderEnquiries();
+      renderFeedback();
       document.getElementById("updatedAt").textContent = `Last synced ${fmtDate(state.data.generatedAt)}`;
     }
     async function load(){

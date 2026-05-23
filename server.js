@@ -18,7 +18,7 @@ let pgPool = null;
 const defaultImage = "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1100&q=80";
 
 function initialDb() {
-  return { tutors: [], sessions: [], websites: [], enquiries: [], analytics: [], activityLogs: [] };
+  return { tutors: [], sessions: [], websites: [], enquiries: [], analytics: [], activityLogs: [], feedbacks: [] };
 }
 
 async function ensurePostgres() {
@@ -82,6 +82,15 @@ async function ensurePostgres() {
         user_agent text,
         created_at timestamptz NOT NULL
       );
+      CREATE TABLE IF NOT EXISTS feedbacks (
+        id text PRIMARY KEY,
+        tutor_id text REFERENCES tutors(id) ON DELETE SET NULL,
+        website_id text REFERENCES websites(id) ON DELETE SET NULL,
+        rating integer,
+        liked text,
+        improve text,
+        created_at timestamptz NOT NULL
+      );
     `);
     await pgPool.query("ALTER TABLE tutors ADD COLUMN IF NOT EXISTS name text");
     await pgPool.query("ALTER TABLE tutors ADD COLUMN IF NOT EXISTS city text");
@@ -92,13 +101,14 @@ async function ensurePostgres() {
 async function readDb() {
   const pool = await ensurePostgres();
   if (pool) {
-    const [tutors, sessions, websites, enquiries, analytics, activityLogs] = await Promise.all([
+    const [tutors, sessions, websites, enquiries, analytics, activityLogs, feedbacks] = await Promise.all([
       pool.query("SELECT * FROM tutors"),
       pool.query("SELECT * FROM sessions"),
       pool.query("SELECT * FROM websites"),
       pool.query("SELECT * FROM enquiries ORDER BY created_at ASC"),
       pool.query("SELECT * FROM analytics_events ORDER BY created_at ASC"),
-      pool.query("SELECT * FROM activity_logs ORDER BY created_at ASC")
+      pool.query("SELECT * FROM activity_logs ORDER BY created_at ASC"),
+      pool.query("SELECT * FROM feedbacks ORDER BY created_at ASC")
     ]);
     return {
       tutors: tutors.rows.map(row => ({ id: row.id, name: row.name || "", email: row.email, phone: row.phone || "", city: row.city || "", passwordHash: row.password_hash, createdAt: row.created_at.toISOString() })),
@@ -106,7 +116,8 @@ async function readDb() {
       websites: websites.rows.map(row => ({ id: row.id, tutorId: row.tutor_id, slug: row.slug || "", customDomain: row.custom_domain || "", domainStatus: row.domain_status || "not_connected", draftTemplate: row.draft_template, publishedTemplate: row.published_template, publishedAt: row.published_at ? row.published_at.toISOString() : "", lastDomainCheckAt: row.last_domain_check_at ? row.last_domain_check_at.toISOString() : "" })),
       enquiries: enquiries.rows.map(row => ({ id: row.id, websiteId: row.website_id, slug: row.slug || "", name: row.name || "", phone: row.phone || "", email: row.email || "", message: row.message || "", status: row.status || "new", createdAt: row.created_at.toISOString() })),
       analytics: analytics.rows.map(row => ({ id: row.id, websiteId: row.website_id, slug: row.slug || "", eventType: row.event_type || "", createdAt: row.created_at.toISOString() })),
-      activityLogs: activityLogs.rows.map(row => ({ id: row.id, tutorId: row.tutor_id || "", websiteId: row.website_id || "", type: row.type || "", message: row.message || "", metadata: row.metadata || {}, ip: row.ip || "", userAgent: row.user_agent || "", createdAt: row.created_at.toISOString() }))
+      activityLogs: activityLogs.rows.map(row => ({ id: row.id, tutorId: row.tutor_id || "", websiteId: row.website_id || "", type: row.type || "", message: row.message || "", metadata: row.metadata || {}, ip: row.ip || "", userAgent: row.user_agent || "", createdAt: row.created_at.toISOString() })),
+      feedbacks: feedbacks.rows.map(row => ({ id: row.id, tutorId: row.tutor_id || "", websiteId: row.website_id || "", rating: row.rating || 0, liked: row.liked || "", improve: row.improve || "", createdAt: row.created_at.toISOString() }))
     };
   }
   if (!fs.existsSync(DB_FILE)) return initialDb();
@@ -158,6 +169,13 @@ async function writeDb(db) {
         await client.query(
           "INSERT INTO activity_logs (id,tutor_id,website_id,type,message,metadata,ip,user_agent,created_at) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)",
           [log.id, log.tutorId || null, log.websiteId || null, log.type || "", log.message || "", log.metadata || {}, log.ip || "", log.userAgent || "", log.createdAt]
+        );
+      }
+      await client.query("DELETE FROM feedbacks");
+      for (const feedback of db.feedbacks || []) {
+        await client.query(
+          "INSERT INTO feedbacks (id,tutor_id,website_id,rating,liked,improve,created_at) VALUES ($1,$2,$3,$4,$5,$6,$7)",
+          [feedback.id, feedback.tutorId || null, feedback.websiteId || null, Number(feedback.rating || 0), feedback.liked || "", feedback.improve || "", feedback.createdAt]
         );
       }
       await client.query("COMMIT");
@@ -389,6 +407,7 @@ function adminOverview(db) {
       visits: analytics.filter(event => event.eventType === "visit").length,
       enquiries: db.enquiries.length,
       whatsappClicks: analytics.filter(event => event.eventType === "whatsapp_click").length,
+      feedbacks: (db.feedbacks || []).length,
       activity24h: recentActivity.filter(item => new Date(item.createdAt) >= dayAgo).length
     },
     tutors: db.tutors.map(tutor => {
@@ -406,6 +425,11 @@ function adminOverview(db) {
       };
     }).sort((a, b) => new Date(b.lastSeenAt || 0) - new Date(a.lastSeenAt || 0)),
     enquiries: db.enquiries.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 60),
+    feedbacks: (db.feedbacks || []).slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 60).map(feedback => {
+      const tutor = tutorById.get(feedback.tutorId) || null;
+      const website = websiteById.get(feedback.websiteId);
+      return { ...feedback, tutor, website: website ? publicWebsite(website) : null };
+    }),
     activity: recentActivity
   };
 }
@@ -678,6 +702,28 @@ async function handleApi(req, res, url) {
     if (!tutor) return;
     const website = db.websites.find(item => item.tutorId === tutor.id);
     return sendJson(res, 200, { analytics: analyticsSummary(db, website) });
+  }
+  if (req.method === "POST" && url.pathname === "/api/feedback") {
+    const tutor = requireTutor(req, res, db);
+    if (!tutor) return;
+    const website = db.websites.find(item => item.tutorId === tutor.id);
+    const data = await bodyJson(req);
+    const rating = Math.max(1, Math.min(5, Number(data.rating || 0)));
+    if (!rating) return sendJson(res, 400, { error: "Rating required" });
+    const feedback = {
+      id: id("fb"),
+      tutorId: tutor.id,
+      websiteId: website?.id || "",
+      rating,
+      liked: String(data.liked || "").trim().slice(0, 2000),
+      improve: String(data.improve || "").trim().slice(0, 2000),
+      createdAt: new Date().toISOString()
+    };
+    db.feedbacks = db.feedbacks || [];
+    db.feedbacks.push(feedback);
+    recordActivity(db, req, { tutor, website, type: "feedback", message: `${tutor.name || tutor.email} submitted TutorHive OS feedback`, metadata: { rating: feedback.rating } });
+    await writeDb(db);
+    return sendJson(res, 201, { feedback });
   }
   const enquiryMatch = url.pathname.match(/^\/api\/site\/([^/]+)\/enquiries$/);
   if (req.method === "POST" && enquiryMatch) {
