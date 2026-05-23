@@ -122,7 +122,7 @@
       <div class="container">
         <div class="preview-top">
           <div><span class="badge">Presence launch</span><h2 class="h2">Your tutoring presence is taking shape</h2><div class="status-pill" id="siteStatus"><span class="status-dot"></span><span>Draft saved locally</span></div></div>
-          <div class="row"><button class="btn" id="editBtn">Edit Template</button><button class="btn teal" id="publishBtn">Publish Website</button></div>
+          <div class="row"><button class="btn" id="editBtn">Edit Template</button><button class="btn" id="feedbackHeaderBtn" type="button">Send Feedback</button><button class="btn teal" id="publishBtn">Publish Website</button></div>
         </div>
         <div class="tabs" aria-label="Dashboard sections">
           <button class="tab-btn active" type="button" data-tab="builder">Website</button>
@@ -862,6 +862,10 @@
       document.getElementById("workspace").classList.toggle("editing", isOpen);
       document.getElementById("editBtn").textContent = isOpen ? "Hide Editor" : "Edit Template";
       if (isOpen) editor.scrollIntoView({behavior:"smooth", block:"start"});
+    });
+    document.getElementById("feedbackHeaderBtn").addEventListener("click",()=>{
+      document.querySelector('[data-tab="feedback"]').click();
+      document.getElementById("feedbackPanel").scrollIntoView({behavior:"smooth", block:"start"});
     });
     document.querySelectorAll("[data-tab]").forEach(button=>button.addEventListener("click",()=>{
       const tab = button.dataset.tab;
