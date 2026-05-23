@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TutorHive Live Admin Dashboard</title>
+  <meta name="description" content="Live TutorHive OS users, sessions, enquiries, and activity logs.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    :root{--brand:#0ea5a3;--brand2:#22d3ee;--ink:#0f172a;--sub:#475569;--muted:#f7fafc;--line:#e5e7eb;--hot:#dc2626;--good:#16a34a;--warn:#ca8a04;--shadow:0 18px 50px rgba(2,8,23,.1)}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--ink);background:#f6f9fb}
+    a{color:inherit;text-decoration:none}
+    button,input{font:inherit}
+    .shell{width:min(1320px,calc(100% - 32px));margin:0 auto}
+    .topbar{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    .nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:1000;font-size:20px}.brand img{width:64px;height:54px;object-fit:contain}
+    .toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.status{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;background:#fff;padding:9px 12px;color:var(--sub);font-size:14px;font-weight:800}.dot{width:9px;height:9px;border-radius:50%;background:var(--warn)}.dot.live{background:var(--good)}
+    .btn{border:1px solid var(--line);border-radius:999px;background:#fff;padding:10px 14px;font-weight:900;cursor:pointer}.btn.dark{border:0;background:#0f172a;color:#fff}.btn.teal{border:0;color:#fff;background:linear-gradient(120deg,var(--brand),var(--brand2))}
+    main{padding:28px 0 48px}.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:18px}.h1{font-size:clamp(30px,4vw,48px);line-height:1.04;margin:0 0 8px}.small{font-size:14px;line-height:1.55;color:var(--sub);margin:0}
+    .grid{display:grid;gap:14px}.stats{grid-template-columns:repeat(8,1fr);margin-bottom:16px}.stat{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px;box-shadow:0 8px 24px rgba(2,8,23,.04)}.stat strong{display:block;font-size:26px;line-height:1.1}.stat span{display:block;color:var(--sub);font-size:13px;font-weight:800;margin-top:6px}
+    .layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr);gap:16px;align-items:start}.panel{background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);overflow:hidden}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px;border-bottom:1px solid var(--line)}.panel-head h2{font-size:18px;margin:0}.panel-body{padding:0}
+    .search{width:min(360px,100%);border:1px solid var(--line);border-radius:999px;padding:10px 13px;background:#fff}
+    table{width:100%;border-collapse:collapse}th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:12px;color:var(--sub);text-transform:uppercase;letter-spacing:.04em;background:#fbfdff}td{font-size:14px}.name{font-weight:950}.muted{color:var(--sub)}.pill{display:inline-flex;align-items:center;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:900;background:#f1f5f9;color:#334155}.pill.active{background:#dcfce7;color:#166534}.pill.idle{background:#fee2e2;color:#991b1b}
+    .activity{display:grid}.event{display:grid;grid-template-columns:96px 1fr;gap:12px;padding:13px 16px;border-bottom:1px solid var(--line)}.event-time{font-size:12px;color:var(--sub);font-weight:900}.event-title{font-size:14px;font-weight:950;margin:0 0 4px}.event-meta{font-size:13px;color:var(--sub);line-height:1.45}.source{display:inline-flex;margin-left:6px;border-radius:999px;background:#ecfeff;color:#0f766e;padding:2px 7px;font-size:11px;font-weight:900}
+    .enquiries{margin-top:16px}.empty{padding:18px;color:var(--sub)}.token-card{display:none;margin-bottom:16px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:16px;box-shadow:var(--shadow)}.token-card.active{display:block}.token-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.token-row input{flex:1;min-width:240px;border:1px solid var(--line);border-radius:999px;padding:11px 14px}
+    @media(max-width:1180px){.stats{grid-template-columns:repeat(4,1fr)}.layout{grid-template-columns:1fr}}
+    @media(max-width:680px){.shell{width:min(100% - 24px,1320px)}.stats{grid-template-columns:repeat(2,1fr)}.panel-head{align-items:flex-start;flex-direction:column}.event{grid-template-columns:1fr}th:nth-child(4),td:nth-child(4),th:nth-child(5),td:nth-child(5){display:none}.btn{width:100%}.toolbar{width:100%}.status{width:100%;justify-content:center}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell nav">
+      <a class="brand" href="index.html"><img src="logo.png" alt="TutorHive logo"><span>Live Admin</span></a>
+      <div class="toolbar">
+        <span class="status"><span class="dot" id="liveDot"></span><span id="liveText">Connecting</span></span>
+        <button class="btn" id="refreshBtn" type="button">Refresh</button>
+        <button class="btn dark" id="tokenBtn" type="button">Admin Key</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <h1 class="h1">TutorHive OS activity</h1>
+        <p class="small">Live view of OS users, active sessions, tutor websites, enquiries, visits, and recent actions.</p>
+      </div>
+      <p class="small" id="updatedAt">Waiting for first sync</p>
+    </section>
+
+    <section class="token-card" id="tokenCard">
+      <strong>Production access</strong>
+      <p class="small">Set `ADMIN_TOKEN` on the server. Enter that key here and this browser will include it with admin API requests.</p>
+      <div class="token-row">
+        <input id="tokenInput" type="password" placeholder="Admin token">
+        <button class="btn teal" id="saveToken" type="button">Save Key</button>
+        <button class="btn" id="clearToken" type="button">Clear</button>
+      </div>
+    </section>
+
+    <section class="grid stats" id="stats"></section>
+
+    <section class="layout">
+      <article class="panel">
+        <div class="panel-head">
+          <h2>Users using TutorHive OS</h2>
+          <input class="search" id="userSearch" placeholder="Search user, email, city, site">
+        </div>
+        <div class="panel-body">
+          <table>
+            <thead><tr><th>User</th><th>Status</th><th>Website</th><th>Activity</th><th>Results</th></tr></thead>
+            <tbody id="usersTable"></tbody>
+          </table>
+          <div class="empty" id="usersEmpty" hidden>No users found.</div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <h2>Live activity log</h2>
+          <span class="pill" id="activityCount">0 events</span>
+        </div>
+        <div class="panel-body activity" id="activityList"></div>
+      </article>
+    </section>
+
+    <section class="panel enquiries">
+      <div class="panel-head">
+        <h2>Recent enquiries</h2>
+        <span class="pill" id="enquiryCount">0 enquiries</span>
+      </div>
+      <div class="panel-body">
+        <table>
+          <thead><tr><th>Parent/student</th><th>Contact</th><th>Site</th><th>Status</th><th>Received</th></tr></thead>
+          <tbody id="enquiriesTable"></tbody>
+        </table>
+        <div class="empty" id="enquiriesEmpty" hidden>No enquiries yet.</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const API_BASE = ["tutorhive.in", "www.tutorhive.in"].includes(window.location.hostname) ? "https://api.tutorhive.in" : "";
+    const tokenCard = document.getElementById("tokenCard");
+    const tokenInput = document.getElementById("tokenInput");
+    const liveDot = document.getElementById("liveDot");
+    const liveText = document.getElementById("liveText");
+    const state = { data: null, query: "" };
+
+    function adminToken(){return localStorage.getItem("tutorhiveAdminToken") || new URLSearchParams(location.search).get("token") || ""}
+    function fmtDate(value){
+      if (!value) return "Never";
+      return new Intl.DateTimeFormat(undefined,{dateStyle:"medium",timeStyle:"short"}).format(new Date(value));
+    }
+    function fmtTime(value){
+      if (!value) return "";
+      return new Intl.DateTimeFormat(undefined,{hour:"2-digit",minute:"2-digit",second:"2-digit"}).format(new Date(value));
+    }
+    function escapeHtml(value){
+      return String(value ?? "").replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
+    }
+    function websiteLabel(site){
+      if (!site) return "No website";
+      return site.slug ? `${site.slug}.tutorhive.in` : "Draft website";
+    }
+    function setLive(ok, message){
+      liveDot.classList.toggle("live", ok);
+      liveText.textContent = message;
+    }
+    function stat(label, value){
+      return `<div class="stat"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></div>`;
+    }
+    function renderStats(totals){
+      document.getElementById("stats").innerHTML = [
+        stat("Total users", totals.tutors),
+        stat("Active sessions", totals.activeSessions),
+        stat("Websites", totals.websites),
+        stat("Published", totals.publishedWebsites),
+        stat("Site visits", totals.visits),
+        stat("Enquiries", totals.enquiries),
+        stat("WhatsApp clicks", totals.whatsappClicks),
+        stat("Activity 24h", totals.activity24h)
+      ].join("");
+    }
+    function renderUsers(){
+      const rows = document.getElementById("usersTable");
+      const query = state.query.toLowerCase();
+      const users = (state.data?.tutors || []).filter(user => [user.name,user.email,user.phone,user.city,websiteLabel(user.website)].join(" ").toLowerCase().includes(query));
+      rows.innerHTML = users.map(user => `
+        <tr>
+          <td><div class="name">${escapeHtml(user.name || "Unnamed tutor")}</div><div class="muted">${escapeHtml(user.email)}</div><div class="muted">${escapeHtml(user.phone || user.city || "")}</div></td>
+          <td><span class="pill ${user.active ? "active" : "idle"}">${user.active ? "Active" : "Idle"}</span></td>
+          <td><div>${escapeHtml(websiteLabel(user.website))}</div><div class="muted">${user.website?.publishedAt ? "Published " + fmtDate(user.website.publishedAt) : "Not published"}</div></td>
+          <td><div>${escapeHtml(fmtDate(user.lastSeenAt))}</div><div class="muted">Joined ${escapeHtml(fmtDate(user.createdAt))}</div></td>
+          <td><div>${user.visits} visits</div><div class="muted">${user.enquiries} enquiries · ${user.whatsappClicks} WhatsApp</div></td>
+        </tr>
+      `).join("");
+      document.getElementById("usersEmpty").hidden = users.length > 0;
+    }
+    function renderActivity(){
+      const list = document.getElementById("activityList");
+      const events = state.data?.activity || [];
+      document.getElementById("activityCount").textContent = `${events.length} events`;
+      list.innerHTML = events.length ? events.map(event => {
+        const tutor = event.tutor?.name || event.tutor?.email || "";
+        const site = websiteLabel(event.website);
+        return `<div class="event">
+          <div class="event-time">${escapeHtml(fmtTime(event.createdAt))}<br>${escapeHtml(new Intl.DateTimeFormat(undefined,{month:"short",day:"numeric"}).format(new Date(event.createdAt)))}</div>
+          <div><p class="event-title">${escapeHtml(event.message || event.type)}<span class="source">${escapeHtml(event.source || "os")}</span></p><div class="event-meta">${escapeHtml([tutor, site].filter(Boolean).join(" · "))}</div></div>
+        </div>`;
+      }).join("") : `<div class="empty">No activity yet.</div>`;
+    }
+    function renderEnquiries(){
+      const rows = document.getElementById("enquiriesTable");
+      const enquiries = state.data?.enquiries || [];
+      document.getElementById("enquiryCount").textContent = `${enquiries.length} enquiries`;
+      rows.innerHTML = enquiries.map(item => `
+        <tr>
+          <td><div class="name">${escapeHtml(item.name || "Unnamed")}</div><div class="muted">${escapeHtml(item.message || "")}</div></td>
+          <td><div>${escapeHtml(item.phone || "No phone")}</div><div class="muted">${escapeHtml(item.email || "")}</div></td>
+          <td>${escapeHtml(item.slug || "site")}</td>
+          <td><span class="pill">${escapeHtml((item.status || "new").replace(/_/g, " "))}</span></td>
+          <td>${escapeHtml(fmtDate(item.createdAt))}</td>
+        </tr>
+      `).join("");
+      document.getElementById("enquiriesEmpty").hidden = enquiries.length > 0;
+    }
+    function render(){
+      if (!state.data) return;
+      renderStats(state.data.totals);
+      renderUsers();
+      renderActivity();
+      renderEnquiries();
+      document.getElementById("updatedAt").textContent = `Last synced ${fmtDate(state.data.generatedAt)}`;
+    }
+    async function load(){
+      try {
+        const headers = {};
+        const token = adminToken();
+        if (token) headers["X-Admin-Token"] = token;
+        const response = await fetch(`${API_BASE}/api/admin/overview`, { headers, credentials: "include" });
+        if (!response.ok) throw new Error((await response.json()).error || "Unable to load dashboard");
+        state.data = await response.json();
+        tokenCard.classList.remove("active");
+        setLive(true, "Live");
+        render();
+      } catch (error) {
+        setLive(false, error.message);
+        tokenCard.classList.add("active");
+      }
+    }
+    document.getElementById("refreshBtn").addEventListener("click", load);
+    document.getElementById("tokenBtn").addEventListener("click", () => tokenCard.classList.toggle("active"));
+    document.getElementById("saveToken").addEventListener("click", () => {
+      localStorage.setItem("tutorhiveAdminToken", tokenInput.value.trim());
+      load();
+    });
+    document.getElementById("clearToken").addEventListener("click", () => {
+      localStorage.removeItem("tutorhiveAdminToken");
+      tokenInput.value = "";
+      load();
+    });
+    document.getElementById("userSearch").addEventListener("input", event => {
+      state.query = event.target.value;
+      renderUsers();
+    });
+    tokenInput.value = localStorage.getItem("tutorhiveAdminToken") || "";
+    load();
+    setInterval(load, 3000);
+  </script>
+</body>
+</html>

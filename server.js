@@ -7,17 +7,18 @@ const PORT = Number(process.env.PORT || 8091);
 const HOST = process.env.HOST || "0.0.0.0";
 const ROOT = __dirname;
 const DB_FILE = path.join(ROOT, "tutorhive-db.json");
-const PUBLIC_FILES = new Set(["/", "/index.html", "/trial-thank-you.html", "/tutorhive-os.html", "/tutorhive-dashboard.html", "/mobile-fixes.css", "/seo-pages.css", "/logo.png", "/favicon.ico", "/robots.txt", "/sitemap.xml", "/CNAME"]);
+const PUBLIC_FILES = new Set(["/", "/index.html", "/trial-thank-you.html", "/tutorhive-os.html", "/tutorhive-dashboard.html", "/tutorhive-admin.html", "/mobile-fixes.css", "/seo-pages.css", "/logo.png", "/favicon.ico", "/robots.txt", "/sitemap.xml", "/CNAME"]);
 const DATABASE_URL = process.env.DATABASE_URL || "";
 const SITE_BASE_DOMAIN = process.env.SITE_BASE_DOMAIN || "tutorhive.in";
 const ALLOWED_ORIGINS = new Set((process.env.ALLOWED_ORIGINS || "https://tutorhive.in,https://www.tutorhive.in").split(",").map(value => value.trim()).filter(Boolean));
+const ADMIN_TOKEN = process.env.ADMIN_TOKEN || "";
 const COOKIE_SECURE = process.env.NODE_ENV === "production" ? "; Secure" : "";
 let pgPool = null;
 
 const defaultImage = "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1100&q=80";
 
 function initialDb() {
-  return { tutors: [], sessions: [], websites: [], enquiries: [], analytics: [] };
+  return { tutors: [], sessions: [], websites: [], enquiries: [], analytics: [], activityLogs: [] };
 }
 
 async function ensurePostgres() {
@@ -70,6 +71,17 @@ async function ensurePostgres() {
         event_type text,
         created_at timestamptz NOT NULL
       );
+      CREATE TABLE IF NOT EXISTS activity_logs (
+        id text PRIMARY KEY,
+        tutor_id text,
+        website_id text,
+        type text,
+        message text,
+        metadata jsonb,
+        ip text,
+        user_agent text,
+        created_at timestamptz NOT NULL
+      );
     `);
     await pgPool.query("ALTER TABLE tutors ADD COLUMN IF NOT EXISTS name text");
     await pgPool.query("ALTER TABLE tutors ADD COLUMN IF NOT EXISTS city text");
@@ -80,19 +92,21 @@ async function ensurePostgres() {
 async function readDb() {
   const pool = await ensurePostgres();
   if (pool) {
-    const [tutors, sessions, websites, enquiries, analytics] = await Promise.all([
+    const [tutors, sessions, websites, enquiries, analytics, activityLogs] = await Promise.all([
       pool.query("SELECT * FROM tutors"),
       pool.query("SELECT * FROM sessions"),
       pool.query("SELECT * FROM websites"),
       pool.query("SELECT * FROM enquiries ORDER BY created_at ASC"),
-      pool.query("SELECT * FROM analytics_events ORDER BY created_at ASC")
+      pool.query("SELECT * FROM analytics_events ORDER BY created_at ASC"),
+      pool.query("SELECT * FROM activity_logs ORDER BY created_at ASC")
     ]);
     return {
       tutors: tutors.rows.map(row => ({ id: row.id, name: row.name || "", email: row.email, phone: row.phone || "", city: row.city || "", passwordHash: row.password_hash, createdAt: row.created_at.toISOString() })),
       sessions: sessions.rows.map(row => ({ token: row.token, tutorId: row.tutor_id, createdAt: row.created_at.toISOString(), expiresAt: row.expires_at.toISOString() })),
       websites: websites.rows.map(row => ({ id: row.id, tutorId: row.tutor_id, slug: row.slug || "", customDomain: row.custom_domain || "", domainStatus: row.domain_status || "not_connected", draftTemplate: row.draft_template, publishedTemplate: row.published_template, publishedAt: row.published_at ? row.published_at.toISOString() : "", lastDomainCheckAt: row.last_domain_check_at ? row.last_domain_check_at.toISOString() : "" })),
       enquiries: enquiries.rows.map(row => ({ id: row.id, websiteId: row.website_id, slug: row.slug || "", name: row.name || "", phone: row.phone || "", email: row.email || "", message: row.message || "", status: row.status || "new", createdAt: row.created_at.toISOString() })),
-      analytics: analytics.rows.map(row => ({ id: row.id, websiteId: row.website_id, slug: row.slug || "", eventType: row.event_type || "", createdAt: row.created_at.toISOString() }))
+      analytics: analytics.rows.map(row => ({ id: row.id, websiteId: row.website_id, slug: row.slug || "", eventType: row.event_type || "", createdAt: row.created_at.toISOString() })),
+      activityLogs: activityLogs.rows.map(row => ({ id: row.id, tutorId: row.tutor_id || "", websiteId: row.website_id || "", type: row.type || "", message: row.message || "", metadata: row.metadata || {}, ip: row.ip || "", userAgent: row.user_agent || "", createdAt: row.created_at.toISOString() }))
     };
   }
   if (!fs.existsSync(DB_FILE)) return initialDb();
@@ -137,6 +151,13 @@ async function writeDb(db) {
         await client.query(
           "INSERT INTO analytics_events (id,website_id,slug,event_type,created_at) VALUES ($1,$2,$3,$4,$5)",
           [event.id, event.websiteId, event.slug || "", event.eventType || "", event.createdAt]
+        );
+      }
+      await client.query("DELETE FROM activity_logs");
+      for (const log of db.activityLogs || []) {
+        await client.query(
+          "INSERT INTO activity_logs (id,tutor_id,website_id,type,message,metadata,ip,user_agent,created_at) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)",
+          [log.id, log.tutorId || null, log.websiteId || null, log.type || "", log.message || "", log.metadata || {}, log.ip || "", log.userAgent || "", log.createdAt]
         );
       }
       await client.query("COMMIT");
@@ -192,7 +213,7 @@ function corsHeaders(req) {
   return {
     "Access-Control-Allow-Origin": origin,
     "Access-Control-Allow-Credentials": "true",
-    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Headers": "Content-Type, X-Admin-Token",
     "Access-Control-Allow-Methods": "GET,POST,PATCH,DELETE,OPTIONS",
     "Vary": "Origin"
   };
@@ -231,6 +252,162 @@ function requireTutor(req, res, db) {
     return null;
   }
   return tutor;
+}
+
+function clientIp(req) {
+  return String(req.headers["x-forwarded-for"] || req.socket.remoteAddress || "").split(",")[0].trim();
+}
+
+function requireAdmin(req, res) {
+  const provided = req.headers["x-admin-token"] || new URL(req.url, `http://${req.headers.host || "localhost"}`).searchParams.get("token") || parseCookies(req).th_admin;
+  const isLocal = ["127.0.0.1", "::1", "::ffff:127.0.0.1"].includes(clientIp(req));
+  if ((ADMIN_TOKEN && provided === ADMIN_TOKEN) || (!ADMIN_TOKEN && isLocal)) return true;
+  sendJson(res, 401, { error: ADMIN_TOKEN ? "Admin token required" : "Set ADMIN_TOKEN in production to enable admin access" });
+  return false;
+}
+
+function publicTutor(tutor) {
+  return { id: tutor.id, name: tutor.name || "", email: tutor.email || "", phone: tutor.phone || "", city: tutor.city || "", createdAt: tutor.createdAt || "" };
+}
+
+function publicSession(session) {
+  return { tutorId: session.tutorId, createdAt: session.createdAt, expiresAt: session.expiresAt, active: new Date(session.expiresAt) > new Date() };
+}
+
+function recordActivity(db, req, { tutor, website, type, message, metadata = {} }) {
+  db.activityLogs = db.activityLogs || [];
+  db.activityLogs.push({
+    id: id("act"),
+    tutorId: tutor?.id || website?.tutorId || "",
+    websiteId: website?.id || "",
+    type,
+    message,
+    metadata,
+    ip: clientIp(req),
+    userAgent: String(req.headers["user-agent"] || "").slice(0, 300),
+    createdAt: new Date().toISOString()
+  });
+}
+
+function adminOverview(db) {
+  const now = new Date();
+  const dayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+  const activeSessions = db.sessions.filter(session => new Date(session.expiresAt) > now);
+  const tutorById = new Map(db.tutors.map(tutor => [tutor.id, publicTutor(tutor)]));
+  const websiteById = new Map(db.websites.map(website => [website.id, website]));
+  const websiteByTutorId = new Map(db.websites.map(website => [website.tutorId, website]));
+  const analytics = db.analytics || [];
+  const activityLogs = db.activityLogs || [];
+  const hasActivity = (type, matcher) => activityLogs.some(log => log.type === type && matcher(log));
+  const legacyActivity = [
+    ...db.tutors
+      .filter(tutor => !hasActivity("signup", log => log.tutorId === tutor.id))
+      .map(tutor => {
+        const website = websiteByTutorId.get(tutor.id);
+        return {
+          id: `legacy_signup_${tutor.id}`,
+          type: "signup",
+          message: `${tutor.name || tutor.email} created a TutorHive OS account`,
+          createdAt: tutor.createdAt,
+          source: "legacy",
+          tutor: tutorById.get(tutor.id) || null,
+          website: website ? publicWebsite(website) : null,
+          metadata: { email: tutor.email || "", city: tutor.city || "" }
+        };
+      }),
+    ...db.sessions
+      .filter(session => !hasActivity("login", log => log.tutorId === session.tutorId && Math.abs(new Date(log.createdAt) - new Date(session.createdAt)) < 60000))
+      .map(session => {
+        const tutor = tutorById.get(session.tutorId);
+        const website = websiteByTutorId.get(session.tutorId);
+        return {
+          id: `legacy_session_${session.token}`,
+          type: "session",
+          message: `${tutor?.name || tutor?.email || "Tutor"} session started`,
+          createdAt: session.createdAt,
+          source: "legacy",
+          tutor: tutor || null,
+          website: website ? publicWebsite(website) : null,
+          metadata: { expiresAt: session.expiresAt, active: new Date(session.expiresAt) > now }
+        };
+      }),
+    ...db.websites
+      .filter(website => website.publishedAt && !hasActivity("publish", log => log.websiteId === website.id))
+      .map(website => {
+        const tutor = tutorById.get(website.tutorId);
+        return {
+          id: `legacy_publish_${website.id}`,
+          type: "publish",
+          message: `${tutor?.name || tutor?.email || "Tutor"} published ${website.slug || "a website"}`,
+          createdAt: website.publishedAt,
+          source: "legacy",
+          tutor: tutor || null,
+          website: publicWebsite(website),
+          metadata: { slug: website.slug || "" }
+        };
+      }),
+    ...db.enquiries
+      .filter(enquiry => !hasActivity("enquiry_received", log => log.metadata?.email === enquiry.email && log.metadata?.phone === enquiry.phone && log.websiteId === enquiry.websiteId))
+      .map(enquiry => {
+        const website = websiteById.get(enquiry.websiteId);
+        return {
+          id: `legacy_enquiry_${enquiry.id}`,
+          type: "enquiry_received",
+          message: `New enquiry on ${enquiry.slug || "published site"}`,
+          createdAt: enquiry.createdAt,
+          source: "legacy",
+          tutor: website ? tutorById.get(website.tutorId) || null : null,
+          website: website ? publicWebsite(website) : null,
+          metadata: { name: enquiry.name || "", phone: enquiry.phone || "", email: enquiry.email || "" }
+        };
+      })
+  ];
+  const recentActivity = [
+    ...activityLogs.map(log => ({ ...log, source: "os", tutor: tutorById.get(log.tutorId) || null, website: websiteById.get(log.websiteId) ? publicWebsite(websiteById.get(log.websiteId)) : null })),
+    ...legacyActivity,
+    ...analytics.slice(-300).map(event => {
+      const website = websiteById.get(event.websiteId);
+      return {
+        id: event.id,
+        type: event.eventType,
+        message: event.eventType === "visit" ? `Website visit on ${event.slug || "published site"}` : `Website ${event.eventType.replace(/_/g, " ")}`,
+        createdAt: event.createdAt,
+        source: "site",
+        tutor: website ? tutorById.get(website.tutorId) || null : null,
+        website: website ? publicWebsite(website) : null,
+        metadata: { slug: event.slug || "" }
+      };
+    })
+  ].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 120);
+  return {
+    generatedAt: now.toISOString(),
+    totals: {
+      tutors: db.tutors.length,
+      activeSessions: activeSessions.length,
+      websites: db.websites.length,
+      publishedWebsites: db.websites.filter(website => website.publishedTemplate).length,
+      visits: analytics.filter(event => event.eventType === "visit").length,
+      enquiries: db.enquiries.length,
+      whatsappClicks: analytics.filter(event => event.eventType === "whatsapp_click").length,
+      activity24h: recentActivity.filter(item => new Date(item.createdAt) >= dayAgo).length
+    },
+    tutors: db.tutors.map(tutor => {
+      const website = db.websites.find(item => item.tutorId === tutor.id);
+      const sessions = db.sessions.filter(session => session.tutorId === tutor.id);
+      const websiteEvents = website ? analytics.filter(event => event.websiteId === website.id) : [];
+      return {
+        ...publicTutor(tutor),
+        active: sessions.some(session => new Date(session.expiresAt) > now),
+        lastSeenAt: sessions.concat(activityLogs.filter(log => log.tutorId === tutor.id)).map(item => item.createdAt).sort().pop() || tutor.createdAt,
+        website: website ? publicWebsite(website) : null,
+        visits: websiteEvents.filter(event => event.eventType === "visit").length,
+        enquiries: website ? db.enquiries.filter(item => item.websiteId === website.id).length : 0,
+        whatsappClicks: websiteEvents.filter(event => event.eventType === "whatsapp_click").length
+      };
+    }).sort((a, b) => new Date(b.lastSeenAt || 0) - new Date(a.lastSeenAt || 0)),
+    enquiries: db.enquiries.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 60),
+    activity: recentActivity
+  };
 }
 
 function templateFromSignup(data) {
@@ -377,6 +554,10 @@ function serveFile(req, res, url) {
 async function handleApi(req, res, url) {
   if (req.method === "OPTIONS") return sendJson(res, 204, {}, corsHeaders(req));
   const db = await readDb();
+  if (req.method === "GET" && url.pathname === "/api/admin/overview") {
+    if (!requireAdmin(req, res)) return;
+    return sendJson(res, 200, adminOverview(db), corsHeaders(req));
+  }
   if (req.method === "POST" && url.pathname === "/api/signup") {
     const data = await bodyJson(req);
     const email = String(data.email || "").trim().toLowerCase();
@@ -389,6 +570,7 @@ async function handleApi(req, res, url) {
     db.websites.push(website);
     const token = id("sess");
     db.sessions.push({ token, tutorId: tutor.id, createdAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30).toISOString() });
+    recordActivity(db, req, { tutor, website, type: "signup", message: `${tutor.name || tutor.email} created a TutorHive OS account`, metadata: { email: tutor.email, city: tutor.city } });
     await writeDb(db);
     return sendJson(res, 201, { tutor: { id: tutor.id, name: tutor.name, email: tutor.email, city: tutor.city }, website: publicWebsite(website) }, {...corsHeaders(req), "Set-Cookie": `th_session=${encodeURIComponent(token)}; HttpOnly; Path=/; SameSite=Lax${COOKIE_SECURE}; Max-Age=2592000`});
   }
@@ -398,12 +580,18 @@ async function handleApi(req, res, url) {
     if (!tutor || !verifyPassword(data.password, tutor.passwordHash)) return sendJson(res, 401, { error: "Invalid email or password" });
     const token = id("sess");
     db.sessions.push({ token, tutorId: tutor.id, createdAt: new Date().toISOString(), expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30).toISOString() });
+    const website = db.websites.find(item => item.tutorId === tutor.id);
+    recordActivity(db, req, { tutor, website, type: "login", message: `${tutor.name || tutor.email} logged in`, metadata: { email: tutor.email } });
     await writeDb(db);
     return sendJson(res, 200, { tutor: { id: tutor.id, name: tutor.name || "", email: tutor.email, city: tutor.city || "" } }, {...corsHeaders(req), "Set-Cookie": `th_session=${encodeURIComponent(token)}; HttpOnly; Path=/; SameSite=Lax${COOKIE_SECURE}; Max-Age=2592000`});
   }
   if (req.method === "POST" && url.pathname === "/api/logout") {
     const token = parseCookies(req).th_session;
+    const session = db.sessions.find(item => item.token === token);
+    const tutor = session ? db.tutors.find(item => item.id === session.tutorId) : null;
+    const website = tutor ? db.websites.find(item => item.tutorId === tutor.id) : null;
     const next = { ...db, sessions: db.sessions.filter(session => session.token !== token) };
+    if (tutor) recordActivity(next, req, { tutor, website, type: "logout", message: `${tutor.name || tutor.email} logged out`, metadata: { email: tutor.email } });
     await writeDb(next);
     return sendJson(res, 200, { ok: true }, {...corsHeaders(req), "Set-Cookie": `th_session=; HttpOnly; Path=/; SameSite=Lax${COOKIE_SECURE}; Max-Age=0`});
   }
@@ -426,6 +614,7 @@ async function handleApi(req, res, url) {
       website.domainStatus = website.customDomain ? "pending_dns" : "not_connected";
       website.draftTemplate.siteSlug = website.slug;
       website.draftTemplate.customDomain = website.customDomain;
+      recordActivity(db, req, { tutor, website, type: "website_update", message: `${tutor.name || tutor.email} updated website draft`, metadata: { slug: website.slug, customDomain: website.customDomain || "" } });
       await writeDb(db);
       return sendJson(res, 200, { website: publicWebsite(website) });
     }
@@ -438,6 +627,7 @@ async function handleApi(req, res, url) {
     website.draftTemplate.siteSlug = website.slug;
     website.publishedTemplate = { ...website.draftTemplate, publishedAt: new Date().toISOString() };
     website.publishedAt = website.publishedTemplate.publishedAt;
+    recordActivity(db, req, { tutor, website, type: "publish", message: `${tutor.name || tutor.email} published ${website.slug}.${SITE_BASE_DOMAIN}`, metadata: { slug: website.slug, publicUrl: publicSiteUrl(website.slug) } });
     await writeDb(db);
     return sendJson(res, 200, { website: publicWebsite(website), publicUrl: publicSiteUrl(website.slug) });
   }
@@ -448,6 +638,7 @@ async function handleApi(req, res, url) {
     if (!website.customDomain) return sendJson(res, 400, { error: "Save a custom domain first" });
     website.domainStatus = "pending_dns";
     website.lastDomainCheckAt = new Date().toISOString();
+    recordActivity(db, req, { tutor, website, type: "domain_verify", message: `${tutor.name || tutor.email} requested domain verification`, metadata: { customDomain: website.customDomain } });
     await writeDb(db);
     return sendJson(res, 200, { website: publicWebsite(website), message: "DNS verification queued. Production will check CNAME/TXT records here." });
   }
@@ -468,6 +659,7 @@ async function handleApi(req, res, url) {
     const allowed = new Set(["new", "contacted", "demo_scheduled", "converted"]);
     if (!allowed.has(data.status)) return sendJson(res, 400, { error: "Invalid enquiry status" });
     enquiry.status = data.status;
+    recordActivity(db, req, { tutor, website, type: "enquiry_status", message: `${tutor.name || tutor.email} marked an enquiry as ${data.status.replace(/_/g, " ")}`, metadata: { enquiryId: enquiry.id, status: data.status } });
     await writeDb(db);
     return sendJson(res, 200, { enquiry });
   }
@@ -475,7 +667,9 @@ async function handleApi(req, res, url) {
     const tutor = requireTutor(req, res, db);
     if (!tutor) return;
     const website = db.websites.find(item => item.tutorId === tutor.id);
+    const deletedCount = db.enquiries.filter(item => item.websiteId === website.id).length;
     db.enquiries = db.enquiries.filter(item => item.websiteId !== website.id);
+    recordActivity(db, req, { tutor, website, type: "enquiries_deleted", message: `${tutor.name || tutor.email} cleared enquiries`, metadata: { deletedCount } });
     await writeDb(db);
     return sendJson(res, 200, { ok: true });
   }
@@ -494,6 +688,7 @@ async function handleApi(req, res, url) {
     const enquiry = { id: id("enq"), websiteId: website.id, slug: website.slug, name: data.name || "", phone: data.phone || "", email: data.email || "", message: data.message || "", createdAt: new Date().toISOString(), status: "new" };
     db.enquiries.push(enquiry);
     recordAnalytics(db, website, "enquiry");
+    recordActivity(db, req, { website, type: "enquiry_received", message: `New enquiry on ${website.slug || "published site"}`, metadata: { name: enquiry.name, phone: enquiry.phone, email: enquiry.email } });
     await writeDb(db);
     return sendJson(res, 201, { enquiry });
   }
