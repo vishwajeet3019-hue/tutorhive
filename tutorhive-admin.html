@@ -64,20 +64,6 @@
 
     <section class="grid stats" id="stats"></section>
 
-    <section class="panel enquiries">
-      <div class="panel-head">
-        <h2>Student enquiry details</h2>
-        <span class="pill" id="enquiryCount">0 enquiries</span>
-      </div>
-      <div class="panel-body">
-        <table>
-          <thead><tr><th>Student/parent name</th><th>Phone / email</th><th>Message</th><th>Tutor / site</th><th>Received</th></tr></thead>
-          <tbody id="enquiriesTable"></tbody>
-        </table>
-        <div class="empty" id="enquiriesEmpty" hidden>No enquiries yet.</div>
-      </div>
-    </section>
-
     <section class="layout">
       <article class="panel">
         <div class="panel-head">
@@ -100,6 +86,20 @@
         </div>
         <div class="panel-body activity" id="activityList"></div>
       </article>
+    </section>
+
+    <section class="panel enquiries">
+      <div class="panel-head">
+        <h2>Recent enquiries</h2>
+        <span class="pill" id="enquiryCount">0 enquiries</span>
+      </div>
+      <div class="panel-body">
+        <table>
+          <thead><tr><th>Parent/student</th><th>Contact</th><th>Site</th><th>Status</th><th>Received</th></tr></thead>
+          <tbody id="enquiriesTable"></tbody>
+        </table>
+        <div class="empty" id="enquiriesEmpty" hidden>No enquiries yet.</div>
+      </div>
     </section>
 
     <section class="panel enquiries">
@@ -195,10 +195,10 @@
       document.getElementById("enquiryCount").textContent = `${enquiries.length} enquiries`;
       rows.innerHTML = enquiries.map(item => `
         <tr>
-          <td><div class="name">${escapeHtml(item.name || "Unnamed")}</div><div class="muted">${escapeHtml((item.status || "new").replace(/_/g, " "))}</div></td>
+          <td><div class="name">${escapeHtml(item.name || "Unnamed")}</div><div class="muted">${escapeHtml(item.message || "")}</div></td>
           <td><div>${escapeHtml(item.phone || "No phone")}</div><div class="muted">${escapeHtml(item.email || "")}</div></td>
-          <td>${escapeHtml(item.message || "")}</td>
-          <td><div>${escapeHtml(item.tutor?.name || item.tutor?.email || "Tutor")}</div><div class="muted">${escapeHtml(item.slug || websiteLabel(item.website))}</div></td>
+          <td>${escapeHtml(item.slug || "site")}</td>
+          <td><span class="pill">${escapeHtml((item.status || "new").replace(/_/g, " "))}</span></td>
           <td>${escapeHtml(fmtDate(item.createdAt))}</td>
         </tr>
       `).join("");

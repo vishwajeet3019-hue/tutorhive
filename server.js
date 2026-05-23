@@ -424,11 +424,7 @@ function adminOverview(db) {
         whatsappClicks: websiteEvents.filter(event => event.eventType === "whatsapp_click").length
       };
     }).sort((a, b) => new Date(b.lastSeenAt || 0) - new Date(a.lastSeenAt || 0)),
-    enquiries: db.enquiries.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 60).map(enquiry => {
-      const website = websiteById.get(enquiry.websiteId);
-      const tutor = website ? tutorById.get(website.tutorId) || null : null;
-      return { ...enquiry, tutor, website: website ? publicWebsite(website) : null };
-    }),
+    enquiries: db.enquiries.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 60),
     feedbacks: (db.feedbacks || []).slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 60).map(feedback => {
       const tutor = tutorById.get(feedback.tutorId) || null;
       const website = websiteById.get(feedback.websiteId);
