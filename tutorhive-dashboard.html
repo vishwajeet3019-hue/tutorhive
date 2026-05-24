@@ -50,7 +50,7 @@
     .modal{position:fixed;inset:0;background:rgba(15,23,42,.54);display:none;align-items:center;justify-content:center;z-index:80;padding:18px}.modal.active{display:flex}.modal-card{width:min(520px,100%);background:#fff;border-radius:18px;border:1px solid var(--border);box-shadow:var(--shadow);padding:22px}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.icon-btn{border:1px solid var(--border);border-radius:999px;background:#fff;width:36px;height:36px;cursor:pointer;font-weight:900}
     .preview-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}.status-pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border);border-radius:999px;background:#fff;padding:8px 12px;font-size:13px;font-weight:900;color:var(--sub)}.status-dot{width:8px;height:8px;border-radius:50%;background:#f59e0b}.status-dot.live{background:#10b981}
     .dashboard-summary{display:grid;grid-template-columns:1.1fr .9fr .9fr;gap:14px;margin:0 0 18px}.summary-card{border:1px solid var(--border);border-radius:18px;background:#fff;padding:16px;box-shadow:0 10px 26px rgba(2,8,23,.06)}.summary-card strong{display:block;font-size:24px;line-height:1.1}.summary-card.action{background:linear-gradient(135deg,#ecfeff,#fff7dc)}
-    .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.tab-btn{border:1px solid var(--border);border-radius:999px;background:#fff;padding:10px 14px;font-weight:900;cursor:pointer}.tab-btn.active{background:#0f172a;color:#fff;border-color:#0f172a}.panel{display:none}.panel.active{display:block}.dashboard-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:var(--shadow);margin-bottom:20px}.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}.data-list{display:grid;gap:10px;margin-top:14px}.data-row{border:1px solid var(--border);border-radius:14px;padding:14px;background:#fff;display:grid;gap:6px}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}.notice{border:1px solid #bae6fd;background:#eff6ff;border-radius:14px;padding:14px;color:#1e3a8a;font-weight:800}
+    .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.tab-btn{border:1px solid var(--border);border-radius:999px;background:#fff;padding:10px 14px;font-weight:900;cursor:pointer}.tab-btn.active{background:#0f172a;color:#fff;border-color:#0f172a}.panel{display:none}.panel.active{display:block}.dashboard-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:var(--shadow);margin-bottom:20px}.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}.data-list{display:grid;gap:10px;margin-top:14px}.data-row{border:1px solid var(--border);border-radius:14px;padding:14px;background:#fff;display:grid;gap:6px}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}.notice{border:1px solid #bae6fd;background:#eff6ff;border-radius:14px;padding:14px;color:#1e3a8a;font-weight:800}.domain-guide{display:grid;gap:12px}.domain-step{border:1px solid var(--border);border-radius:14px;background:#fff;padding:13px;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;color:var(--ink);font-weight:700}.domain-step strong{display:block;font-size:15px}.domain-step span:first-child{width:28px;height:28px;border-radius:999px;background:linear-gradient(120deg,var(--brand),var(--brand2));color:#fff;display:grid;place-items:center;font-weight:1000}.domain-step .small{font-size:14px;line-height:1.45}.domain-help{margin-top:10px;color:#1e3a8a;font-weight:800}
     .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}.stat-card{border:1px solid var(--border);border-radius:16px;background:#fff;padding:18px}.stat-card strong{display:block;font-size:34px;line-height:1}.status-select{width:max-content;min-width:170px;border:1px solid var(--border);border-radius:999px;padding:9px 12px;background:#fff;font-weight:900}.upgrade-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.upgrade-plan{border:1px solid var(--border);border-radius:16px;padding:16px;background:#fff}.upgrade-plan.pro{border-color:#67e8f9;background:linear-gradient(135deg,#ecfeff,#fff)}
     .launch-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:16px}.launch-score{display:grid;place-items:center;text-align:center;min-height:220px;border:1px solid var(--border);border-radius:18px;background:linear-gradient(135deg,#ecfeff,#fff7dc)}.launch-score strong{display:block;font-size:58px;line-height:1}.checklist{display:grid;gap:10px}.check-item{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--border);border-radius:14px;background:#fff;padding:14px}.check-mark{display:grid;place-items:center;flex:0 0 28px;height:28px;border-radius:50%;background:#e2e8f0;font-weight:1000}.check-item.done .check-mark{background:#ccfbf1;color:#0f766e}.growth-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}.growth-card{border:1px solid var(--border);border-radius:16px;background:#fff;padding:16px;display:grid;gap:10px}.copy-box{border:1px solid var(--border);border-radius:14px;background:#fbfdff;padding:14px;white-space:pre-line}.copy-actions{display:flex;gap:8px;flex-wrap:wrap}
     .workspace{display:grid;grid-template-columns:1fr;gap:20px;align-items:start}.workspace.editing{grid-template-columns:minmax(340px,430px) minmax(0,1fr)}
@@ -334,20 +334,22 @@
         </section>
 
         <section class="panel dashboard-card" id="domainPanel">
-          <span class="badge">Whitelabel domain</span>
-          <h2 class="h2">Connect a custom domain</h2>
-          <p class="small">Tutors can publish first on a TutorHive OS preview URL, then connect their own domain when they are ready.</p>
+          <span class="badge">Custom website address</span>
+          <h2 class="h2">Use your own domain</h2>
+          <p class="small">If you already own a domain, add it here. Parents can then visit your website using your own address, like <span class="mono">www.yourinstitute.com</span>.</p>
           <div class="split">
             <form class="form" id="domainForm">
-              <div><label>Custom domain</label><input class="input" name="customDomain" placeholder="www.yourinstitute.com"></div>
+              <div><label>Your domain name</label><input class="input" name="customDomain" placeholder="www.yourinstitute.com"></div>
               <button class="btn teal" type="submit">Save Domain</button>
-              <button class="btn" type="button" id="verifyDomain">Verify DNS</button>
+              <button class="btn" type="button" id="verifyDomain">Check Connection</button>
             </form>
             <div class="notice">
-              Custom domain setup:<br>
-              Add this domain inside Render first, then copy the exact DNS records Render gives you.<br>
-              Typical CNAME target: <span class="mono">tutorhive-vxdj.onrender.com</span><br>
-              Keep the TutorHive OS subdomain active until the custom domain is verified.
+              <div class="domain-guide">
+                <div class="domain-step"><span>1</span><div><strong>Save your domain here</strong><p class="small">Example: <span class="mono">www.yourinstitute.com</span>. Keep using your TutorHive preview link until this is connected.</p></div></div>
+                <div class="domain-step"><span>2</span><div><strong>Open where you bought the domain</strong><p class="small">Go to GoDaddy, Hostinger, Namecheap, Google Domains, or your domain provider. Open the DNS or Manage DNS page.</p></div></div>
+                <div class="domain-step"><span>3</span><div><strong>Add one CNAME record</strong><p class="small">Name/Host: <span class="mono">www</span><br>Points to/Value: <span class="mono">tutorhive-vxdj.onrender.com</span></p></div></div>
+              </div>
+              <div class="domain-help">After saving the record, click Check Connection. It can take a few minutes, sometimes up to 24 hours.</div>
             </div>
           </div>
           <div class="data-list" id="domainStatus"></div>
@@ -811,7 +813,7 @@
       const status = document.getElementById("domainStatus");
       if (!status) return;
       const domain = state.customDomain || "No custom domain saved yet";
-      status.innerHTML = `<div class="data-row"><strong>Current domain</strong><span class="mono small">${escapeHtml(domain)}</span><span class="small">Status: ${state.customDomain ? "DNS pending verification in production" : "Using TutorHive OS preview URL"}</span></div>`;
+      status.innerHTML = `<div class="data-row"><strong>Current domain</strong><span class="mono small">${escapeHtml(domain)}</span><span class="small">Status: ${state.customDomain ? "Waiting for domain connection" : "Using TutorHive preview link"}</span></div>`;
     }
     function renderSettings(){
       const output = document.getElementById("publicUrl");
