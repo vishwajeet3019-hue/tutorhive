@@ -35,7 +35,7 @@
     .form{display:grid;gap:14px;margin-top:22px}.input{width:100%;border:1px solid var(--border);border-radius:14px;padding:15px;background:#fff;font-size:16px}label{font-weight:900;font-size:14px}
     .step{display:none}.step.active{display:block}
     .preview-wrap{display:none;padding:28px 0}.preview-wrap.active{display:block}
-    body.published .nav, body.published .preview-top, body.published .editor, body.published .tabs{display:none}
+    body.published .nav, body.published .preview-top, body.published .editor, body.published .tabs, body.published .dashboard-summary{display:none}
     body.published .preview-wrap{display:block;padding:0}
     body.published .container{width:100%;max-width:none}
     body.published .workspace, body.published .workspace.editing{display:block}
@@ -49,6 +49,7 @@
     .loading-screen{position:fixed;inset:0;z-index:90;display:none;place-items:center;padding:24px;background:radial-gradient(circle at 50% 40%,rgba(34,211,238,.12),transparent 28%),linear-gradient(180deg,#fff,#f8fbff)}.loading-screen.active{display:grid}.loading-card{width:min(440px,100%);text-align:center}.logo-loader{position:relative;width:286px;height:286px;margin:0 auto 12px}.logo-loader::before{content:"";position:absolute;inset:38px;border-radius:50%;background:radial-gradient(circle,rgba(34,211,238,.16),transparent 70%);animation:logoAura 3.2s ease-in-out infinite}.logo-piece{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;will-change:transform,opacity,clip-path}.logo-piece.mark{clip-path:inset(0 24% 48% 24%);animation:markReveal 3.2s cubic-bezier(.22,1,.36,1) infinite}.logo-piece.word{clip-path:inset(51% 0 18% 0);animation:wordReveal 3.2s cubic-bezier(.22,1,.36,1) infinite}.logo-piece.swoosh{clip-path:inset(81% 0 0 0);animation:swooshReveal 3.2s cubic-bezier(.22,1,.36,1) infinite}.logo-shine{position:absolute;inset:0;background:linear-gradient(110deg,transparent 32%,rgba(255,255,255,.92) 48%,transparent 64%);mix-blend-mode:screen;transform:translateX(-120%);animation:logoShine 3.2s ease-in-out infinite}.loading-title{margin:0 0 8px;font-size:28px;line-height:1.1}.loading-copy{margin:0;color:var(--sub);line-height:1.6}.loading-track{height:6px;margin-top:22px;border-radius:999px;background:#e2e8f0;overflow:hidden}.loading-track span{display:block;width:100%;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--brand),var(--brand2),var(--honey));transform-origin:left center;will-change:transform;animation:fill 3.4s cubic-bezier(.22,1,.36,1) infinite}@keyframes markReveal{0%,8%{opacity:0;transform:translateY(14px) scale(.9)}24%,84%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-4px) scale(1.02)}}@keyframes wordReveal{0%,22%{opacity:0;clip-path:inset(51% 100% 18% 0)}42%,84%{opacity:1;clip-path:inset(51% 0 18% 0)}100%{opacity:0;clip-path:inset(51% 0 18% 0)}}@keyframes swooshReveal{0%,40%{opacity:0;clip-path:inset(81% 100% 0 0)}58%,84%{opacity:1;clip-path:inset(81% 0 0 0)}100%{opacity:0;clip-path:inset(81% 0 0 0)}}@keyframes logoAura{0%,100%{opacity:.45;transform:scale(.88)}50%{opacity:1;transform:scale(1.08)}}@keyframes logoShine{0%,48%{opacity:0;transform:translateX(-120%)}62%{opacity:1}78%,100%{opacity:0;transform:translateX(120%)}}@keyframes fill{0%{transform:scaleX(.04)}82%{transform:scaleX(.92)}100%{transform:scaleX(1)}}@media (prefers-reduced-motion: reduce){.logo-loader::before,.logo-piece,.logo-shine,.loading-track span{animation:none}.logo-piece{opacity:1}}
     .modal{position:fixed;inset:0;background:rgba(15,23,42,.54);display:none;align-items:center;justify-content:center;z-index:80;padding:18px}.modal.active{display:flex}.modal-card{width:min(520px,100%);background:#fff;border-radius:18px;border:1px solid var(--border);box-shadow:var(--shadow);padding:22px}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.icon-btn{border:1px solid var(--border);border-radius:999px;background:#fff;width:36px;height:36px;cursor:pointer;font-weight:900}
     .preview-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}.status-pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border);border-radius:999px;background:#fff;padding:8px 12px;font-size:13px;font-weight:900;color:var(--sub)}.status-dot{width:8px;height:8px;border-radius:50%;background:#f59e0b}.status-dot.live{background:#10b981}
+    .dashboard-summary{display:grid;grid-template-columns:1.1fr .9fr .9fr;gap:14px;margin:0 0 18px}.summary-card{border:1px solid var(--border);border-radius:18px;background:#fff;padding:16px;box-shadow:0 10px 26px rgba(2,8,23,.06)}.summary-card strong{display:block;font-size:24px;line-height:1.1}.summary-card.action{background:linear-gradient(135deg,#ecfeff,#fff7dc)}
     .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.tab-btn{border:1px solid var(--border);border-radius:999px;background:#fff;padding:10px 14px;font-weight:900;cursor:pointer}.tab-btn.active{background:#0f172a;color:#fff;border-color:#0f172a}.panel{display:none}.panel.active{display:block}.dashboard-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:var(--shadow);margin-bottom:20px}.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}.data-list{display:grid;gap:10px;margin-top:14px}.data-row{border:1px solid var(--border);border-radius:14px;padding:14px;background:#fff;display:grid;gap:6px}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}.notice{border:1px solid #bae6fd;background:#eff6ff;border-radius:14px;padding:14px;color:#1e3a8a;font-weight:800}
     .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}.stat-card{border:1px solid var(--border);border-radius:16px;background:#fff;padding:18px}.stat-card strong{display:block;font-size:34px;line-height:1}.status-select{width:max-content;min-width:170px;border:1px solid var(--border);border-radius:999px;padding:9px 12px;background:#fff;font-weight:900}.upgrade-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.upgrade-plan{border:1px solid var(--border);border-radius:16px;padding:16px;background:#fff}.upgrade-plan.pro{border-color:#67e8f9;background:linear-gradient(135deg,#ecfeff,#fff)}
     .launch-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:16px}.launch-score{display:grid;place-items:center;text-align:center;min-height:220px;border:1px solid var(--border);border-radius:18px;background:linear-gradient(135deg,#ecfeff,#fff7dc)}.launch-score strong{display:block;font-size:58px;line-height:1}.checklist{display:grid;gap:10px}.check-item{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--border);border-radius:14px;background:#fff;padding:14px}.check-mark{display:grid;place-items:center;flex:0 0 28px;height:28px;border-radius:50%;background:#e2e8f0;font-weight:1000}.check-item.done .check-mark{background:#ccfbf1;color:#0f766e}.growth-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}.growth-card{border:1px solid var(--border);border-radius:16px;background:#fff;padding:16px;display:grid;gap:10px}.copy-box{border:1px solid var(--border);border-radius:14px;background:#fbfdff;padding:14px;white-space:pre-line}.copy-actions{display:flex;gap:8px;flex-wrap:wrap}
@@ -65,7 +66,7 @@
     .editor{display:none;background:#fff;border:1px solid var(--border);border-radius:18px;padding:18px;max-height:calc(100vh - 120px);overflow:auto;position:sticky;top:96px}.editor.active{display:block}.edit-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.full{grid-column:1/-1}.theme-row,.swatch-row,.image-actions{display:flex;gap:9px;flex-wrap:wrap}.theme-btn,.swatch-btn{width:38px;height:38px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1px var(--border);cursor:pointer}.theme-btn.active,.swatch-btn.active{box-shadow:0 0 0 3px var(--ink)}.picker-control{position:relative;width:44px;height:44px;border:1px solid var(--border);border-radius:14px;background:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 12px rgba(2,8,23,.06)}.picker-control span{font-size:22px;line-height:1}.picker-control input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}.choice-btn{border:1px solid var(--border);border-radius:999px;background:#fff;padding:9px 12px;font-weight:900;cursor:pointer}
     .editor-tools{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}.tool-box{border:1px solid var(--border);border-radius:16px;padding:14px;background:#fbfdff}.drag-list,.manage-list{display:grid;gap:8px}.drag-item,.manage-item{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--border);border-radius:12px;background:#fff;padding:10px 11px;font-weight:900}.drag-item{cursor:grab}.drag-actions{display:flex;gap:6px;flex-wrap:wrap}.mini-btn{border:1px solid var(--border);background:#fff;border-radius:8px;font-weight:900;cursor:pointer;padding:4px 8px}.mini-btn.danger{color:#b91c1c}.review-form{display:grid;grid-template-columns:1fr;gap:10px}.hint{font-size:13px;color:var(--sub)}.empty{border:1px dashed var(--border);border-radius:12px;padding:12px;color:var(--sub);font-size:14px}
     @media(max-width:1050px){.workspace.editing{grid-template-columns:1fr}.editor{position:static;max-height:none}}
-    @media(max-width:900px){.site-hero,.columns,.reviews-grid,.edit-grid,.editor-tools,.review-form,.split,.stat-grid,.upgrade-grid,.launch-grid,.growth-grid{grid-template-columns:1fr}.site-links,.site-pill,.float{display:none}.site-nav{height:auto;padding:18px}.photo{height:260px}.contact{display:grid}.band,.site-hero{padding:28px 20px}.btn{width:100%}.title{font-size:clamp(34px,11vw,48px)}.tabs{display:grid;grid-template-columns:1fr 1fr}.tab-btn{width:100%}}
+    @media(max-width:900px){.site-hero,.columns,.reviews-grid,.edit-grid,.editor-tools,.review-form,.split,.stat-grid,.upgrade-grid,.launch-grid,.growth-grid,.dashboard-summary{grid-template-columns:1fr}.site-links,.site-pill,.float{display:none}.site-nav{height:auto;padding:18px}.photo{height:260px}.contact{display:grid}.band,.site-hero{padding:28px 20px}.btn{width:100%}.title{font-size:clamp(34px,11vw,48px)}.tabs{display:grid;grid-template-columns:1fr 1fr}.tab-btn{width:100%}}
     @media(max-width:560px){.container{width:min(100% - 24px,1160px)}body.published .container{width:100%}.site-nav{align-items:flex-start;gap:10px}.site-brand{font-size:20px}.site-hero{padding:24px 16px}.band{padding:24px 16px !important}.title{font-size:34px;line-height:1.08}.lead{font-size:16px}.photo{height:220px;border-radius:20px}.preview-top{align-items:flex-start}.publish-toolbar{left:12px;right:12px;justify-content:center}.publish-toolbar .btn{width:auto}.card{padding:22px}.h1{font-size:36px}}
   </style>
 </head>
@@ -124,9 +125,14 @@
           <div><span class="badge">Presence launch</span><h2 class="h2">Your tutoring presence is taking shape</h2><div class="status-pill" id="siteStatus"><span class="status-dot"></span><span>Draft saved locally</span></div></div>
           <div class="row"><button class="btn" id="editBtn">Edit Template</button><button class="btn" id="feedbackHeaderBtn" type="button">Send Feedback</button><button class="btn teal" id="publishBtn">Publish Website</button></div>
         </div>
+        <div class="dashboard-summary" id="dashboardSummary">
+          <div class="summary-card action"><span class="badge">Next best action</span><strong id="nextActionTitle">Finish your launch</strong><p class="small" id="nextActionCopy">Complete your checklist so parents know what to do next.</p></div>
+          <div class="summary-card"><strong id="summaryScore">0%</strong><span class="small">Website score</span></div>
+          <div class="summary-card"><strong id="summaryEnquiries">0</strong><span class="small">Enquiries captured</span></div>
+        </div>
         <div class="tabs" aria-label="Dashboard sections">
           <button class="tab-btn active" type="button" data-tab="builder">Website</button>
-          <button class="tab-btn" type="button" data-tab="launch">Launch Center</button>
+          <button class="tab-btn" type="button" data-tab="launch">Growth Checklist</button>
           <button class="tab-btn" type="button" data-tab="enquiries">Enquiries</button>
           <button class="tab-btn" type="button" data-tab="analytics">Analytics</button>
           <button class="tab-btn" type="button" data-tab="domain">Domain</button>
@@ -278,6 +284,8 @@
                   <label style="display:flex;align-items:center;gap:8px"><input name="inquiryName" type="checkbox"> Ask for parent/student name</label>
                   <label style="display:flex;align-items:center;gap:8px"><input name="inquiryPhone" type="checkbox"> Ask for phone</label>
                   <label style="display:flex;align-items:center;gap:8px"><input name="inquiryEmail" type="checkbox"> Ask for email</label>
+                  <label style="display:flex;align-items:center;gap:8px"><input name="inquiryClass" type="checkbox"> Ask for class / grade</label>
+                  <label style="display:flex;align-items:center;gap:8px"><input name="inquirySubject" type="checkbox"> Ask for subject needed</label>
                   <label style="display:flex;align-items:center;gap:8px"><input name="inquiryMessage" type="checkbox"> Ask for message</label>
                 </div>
               </div>
@@ -477,6 +485,8 @@
       inquiryName: "on",
       inquiryPhone: "on",
       inquiryEmail: "on",
+      inquiryClass: "on",
+      inquirySubject: "on",
       inquiryMessage: "on",
       customDomain: "",
       siteSlug: "",
@@ -488,14 +498,21 @@
       pageBg: "#ffffff",
       sectionBg: "#f4fdfc",
       spacing: "34",
-      sectionOrder: ["services", "reviews", "contact"],
+      sectionOrder: ["services", "approach", "reviews", "contact"],
       serviceOrder: ["service1", "service2", "service3"],
       reviews: [
         {text: '"The classes are structured, clear, and helped my child gain confidence."', stars: 5},
         {text: '"Concepts are explained patiently with useful practice after every class."', stars: 5},
         {text: '"The demo class helped us understand the teaching style quickly."', stars: 4}
       ],
-      customSections: []
+      customSections: [
+        {
+          id: "approach",
+          title: "How learning improves here",
+          text: "Every student starts with a clear goal, a simple study plan, and regular practice. Parents get honest updates, students get patient support, and classes stay focused on confidence, consistency, and measurable academic progress.",
+          showInNav: true
+        }
+      ]
     };
     const templatePresets = {
       maths: {
@@ -687,6 +704,8 @@
       if (state.inquiryName === "on" || state.inquiryName === true) fields.push('<input class="input" name="name" placeholder="Name" required>');
       if (state.inquiryPhone === "on" || state.inquiryPhone === true) fields.push('<input class="input" name="phone" placeholder="Phone / WhatsApp" required>');
       if (state.inquiryEmail === "on" || state.inquiryEmail === true) fields.push('<input class="input" name="email" type="email" placeholder="Email">');
+      if (state.inquiryClass === "on" || state.inquiryClass === true) fields.push('<input class="input" name="classGrade" placeholder="Student class / grade">');
+      if (state.inquirySubject === "on" || state.inquirySubject === true) fields.push('<input class="input" name="subject" placeholder="Subject needed">');
       if (state.inquiryMessage === "on" || state.inquiryMessage === true) fields.push('<textarea class="input" name="message" rows="4" placeholder="What help do you need?"></textarea>');
       if (state.whatsapp) fields.push(`<input type="hidden" name="whatsappDestination" value="${escapeHtml(state.whatsapp)}">`);
       form.innerHTML = `${fields.join("")}<button class="btn teal" type="submit">Submit Inquiry</button><div class="small" id="inquiryThanks" style="display:none;color:green;font-weight:900">Inquiry captured in the dashboard.</div>`;
@@ -743,6 +762,12 @@
       if (state.customDomain) return `https://${state.customDomain.replace(/^https?:\/\//,"")}`;
       return `https://${state.siteSlug || slugify(state.instituteName)}.tutorhive.in`;
     }
+    function cleanPhone(value){
+      return String(value || "").replace(/[^\d]/g, "");
+    }
+    function followUpMessage(item){
+      return `Hi ${item.name || "there"}, thanks for enquiring about ${state.instituteName || "my classes"}. I would be happy to understand the student's needs and schedule a free demo class. What time works best for you?`;
+    }
     async function loadEnquiries(){
       const list = document.getElementById("enquiryList");
       if (!list) return;
@@ -754,6 +779,7 @@
       }
       if (!items.length) {
         list.innerHTML = '<div class="empty">No enquiries yet. Open the website preview, click Book Demo or Send Inquiry, and submit the form.</div>';
+        document.getElementById("summaryEnquiries").textContent = "0";
         return;
       }
       list.innerHTML = "";
@@ -761,9 +787,14 @@
         const row = document.createElement("div");
         row.className = "data-row";
         const options = Object.entries(enquiryStatuses).map(([value,label]) => `<option value="${value}" ${item.status === value ? "selected" : ""}>${label}</option>`).join("");
-        row.innerHTML = `<div class="row"><strong>${escapeHtml(item.name || "New enquiry")}</strong><select class="status-select" data-enquiry-status="${escapeHtml(item.id || "")}">${options}</select></div><span class="small">${escapeHtml(item.phone || "")} ${item.email ? "· " + escapeHtml(item.email) : ""}</span><p class="small">${escapeHtml(item.message || "No message added.")}</p><span class="small">${item.createdAt ? new Date(item.createdAt).toLocaleString() : ""}</span>`;
+        const phone = cleanPhone(item.phone);
+        const message = encodeURIComponent(followUpMessage(item));
+        const whatsapp = phone ? `<a class="btn teal" href="https://wa.me/${phone}?text=${message}" target="_blank" rel="noopener">WhatsApp follow-up</a>` : "";
+        row.innerHTML = `<div class="row"><strong>${escapeHtml(item.name || "New enquiry")}</strong><select class="status-select" data-enquiry-status="${escapeHtml(item.id || "")}">${options}</select></div><span class="small">${escapeHtml(item.phone || "")} ${item.email ? "· " + escapeHtml(item.email) : ""}</span><p class="small">${escapeHtml(item.message || "No message added.")}</p><div class="copy-actions">${whatsapp}<button class="btn" type="button" data-copy-followup="${escapeHtml(item.id || item.phone || item.name || "")}">Copy follow-up</button></div><span class="small">${item.createdAt ? new Date(item.createdAt).toLocaleString() : ""}</span>`;
+        row.dataset.followupText = followUpMessage(item);
         list.appendChild(row);
       });
+      document.getElementById("summaryEnquiries").textContent = items.length;
     }
     function renderEnquiries(){loadEnquiries()}
     async function loadAnalytics(){
@@ -800,7 +831,12 @@
       if (!checklist) return;
       const items = launchItems();
       const complete = items.filter(item => item.done).length;
-      document.getElementById("launchScore").textContent = `${Math.round((complete / items.length) * 100)}%`;
+      const score = `${Math.round((complete / items.length) * 100)}%`;
+      document.getElementById("launchScore").textContent = score;
+      document.getElementById("summaryScore").textContent = score;
+      const next = items.find(item => !item.done);
+      document.getElementById("nextActionTitle").textContent = next ? next.label : "Ready to grow";
+      document.getElementById("nextActionCopy").textContent = next ? next.detail : "Your core launch steps are complete. Keep sharing your website and following up with enquiries.";
       checklist.innerHTML = items.map(item => `<div class="check-item ${item.done ? "done" : ""}"><span class="check-mark">${item.done ? "✓" : "·"}</span><div><strong>${escapeHtml(item.label)}</strong><div class="small">${escapeHtml(item.detail)}</div></div></div>`).join("");
       const publicLink = publicUrl();
       const institute = state.instituteName || "my tutoring studio";
@@ -852,7 +888,7 @@
     });
     builderForm.addEventListener("input",()=>{
       const data = Object.fromEntries(new FormData(builderForm).entries());
-      state={...state,...data,showExperienceBadge:data.showExperienceBadge || "off",showPricingBadge:data.showPricingBadge || "off",inquiryName:data.inquiryName || "off",inquiryPhone:data.inquiryPhone || "off",inquiryEmail:data.inquiryEmail || "off",inquiryMessage:data.inquiryMessage || "off"};
+      state={...state,...data,showExperienceBadge:data.showExperienceBadge || "off",showPricingBadge:data.showPricingBadge || "off",inquiryName:data.inquiryName || "off",inquiryPhone:data.inquiryPhone || "off",inquiryEmail:data.inquiryEmail || "off",inquiryClass:data.inquiryClass || "off",inquirySubject:data.inquirySubject || "off",inquiryMessage:data.inquiryMessage || "off"};
       markDraft();
       updatePreview();
     });
@@ -1177,6 +1213,14 @@
       setTimeout(()=>document.getElementById("copyPublicUrl").textContent = "Copy Public URL",1200);
     });
     document.addEventListener("click",(event)=>{
+      const followup = event.target.closest("[data-copy-followup]");
+      if (followup) {
+        const row = followup.closest(".data-row");
+        navigator.clipboard?.writeText(row?.dataset.followupText || "");
+        followup.textContent = "Copied";
+        setTimeout(()=>followup.textContent = "Copy follow-up",1200);
+        return;
+      }
       const button = event.target.closest("[data-copy-target]");
       if (!button) return;
       const target = document.getElementById(button.dataset.copyTarget);
