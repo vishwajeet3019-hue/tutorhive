@@ -678,7 +678,7 @@ async function handleApi(req, res, url) {
     website.lastDomainCheckAt = new Date().toISOString();
     recordActivity(db, req, { tutor, website, type: "domain_verify", message: `${tutor.name || tutor.email} requested domain verification`, metadata: { customDomain: website.customDomain } });
     await writeDb(db);
-    return sendJson(res, 200, { website: publicWebsite(website), message: "DNS verification queued. Production will check CNAME/TXT records here." });
+    return sendJson(res, 200, { website: publicWebsite(website), message: "Domain connection check started. If you just changed your domain settings, please wait a few minutes and try again." });
   }
   if (req.method === "GET" && url.pathname === "/api/enquiries") {
     const tutor = requireTutor(req, res, db);
