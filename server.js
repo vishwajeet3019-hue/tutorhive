@@ -435,29 +435,33 @@ function adminOverview(db) {
 }
 
 function templateFromSignup(data) {
+  const subject = data.subject || "Tutoring";
+  const city = data.location || "Your city";
   return {
     tutorName: data.name || "",
     instituteName: "",
-    kicker: `${data.location || "Your city"} ${data.subject || "subject"} tutor`,
-    headline: `${data.subject || "Tutoring"} support that feels personal, clear, and confidence-building.`,
-    subhead: "Grades 6-10 · Online and home tuition",
+    kicker: `${city} ${subject} tutor`,
+    headline: `Personalized ${subject} coaching that builds confidence, clarity, and steady marks.`,
+    subhead: "1:1 online classes · Parent updates · Flexible demo slots",
     experience: "7 years experience",
-    pricing: "₹700/class",
+    pricing: "Demo available",
     showExperienceBadge: "on",
     showPricingBadge: "on",
     experienceX: "18",
     experienceY: "18",
     pricingX: "24",
     pricingY: "24",
-    service1: data.subject || "Maths",
+    service1: subject,
     service2: "Concept clarity",
-    service3: "Exam prep",
-    testimonial: "\"The classes are structured, clear, and helped my child gain confidence.\"",
+    service3: "Exam-ready practice",
+    testimonial: "\"The classes feel structured, patient, and focused on real progress.\"",
     ctaButton: "Book Demo",
     inquiryTitle: "Send an inquiry",
     inquiryName: "on",
     inquiryPhone: "on",
     inquiryEmail: "on",
+    inquiryClass: "on",
+    inquirySubject: "on",
     inquiryMessage: "on",
     customDomain: "",
     siteSlug: "",
@@ -469,10 +473,20 @@ function templateFromSignup(data) {
     pageBg: "#ffffff",
     sectionBg: "#f4fdfc",
     spacing: "34",
-    sectionOrder: ["services", "reviews", "contact"],
+    sectionOrder: ["services", "approach", "reviews", "contact"],
     serviceOrder: ["service1", "service2", "service3"],
-    reviews: [{ text: "\"The classes are structured, clear, and helped my child gain confidence.\"", stars: 5 }],
-    customSections: []
+    reviews: [
+      { text: "\"The classes feel structured, patient, and focused on real progress.\"", stars: 5 },
+      { text: "\"The demo helped us understand the teaching style and next steps clearly.\"", stars: 5 }
+    ],
+    customSections: [
+      {
+        id: "approach",
+        title: "How learning improves here",
+        text: "Every student starts with a clear goal, a simple study plan, and regular practice. Parents get honest updates, students get patient support, and classes stay focused on confidence, consistency, and measurable academic progress.",
+        showInNav: true
+      }
+    ]
   };
 }
 
@@ -554,7 +568,7 @@ function renderSite(website) {
   }).join("");
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${escapeHtml(t.instituteName)} | TutorHive OS</title><meta name="description" content="${escapeHtml(t.headline)}"><style>
   *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;color:#0f172a;background:${escapeHtml(t.pageBg || "#fff")}}a{text-decoration:none;color:inherit}.site-nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 max(24px,calc((100vw - 1180px)/2));border-bottom:1px solid #e5e7eb;background:#fff}.brand{display:flex;align-items:center;gap:10px;font-size:24px;font-weight:1000;min-width:0}.brand span{overflow-wrap:anywhere}.brand img{width:42px;height:42px;border-radius:10px;object-fit:cover}.links{display:flex;gap:22px;color:#475569;font-weight:900}.pill,.btn{border:0;border-radius:999px;background:#0f172a;color:#fff;font-weight:900;padding:12px 18px;cursor:pointer}.teal{background:linear-gradient(120deg,#0ea5a3,#22d3ee)}.hero{display:grid;grid-template-columns:1.03fr .97fr;gap:34px;align-items:center;padding:54px max(24px,calc((100vw - 1180px)/2));background:linear-gradient(135deg,${escapeHtml(t.sectionBg || "#f4fdfc")} 0%,#fff 55%,#fff7dc 100%)}.kicker{font-size:13px;font-weight:1000;text-transform:uppercase;letter-spacing:.07em;color:#0ea5a3}.title{font-size:clamp(38px,5.2vw,64px);line-height:1.03;margin:12px 0}.lead{font-size:18px;line-height:1.7;color:#475569;max-width:560px}.photo{position:relative;height:380px;border-radius:30px;overflow:hidden;box-shadow:0 24px 60px rgba(2,8,23,.16)}.photo img{width:100%;height:100%;object-fit:cover;display:block}.float{position:absolute;border:1px solid #e5e7eb;border-radius:18px;background:#fff;box-shadow:0 14px 32px rgba(2,8,23,.14);padding:14px;font-weight:900}.left{left:${Number(t.experienceX || 18)}px;top:${Number(t.experienceY || 18)}px}.right{right:${Number(t.pricingX || 24)}px;bottom:${Number(t.pricingY || 24)}px}.band{padding:${Number(t.spacing || 34)}px max(24px,calc((100vw - 1180px)/2));border-top:1px solid #e5e7eb}.tint{background:linear-gradient(135deg,#f8fbff,#f4fdfc)}.columns,.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.mini,.review-card{border:1px solid #e5e7eb;border-radius:16px;padding:18px;background:#fff}.review-card p{white-space:pre-line}.stars{color:#f6b51e}.contact{display:flex;align-items:center;justify-content:space-between;gap:18px;background:#0f172a;color:#fff}.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(15,23,42,.54);padding:18px}.modal.active{display:flex}.card{width:min(520px,100%);background:#fff;color:#0f172a;border-radius:18px;padding:22px}.form{display:grid;gap:12px}.input{width:100%;border:1px solid #e5e7eb;border-radius:14px;padding:14px;font-size:16px}@media(max-width:900px){.site-nav{align-items:flex-start;flex-direction:column;padding:18px 20px}.hero,.columns,.reviews-grid{grid-template-columns:1fr}.links{flex-wrap:wrap;gap:12px}.pill{display:none}.float{display:none}.hero,.band{padding:28px 20px}.photo{height:260px;border-radius:22px}.contact{display:grid}.btn{width:100%}.title{font-size:clamp(34px,11vw,48px)}}@media(max-width:560px){.site-nav{gap:12px}.brand{font-size:22px}.links{font-size:15px}.hero{gap:24px}.lead{font-size:16px}.photo{height:230px}.band{padding:24px 16px}.hero{padding:28px 16px}.title{font-size:38px}}
-  </style></head><body><nav class="site-nav"><strong class="brand">${t.logoUrl ? `<img src="${escapeHtml(t.logoUrl)}" alt="">` : ""}<span>${escapeHtml(t.instituteName)}</span></strong><div class="links">${nav}</div><a class="pill" href="#contact">Get started</a></nav><main><section class="hero"><div><div class="kicker">${escapeHtml(t.kicker)}</div><h1 class="title">${escapeHtml(t.headline)}</h1><p class="lead">By ${escapeHtml(t.tutorName || "Tutor")} · ${escapeHtml(t.subhead)}</p><button class="btn" id="heroInquiry">${escapeHtml(t.ctaButton || "Book Demo")}</button></div><div class="photo"><img src="${escapeHtml(t.imageUrl || defaultImage)}" alt="Tutor website image">${t.showExperienceBadge === "on" ? `<div class="float left">${escapeHtml(t.experience)}<br><span>Structured learning</span></div>` : ""}${t.showPricingBadge === "on" ? `<div class="float right">${escapeHtml(t.pricing)}<br><span>Demo available</span></div>` : ""}</div></section>${sections}</main><div class="modal" id="modal"><div class="card"><h2>${escapeHtml(t.inquiryTitle || "Send an inquiry")}</h2><form class="form" id="inquiryForm">${t.inquiryName === "on" ? '<input class="input" name="name" placeholder="Name" required>' : ""}${t.inquiryPhone === "on" ? '<input class="input" name="phone" placeholder="Phone / WhatsApp" required>' : ""}${t.inquiryEmail === "on" ? '<input class="input" name="email" type="email" placeholder="Email">' : ""}${t.inquiryMessage === "on" ? '<textarea class="input" name="message" rows="4" placeholder="What help do you need?"></textarea>' : ""}<button class="btn teal" type="submit">Submit Inquiry</button><button class="btn" type="button" id="closeModal">Close</button><p id="thanks" style="display:none;color:green;font-weight:900">Inquiry sent.</p></form></div></div><script>
+  </style></head><body><nav class="site-nav"><strong class="brand">${t.logoUrl ? `<img src="${escapeHtml(t.logoUrl)}" alt="">` : ""}<span>${escapeHtml(t.instituteName)}</span></strong><div class="links">${nav}</div><a class="pill" href="#contact">Get started</a></nav><main><section class="hero"><div><div class="kicker">${escapeHtml(t.kicker)}</div><h1 class="title">${escapeHtml(t.headline)}</h1><p class="lead">By ${escapeHtml(t.tutorName || "Tutor")} · ${escapeHtml(t.subhead)}</p><button class="btn" id="heroInquiry">${escapeHtml(t.ctaButton || "Book Demo")}</button></div><div class="photo"><img src="${escapeHtml(t.imageUrl || defaultImage)}" alt="Tutor website image">${t.showExperienceBadge === "on" ? `<div class="float left">${escapeHtml(t.experience)}<br><span>Structured learning</span></div>` : ""}${t.showPricingBadge === "on" ? `<div class="float right">${escapeHtml(t.pricing)}<br><span>Demo available</span></div>` : ""}</div></section>${sections}</main><div class="modal" id="modal"><div class="card"><h2>${escapeHtml(t.inquiryTitle || "Send an inquiry")}</h2><form class="form" id="inquiryForm">${t.inquiryName === "on" ? '<input class="input" name="name" placeholder="Name" required>' : ""}${t.inquiryPhone === "on" ? '<input class="input" name="phone" placeholder="Phone / WhatsApp" required>' : ""}${t.inquiryEmail === "on" ? '<input class="input" name="email" type="email" placeholder="Email">' : ""}${t.inquiryClass === "on" ? '<input class="input" name="classGrade" placeholder="Student class / grade">' : ""}${t.inquirySubject === "on" ? '<input class="input" name="subject" placeholder="Subject needed">' : ""}${t.inquiryMessage === "on" ? '<textarea class="input" name="message" rows="4" placeholder="What help do you need?"></textarea>' : ""}<button class="btn teal" type="submit">Submit Inquiry</button><button class="btn" type="button" id="closeModal">Close</button><p id="thanks" style="display:none;color:green;font-weight:900">Inquiry sent.</p></form></div></div><script>
   const modal=document.getElementById("modal");const track=type=>fetch("/api/site/${escapeHtml(website.slug)}/track",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({type})}).catch(()=>{});document.getElementById("openInquiry")?.addEventListener("click",()=>modal.classList.add("active"));document.getElementById("heroInquiry")?.addEventListener("click",()=>modal.classList.add("active"));document.getElementById("closeModal").addEventListener("click",()=>modal.classList.remove("active"));document.getElementById("inquiryForm").addEventListener("submit",async e=>{e.preventDefault();const data=Object.fromEntries(new FormData(e.currentTarget).entries());await fetch("/api/site/${escapeHtml(website.slug)}/enquiries",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});document.getElementById("thanks").style.display="block";e.currentTarget.reset()});document.querySelectorAll('a[href*="wa.me"],a[href*="whatsapp"]').forEach(link=>link.addEventListener("click",()=>track("whatsapp_click")));
   </script></body></html>`;
 }
@@ -731,7 +745,12 @@ async function handleApi(req, res, url) {
     const website = db.websites.find(item => item.slug === slug || cleanHost(item.customDomain) === cleanHost(req.headers.host));
     if (!website || !website.publishedTemplate) return sendJson(res, 404, { error: "Published website not found" });
     const data = await bodyJson(req);
-    const enquiry = { id: id("enq"), websiteId: website.id, slug: website.slug, name: data.name || "", phone: data.phone || "", email: data.email || "", message: data.message || "", createdAt: new Date().toISOString(), status: "new" };
+    const details = [
+      data.classGrade ? `Class/grade: ${data.classGrade}` : "",
+      data.subject ? `Subject: ${data.subject}` : "",
+      data.message || ""
+    ].filter(Boolean).join("\n");
+    const enquiry = { id: id("enq"), websiteId: website.id, slug: website.slug, name: data.name || "", phone: data.phone || "", email: data.email || "", message: details, createdAt: new Date().toISOString(), status: "new" };
     db.enquiries.push(enquiry);
     recordAnalytics(db, website, "enquiry");
     recordActivity(db, req, { website, type: "enquiry_received", message: `New enquiry on ${website.slug || "published site"}`, metadata: { name: enquiry.name, phone: enquiry.phone, email: enquiry.email } });
