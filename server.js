@@ -13,6 +13,7 @@ const SITE_BASE_DOMAIN = process.env.SITE_BASE_DOMAIN || "tutorhive.in";
 const ALLOWED_ORIGINS = new Set((process.env.ALLOWED_ORIGINS || "https://tutorhive.in,https://www.tutorhive.in").split(",").map(value => value.trim()).filter(Boolean));
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || "";
 const COOKIE_SECURE = process.env.NODE_ENV === "production" ? "; Secure" : "";
+const TEMPLATE_VERSION = 3;
 let pgPool = null;
 
 const defaultImage = "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1100&q=80";
@@ -434,10 +435,68 @@ function adminOverview(db) {
   };
 }
 
+function defaultCourses(subject = "Maths") {
+  return [
+    {
+      id: "course-1",
+      title: `${subject || "Maths"} 1:1 Course`,
+      description: "Personalized live classes with concept clarity, guided practice, and steady progress tracking.",
+      price: "₹3,499/month",
+      imageUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=900&q=80"
+    },
+    {
+      id: "course-2",
+      title: "Exam Preparation",
+      description: "Focused revision, test practice, doubt clearing, and exam strategy for confident performance.",
+      price: "₹6,999/month",
+      imageUrl: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=900&q=80"
+    },
+    {
+      id: "course-3",
+      title: "Foundation Builder",
+      description: "Strengthen basics, improve consistency, and build better study habits through 1:1 support.",
+      price: "₹2,999/month",
+      imageUrl: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=900&q=80"
+    }
+  ];
+}
+
+function defaultApproachSection() {
+  return {
+    id: "approach",
+    title: "How learning improves here",
+    text: "Every student starts with a clear goal, a simple study plan, and regular practice. Parents get honest updates, students get patient support, and classes stay focused on confidence, consistency, and measurable academic progress.",
+    showInNav: true
+  };
+}
+
+function normalizeTemplate(template = {}) {
+  const previousVersion = Number(template.templateVersion || 0);
+  const subject = template.service1 || template.subject || "Maths";
+  const next = { ...template, templateVersion: TEMPLATE_VERSION };
+  next.sectionOrder = (next.sectionOrder || ["courses", "approach", "reviews", "contact"]).filter(key => key !== "services");
+  if (!next.sectionOrder.includes("courses")) next.sectionOrder.unshift("courses");
+  next.courses = Array.isArray(next.courses) && next.courses.length ? next.courses : defaultCourses(subject);
+  next.customSections = (next.customSections || []).map(section => ({ showInNav: false, ...section }));
+  if (!next.customSections.some(section => section.id === "approach")) next.customSections.push(defaultApproachSection());
+  if (!next.sectionOrder.includes("approach")) {
+    const insertBefore = next.sectionOrder.includes("reviews") ? next.sectionOrder.indexOf("reviews") : next.sectionOrder.indexOf("contact");
+    next.sectionOrder.splice(insertBefore > 0 ? insertBefore : next.sectionOrder.length, 0, "approach");
+  }
+  if (previousVersion < 3) {
+    next.showExperienceBadge = next.showExperienceBadge || "on";
+    next.showPricingBadge = next.showPricingBadge || "on";
+    next.inquiryClass = next.inquiryClass || "on";
+    next.inquirySubject = next.inquirySubject || "on";
+  }
+  return next;
+}
+
 function templateFromSignup(data) {
   const subject = data.subject || "Tutoring";
   const city = data.location || "Your city";
   return {
+    templateVersion: TEMPLATE_VERSION,
     tutorName: data.name || "",
     instituteName: "",
     kicker: `${city} ${subject} tutor`,
@@ -475,41 +534,12 @@ function templateFromSignup(data) {
     spacing: "34",
     sectionOrder: ["courses", "approach", "reviews", "contact"],
     serviceOrder: ["service1", "service2", "service3"],
-    courses: [
-      {
-        id: "course-1",
-        title: `${data.subject || "Maths"} 1:1 Course`,
-        description: "Personalized live classes with concept clarity, guided practice, and steady progress tracking.",
-        price: "₹3,499/month",
-        imageUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=900&q=80"
-      },
-      {
-        id: "course-2",
-        title: "Exam Preparation",
-        description: "Focused revision, test practice, doubt clearing, and exam strategy for confident performance.",
-        price: "₹6,999/month",
-        imageUrl: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=900&q=80"
-      },
-      {
-        id: "course-3",
-        title: "Foundation Builder",
-        description: "Strengthen basics, improve consistency, and build better study habits through 1:1 support.",
-        price: "₹2,999/month",
-        imageUrl: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=900&q=80"
-      }
-    ],
+    courses: defaultCourses(data.subject || "Maths"),
     reviews: [
       { text: "\"The classes feel structured, patient, and focused on real progress.\"", stars: 5 },
       { text: "\"The demo helped us understand the teaching style and next steps clearly.\"", stars: 5 }
     ],
-    customSections: [
-      {
-        id: "approach",
-        title: "How learning improves here",
-        text: "Every student starts with a clear goal, a simple study plan, and regular practice. Parents get honest updates, students get patient support, and classes stay focused on confidence, consistency, and measurable academic progress.",
-        showInNav: true
-      }
-    ]
+    customSections: [defaultApproachSection()]
   };
 }
 
@@ -566,18 +596,11 @@ function analyticsSummary(db, website) {
 }
 
 function renderSite(website) {
-  const t = website.publishedTemplate;
-  if (!t) return null;
-  const sectionOrder = (t.sectionOrder || ["courses", "reviews", "contact"]).filter(key => key !== "services");
-  if (!sectionOrder.includes("courses")) sectionOrder.unshift("courses");
-  const sections = sectionOrder.map(key => {
+  if (!website.publishedTemplate) return null;
+  const t = normalizeTemplate(website.publishedTemplate);
+  const sections = (t.sectionOrder || ["courses", "reviews", "contact"]).filter(key => key !== "services").map(key => {
     if (key === "courses") {
-      const courses = (t.courses && t.courses.length ? t.courses : [
-        {title: t.service1 || "1:1 Tutoring", description: "Personalized live classes with concept clarity, guided practice, and steady progress tracking.", price: t.pricing || "", imageUrl: t.imageUrl || defaultImage},
-        {title: t.service2 || "Exam Preparation", description: "Focused revision, test practice, doubt clearing, and exam strategy for confident performance.", price: "", imageUrl: defaultImage},
-        {title: t.service3 || "Foundation Builder", description: "Strengthen basics, improve consistency, and build better study habits through 1:1 support.", price: "", imageUrl: defaultImage}
-      ]);
-      return `<section class="band tint" id="courses"><strong>Courses</strong><p>Choose the support that matches your learning goals.</p><div class="course-grid">${courses.map(course => `<article class="course-card"><img src="${escapeHtml(course.imageUrl || defaultImage)}" alt="${escapeHtml(course.title || "Course")}"><div class="course-body"><strong>${escapeHtml(course.title || "Untitled course")}</strong><p>${escapeHtml(course.description || "Personalized support for steady academic progress.")}</p><div class="course-meta">${course.price ? `<span>${escapeHtml(course.price)}</span>` : ""}<a class="btn course-cta" href="#contact">${course.price ? "Enquire about this course" : "Ask for pricing"}</a></div></div></article>`).join("")}</div></section>`;
+      return `<section class="band tint" id="courses"><strong>Courses</strong><p>Choose the support that matches your learning goals.</p><div class="course-grid">${(t.courses || []).map(course => `<article class="course-card"><img src="${escapeHtml(course.imageUrl || defaultImage)}" alt="${escapeHtml(course.title || "Course")}"><div class="course-body"><strong>${escapeHtml(course.title || "Untitled course")}</strong><p>${escapeHtml(course.description || "Personalized support for steady academic progress.")}</p><div class="course-meta">${course.price ? `<span>${escapeHtml(course.price)}</span>` : ""}<a class="btn course-cta" href="#contact">${course.price ? "Enquire about this course" : "Ask for pricing"}</a></div></div></article>`).join("")}</div></section>`;
     }
     if (key === "reviews") {
       return `<section class="band" id="reviews"><strong>What students say</strong><div class="reviews-grid">${(t.reviews || []).map(review => `<div class="review-card"><div class="stars">${stars(review.stars)}</div><p>${escapeHtml(review.text)}</p>${review.author ? `<strong>- ${escapeHtml(review.author)}</strong>` : ""}</div>`).join("")}</div></section>`;
@@ -589,7 +612,7 @@ function renderSite(website) {
     if (!custom) return "";
     return `<section class="band" id="${escapeHtml(custom.id)}"><strong>${escapeHtml(custom.title)}</strong><p>${escapeHtml(custom.text)}</p></section>`;
   }).join("");
-  const nav = sectionOrder.map(key => {
+  const nav = (t.sectionOrder || []).filter(key => key !== "services").map(key => {
     const custom = (t.customSections || []).find(section => section.id === key);
     if (custom && !custom.showInNav) return "";
     const label = key === "courses" ? "Courses" : key === "reviews" ? "Reviews" : key === "contact" ? "Contact" : custom?.title || "Page";
@@ -597,7 +620,7 @@ function renderSite(website) {
     return `<a href="${href}">${escapeHtml(label)}</a>`;
   }).join("");
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${escapeHtml(t.instituteName)} | TutorHive OS</title><meta name="description" content="${escapeHtml(t.headline)}"><style>
-  *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;color:#0f172a;background:${escapeHtml(t.pageBg || "#fff")}}a{text-decoration:none;color:inherit}.site-nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 max(24px,calc((100vw - 1180px)/2));border-bottom:1px solid #e5e7eb;background:#fff}.brand{display:flex;align-items:center;gap:10px;font-size:24px;font-weight:1000;min-width:0}.brand span{overflow-wrap:anywhere}.brand img{width:42px;height:42px;border-radius:10px;object-fit:cover}.links{display:flex;gap:22px;color:#475569;font-weight:900}.pill,.btn{border:0;border-radius:999px;background:#0f172a;color:#fff;font-weight:900;padding:12px 18px;cursor:pointer}.teal{background:linear-gradient(120deg,#0ea5a3,#22d3ee)}.hero{display:grid;grid-template-columns:1.03fr .97fr;gap:34px;align-items:center;padding:54px max(24px,calc((100vw - 1180px)/2));background:linear-gradient(135deg,${escapeHtml(t.sectionBg || "#f4fdfc")} 0%,#fff 55%,#fff7dc 100%)}.kicker{font-size:13px;font-weight:1000;text-transform:uppercase;letter-spacing:.07em;color:#0ea5a3}.title{font-size:clamp(38px,5.2vw,64px);line-height:1.03;margin:12px 0}.lead{font-size:18px;line-height:1.7;color:#475569;max-width:560px}.photo{position:relative;height:380px;border-radius:30px;overflow:hidden;box-shadow:0 24px 60px rgba(2,8,23,.16)}.photo img{width:100%;height:100%;object-fit:cover;display:block}.float{position:absolute;border:1px solid #e5e7eb;border-radius:18px;background:#fff;box-shadow:0 14px 32px rgba(2,8,23,.14);padding:14px;font-weight:900}.left{left:${Number(t.experienceX || 18)}px;top:${Number(t.experienceY || 18)}px}.right{right:${Number(t.pricingX || 24)}px;bottom:${Number(t.pricingY || 24)}px}.band{padding:${Number(t.spacing || 34)}px max(24px,calc((100vw - 1180px)/2));border-top:1px solid #e5e7eb}.tint{background:linear-gradient(135deg,#f8fbff,#f4fdfc)}.columns,.reviews-grid,.course-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.mini,.review-card{border:1px solid #e5e7eb;border-radius:16px;padding:18px;background:#fff}.course-grid{margin-top:18px;align-items:stretch}.course-card{border:1px solid #e5e7eb;border-radius:18px;background:#fff;overflow:hidden;box-shadow:0 12px 28px rgba(2,8,23,.08);display:flex;flex-direction:column;height:100%}.course-card img{width:100%;height:180px;object-fit:cover;display:block;flex:0 0 auto}.course-body{padding:18px;display:flex;flex-direction:column;gap:12px;flex:1}.course-body p{margin:0}.course-meta{margin-top:auto;display:grid;gap:10px}.course-body span{color:#0f766e;font-weight:1000}.course-body span::before{content:"Fee: ";color:#475569;font-weight:800}.course-cta{text-align:center}.review-card p{white-space:pre-line}.stars{color:#f6b51e}.contact{display:flex;align-items:center;justify-content:space-between;gap:18px;background:#0f172a;color:#fff}.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(15,23,42,.54);padding:18px}.modal.active{display:flex}.card{width:min(520px,100%);background:#fff;color:#0f172a;border-radius:18px;padding:22px}.form{display:grid;gap:12px}.input{width:100%;border:1px solid #e5e7eb;border-radius:14px;padding:14px;font-size:16px}@media(max-width:900px){.site-nav{align-items:flex-start;flex-direction:column;padding:18px 20px}.hero,.columns,.course-grid,.reviews-grid{grid-template-columns:1fr}.links{flex-wrap:wrap;gap:12px}.pill{display:none}.float{display:none}.hero,.band{padding:28px 20px}.photo{height:260px;border-radius:22px}.contact{display:grid}.btn{width:100%}.title{font-size:clamp(34px,11vw,48px)}}@media(max-width:560px){.site-nav{gap:12px}.brand{font-size:22px}.links{font-size:15px}.hero{gap:24px}.lead{font-size:16px}.photo{height:230px}.band{padding:24px 16px}.hero{padding:28px 16px}.title{font-size:38px}.course-card img{height:160px}}
+  *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;color:#0f172a;background:${escapeHtml(t.pageBg || "#fff")}}a{text-decoration:none;color:inherit}.site-nav{min-height:78px;display:grid;grid-template-columns:minmax(240px,1fr) minmax(0,auto) auto;align-items:center;gap:18px;padding:14px max(24px,calc((100vw - 1180px)/2));border-bottom:1px solid #e5e7eb;background:#fff}.brand{display:flex;align-items:center;gap:10px;font-size:clamp(20px,2vw,24px);font-weight:1000;line-height:1.08;min-width:0;max-width:620px}.brand span{overflow-wrap:anywhere}.brand img{width:42px;height:42px;border-radius:10px;object-fit:cover;flex:0 0 auto}.links{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:10px 22px;color:#475569;font-weight:900;line-height:1.12;min-width:0}.links a{max-width:18ch}.pill,.btn{border:0;border-radius:999px;background:#0f172a;color:#fff;font-weight:900;padding:12px 18px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;line-height:1.15;text-align:center}.teal{background:linear-gradient(120deg,#0ea5a3,#22d3ee)}.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.92fr);gap:clamp(26px,4vw,46px);align-items:center;padding:clamp(40px,6vw,66px) max(24px,calc((100vw - 1180px)/2));background:linear-gradient(135deg,${escapeHtml(t.sectionBg || "#f4fdfc")} 0%,#fff 55%,#fff7dc 100%)}.kicker{font-size:13px;font-weight:1000;text-transform:uppercase;letter-spacing:.07em;color:#0ea5a3}.title{font-size:clamp(42px,4.6vw,70px);line-height:1.04;margin:12px 0;max-width:11.5ch}.lead{font-size:18px;line-height:1.65;color:#475569;max-width:620px}.photo{position:relative;min-height:320px;height:clamp(320px,32vw,430px);border-radius:26px;overflow:hidden;box-shadow:0 24px 60px rgba(2,8,23,.16)}.photo img{width:100%;height:100%;object-fit:cover;display:block}.float{position:absolute;max-width:min(260px,48%);border:1px solid #e5e7eb;border-radius:18px;background:#fff;box-shadow:0 14px 32px rgba(2,8,23,.14);padding:14px;font-weight:900;line-height:1.12}.left{left:max(14px,${Number(t.experienceX || 18)}px);top:max(14px,${Number(t.experienceY || 18)}px)}.right{right:max(14px,${Number(t.pricingX || 24)}px);bottom:max(14px,${Number(t.pricingY || 24)}px)}.band{padding:${Number(t.spacing || 34)}px max(24px,calc((100vw - 1180px)/2));border-top:1px solid #e5e7eb}.band>strong{display:block;font-size:clamp(28px,3.2vw,44px);line-height:1.08;margin:0 0 12px;color:#071126}.band>p{color:#475569;font-size:18px;line-height:1.65;max-width:760px}.tint{background:linear-gradient(135deg,#f8fbff,#f4fdfc)}.columns,.reviews-grid,.course-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.mini,.review-card{border:1px solid #e5e7eb;border-radius:14px;padding:18px;background:#fff}.course-grid{margin-top:18px;align-items:stretch}.course-card{border:1px solid #e5e7eb;border-radius:16px;background:#fff;overflow:hidden;box-shadow:0 12px 28px rgba(2,8,23,.08);display:flex;flex-direction:column;height:100%}.course-card img{width:100%;height:190px;object-fit:cover;display:block;flex:0 0 auto}.course-body{padding:18px;display:flex;flex-direction:column;gap:12px;flex:1}.course-body p{margin:0;line-height:1.55;color:#475569}.course-meta{margin-top:auto;display:grid;gap:10px}.course-body span{color:#0f766e;font-weight:1000}.course-body span::before{content:"Fee: ";color:#475569;font-weight:800}.course-cta{text-align:center}.review-card p{white-space:pre-line;line-height:1.6;color:#475569}.stars{color:#f6b51e}.contact{display:flex;align-items:center;justify-content:space-between;gap:18px;background:#0f172a;color:#fff}.contact p{color:#dbeafe}.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(15,23,42,.54);padding:18px}.modal.active{display:flex}.card{width:min(520px,100%);background:#fff;color:#0f172a;border-radius:18px;padding:22px}.form{display:grid;gap:12px}.input{width:100%;border:1px solid #e5e7eb;border-radius:14px;padding:14px;font-size:16px}@media(max-width:1100px){.site-nav{grid-template-columns:1fr auto}.links{grid-column:1/-1;justify-content:flex-start}.pill{grid-column:2;grid-row:1}.hero{grid-template-columns:1fr .9fr}.title{font-size:clamp(38px,5vw,58px)}}@media(max-width:820px){.site-nav{display:flex;align-items:flex-start;flex-direction:column;padding:18px 20px}.brand{max-width:100%}.hero,.columns,.course-grid,.reviews-grid{grid-template-columns:1fr}.links{justify-content:flex-start;gap:12px}.pill{display:none}.float{display:none}.hero,.band{padding:30px 20px}.photo{height:280px;min-height:0;border-radius:22px;order:-1}.contact{display:grid}.btn{width:100%}.title{font-size:clamp(36px,10vw,50px);max-width:12ch}}@media(max-width:560px){.site-nav{gap:12px}.brand{font-size:21px}.links{font-size:15px}.hero{gap:24px}.lead{font-size:16px}.photo{height:230px}.band{padding:24px 16px}.hero{padding:28px 16px}.title{font-size:clamp(34px,10.5vw,44px)}.course-card img{height:160px}}
   </style></head><body><nav class="site-nav"><strong class="brand">${t.logoUrl ? `<img src="${escapeHtml(t.logoUrl)}" alt="">` : ""}<span>${escapeHtml(t.instituteName)}</span></strong><div class="links">${nav}</div><a class="pill" href="#contact">Get started</a></nav><main><section class="hero"><div><div class="kicker">${escapeHtml(t.kicker)}</div><h1 class="title">${escapeHtml(t.headline)}</h1><p class="lead">By ${escapeHtml(t.tutorName || "Tutor")} · ${escapeHtml(t.subhead)}</p><button class="btn" id="heroInquiry">${escapeHtml(t.ctaButton || "Book Demo")}</button></div><div class="photo"><img src="${escapeHtml(t.imageUrl || defaultImage)}" alt="Tutor website image">${t.showExperienceBadge === "on" ? `<div class="float left">${escapeHtml(t.experience)}<br><span>Structured learning</span></div>` : ""}${t.showPricingBadge === "on" ? `<div class="float right">${escapeHtml(t.pricing)}<br><span>Demo available</span></div>` : ""}</div></section>${sections}</main><div class="modal" id="modal"><div class="card"><h2>${escapeHtml(t.inquiryTitle || "Send an inquiry")}</h2><form class="form" id="inquiryForm">${t.inquiryName === "on" ? '<input class="input" name="name" placeholder="Name" required>' : ""}${t.inquiryPhone === "on" ? '<input class="input" name="phone" placeholder="Phone / WhatsApp" required>' : ""}${t.inquiryEmail === "on" ? '<input class="input" name="email" type="email" placeholder="Email">' : ""}${t.inquiryClass === "on" ? '<input class="input" name="classGrade" placeholder="Student class / grade">' : ""}${t.inquirySubject === "on" ? '<input class="input" name="subject" placeholder="Subject needed">' : ""}${t.inquiryMessage === "on" ? '<textarea class="input" name="message" rows="4" placeholder="What help do you need?"></textarea>' : ""}<button class="btn teal" type="submit">Submit Inquiry</button><button class="btn" type="button" id="closeModal">Close</button><p id="thanks" style="display:none;color:green;font-weight:900">Inquiry sent.</p></form></div></div><script>
   const modal=document.getElementById("modal");const track=type=>fetch("/api/site/${escapeHtml(website.slug)}/track",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({type})}).catch(()=>{});document.getElementById("openInquiry")?.addEventListener("click",()=>modal.classList.add("active"));document.getElementById("heroInquiry")?.addEventListener("click",()=>modal.classList.add("active"));document.getElementById("closeModal").addEventListener("click",()=>modal.classList.remove("active"));document.getElementById("inquiryForm").addEventListener("submit",async e=>{e.preventDefault();const data=Object.fromEntries(new FormData(e.currentTarget).entries());await fetch("/api/site/${escapeHtml(website.slug)}/enquiries",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});document.getElementById("thanks").style.display="block";e.currentTarget.reset()});document.querySelectorAll('a[href*="wa.me"],a[href*="whatsapp"]').forEach(link=>link.addEventListener("click",()=>track("whatsapp_click")));
   </script></body></html>`;
@@ -676,7 +699,7 @@ async function handleApi(req, res, url) {
     if (req.method === "GET") return sendJson(res, 200, { website: publicWebsite(website) });
     if (req.method === "PATCH") {
       const data = await bodyJson(req);
-      website.draftTemplate = { ...website.draftTemplate, ...(data.draftTemplate || {}) };
+      website.draftTemplate = normalizeTemplate({ ...website.draftTemplate, ...(data.draftTemplate || {}) });
       website.slug = slugify(data.slug || website.draftTemplate.siteSlug || website.draftTemplate.instituteName || website.slug);
       website.customDomain = data.customDomain ?? website.draftTemplate.customDomain ?? website.customDomain;
       website.domainStatus = website.customDomain ? "pending_dns" : "not_connected";
@@ -693,6 +716,7 @@ async function handleApi(req, res, url) {
     const website = db.websites.find(item => item.tutorId === tutor.id);
     website.slug = slugify(website.draftTemplate.siteSlug || website.draftTemplate.instituteName || website.slug);
     website.draftTemplate.siteSlug = website.slug;
+    website.draftTemplate = normalizeTemplate(website.draftTemplate);
     website.publishedTemplate = { ...website.draftTemplate, publishedAt: new Date().toISOString() };
     website.publishedAt = website.publishedTemplate.publishedAt;
     recordActivity(db, req, { tutor, website, type: "publish", message: `${tutor.name || tutor.email} published ${website.slug}.${SITE_BASE_DOMAIN}`, metadata: { slug: website.slug, publicUrl: publicSiteUrl(website.slug) } });
@@ -708,7 +732,7 @@ async function handleApi(req, res, url) {
     website.lastDomainCheckAt = new Date().toISOString();
     recordActivity(db, req, { tutor, website, type: "domain_verify", message: `${tutor.name || tutor.email} requested domain verification`, metadata: { customDomain: website.customDomain } });
     await writeDb(db);
-    return sendJson(res, 200, { website: publicWebsite(website), message: "Domain connection check started. If you just changed your domain settings, please wait a few minutes and try again." });
+    return sendJson(res, 200, { website: publicWebsite(website), message: "DNS verification queued. Production will check CNAME/TXT records here." });
   }
   if (req.method === "GET" && url.pathname === "/api/enquiries") {
     const tutor = requireTutor(req, res, db);
