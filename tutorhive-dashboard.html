@@ -51,7 +51,7 @@
     .preview-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}.status-pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border);border-radius:999px;background:#fff;padding:8px 12px;font-size:13px;font-weight:900;color:var(--sub)}.status-dot{width:8px;height:8px;border-radius:50%;background:#f59e0b}.status-dot.live{background:#10b981}
     .dashboard-summary{display:grid;grid-template-columns:1.1fr .9fr .9fr;gap:14px;margin:0 0 18px}.summary-card{border:1px solid var(--border);border-radius:18px;background:#fff;padding:16px;box-shadow:0 10px 26px rgba(2,8,23,.06)}.summary-card strong{display:block;font-size:24px;line-height:1.1}.summary-card.action{background:linear-gradient(135deg,#ecfeff,#fff7dc)}
     .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.tab-btn{border:1px solid var(--border);border-radius:999px;background:#fff;padding:10px 14px;font-weight:900;cursor:pointer}.tab-btn.active{background:#0f172a;color:#fff;border-color:#0f172a}.panel{display:none}.panel.active{display:block}.dashboard-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:var(--shadow);margin-bottom:20px}.split{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}.data-list{display:grid;gap:10px;margin-top:14px}.data-row{border:1px solid var(--border);border-radius:14px;padding:14px;background:#fff;display:grid;gap:6px}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}.notice{border:1px solid #bae6fd;background:#eff6ff;border-radius:14px;padding:14px;color:#1e3a8a;font-weight:800}.domain-guide{display:grid;gap:12px}.domain-step{border:1px solid var(--border);border-radius:14px;background:#fff;padding:13px;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;color:var(--ink);font-weight:700}.domain-step strong{display:block;font-size:15px}.domain-step span:first-child{width:28px;height:28px;border-radius:999px;background:linear-gradient(120deg,var(--brand),var(--brand2));color:#fff;display:grid;place-items:center;font-weight:1000}.domain-step .small{font-size:14px;line-height:1.45}.domain-help{margin-top:10px;color:#1e3a8a;font-weight:800}#domainForm{align-self:start;align-content:start;justify-items:start}#domainForm .btn{width:auto;min-width:180px;padding:12px 20px}
-    .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}.stat-card{border:1px solid var(--border);border-radius:16px;background:#fff;padding:18px}.stat-card strong{display:block;font-size:34px;line-height:1}.status-select{width:max-content;min-width:170px;border:1px solid var(--border);border-radius:999px;padding:9px 12px;background:#fff;font-weight:900}.upgrade-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.upgrade-plan{border:1px solid var(--border);border-radius:16px;padding:16px;background:#fff}.upgrade-plan.pro{border-color:#67e8f9;background:linear-gradient(135deg,#ecfeff,#fff)}
+    .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}.stat-card{border:1px solid var(--border);border-radius:16px;background:#fff;padding:18px}.stat-card strong{display:block;font-size:34px;line-height:1}.status-select{width:max-content;min-width:170px;border:1px solid var(--border);border-radius:999px;padding:9px 12px;background:#fff;font-weight:900}.upgrade-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.upgrade-plan{border:1px solid var(--border);border-radius:16px;padding:16px;background:#fff}.upgrade-plan.pro{border-color:#67e8f9;background:linear-gradient(135deg,#ecfeff,#fff)}.rating-row{display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:6px}.rating-row input{position:absolute;opacity:0;pointer-events:none}.rating-row label{font-size:34px;line-height:1;color:#cbd5e1;cursor:pointer;transition:color .15s ease,transform .15s ease}.rating-row label:hover,.rating-row label:hover~label,.rating-row input:checked~label{color:#f6b51e}.rating-row label:hover{transform:translateY(-1px)}.feedback-modal-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:4px}
     .launch-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:16px}.launch-score{display:grid;place-items:center;text-align:center;min-height:220px;border:1px solid var(--border);border-radius:18px;background:linear-gradient(135deg,#ecfeff,#fff7dc)}.launch-score strong{display:block;font-size:58px;line-height:1}.checklist{display:grid;gap:10px}.check-item{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--border);border-radius:14px;background:#fff;padding:14px}.check-mark{display:grid;place-items:center;flex:0 0 28px;height:28px;border-radius:50%;background:#e2e8f0;font-weight:1000}.check-item.done .check-mark{background:#ccfbf1;color:#0f766e}.growth-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}.growth-card{border:1px solid var(--border);border-radius:16px;background:#fff;padding:16px;display:grid;gap:10px}.copy-box{border:1px solid var(--border);border-radius:14px;background:#fbfdff;padding:14px;white-space:pre-line}.copy-actions{display:flex;gap:8px;flex-wrap:wrap}
     .workspace{display:grid;grid-template-columns:1fr;gap:20px;align-items:start}.workspace.editing{grid-template-columns:minmax(340px,430px) minmax(0,1fr)}
     .site{overflow:hidden;border:1px solid var(--border);border-radius:22px;background:#fff;box-shadow:var(--shadow)}
@@ -462,24 +462,32 @@
       <form class="form" id="inquiryForm"></form>
     </div>
   </div>
-  <div class="modal" id="upgradeModal">
+  <div class="modal" id="publishFeedbackModal">
     <div class="modal-card">
       <div class="modal-head">
-        <div><h2 class="h2" style="margin:0">Your website is live</h2><p class="small" style="margin:4px 0 0">Upgrade when you want TutorHive OS to help with serious growth.</p></div>
-        <button class="icon-btn" type="button" id="closeUpgrade">×</button>
+        <div><h2 class="h2" style="margin:0">How was publishing?</h2><p class="small" style="margin:4px 0 0">Please rate your TutorHive OS experience before continuing.</p></div>
       </div>
-      <div class="upgrade-grid">
-        <div class="upgrade-plan">
-          <strong>Free launch</strong>
-          <p class="small">TutorHive subdomain, live presence, enquiry inbox, launch center, and basic analytics.</p>
-          <button class="btn" type="button" id="openLaunchCenter">Open Launch Center</button>
+      <form class="form" id="publishFeedbackForm">
+        <input type="hidden" name="form" value="TutorHive OS Publish Feedback">
+        <div>
+          <label>Rating</label>
+          <div class="rating-row" aria-label="Required rating from 1 to 5 stars">
+            <input type="radio" id="publishRating5" name="rating" value="5" required><label for="publishRating5" title="5 stars">★</label>
+            <input type="radio" id="publishRating4" name="rating" value="4"><label for="publishRating4" title="4 stars">★</label>
+            <input type="radio" id="publishRating3" name="rating" value="3"><label for="publishRating3" title="3 stars">★</label>
+            <input type="radio" id="publishRating2" name="rating" value="2"><label for="publishRating2" title="2 stars">★</label>
+            <input type="radio" id="publishRating1" name="rating" value="1"><label for="publishRating1" title="1 star">★</label>
+          </div>
         </div>
-        <div class="upgrade-plan pro">
-          <strong>Growth plan</strong>
-          <p class="small">Custom domain support, stronger analytics, local visibility tools, and deeper marketing automation.</p>
-          <button class="btn teal" type="button" id="upgradeInterest">I want this</button>
+        <div>
+          <label>Comment <span class="small">(optional)</span></label>
+          <textarea class="input" name="comment" rows="4" placeholder="What should we improve or keep doing?"></textarea>
         </div>
-      </div>
+        <div class="feedback-modal-actions">
+          <button class="btn teal" type="submit" id="publishFeedbackSubmit">Submit Feedback</button>
+          <p class="small" id="publishFeedbackError" style="display:none;color:#b91c1c;font-weight:900"></p>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -1312,7 +1320,7 @@
       }
       document.body.classList.add("published");
       window.scrollTo({top:0,behavior:"smooth"});
-      document.getElementById("upgradeModal").classList.add("active");
+      document.getElementById("publishFeedbackModal").classList.add("active");
     });
     document.addEventListener("click",(event)=>{
       if (!event.target.closest(".inquiry-trigger")) return;
@@ -1378,6 +1386,28 @@
       fillBuilder();
       updatePreview();
     });
+    async function submitTutorFeedback(data) {
+      const rating = Number(data.rating || 0);
+      if (!rating || rating < 1 || rating > 5) throw new Error("Please choose a 1-5 star rating.");
+      const liked = data.liked || "";
+      const improve = data.improve || data.comment || "";
+      const payload = {
+        form: data.form || "TutorHive OS Feedback",
+        name: currentTutor?.name || state.tutorName || "",
+        phone: currentTutor?.phone || signup.phone || "",
+        email: currentTutor?.email || signup.email || "",
+        subject: `TutorHive OS feedback - ${rating}/5`,
+        message: `Rating: ${rating}/5\nComment: ${improve || "Not provided"}${liked ? `\nWhat worked well: ${liked}` : ""}`
+      };
+      await api("/api/feedback", {method:"POST", body:JSON.stringify({rating, liked, improve})});
+      if (IS_LIVE_SITE) {
+        fetch(SCRIPT_URL, {
+          method:"POST",
+          headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
+          body:new URLSearchParams(payload).toString()
+        }).catch(() => {});
+      }
+    }
     document.getElementById("feedbackForm").addEventListener("submit",async (event)=>{
       event.preventDefault();
       const form = event.currentTarget;
@@ -1386,28 +1416,38 @@
       const error = document.getElementById("feedbackError");
       thanks.style.display = "none";
       error.style.display = "none";
-      const payload = {
-        form: data.form,
-        name: currentTutor?.name || state.tutorName || "",
-        phone: currentTutor?.phone || signup.phone || "",
-        email: currentTutor?.email || signup.email || "",
-        subject: `TutorHive OS feedback - ${data.rating}/5`,
-        message: `Rating: ${data.rating}/5\nWhat worked well: ${data.liked || "Not provided"}\nWhat should improve: ${data.improve || "Not provided"}`
-      };
       try {
-        await api("/api/feedback", {method:"POST", body:JSON.stringify({rating: data.rating, liked: data.liked || "", improve: data.improve || ""})});
-        if (IS_LIVE_SITE) {
-          fetch(SCRIPT_URL, {
-            method:"POST",
-            headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
-            body:new URLSearchParams(payload).toString()
-          }).catch(() => {});
-        }
+        await submitTutorFeedback(data);
         thanks.style.display = "block";
         form.reset();
       } catch (submitError) {
         error.textContent = submitError.message || "Something went wrong. Please try again.";
         error.style.display = "block";
+      }
+    });
+    document.getElementById("publishFeedbackForm").addEventListener("submit",async (event)=>{
+      event.preventDefault();
+      const form = event.currentTarget;
+      const error = document.getElementById("publishFeedbackError");
+      const button = document.getElementById("publishFeedbackSubmit");
+      const data = Object.fromEntries(new FormData(form).entries());
+      error.style.display = "none";
+      button.disabled = true;
+      button.textContent = "Sending...";
+      try {
+        await submitTutorFeedback(data);
+        button.textContent = "Thanks";
+        setTimeout(()=>{
+          document.getElementById("publishFeedbackModal").classList.remove("active");
+          form.reset();
+          button.disabled = false;
+          button.textContent = "Submit Feedback";
+        }, 500);
+      } catch (submitError) {
+        error.textContent = submitError.message || "Something went wrong. Please try again.";
+        error.style.display = "block";
+        button.disabled = false;
+        button.textContent = "Submit Feedback";
       }
     });
     document.getElementById("copyPublicUrl").addEventListener("click",()=>{
@@ -1436,17 +1476,6 @@
     document.getElementById("logoutBtn").addEventListener("click",async ()=>{
       await api("/api/logout", {method:"POST", body:"{}"}).catch(()=>{});
       window.location.href = "tutorhive-os.html#signup";
-    });
-    document.getElementById("closeUpgrade").addEventListener("click",()=>document.getElementById("upgradeModal").classList.remove("active"));
-    document.getElementById("openLaunchCenter").addEventListener("click",()=>{
-      document.getElementById("upgradeModal").classList.remove("active");
-      document.body.classList.remove("published");
-      document.querySelector('[data-tab="launch"]').click();
-      window.scrollTo({top:0,behavior:"smooth"});
-    });
-    document.getElementById("upgradeInterest").addEventListener("click",()=>{
-      document.getElementById("upgradeInterest").textContent = "Interest saved";
-      setTimeout(()=>document.getElementById("upgradeModal").classList.remove("active"), 900);
     });
     async function init(){
       try {
