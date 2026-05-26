@@ -39,7 +39,7 @@ Secondary CTA:
 | Online tuition for younger learners | `/online-tuition-class-1-10/` |
 | Online maths tuition | `/online-maths-tuition/` |
 | Online science tuition | `/online-science-tuition/` |
-| English tuition for kids | `/english-tuition-for-kids/` |
+| English tuition for school students | `/english-tuition-school-students/` |
 | CBSE online tuition | `/cbse-online-tuition/` |
 | Science tuition for Class 8 | `/science-tuition-class-8/` |
 
@@ -63,7 +63,7 @@ Each page includes:
 | Classes 1-10 | `Online Tuition for Classes 1-10 \| Free Demo Class \| TutorHive` | `Personalized online tuition for Classes 1-10 in India. Build strong foundations in maths, science, and English with expert-guided classes and a Free Demo Class.` |
 | Maths | `Online Maths Tuition in India \| Free Demo Class \| TutorHive` | `Online maths tuition for school students in India. Improve concept clarity, problem-solving, and marks with personalized classes and a Free Demo Class.` |
 | Science | `Online Science Tuition for School Students \| TutorHive` | `Online science tuition for school students in India. Personalized physics, chemistry, biology, and revision support with a Free Demo Class.` |
-| English | `English Tuition for Kids \| Online Classes \| TutorHive` | `English tuition for kids with personalized online classes for reading, grammar, writing, comprehension, and school confidence. Book a Free Demo Class.` |
+| English | `English Tuition for School Students \| Online Classes \| TutorHive` | `English tuition for school students with personalized online classes for reading, grammar, writing, comprehension, and school confidence. Book a Free Demo Class.` |
 | CBSE | `CBSE Online Tuition in India \| Free Demo Class \| TutorHive` | `CBSE online tuition in India for school students. Personalized maths, science, English, revision, and exam support with a Free Demo Class.` |
 
 ## Internal linking model
@@ -98,10 +98,10 @@ Blog:
 6. Online Tuition vs Home Tuition: What Should Parents Choose?
 7. How Parents Can Support CBSE Exam Preparation at Home
 8. Why Children Struggle With Word Problems
-9. How to Improve English Writing Skills for Kids
+9. How to Improve English Writing Skills for School Students
 10. Science Revision Tips for Class 8 Students
 11. How Often Should a Child Take Tuition Classes?
-12. What Makes a Good Online Tutor for Kids?
+12. What Makes a Good Online Tutor for School Students?
 13. CBSE Study Plan for the New Academic Year
 14. How to Reduce Homework Stress at Home
 15. Signs Your Child Has Concept Gaps in Maths
@@ -136,7 +136,7 @@ Seed posts already created:
 - Home > Online Tuition for Class 1-10
 - Home > Online Maths Tuition
 - Home > Online Science Tuition
-- Home > English Tuition for Kids
+- Home > English Tuition for School Students
 - Home > CBSE Online Tuition
 - Home > Science Tuition for Class 8
 
