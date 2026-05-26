@@ -3,17 +3,18 @@ const { Pool } = require("pg");
 const HOTFIX_CSS = [
   "#ffffff}",
   "/*th-v4-hotfix*/",
-  ".site-nav{min-height:78px!important;height:auto!important;display:grid!important;grid-template-columns:minmax(260px,1fr) minmax(0,auto) auto!important;align-items:center!important;gap:16px!important;padding:14px max(24px,calc((100vw - 1180px)/2))!important}",
+  ".site-nav{min-height:78px!important;height:auto!important;display:grid!important;grid-template-columns:minmax(220px,1fr) minmax(0,auto) minmax(160px,1fr)!important;align-items:center!important;gap:16px!important;padding:14px max(24px,calc((100vw - 1180px)/2))!important}",
   ".brand{font-size:clamp(20px,2vw,24px)!important;line-height:1.08!important;max-width:520px!important}",
-  ".links{display:flex!important;align-items:center!important;justify-content:flex-end!important;flex-wrap:wrap!important;gap:10px 18px!important;line-height:1.12!important}",
+  ".links{display:flex!important;align-items:center!important;justify-content:center!important;flex-wrap:wrap!important;gap:10px 18px!important;line-height:1.12!important}",
   ".links a{white-space:nowrap!important}",
+  ".pill{justify-self:end!important}",
   "#courses strong:first-child,#reviews strong:first-child,#contact strong:first-child{display:block!important;font-size:clamp(24px,2.2vw,32px)!important;line-height:1.15!important;margin:0 0 10px!important;color:#071126!important;font-weight:1000!important}",
   "#contact strong:first-child{color:#fff!important}",
   "#courses p:first-of-type,#contact p{font-size:18px!important;line-height:1.55!important;max-width:780px!important}",
   "#courses .course-body strong{font-size:18px!important;line-height:1.25!important;margin:0!important;color:#0f172a!important}",
   "#courses .course-body p{font-size:18px!important;line-height:1.55!important}",
-  "@media(max-width:1120px){.site-nav{grid-template-columns:1fr auto!important}.links{grid-column:1/-1!important;justify-content:flex-start!important}.pill{grid-column:2!important;grid-row:1!important}}",
-  "@media(max-width:820px){.site-nav{display:flex!important;align-items:flex-start!important;flex-direction:column!important;padding:18px 20px!important}.links{justify-content:flex-start!important;gap:12px!important}.pill{display:none!important}#courses strong:first-child,#reviews strong:first-child,#contact strong:first-child{font-size:clamp(24px,7vw,30px)!important}#courses p:first-of-type,#contact p{font-size:16px!important}}",
+  "@media(max-width:1120px){.site-nav{grid-template-columns:minmax(220px,1fr) auto!important}.links{grid-column:1/-1!important;justify-content:center!important}.pill{grid-column:2!important;grid-row:1!important}}",
+  "@media(max-width:820px){.site-nav{display:flex!important;align-items:center!important;flex-direction:column!important;padding:18px 20px!important}.brand{text-align:center!important}.links{justify-content:center!important;gap:12px!important}.pill{display:none!important}#courses strong:first-child,#reviews strong:first-child,#contact strong:first-child{font-size:clamp(24px,7vw,30px)!important}#courses p:first-of-type,#contact p{font-size:16px!important}}",
   "body{background:#ffffff"
 ].join("");
 
