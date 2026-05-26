@@ -474,6 +474,7 @@ function normalizeTemplate(template = {}) {
   const previousVersion = Number(template.templateVersion || 0);
   const subject = template.service1 || template.subject || "Maths";
   const next = { ...template, templateVersion: TEMPLATE_VERSION };
+  if (String(next.pageBg || "").includes("th-v4-hotfix")) next.pageBg = "#ffffff";
   next.sectionOrder = (next.sectionOrder || ["courses", "approach", "reviews", "contact"]).filter(key => key !== "services");
   if (!next.sectionOrder.includes("courses")) next.sectionOrder.unshift("courses");
   next.courses = Array.isArray(next.courses) && next.courses.length ? next.courses : defaultCourses(subject);
