@@ -112,24 +112,24 @@
 
       <!-- ✅ Existing Inline Styles (keep as is) -->
       <style>
-        :root{--brand:#0ea5a3;--brand2:#22d3ee;--honey:#fbbf24;--ink:#0f172a;--sub:#475569;--muted:#f7fafc;--border:#e5e7eb;--bg:#fbfcfe;--shadow:0 18px 50px rgba(2,8,23,.12);--soft-shadow:0 14px 36px rgba(15,23,42,.08)}
+        :root{--brand:#12355b;--brand2:#1f5f8b;--honey:#f59e0b;--saffron:#f4b23c;--ink:#102033;--sub:#526173;--muted:#f8f6f1;--border:#e4ddd1;--bg:#fffdf8;--shadow:0 18px 50px rgba(16,32,51,.13);--soft-shadow:0 14px 36px rgba(16,32,51,.08)}
         *{box-sizing:border-box}html{scroll-behavior:smooth}
         body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--ink);background:var(--bg);overflow-x:hidden}
         a{color:inherit;text-decoration:none}
         .container{width:min(100% - 40px,1360px);margin:0 auto}
         .btn{display:inline-flex;align-items:center;gap:.6rem;padding:12px 18px;border-radius:999px;border:1px solid #d9e2ea;background:#fff;font-weight:850;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease}
         .btn:hover{transform:translateY(-2px);box-shadow:var(--soft-shadow);border-color:#cbd5e1}
-        .btn.primary{border:none;color:#172033;background:linear-gradient(120deg,#fbbf24,#ffe8a3);box-shadow:0 12px 26px rgba(251,191,36,.24)}
-        .btn.teal{border:none;color:#fff;background:linear-gradient(120deg,#0f766e,var(--brand2));box-shadow:0 12px 28px rgba(14,165,163,.22)}
-        .badge{display:inline-block;border:1px dashed var(--brand);background:#ecfeff;border-radius:999px;padding:6px 10px;font-weight:700}
-        .hero-eyebrow{display:inline-flex;align-items:center;color:#0f766e;font-size:14px;font-weight:900;letter-spacing:.02em}
-        .usp-row{display:flex;gap:10px 16px;flex-wrap:wrap;margin-top:18px}.usp-pill{display:flex;align-items:flex-start;gap:8px;font-size:15px;font-weight:800;color:#334155}.usp-pill::before{content:"";width:7px;height:12px;border:solid var(--brand);border-width:0 2px 2px 0;transform:rotate(45deg);margin:2px 3px 0 2px;flex:0 0 auto}
-        .hero-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:24px}.text-link{display:inline-flex;align-items:center;gap:6px;color:#0f766e;font-weight:900}.text-link:hover{text-decoration:underline;text-underline-offset:4px}
+        .btn.primary{border:none;color:#172033;background:linear-gradient(120deg,var(--saffron),#ffe0a6);box-shadow:0 12px 26px rgba(245,158,11,.24)}
+        .btn.teal{border:none;color:#fff;background:linear-gradient(120deg,var(--brand),var(--brand2));box-shadow:0 12px 28px rgba(18,53,91,.22)}
+        .badge{display:inline-block;border:1px dashed var(--saffron);background:#fff7e8;border-radius:999px;padding:6px 10px;font-weight:700}
+        .hero-eyebrow{display:inline-flex;align-items:center;color:#7c4a04;font-size:14px;font-weight:900;letter-spacing:.02em}
+        .usp-row{display:flex;gap:10px 16px;flex-wrap:wrap;margin-top:18px}.usp-pill{display:flex;align-items:flex-start;gap:8px;font-size:15px;font-weight:800;color:#334155}.usp-pill::before{content:"";width:7px;height:12px;border:solid var(--saffron);border-width:0 2px 2px 0;transform:rotate(45deg);margin:2px 3px 0 2px;flex:0 0 auto}
+        .hero-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:24px}.text-link{display:inline-flex;align-items:center;gap:6px;color:var(--brand);font-weight:900}.text-link:hover{text-decoration:underline;text-underline-offset:4px}
         .hero-proof{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:26px;max-width:650px}.hero-proof span{display:block;border:1px solid rgba(148,163,184,.28);background:rgba(255,255,255,.74);border-radius:10px;padding:13px 14px;box-shadow:0 10px 24px rgba(15,23,42,.05)}.hero-proof strong{display:block;font-size:18px;line-height:1.1}.hero-proof small{display:block;margin-top:4px;color:#64748b;font-weight:800}
         .small{color:#64748b;font-size:14px;line-height:1.55}
         .h1{font-size:clamp(38px,5.8vw,76px);margin:10px 0 0;line-height:1.01;letter-spacing:-.03em;max-width:760px}
         .h2{font-size:clamp(26px,3vw,42px);margin:0 0 10px;line-height:1.08;letter-spacing:-.02em}
-        .impact{background:linear-gradient(90deg,#0ea5a3,#22d3ee,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
+        .impact{background:linear-gradient(90deg,var(--brand),var(--brand2),var(--saffron));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
         .card{background:#fff;border:1px solid #dde6ee;border-radius:14px;padding:20px;box-shadow:var(--soft-shadow)}
         .section{padding:86px 0}.section.alt{background:linear-gradient(180deg,#f8fbff,#fff)}
         .grid{display:grid;gap:18px}.grid.cols-2{grid-template-columns:1fr}.grid.cols-3{grid-template-columns:1fr}
@@ -137,7 +137,7 @@
         .tile{background:#fff;border:1px solid #dde6ee;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px;transition:.2s ease;box-shadow:0 10px 28px rgba(15,23,42,.045)}
         .tile:hover{transform:translateY(-3px);box-shadow:var(--soft-shadow);border-color:#c9d8e4}
         .topic-card{min-height:180px}
-        .topic-card a{display:inline-flex;margin-top:auto;font-weight:900;color:#0f766e}
+        .topic-card a{display:inline-flex;margin-top:auto;font-weight:900;color:var(--brand)}
         .trust-grid{display:grid;gap:18px}
         .trust-point{display:flex;gap:12px;align-items:flex-start}
         .trust-point strong{display:block;margin-bottom:4px}
@@ -145,9 +145,9 @@
         .faq-item{border:1px solid #dde6ee;border-radius:14px;padding:20px;background:#fff;box-shadow:0 10px 26px rgba(15,23,42,.04)}
         .faq-item h3{margin:0 0 8px;font-size:18px}
         .price-note{margin-top:auto;padding-top:4px;color:#0f172a;font-weight:800}
-        .icon-wrap{width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#ecfeff;border:1px solid #d9f2f5}
+        .icon-wrap{width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#fff7e8;border:1px solid #f8d39a}
         /* header */
-        .topbar{background:#10202f;font-weight:850;color:#ecfeff}
+        .topbar{background:#102033;font-weight:850;color:#fff7e8}
         .topbar .container{padding:10px 0;text-align:center}
         .nav{border-bottom:1px solid rgba(226,232,240,.9);background:rgba(255,255,255,.92);position:sticky;top:0;z-index:50;backdrop-filter:saturate(160%) blur(14px);box-shadow:0 10px 30px rgba(15,23,42,.04)}
         .nav .row{min-height:78px;display:grid;grid-template-columns:210px minmax(0,1fr) auto;align-items:center;gap:18px}
@@ -158,24 +158,44 @@
         .menu a:after{content:"";position:absolute;left:10px;right:10px;bottom:4px;height:2px;background:linear-gradient(90deg,var(--brand),var(--brand2));border-radius:2px;transform:scaleX(0);transition:transform .18s ease}
         .menu a:hover:after{transform:scaleX(1)}.menu a.active{font-weight:900}
         .nav-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;align-items:center}
-        .premium-home{padding-top:0;background:linear-gradient(135deg,#f7fffe 0%,#fff 46%,#fff7df 100%)}
+        .premium-home{padding-top:0;background:linear-gradient(135deg,#fffdf8 0%,#fff 46%,#fff4d8 100%)}
         .hero-grid{display:grid;gap:42px;align-items:center;padding:76px 0 36px}@media(min-width:900px){.hero-grid{grid-template-columns:1.06fr .94fr}}
         .hero-grid>.reveal:first-child{align-self:center}
         .hero-grid>.reveal:first-child>.small{font-size:18px;line-height:1.72;max-width:690px;color:#526173}
-        .hero-illus{position:relative;border:1px solid rgba(148,163,184,.24);border-radius:24px;overflow:hidden;box-shadow:0 34px 80px rgba(15,23,42,.14);background:radial-gradient(circle at top left,#effcff 0,#f8fdff 34%,#fffaf5 100%);animation:heroEnter .45s cubic-bezier(.22,1,.36,1) both}
+        .hero-illus{position:relative;border:1px solid rgba(148,163,184,.24);border-radius:24px;overflow:hidden;box-shadow:0 34px 80px rgba(15,23,42,.14);background:radial-gradient(circle at top left,#fff7e8 0,#fffdf8 34%,#edf5fb 100%);animation:heroEnter .45s cubic-bezier(.22,1,.36,1) both}
         .carousel{position:relative;overflow:hidden}.carousel-track{display:flex;gap:18px;scroll-snap-type:x mandatory;overflow-x:auto;padding:4px 0 10px}.carousel .card{min-width:300px;scroll-snap-align:start}
         .testimonial-card{position:relative;min-width:320px;max-width:410px;border-color:#dbe5ed;border-radius:14px;padding:22px;box-shadow:0 14px 34px rgba(15,23,42,.07);overflow:hidden}
         .testimonial-card::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,var(--brand),var(--brand2),var(--honey))}
         .testimonial-stars{color:#f6b51e;font-size:15px;letter-spacing:1px;font-weight:1000;margin-bottom:12px}
         .testimonial-quote{margin:0;color:#334155;font-size:16px;line-height:1.62}
         .testimonial-parent{display:flex;align-items:center;gap:10px;margin-top:18px;padding-top:14px;border-top:1px solid #eef2f7}
-        .testimonial-avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#ecfeff;color:#0f766e;font-weight:1000;flex:0 0 auto}
+        .testimonial-avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#fff7e8;color:#7c4a04;font-weight:1000;flex:0 0 auto}
         .testimonial-name{display:block;color:#0f172a;font-weight:900;line-height:1.2}.testimonial-meta{display:block;color:#64748b;font-size:13px;font-weight:800;margin-top:2px}
         .testimonial-section{padding:28px 0 8px}.testimonial-section .h2,.support-section .h2{text-wrap:balance}
         .support-section{padding-top:72px}.support-section>.small{font-size:17px;max-width:760px;color:#526173}
         .support-section .grid{gap:20px}.support-section .topic-card{min-height:210px}
         .support-section .topic-card strong{font-size:20px;letter-spacing:-.01em}
-        .support-section .topic-card a{color:#0f766e}
+        .support-section .topic-card a{color:var(--brand)}
+        .curriculum-section{padding:64px 0 34px;background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(255,247,232,.58))}
+        .section-head{max-width:820px;margin-bottom:22px}.section-head p{font-size:17px;line-height:1.65;color:var(--sub)}
+        .curriculum-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+        .curriculum-card{position:relative;min-height:250px;border:1px solid #eadfcf;border-radius:18px;background:#fff;padding:20px;display:flex;flex-direction:column;gap:14px;box-shadow:0 18px 42px rgba(16,32,51,.08);overflow:hidden}
+        .curriculum-card::before{content:"";position:absolute;inset:0 0 auto;height:5px;background:linear-gradient(90deg,var(--brand),var(--brand2),var(--saffron))}
+        .curriculum-logo{height:86px;display:flex;align-items:center;justify-content:flex-start}
+        .curriculum-logo img{max-height:76px;max-width:150px;object-fit:contain}
+        .curriculum-logo.wide img{max-width:190px;max-height:58px}
+        .curriculum-card strong{font-size:22px;line-height:1.1}.curriculum-card p{margin:0;color:var(--sub);line-height:1.55}
+        .contact-section{background:linear-gradient(135deg,#102033 0%,#12355b 48%,#fff7e8 48%,#fffdf8 100%);border-top:1px solid rgba(228,221,209,.8);border-bottom:1px solid rgba(228,221,209,.8)}
+        .contact-panel{display:grid;grid-template-columns:.95fr 1.05fr;gap:22px;align-items:stretch}
+        .contact-copy{color:#fff;display:flex;flex-direction:column;justify-content:space-between;gap:22px;padding:8px 0}
+        .contact-copy .h2{color:#fff}.contact-copy .small{color:#dbeafe;max-width:640px}
+        .contact-info{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:22px;box-shadow:0 18px 44px rgba(0,0,0,.16);backdrop-filter:blur(10px)}
+        .contact-info h3{margin:0 0 12px;color:#fff}.contact-info p{margin:10px 0;color:#dbeafe}.contact-info a{color:#ffd98a;font-weight:900}
+        .contact-form-card{border-radius:22px;padding:26px;border-color:#e7d9c2;box-shadow:0 24px 70px rgba(16,32,51,.14)}
+        .contact-form-card .btn{width:100%;justify-content:center;border-radius:14px}
+        .site-footer{background:#fffaf0;border-top:1px solid #eadfcf;padding:34px 0}
+        .footer-grid{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:26px;align-items:start}
+        .footer-note{max-width:560px}.footer-note .brand{margin-bottom:8px}.footer-links{display:grid;gap:9px}.footer-links a{color:var(--brand);font-weight:850}.footer-cta{margin-top:18px}
         /* animations */
         .reveal{opacity:0;transform:translateY(10px);transition:opacity .32s ease, transform .32s ease}.reveal.show{opacity:1;transform:none}
         .fade-up{opacity:0;transform:translateY(8px);transition:opacity .32s ease, transform .32s ease}.fade-up.show{opacity:1;transform:none}
@@ -201,9 +221,11 @@
         section[data-page]{display:none}section[data-page].active{display:block}
         .tabbar{display:none;position:sticky;top:78px;background:#fff;border-bottom:1px dashed var(--border);z-index:40}
         .tabbar .container{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0}
-        .tabbar a{font-weight:800;padding:8px 12px;border-radius:10px;border:1px solid var(--border)}.tabbar a.active{background:#ecfeff;border-color:#bae6fd}
+        .tabbar a{font-weight:800;padding:8px 12px;border-radius:10px;border:1px solid var(--border)}.tabbar a.active{background:#fff7e8;border-color:#f8d39a}
         @media(max-width:1020px){.nav .row{grid-template-columns:auto 1fr}.menu{display:none}.nav-actions{justify-content:flex-end}.tabbar{display:block}.tabbar .container{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.tabbar .container::-webkit-scrollbar{display:none}.tabbar a{white-space:nowrap}}
-        @media(max-width:640px){.container{width:min(100% - 32px,1360px)}.topbar .container{font-size:13px;padding:8px 0}.nav .row{grid-template-columns:1fr;gap:8px;min-height:0;padding:8px 0 10px}.brand,.nav-actions{justify-content:center}.brand img{height:74px;width:86px}.nav-actions{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:8px}.nav-actions .btn{width:100%;padding:10px 12px;font-size:14px;margin:0}.tabbar{position:static}.tabbar .container{padding:8px 0}.tabbar a{font-size:14px;padding:8px 11px}.section{padding:48px 0}.hero-grid{gap:24px;padding:44px 0 26px}.hero-illus{display:none}.h1{font-size:clamp(34px,10.8vw,46px)}.hero-proof{grid-template-columns:1fr}.hero-grid>.reveal:first-child>.small{font-size:16px}.usp-row{display:grid}}
+        @media(max-width:1020px){.curriculum-grid{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:900px){.contact-panel,.footer-grid{grid-template-columns:1fr}.contact-section{background:linear-gradient(180deg,#102033 0%,#12355b 58%,#fffdf8 58%,#fffdf8 100%)}}
+        @media(max-width:640px){.container{width:min(100% - 32px,1360px)}.topbar .container{font-size:13px;padding:8px 0}.nav .row{grid-template-columns:1fr;gap:8px;min-height:0;padding:8px 0 10px}.brand,.nav-actions{justify-content:center}.brand img{height:74px;width:86px}.nav-actions{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:8px}.nav-actions .btn{width:100%;padding:10px 12px;font-size:14px;margin:0}.tabbar{position:static}.tabbar .container{padding:8px 0}.tabbar a{font-size:14px;padding:8px 11px}.section{padding:48px 0}.hero-grid{gap:24px;padding:44px 0 26px}.hero-illus{display:none}.h1{font-size:clamp(34px,10.8vw,46px)}.hero-proof{grid-template-columns:1fr}.usp-row{display:grid}.curriculum-grid{grid-template-columns:1fr}.curriculum-card{min-height:0}}
       </style>
     </head>
 
@@ -252,19 +274,19 @@
     <div class='hero-illus'>
       <svg class='hero-scene' viewBox='0 0 880 540' xmlns='http://www.w3.org/2000/svg' role='img' aria-label='Animated online tutoring scene'>
         <defs>
-          <linearGradient id='panel' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#f7fdff'/><stop offset='1' stop-color='#fff8ef'/></linearGradient>
-          <linearGradient id='lesson' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#083344'/><stop offset='.55' stop-color='#0f766e'/><stop offset='1' stop-color='#14b8a6'/></linearGradient>
-          <linearGradient id='accent' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#fbbf24'/><stop offset='1' stop-color='#fde68a'/></linearGradient>
+          <linearGradient id='panel' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#fffdf8'/><stop offset='1' stop-color='#fff4d8'/></linearGradient>
+          <linearGradient id='lesson' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#102033'/><stop offset='.55' stop-color='#12355b'/><stop offset='1' stop-color='#1f5f8b'/></linearGradient>
+          <linearGradient id='accent' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#f4b23c'/><stop offset='1' stop-color='#ffe0a6'/></linearGradient>
           <linearGradient id='glass' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#ffffff' stop-opacity='.98'/><stop offset='1' stop-color='#ffffff' stop-opacity='.82'/></linearGradient>
           <filter id='softShadow' x='-30%' y='-30%' width='160%' height='160%'><feDropShadow dx='0' dy='18' stdDeviation='18' flood-color='#0f172a' flood-opacity='.14'/></filter>
         </defs>
         <rect width='880' height='540' rx='28' fill='url(#panel)'/>
-        <circle class='orbit' cx='748' cy='96' r='92' fill='#dff8fb'/>
+        <circle class='orbit' cx='748' cy='96' r='92' fill='#dbeafe'/>
         <circle class='orbit alt' cx='112' cy='436' r='74' fill='#fff0c7'/>
         <g class='lesson-shell' filter='url(#softShadow)'>
           <rect x='146' y='70' width='588' height='386' rx='34' fill='#fff'/>
           <rect x='146' y='70' width='588' height='50' rx='34' fill='#0f172a'/>
-          <circle cx='174' cy='95' r='6' fill='#f87171'/><circle cx='196' cy='95' r='6' fill='#fbbf24'/><circle cx='218' cy='95' r='6' fill='#34d399'/>
+          <circle cx='174' cy='95' r='6' fill='#f87171'/><circle cx='196' cy='95' r='6' fill='#f4b23c'/><circle cx='218' cy='95' r='6' fill='#1f5f8b'/>
           <rect class='lesson-panel' x='170' y='144' width='404' height='226' rx='28' fill='url(#lesson)'/>
           <rect class='shine' x='188' y='144' width='82' height='226' fill='rgba(255,255,255,.18)' opacity='0'/>
           <circle class='focus-ring' cx='324' cy='236' r='74' fill='none' stroke='rgba(255,255,255,.32)' stroke-width='4'/>
@@ -272,28 +294,59 @@
           <circle cx='324' cy='222' r='30' fill='#fff'/>
           <rect x='286' y='260' width='76' height='40' rx='20' fill='#fff'/>
           <circle class='lesson-dot' cx='420' cy='194' r='8' fill='#fde68a'/>
-          <circle class='lesson-dot' cx='420' cy='228' r='8' fill='#a5f3fc'/>
+          <circle class='lesson-dot' cx='420' cy='228' r='8' fill='#bfdbfe'/>
           <circle class='lesson-dot' cx='420' cy='262' r='8' fill='#fff'/>
           <path class='lesson-line' d='M444 194h84' stroke='rgba(255,255,255,.84)' stroke-width='18' stroke-linecap='round' style='transform-origin:left center'/>
           <path class='lesson-line alt' d='M444 228h108' stroke='rgba(255,255,255,.74)' stroke-width='18' stroke-linecap='round' style='transform-origin:left center'/>
           <path class='lesson-line' d='M444 262h76' stroke='rgba(255,255,255,.68)' stroke-width='18' stroke-linecap='round' style='transform-origin:left center'/>
           <rect x='170' y='388' width='404' height='10' rx='5' fill='#e2e8f0'/>
           <rect class='progress-fill' x='170' y='388' width='404' height='10' rx='5' fill='url(#accent)'/>
-          <g class='student-a'><rect x='598' y='146' width='110' height='102' rx='22' fill='#effcff'/><circle cx='653' cy='184' r='22' fill='#a5f3fc'/><rect x='626' y='215' width='54' height='14' rx='7' fill='#bae6fd'/></g>
+          <g class='student-a'><rect x='598' y='146' width='110' height='102' rx='22' fill='#edf5fb'/><circle cx='653' cy='184' r='22' fill='#bfdbfe'/><rect x='626' y='215' width='54' height='14' rx='7' fill='#bfdbfe'/></g>
           <g class='student-b'><rect x='598' y='266' width='110' height='102' rx='22' fill='#fff8eb'/><circle cx='653' cy='304' r='22' fill='#fde68a'/><rect x='626' y='335' width='54' height='14' rx='7' fill='#fde68a'/></g>
         </g>
         <g class='note-card' filter='url(#softShadow)'>
           <rect x='76' y='152' width='178' height='112' rx='24' fill='url(#glass)'/>
-          <circle cx='108' cy='184' r='8' fill='#0ea5a3'/>
+          <circle cx='108' cy='184' r='8' fill='#12355b'/>
           <path d='M130 184h88M108 214h110M108 238h82' stroke='#cbd5e1' stroke-width='12' stroke-linecap='round'/>
         </g>
         <g>
-          <polygon class='spark' points='654,404 661,419 678,421 665,432 669,449 654,440 639,449 643,432 630,421 647,419' fill='#fbbf24'/>
-          <polygon class='spark alt' points='720,406 726,418 740,420 730,430 733,444 720,437 707,444 710,430 700,420 714,418' fill='#22d3ee'/>
+          <polygon class='spark' points='654,404 661,419 678,421 665,432 669,449 654,440 639,449 643,432 630,421 647,419' fill='#f4b23c'/>
+          <polygon class='spark alt' points='720,406 726,418 740,420 730,430 733,444 720,437 707,444 710,430 700,420 714,418' fill='#bfdbfe'/>
         </g>
       </svg>
     </div>
   </div>
+
+  <section class='curriculum-section' aria-labelledby='curriculum-heading'>
+    <div class='container'>
+      <div class='section-head'>
+        <h2 class='h2 reveal' id='curriculum-heading'>Curriculum support</h2>
+        <p class='reveal'>TutorHive supports school learning across major Indian and international curricula, with classes planned around each student's current chapters, revision needs, and assessment style.</p>
+      </div>
+      <div class='curriculum-grid'>
+        <article class='curriculum-card reveal'>
+          <div class='curriculum-logo'><img src='assets/curriculum/cbse-logo.png' alt='CBSE logo'></div>
+          <strong>CBSE</strong>
+          <p>Chapter-aligned practice, school test preparation, and steady revision support for Classes 1-10.</p>
+        </article>
+        <article class='curriculum-card reveal'>
+          <div class='curriculum-logo'><img src='assets/curriculum/cisce-logo.png' alt='CISCE ICSE logo'></div>
+          <strong>ICSE</strong>
+          <p>Structured support for concept depth, written answers, grammar, science, maths, and school assessments.</p>
+        </article>
+        <article class='curriculum-card reveal'>
+          <div class='curriculum-logo'><img src='assets/curriculum/ib-logo.png' alt='International Baccalaureate logo'></div>
+          <strong>IB</strong>
+          <p>Guidance for inquiry-led learning, clear explanations, and confident subject understanding.</p>
+        </article>
+        <article class='curriculum-card reveal'>
+          <div class='curriculum-logo wide'><img src='assets/curriculum/cambridge-igcse-logo.png' alt='Cambridge International Education logo'></div>
+          <strong>IGCSE</strong>
+          <p>Support for Cambridge-style learning, topic practice, and exam-oriented revision routines.</p>
+        </article>
+      </div>
+    </div>
+  </section>
 
   <div class='container testimonial-section' style='margin-top:40px'>
     <h2 class='h2 reveal'>What parents say</h2>
@@ -347,15 +400,15 @@
     <h2 class='h2 reveal'>Outcomes parents care about</h2>
     <div class='grid cols-3' style='margin-top:12px'>
       <div class='tile reveal' style='display:flex;align-items:center;gap:12px'>
-        <svg width='100' height='100' viewBox='0 0 120 120'><circle cx='60' cy='60' r='46' stroke='#e5e7eb' stroke-width='12' fill='none'/><circle cx='60' cy='60' r='46' stroke='#0ea5a3' stroke-width='12' fill='none' stroke-linecap='round' transform='rotate(-90 60 60)' stroke-dasharray='220 290'/><text x='60' y='66' text-anchor='middle' font-size='22' font-weight='900' fill='#0f172a'>2×</text></svg>
+        <svg width='100' height='100' viewBox='0 0 120 120'><circle cx='60' cy='60' r='46' stroke='#e5e7eb' stroke-width='12' fill='none'/><circle cx='60' cy='60' r='46' stroke='#12355b' stroke-width='12' fill='none' stroke-linecap='round' transform='rotate(-90 60 60)' stroke-dasharray='220 290'/><text x='60' y='66' text-anchor='middle' font-size='22' font-weight='900' fill='#0f172a'>2×</text></svg>
         <div><strong>Homework completion</strong><div class='small'>vs baseline*</div></div>
       </div>
       <div class='tile reveal' style='display:flex;align-items:center;gap:12px'>
-        <svg width='100' height='100' viewBox='0 0 120 120'><circle cx='60' cy='60' r='46' stroke='#e5e7eb' stroke-width='12' fill='none'/><circle cx='60' cy='60' r='46' stroke='#fbbf24' stroke-width='12' fill='none' stroke-linecap='round' transform='rotate(-90 60 60)' stroke-dasharray='165 290'/><text x='60' y='66' text-anchor='middle' font-size='22' font-weight='900' fill='#0f172a'>+25%</text></svg>
+        <svg width='100' height='100' viewBox='0 0 120 120'><circle cx='60' cy='60' r='46' stroke='#e5e7eb' stroke-width='12' fill='none'/><circle cx='60' cy='60' r='46' stroke='#f4b23c' stroke-width='12' fill='none' stroke-linecap='round' transform='rotate(-90 60 60)' stroke-dasharray='165 290'/><text x='60' y='66' text-anchor='middle' font-size='22' font-weight='900' fill='#0f172a'>+25%</text></svg>
         <div><strong>Problem solving speed</strong><div class='small'>improvement*</div></div>
       </div>
       <div class='tile reveal' style='display:flex;align-items:center;gap:12px'>
-        <svg width='100' height='100' viewBox='0 0 120 120'><circle cx='60' cy='60' r='46' stroke='#e5e7eb' stroke-width='12' fill='none'/><circle cx='60' cy='60' r='46' stroke='#22d3ee' stroke-width='12' fill='none' stroke-linecap='round' transform='rotate(-90 60 60)' stroke-dasharray='275 290'/><text x='60' y='66' text-anchor='middle' font-size='22' font-weight='900' fill='#0f172a'>95%</text></svg>
+        <svg width='100' height='100' viewBox='0 0 120 120'><circle cx='60' cy='60' r='46' stroke='#e5e7eb' stroke-width='12' fill='none'/><circle cx='60' cy='60' r='46' stroke='#1f5f8b' stroke-width='12' fill='none' stroke-linecap='round' transform='rotate(-90 60 60)' stroke-dasharray='275 290'/><text x='60' y='66' text-anchor='middle' font-size='22' font-weight='900' fill='#0f172a'>95%</text></svg>
         <div><strong>Parent recommendation</strong><div class='small'>rate*</div></div>
       </div>
     </div>
@@ -390,6 +443,33 @@
       <article class='faq-item reveal'><h3>Can my child take only maths or science tuition?</h3><p class='small'>Yes. Parents can choose subject-specific support such as maths tuition, science tuition, English tuition, or broader CBSE support.</p></article>
       <article class='faq-item reveal'><h3>How do I know if the tutor is right for my child?</h3><p class='small'>Start with a Free Demo Class, discuss your child's needs, and review the tutor's teaching approach before continuing.</p></article>
       <article class='faq-item reveal'><h3>Do parents receive updates?</h3><p class='small'>Yes. TutorHive is designed around parent trust, with clear communication, progress visibility, and responsive support.</p></article>
+    </div>
+  </section>
+
+  <section class='section contact-section' aria-labelledby='bottom-contact-heading'>
+    <div class='container contact-panel'>
+      <div class='contact-copy'>
+        <div>
+          <h2 class='h2 reveal' id='bottom-contact-heading'>Book a Free Class with TutorHive</h2>
+          <p class='small reveal'>Tell us your child's class, subject needs, and preferred schedule. We will reply with demo options, tutor fit, and pricing guidance.</p>
+        </div>
+        <div class='contact-info reveal'>
+          <h3>Contact TutorHive</h3>
+          <p class='small'>Email: <strong>hello@tutorhive.in</strong></p>
+          <p class='small'>Phone: <strong>+91 98765 43210</strong></p>
+          <p class='small'>Social: <a href='https://www.instagram.com/' target='_blank' rel='noopener'>Instagram</a> · <a href='https://www.linkedin.com/' target='_blank' rel='noopener'>LinkedIn</a> · <a href='https://www.youtube.com/' target='_blank' rel='noopener'>YouTube</a></p>
+        </div>
+      </div>
+      <form id="bottomContactForm" class="form card contact-form-card reveal">
+        <input type="hidden" name="form" value="Homepage Contact">
+        <input class='input' name='parent' placeholder='Parent name' required>
+        <input class='input' name='phone' placeholder='Phone' required>
+        <input class='input' name='email' type='email' placeholder='Email' required>
+        <select name='subject' class='input'><option>What do you need?</option><option>Book Free Class</option><option>Pricing inquiry</option><option>Maths tuition</option><option>Science tuition</option><option>English tuition</option><option>CBSE, ICSE, IB or IGCSE support</option></select>
+        <textarea class='input' name='notes' rows='4' placeholder='Class, subject, curriculum and preferred timings'></textarea>
+        <button class='btn teal' type='submit'>Book Free Class</button>
+      </form>
+      <div id="bottomContactFormThanks" class="small" style="display:none;margin-top:12px;color:green;">Thank you. We will contact you within 24 hours.</div>
     </div>
   </section>
 </section>
@@ -451,7 +531,27 @@
   </div>
 </section>
 
-<footer><div class='container row'><div class='brand'>🐝 TutorHive</div><div class='small'>© 2026 TutorHive · Home · Subjects · Book · Contact · <a href='blog/'>Blog</a> · <a href='teach/'>Teach</a> · <a href='careers/'>Careers</a></div></div></footer>
+<footer class='site-footer'>
+  <div class='container footer-grid'>
+    <div class='footer-note'>
+      <div class='brand'><img src='logo.png' alt='TutorHive logo'>TutorHive</div>
+      <p class='small'>We are committed to protecting parent and student data. Contact details and learning notes are used only to arrange classes, support progress tracking, and communicate with families.</p>
+      <a class='btn primary footer-cta' href='#book' data-link='book'>Book Free Class</a>
+    </div>
+    <div class='footer-links'>
+      <strong>Contact</strong>
+      <span class='small'>hello@tutorhive.in</span>
+      <span class='small'>+91 98765 43210</span>
+      <a href='#contact' data-link='contact'>Contact</a>
+    </div>
+    <div class='footer-links'>
+      <strong>Social</strong>
+      <a href='https://www.instagram.com/' target='_blank' rel='noopener'>Instagram</a>
+      <a href='https://www.linkedin.com/' target='_blank' rel='noopener'>LinkedIn</a>
+      <a href='https://www.youtube.com/' target='_blank' rel='noopener'>YouTube</a>
+    </div>
+  </div>
+</footer>
 
 <script>
 // SPA navigation
@@ -508,7 +608,7 @@ function wireForm(formId){
     }
   });
 }
-["trialForm","contactForm"].forEach(wireForm);
+["trialForm","contactForm","bottomContactForm"].forEach(wireForm);
 </script>
 
 
