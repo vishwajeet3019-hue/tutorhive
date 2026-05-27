@@ -148,7 +148,7 @@
         .pricing-badge{display:inline-block;align-self:flex-start;background:#ecfeff;color:#0f766e;border:1px solid #bae6fd;border-radius:999px;padding:4px 8px;font-size:13px;font-weight:900}
         .pricing-badge.popular{background:var(--brand);color:#fff;border-color:var(--brand)}
         .pricing-classes{font-weight:900;color:#0f172a}
-        .pricing-highlight{position:relative;border-color:#bae6fd!important;box-shadow:0 0 0 1px rgba(34,211,238,.26),0 16px 44px rgba(14,165,163,.12);animation:pricingOutline 3.2s ease-in-out infinite}
+        .pricing-highlight{position:relative;border-color:#bae6fd!important;box-shadow:0 0 0 1px rgba(34,211,238,.26),0 16px 44px rgba(14,165,163,.12)}
         .pricing-highlight:hover{box-shadow:0 0 0 2px rgba(34,211,238,.42),var(--shadow)}
         @keyframes pricingOutline{0%,100%{box-shadow:0 0 0 1px rgba(34,211,238,.22),0 16px 44px rgba(14,165,163,.1)}50%{box-shadow:0 0 0 4px rgba(34,211,238,.2),0 20px 54px rgba(14,165,163,.18)}}
         .pricing-trust{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
@@ -177,10 +177,10 @@
         .testimonial-avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#ecfeff;color:#0f766e;font-weight:1000;flex:0 0 auto}
         .testimonial-name{display:block;color:#0f172a;font-weight:900;line-height:1.2}.testimonial-meta{display:block;color:#64748b;font-size:13px;font-weight:800;margin-top:2px}
         /* animations */
-        .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}.reveal.show{opacity:1;transform:none}
-        .fade-up{opacity:0;transform:translateY(12px);transition:opacity .6s ease, transform .6s ease}.fade-up.show{opacity:1;transform:none}
+        .reveal{opacity:0;transform:translateY(10px);transition:opacity .32s ease, transform .32s ease}.reveal.show{opacity:1;transform:none}
+        .fade-up{opacity:0;transform:translateY(8px);transition:opacity .32s ease, transform .32s ease}.fade-up.show{opacity:1;transform:none}
         .hero-scene .lesson-shell,.hero-scene .lesson-panel,.hero-scene .student-a,.hero-scene .student-b,.hero-scene .note-card,.hero-scene .spark,.hero-scene .progress-fill,.hero-scene .orbit,.hero-scene .shine,.hero-scene .focus-ring,.hero-scene .lesson-line,.hero-scene .lesson-dot{transform-box:fill-box;transform-origin:center}
-        .hero-scene .lesson-shell{animation:shellFloat 8s cubic-bezier(.45,0,.2,1) infinite}.hero-scene .lesson-panel{animation:panelGlow 6.4s ease-in-out infinite}.hero-scene .student-a{animation:studentFloat 6.2s ease-in-out infinite}.hero-scene .student-b{animation:studentFloat 6.2s ease-in-out infinite -1.4s}.hero-scene .note-card{animation:noteFloat 7s cubic-bezier(.45,0,.2,1) infinite}.hero-scene .spark{animation:sparkle 3.2s ease-in-out infinite}.hero-scene .spark.alt{animation-delay:1.2s}.hero-scene .progress-fill{animation:premiumProgress 6.4s cubic-bezier(.22,1,.36,1) infinite;transform-origin:left center}.hero-scene .orbit{animation:orbitDrift 11s ease-in-out infinite}.hero-scene .orbit.alt{animation-delay:-4.5s}.hero-scene .shine{animation:premiumShine 6.4s ease-in-out infinite}.hero-scene .focus-ring{animation:focusPulse 4.2s ease-in-out infinite}.hero-scene .lesson-line{animation:lineReveal 5.6s ease-in-out infinite}.hero-scene .lesson-line.alt{animation-delay:1.1s}.hero-scene .lesson-dot{animation:dotPulse 2.8s ease-in-out infinite}
+        .hero-scene .progress-fill{transform-origin:left center;transform:scaleX(.9)}
         @keyframes shellFloat{0%,100%{transform:translateY(0)}35%{transform:translateY(-8px)}70%{transform:translateY(-3px)}}
         @keyframes panelGlow{0%,100%{opacity:.96}45%{opacity:1}}
         @keyframes studentFloat{0%,100%{transform:translateY(0)}40%{transform:translateY(-7px)}}
@@ -208,7 +208,7 @@
     </head>
 
 <body>
-<div class='topbar'><div class='container'>🎉 Free 30‑min trial class — live on Zoom.</div></div>
+<div class='topbar'><div class='container'>Free 30-min trial class, live on Zoom.</div></div>
 <div class='nav'><div class='container row'><div class="brand">
     <img src="logo.png" alt="TutorHive Logo">
   </div>
@@ -297,30 +297,30 @@
     <div class='carousel'><div class='carousel-track' id='track'>
       <article class='card testimonial-card'>
         <div class='testimonial-stars' aria-label='5 out of 5 stars'>★★★★★</div>
-        <p class='testimonial-quote'>“TutorHive made math feel lighter for my son. The weekly updates help us understand exactly where he is improving.”</p>
-        <div class='testimonial-parent'><span class='testimonial-avatar'>A</span><span><strong class='testimonial-name'>Asha</strong><span class='testimonial-meta'>Class 5 parent</span></span></div>
+        <p class='testimonial-quote'>“Ananya ma'am made maths feel lighter for my son. The weekly updates help us understand exactly where he is improving.”</p>
+        <div class='testimonial-parent'><span class='testimonial-avatar'>A</span><span><strong class='testimonial-name'>Asha Sharma</strong><span class='testimonial-meta'>Class 5 parent</span></span></div>
       </article>
       <article class='card testimonial-card'>
         <div class='testimonial-stars' aria-label='5 out of 5 stars'>★★★★★</div>
-        <p class='testimonial-quote'>“English sessions improved her writing and confidence. She now participates more in class and asks better questions.”</p>
-        <div class='testimonial-parent'><span class='testimonial-avatar'>V</span><span><strong class='testimonial-name'>Vikram</strong><span class='testimonial-meta'>Class 7 parent</span></span></div>
+        <p class='testimonial-quote'>“Meera ma'am improved my daughter's English writing and confidence. She now participates more in class and asks better questions.”</p>
+        <div class='testimonial-parent'><span class='testimonial-avatar'>V</span><span><strong class='testimonial-name'>Vikram Iyer</strong><span class='testimonial-meta'>Class 7 parent</span></span></div>
       </article>
       <article class='card testimonial-card'>
         <div class='testimonial-stars' aria-label='5 out of 5 stars'>★★★★★</div>
-        <p class='testimonial-quote'>“Simple scheduling, clear Zoom links, and no extra portals to manage. The whole process feels calm for parents.”</p>
-        <div class='testimonial-parent'><span class='testimonial-avatar'>N</span><span><strong class='testimonial-name'>Nidhi</strong><span class='testimonial-meta'>Class 3 parent</span></span></div>
+        <p class='testimonial-quote'>“Raghav sir helped my son revise Class 9 science chapter by chapter. Tests feel less stressful now because revision is planned.”</p>
+        <div class='testimonial-parent'><span class='testimonial-avatar'>N</span><span><strong class='testimonial-name'>Nidhi Verma</strong><span class='testimonial-meta'>Class 9 parent</span></span></div>
       </article>
       <article class='card testimonial-card'>
         <div class='testimonial-stars' aria-label='5 out of 5 stars'>★★★★★</div>
-        <p class='testimonial-quote'>“The tutor is patient and gives clear plans after every class. My daughter actually looks forward to her sessions now.”</p>
-        <div class='testimonial-parent'><span class='testimonial-avatar'>R</span><span><strong class='testimonial-name'>Raj</strong><span class='testimonial-meta'>Class 4 parent</span></span></div>
+        <p class='testimonial-quote'>“Kavita ma'am gave my daughter a clear Class 10 maths plan. Her confidence in board-style questions has improved a lot.”</p>
+        <div class='testimonial-parent'><span class='testimonial-avatar'>R</span><span><strong class='testimonial-name'>Raj Malhotra</strong><span class='testimonial-meta'>Class 10 parent</span></span></div>
       </article>
     </div></div>
   </div>
 
   <div class='container section'>
-    <h2 class='h2 reveal'>Online tuition parents are actually searching for</h2>
-    <p class='small reveal'>Choose the support your child needs now, with subject-focused classes and parent-friendly communication.</p>
+    <h2 class='h2 reveal'>Focused academic support for every school year</h2>
+    <p class='small reveal'>Choose subject-wise online tuition built for clearer concepts, stronger revision, and visible progress across Classes 1-10.</p>
     <div class='grid cols-3' style='margin-top:18px'>
       <article class='tile topic-card reveal'><strong>Maths Tuition</strong><p class='small'>Build number sense, problem-solving confidence, and exam readiness with personalized maths support.</p><a href='online-maths-tuition/'>View online maths tuition</a></article>
       <article class='tile topic-card reveal'><strong>Science Tuition</strong><p class='small'>Strengthen concepts in physics, chemistry, and biology through clear explanations and revision support.</p><a href='online-science-tuition/'>View online science tuition</a></article>
@@ -335,7 +335,7 @@
     <h2 class='h2 reveal'>Why parents trust TutorHive</h2>
     <div class='grid cols-3'>
       <div class='tile reveal'><strong>Expert-guided online tutoring</strong><p class='small'>Each tutor is screened, interviewed, and demo-tested before teaching.</p></div>
-      <div class='tile reveal'><strong>Curriculum-aligned</strong><p class='small'>CBSE/ICSE/IB/IGCSE — experienced with Classes 1–10.</p></div>
+      <div class='tile reveal'><strong>Curriculum-aligned</strong><p class='small'>CBSE, ICSE, IB, and IGCSE support for Classes 1-10.</p></div>
       <div class='tile reveal'><strong>Personalized learning for every student</strong><p class='small'>Lessons adapt to each child’s level, pace, and board syllabus.</p></div>
     </div>
   </div></div>
@@ -356,7 +356,7 @@
         <div><strong>Parent recommendation</strong><div class='small'>rate*</div></div>
       </div>
     </div>
-    <div class='card small reveal' style='margin-top:16px'>*Illustrative starter metrics — replace with your real results.</div>
+    <div class='card small reveal' style='margin-top:16px'>*Illustrative starter metrics. Replace with your real results.</div>
   </div>
   <section id="benefits" class="container reveal">
     <h2 class="h2">What changes for your child</h2>
@@ -400,9 +400,9 @@
       <div class='tile reveal'><div class='icon-wrap'>➕</div><strong>Mathematics</strong><p class='small'>Number sense, arithmetic, fractions, algebra, geometry, word problems.</p><a href='online-maths-tuition/'>Online maths tuition</a></div>
       <div class='tile reveal'><div class='icon-wrap'>🔬</div><strong>Science</strong><p class='small'>Physics basics, chemistry basics, life sciences, experiments.</p><a href='online-science-tuition/'>Online science tuition</a></div>
       <div class='tile reveal'><div class='icon-wrap'>📘</div><strong>English</strong><p class='small'>Grammar, writing, comprehension, literature.</p><a href='english-tuition-school-students/'>English tuition for school students</a></div>
-      <div class='tile reveal'><div class='icon-wrap'>🗺️</div><strong>Social Studies</strong><p class='small'>History, civics, geography — timelines, maps, projects.</p></div>
+      <div class='tile reveal'><div class='icon-wrap'>🗺️</div><strong>Social Studies</strong><p class='small'>History, civics, geography, timelines, maps, and projects.</p></div>
       <div class='tile reveal'><div class='icon-wrap'>📝</div><strong>Hindi</strong><p class='small'>Reading, grammar, vocabulary, composition.</p></div>
-      <div class='tile reveal'><div class='icon-wrap'>💻</div><strong>Coding</strong><p class='small'>Scratch → Python/JS, logic & algorithms, projects.</p></div>
+      <div class='tile reveal'><div class='icon-wrap'>💻</div><strong>Coding</strong><p class='small'>Scratch to Python or JavaScript, with logic, algorithms, and projects.</p></div>
     </div>
   </div>
 </section>
@@ -472,10 +472,10 @@
 <!-- BOOK -->
 <section class='section' data-page='book'>
   <div class='container'>
-    <h1 class='h1'>Book a free 30‑min trial class</h1>
+    <h1 class='h1'>Book a free 30-min trial class</h1>
     <p class='small'>We’ll reply by email/WhatsApp with a Zoom link and timing options within 24 hours.</p>
     <div class='grid cols-2' style='margin-top:20px'>
-      <div class='card reveal'><h2 class='h2' style='margin:0 0 8px'>What you’ll get</h2><ul class='small'><li>1:1 or small group trial (your choice)</li><li>Topic of your choice</li><li>Post‑class summary email</li></ul></div>
+      <div class='card reveal'><h2 class='h2' style='margin:0 0 8px'>What you’ll get</h2><ul class='small'><li>1:1 or small group trial (your choice)</li><li>Topic of your choice</li><li>Post-class summary email</li></ul></div>
       <form id="trialForm" class="form card reveal">
         <input type="hidden" name="form" value="Trial Request">
         <input class='input' name='parent' placeholder='Parent name' required>
@@ -515,7 +515,7 @@
 // SPA navigation
 const pages = document.querySelectorAll('section[data-page]');
 const links = document.querySelectorAll('[data-link]');
-const observer = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); observer.unobserve(e.target); } }); }, {threshold:0.14});
+const observer = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); observer.unobserve(e.target); } }); }, {threshold:0.08, rootMargin:"0px 0px -6% 0px"});
 function showPage(key){
   pages.forEach(p=>p.classList.toggle('active', p.dataset.page===key));
   links.forEach(a=>a.classList.toggle('active', a.dataset.link===key));
@@ -535,9 +535,6 @@ if(!location.hash || !document.querySelector("[data-page='"+location.hash.slice(
   document.querySelectorAll("section[data-page='home'] .reveal,section[data-page='home'] .fade-up").forEach(el=>observer.observe(el));
 }
 
-// auto-scroll carousel
-const track = document.getElementById('track');
-if(track){ let pos=0; setInterval(()=>{ pos+=2; if(pos>=track.scrollWidth-track.clientWidth) pos=0; track.scrollTo({left:pos,behavior:'smooth'}); },60); }
 </script>
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxT36vhIrw0yGRojuAE69i7d2OMlSgcQ9mvG1vl-JExEkQ-s9A1epJ2iN83dGKiYGh5VQ/exec";
