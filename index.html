@@ -145,14 +145,6 @@
         .faq-item{border:1px solid var(--border);border-radius:16px;padding:18px;background:#fff}
         .faq-item h3{margin:0 0 8px;font-size:18px}
         .price-note{margin-top:auto;padding-top:4px;color:#0f172a;font-weight:800}
-        .pricing-badge{display:inline-block;align-self:flex-start;background:#ecfeff;color:#0f766e;border:1px solid #bae6fd;border-radius:999px;padding:4px 8px;font-size:13px;font-weight:900}
-        .pricing-badge.popular{background:var(--brand);color:#fff;border-color:var(--brand)}
-        .pricing-classes{font-weight:900;color:#0f172a}
-        .pricing-highlight{position:relative;border-color:#bae6fd!important;box-shadow:0 0 0 1px rgba(34,211,238,.26),0 16px 44px rgba(14,165,163,.12)}
-        .pricing-highlight:hover{box-shadow:0 0 0 2px rgba(34,211,238,.42),var(--shadow)}
-        @keyframes pricingOutline{0%,100%{box-shadow:0 0 0 1px rgba(34,211,238,.22),0 16px 44px rgba(14,165,163,.1)}50%{box-shadow:0 0 0 4px rgba(34,211,238,.2),0 20px 54px rgba(14,165,163,.18)}}
-        .pricing-trust{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
-        .pricing-trust span{border:1px solid var(--border);border-radius:999px;background:#fff;padding:8px 12px;color:#0f172a;font-size:14px;font-weight:800}
         .icon-wrap{width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#ecfeff;border:1px solid #d9f2f5}
         /* header */
         .topbar{background:linear-gradient(90deg,#ecfeff,#fff);font-weight:800;color:#0b3c3b}
@@ -215,7 +207,6 @@
 <div class='menu'>
 <a href='#home' class='active' data-link='home'>Home</a>
 <a href='#subjects' data-link='subjects'>Subjects</a>
-<a href='#pricing' data-link='pricing'>Pricing</a>
 <a href='#book' data-link='book'>Book Trial</a>
 <a href='#contact' data-link='contact'>Contact</a>
 <a href='blog/'>Blog</a>
@@ -223,7 +214,6 @@
 <div class='tabbar'><div class='container'>
   <a href='#home' class='active' data-link='home'>Home</a>
   <a href='#subjects' data-link='subjects'>Subjects</a>
-  <a href='#pricing' data-link='pricing'>Pricing</a>
   <a href='#book' data-link='book'>Book</a>
   <a href='#contact' data-link='contact'>Contact</a>
   <a href='blog/'>Blog</a>
@@ -407,67 +397,6 @@
   </div>
 </section>
 
-<!-- PRICING -->
-<section class='section' data-page='pricing'>
-  <div class='container'>
-    <h1 class='h1'>Affordable Premium 1:1 Tutoring</h1>
-    <p class='small'>Personalized online learning designed around your child’s academic growth, confidence, and consistency.</p>
-    <div class='grid cols-3' style='margin-top:20px'>
-      <div class='tile reveal'>
-        <span class='pricing-badge'>Perfect for Beginners</span>
-        <strong>Starter</strong>
-        <div style='font-size:28px;font-weight:900;margin:6px 0'>₹3,499<span class='small'> /month</span></div>
-        <div class='pricing-classes'>8 Live 1:1 Classes / Month</div>
-        <ul class='small'>
-          <li>Personalized 1:1 tutoring</li>
-          <li>Homework assistance</li>
-          <li>WhatsApp doubt support</li>
-          <li>Session recordings</li>
-          <li>Flexible scheduling</li>
-        </ul>
-        <div class='small price-note'>Best for students needing consistent academic support.</div>
-        <a class='btn' href='#book' data-link='book'>Start Learning</a>
-      </div>
-      <div class='tile reveal pricing-highlight'>
-        <span class='pricing-badge popular'>Most Popular</span>
-        <strong>Standard</strong>
-        <div style='font-size:28px;font-weight:900;margin:6px 0'>₹6,999<span class='small'> /month</span></div>
-        <div class='pricing-classes'>16 Live 1:1 Classes / Month</div>
-        <ul class='small'>
-          <li>Everything in Starter</li>
-          <li>Personalized study plan</li>
-          <li>Monthly progress tracking</li>
-          <li>Parent feedback sessions</li>
-          <li>Priority tutor matching</li>
-          <li>Flexible rescheduling</li>
-        </ul>
-        <div class='small price-note'>Ideal for students aiming for major academic improvement.</div>
-        <a class='btn teal' href='#book' data-link='book'>Book Free Trial</a>
-      </div>
-      <div class='tile reveal'>
-        <span class='pricing-badge'>Dedicated Mentorship</span>
-        <strong>Elite</strong>
-        <div style='font-size:28px;font-weight:900;margin:6px 0'>₹11,999<span class='small'> /month</span></div>
-        <div class='pricing-classes'>30 Live 1:1 Classes / Month</div>
-        <ul class='small'>
-          <li>Dedicated academic mentor</li>
-          <li>Exam preparation strategy</li>
-          <li>Customized assignments</li>
-          <li>Priority scheduling</li>
-          <li>Advanced performance analytics</li>
-          <li>Faster doubt resolution</li>
-        </ul>
-        <div class='small price-note'>Designed for serious academic performance and exam preparation.</div>
-        <a class='btn' href='#book' data-link='book'>Get Dedicated Mentor</a>
-      </div>
-    </div>
-    <div class='pricing-trust reveal'>
-      <span>Cancel anytime</span>
-      <span>Free demo session available</span>
-      <span>Trusted personalized mentorship</span>
-    </div>
-  </div>
-</section>
 
 <!-- BOOK -->
 <section class='section' data-page='book'>
@@ -509,7 +438,7 @@
   </div>
 </section>
 
-<footer><div class='container row'><div class='brand'>🐝 TutorHive</div><div class='small'>© 2026 TutorHive · Home · Subjects · Pricing · Book · Contact · <a href='blog/'>Blog</a> · <a href='teach/'>Teach</a> · <a href='careers/'>Careers</a></div></div></footer>
+<footer><div class='container row'><div class='brand'>🐝 TutorHive</div><div class='small'>© 2026 TutorHive · Home · Subjects · Book · Contact · <a href='blog/'>Blog</a> · <a href='teach/'>Teach</a> · <a href='careers/'>Careers</a></div></div></footer>
 
 <script>
 // SPA navigation
