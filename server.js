@@ -638,12 +638,13 @@ function serveFile(req, res, url) {
   let pathname = url.pathname === "/" ? "/index.html" : url.pathname;
   const cleanPath = pathname.replace(/^\/+/, "");
   const nestedIndex = path.join(ROOT, cleanPath, "index.html");
-  if (!PUBLIC_FILES.has(url.pathname) && !PUBLIC_FILES.has(pathname)) {
+  const isAsset = cleanPath.startsWith("assets/");
+  if (!PUBLIC_FILES.has(url.pathname) && !PUBLIC_FILES.has(pathname) && !isAsset) {
     if (!fs.existsSync(nestedIndex)) return false;
     pathname = path.join(pathname, "index.html");
   }
-  const file = path.join(ROOT, pathname);
-  if (!fs.existsSync(file)) return false;
+  const file = path.resolve(ROOT, pathname.replace(/^\/+/, ""));
+  if (!file.startsWith(ROOT) || !fs.existsSync(file)) return false;
   const type = pathname.endsWith(".css") ? "text/css" : pathname.endsWith(".png") ? "image/png" : pathname.endsWith(".ico") ? "image/x-icon" : "text/html; charset=utf-8";
   res.writeHead(200, {"Content-Type": type});
   fs.createReadStream(file).pipe(res);

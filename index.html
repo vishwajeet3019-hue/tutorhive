@@ -113,7 +113,7 @@
       <!-- ✅ Existing Inline Styles (keep as is) -->
       <style>
         :root{--brand:#12355b;--brand2:#1f5f8b;--honey:#f59e0b;--saffron:#f4b23c;--ink:#102033;--sub:#526173;--muted:#f8f6f1;--border:#e4ddd1;--bg:#fffdf8;--shadow:0 18px 50px rgba(16,32,51,.13);--soft-shadow:0 14px 36px rgba(16,32,51,.08)}
-        *{box-sizing:border-box}html{scroll-behavior:smooth}
+        *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:120px}
         body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--ink);background:var(--bg);overflow-x:hidden}
         a{color:inherit;text-decoration:none}
         .container{width:min(100% - 40px,1360px);margin:0 auto}
@@ -131,7 +131,7 @@
         .h2{font-size:clamp(26px,3vw,42px);margin:0 0 10px;line-height:1.08;letter-spacing:-.02em}
         .impact{background:linear-gradient(90deg,var(--brand),var(--brand2),var(--saffron));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
         .card{background:#fff;border:1px solid #dde6ee;border-radius:14px;padding:20px;box-shadow:var(--soft-shadow)}
-        .section{padding:86px 0}.section.alt{background:linear-gradient(180deg,#f8fbff,#fff)}
+        .section{padding:96px 0}.section.alt{background:linear-gradient(180deg,#f8fbff 0%,#fffdf8 48%,#fff 100%)}
         .grid{display:grid;gap:18px}.grid.cols-2{grid-template-columns:1fr}.grid.cols-3{grid-template-columns:1fr}
         @media(min-width:900px){.grid.cols-2{grid-template-columns:1.2fr 1fr}.grid.cols-3{grid-template-columns:repeat(3,1fr)}}
         .tile{background:#fff;border:1px solid #dde6ee;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px;transition:.2s ease;box-shadow:0 10px 28px rgba(15,23,42,.045)}
@@ -147,8 +147,14 @@
         .price-note{margin-top:auto;padding-top:4px;color:#0f172a;font-weight:800}
         .icon-wrap{width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#fff7e8;border:1px solid #f8d39a}
         /* header */
-        .topbar{background:#102033;font-weight:850;color:#fff7e8}
-        .topbar .container{padding:10px 0;text-align:center}
+        .topbar{position:relative;overflow:hidden;background:linear-gradient(90deg,#102033 0%,#12355b 42%,#1f5f8b 72%,#102033 100%);font-weight:850;color:#fff7e8;box-shadow:inset 0 -1px 0 rgba(255,255,255,.12)}
+        .topbar::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 0%,transparent 38%,rgba(255,255,255,.16) 48%,transparent 58%,transparent 100%);animation:topbarShine 5.5s ease-in-out infinite}
+        .topbar .container{position:relative;z-index:1;padding:10px 0;text-align:center}
+        .topbar-content{display:inline-flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+        .topbar-live{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.1);padding:4px 10px;color:#ffe0a6;font-size:13px;font-weight:1000;text-transform:uppercase}
+        .topbar-dot{width:8px;height:8px;border-radius:50%;background:#f4b23c;box-shadow:0 0 0 0 rgba(244,178,60,.55);animation:topbarPulse 1.9s ease-out infinite}
+        .topbar-main{font-weight:950}
+        .topbar-note{color:#dbeafe;font-weight:800}
         .nav{border-bottom:1px solid rgba(226,232,240,.9);background:rgba(255,255,255,.92);position:sticky;top:0;z-index:50;backdrop-filter:saturate(160%) blur(14px);box-shadow:0 10px 30px rgba(15,23,42,.04)}
         .nav .row{min-height:78px;display:grid;grid-template-columns:210px minmax(0,1fr) auto;align-items:center;gap:18px}
         .brand{display:flex;align-items:center;gap:10px;font-weight:900}
@@ -158,8 +164,8 @@
         .menu a:after{content:"";position:absolute;left:10px;right:10px;bottom:4px;height:2px;background:linear-gradient(90deg,var(--brand),var(--brand2));border-radius:2px;transform:scaleX(0);transition:transform .18s ease}
         .menu a:hover:after{transform:scaleX(1)}.menu a.active{font-weight:900}
         .nav-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;align-items:center}
-        .premium-home{padding-top:0;background:linear-gradient(135deg,#fffdf8 0%,#fff 46%,#fff4d8 100%)}
-        .hero-grid{display:grid;gap:42px;align-items:center;padding:76px 0 36px}@media(min-width:900px){.hero-grid{grid-template-columns:1.06fr .94fr}}
+        .premium-home{position:relative;overflow:hidden;padding-top:0;background:linear-gradient(135deg,#fffdf8 0%,#fff 46%,#fff4d8 100%)}
+        .hero-grid{display:grid;gap:42px;align-items:center;padding:76px 0 88px}@media(min-width:900px){.hero-grid{grid-template-columns:1.06fr .94fr}}
         .hero-grid>.reveal:first-child{align-self:center}
         .hero-grid>.reveal:first-child>.small{font-size:18px;line-height:1.72;max-width:690px;color:#526173}
         .hero-illus{position:relative;border:1px solid rgba(148,163,184,.24);border-radius:24px;overflow:hidden;box-shadow:0 34px 80px rgba(15,23,42,.14);background:radial-gradient(circle at top left,#fff7e8 0,#fffdf8 34%,#edf5fb 100%);animation:heroEnter .45s cubic-bezier(.22,1,.36,1) both}
@@ -171,12 +177,18 @@
         .testimonial-parent{display:flex;align-items:center;gap:10px;margin-top:18px;padding-top:14px;border-top:1px solid #eef2f7}
         .testimonial-avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#fff7e8;color:#7c4a04;font-weight:1000;flex:0 0 auto}
         .testimonial-name{display:block;color:#0f172a;font-weight:900;line-height:1.2}.testimonial-meta{display:block;color:#64748b;font-size:13px;font-weight:800;margin-top:2px}
-        .testimonial-section{padding:28px 0 8px}.testimonial-section .h2,.support-section .h2{text-wrap:balance}
-        .support-section{padding-top:72px}.support-section>.small{font-size:17px;max-width:760px;color:#526173}
+        .section-transition{position:relative;isolation:isolate}
+        .section-transition::before{content:"";display:block;height:26px}
+        .section-transition::after{content:"";position:absolute;left:50%;top:-26px;width:min(980px,92vw);height:96px;background:radial-gradient(ellipse at center,rgba(244,178,60,.09),rgba(255,255,255,0) 70%);transform:translateX(-50%);z-index:-1;pointer-events:none}
+        .testimonial-section{position:relative;padding:94px 0 36px}
+        .testimonial-section .h2,.support-section .h2{text-wrap:balance}
+        .support-section{position:relative;padding-top:106px}.support-section>.small{font-size:17px;max-width:760px;color:#526173}
         .support-section .grid{gap:20px}.support-section .topic-card{min-height:210px}
         .support-section .topic-card strong{font-size:20px;letter-spacing:-.01em}
         .support-section .topic-card a{color:var(--brand)}
-        .curriculum-section{padding:64px 0 34px;background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(255,247,232,.58))}
+        .curriculum-section{position:relative;padding:124px 0 88px;background:linear-gradient(180deg,rgba(255,253,248,.9) 0%,rgba(255,247,232,.6) 58%,rgba(255,255,255,.9) 100%)}
+        .curriculum-section::before{content:"";position:absolute;inset:0 0 auto;height:190px;background:radial-gradient(circle at 18% 0,rgba(244,178,60,.18),transparent 34%),radial-gradient(circle at 80% 12%,rgba(31,95,139,.1),transparent 30%),linear-gradient(180deg,rgba(255,253,248,.98),rgba(255,255,255,0));pointer-events:none}
+        .curriculum-section::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:72px;background:linear-gradient(180deg,rgba(255,255,255,0),#fff);pointer-events:none}
         .section-head{max-width:820px;margin-bottom:22px}.section-head p{font-size:17px;line-height:1.65;color:var(--sub)}
         .curriculum-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
         .curriculum-card{position:relative;min-height:250px;border:1px solid #eadfcf;border-radius:18px;background:#fff;padding:20px;display:flex;flex-direction:column;gap:14px;box-shadow:0 18px 42px rgba(16,32,51,.08);overflow:hidden}
@@ -194,11 +206,17 @@
         .contact-form-card{border-radius:22px;padding:26px;border-color:#e7d9c2;box-shadow:0 24px 70px rgba(16,32,51,.14)}
         .contact-form-card .btn{width:100%;justify-content:center;border-radius:14px}
         .site-footer{background:#fffaf0;border-top:1px solid #eadfcf;padding:34px 0}
-        .footer-grid{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:26px;align-items:start}
+        .footer-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:26px;align-items:start}
         .footer-note{max-width:560px}.footer-note .brand{margin-bottom:8px}.footer-links{display:grid;gap:9px}.footer-links a{color:var(--brand);font-weight:850}.footer-cta{margin-top:18px}
         /* animations */
-        .reveal{opacity:0;transform:translateY(10px);transition:opacity .32s ease, transform .32s ease}.reveal.show{opacity:1;transform:none}
-        .fade-up{opacity:0;transform:translateY(8px);transition:opacity .32s ease, transform .32s ease}.fade-up.show{opacity:1;transform:none}
+        .reveal{opacity:0;transform:translateY(22px);transition:opacity .72s cubic-bezier(.22,1,.36,1), transform .72s cubic-bezier(.22,1,.36,1);will-change:opacity,transform}
+        .reveal.show{opacity:1;transform:none}
+        .fade-up{opacity:0;transform:translateY(18px);transition:opacity .68s cubic-bezier(.22,1,.36,1), transform .68s cubic-bezier(.22,1,.36,1);will-change:opacity,transform}.fade-up.show{opacity:1;transform:none}
+        .grid .reveal:nth-child(2),.carousel-track .reveal:nth-child(2){transition-delay:.06s}
+        .grid .reveal:nth-child(3),.carousel-track .reveal:nth-child(3){transition-delay:.12s}
+        .grid .reveal:nth-child(4),.carousel-track .reveal:nth-child(4){transition-delay:.18s}
+        .grid .reveal:nth-child(5){transition-delay:.24s}
+        .grid .reveal:nth-child(6){transition-delay:.3s}
         .hero-scene .lesson-shell,.hero-scene .lesson-panel,.hero-scene .student-a,.hero-scene .student-b,.hero-scene .note-card,.hero-scene .spark,.hero-scene .progress-fill,.hero-scene .orbit,.hero-scene .shine,.hero-scene .focus-ring,.hero-scene .lesson-line,.hero-scene .lesson-dot{transform-box:fill-box;transform-origin:center}
         .hero-scene .progress-fill{transform-origin:left center;transform:scaleX(.9)}
         @keyframes shellFloat{0%,100%{transform:translateY(0)}35%{transform:translateY(-8px)}70%{transform:translateY(-3px)}}
@@ -213,6 +231,9 @@
         @keyframes focusPulse{0%,100%{opacity:.28;transform:scale(.92)}48%{opacity:.78;transform:scale(1.08)}}
         @keyframes lineReveal{0%,12%{opacity:.28;transform:scaleX(.58)}45%,80%{opacity:.95;transform:scaleX(1)}100%{opacity:.28;transform:scaleX(.58)}}
         @keyframes dotPulse{0%,100%{opacity:.5;transform:scale(.86)}50%{opacity:1;transform:scale(1.12)}}
+        @keyframes topbarShine{0%,58%{transform:translateX(-120%)}78%,100%{transform:translateX(120%)}}
+        @keyframes topbarPulse{0%{box-shadow:0 0 0 0 rgba(244,178,60,.55)}70%{box-shadow:0 0 0 9px rgba(244,178,60,0)}100%{box-shadow:0 0 0 0 rgba(244,178,60,0)}}
+        @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.reveal,.fade-up,.topbar::before,.topbar-dot{transition:none;animation:none}.reveal,.fade-up{opacity:1;transform:none}}
         /* forms */
         .form{display:grid;gap:10px}.input,select,textarea{width:100%;padding:14px;border:1px solid var(--border);border-radius:14px;background:#fff}
         /* footer */
@@ -225,12 +246,12 @@
         @media(max-width:1020px){.nav .row{grid-template-columns:auto 1fr}.menu{display:none}.nav-actions{justify-content:flex-end}.tabbar{display:block}.tabbar .container{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.tabbar .container::-webkit-scrollbar{display:none}.tabbar a{white-space:nowrap}}
         @media(max-width:1020px){.curriculum-grid{grid-template-columns:repeat(2,1fr)}}
         @media(max-width:900px){.contact-panel,.footer-grid{grid-template-columns:1fr}.contact-section{background:linear-gradient(180deg,#102033 0%,#12355b 58%,#fffdf8 58%,#fffdf8 100%)}}
-        @media(max-width:640px){.container{width:min(100% - 32px,1360px)}.topbar .container{font-size:13px;padding:8px 0}.nav .row{grid-template-columns:1fr;gap:8px;min-height:0;padding:8px 0 10px}.brand,.nav-actions{justify-content:center}.brand img{height:74px;width:86px}.nav-actions{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:8px}.nav-actions .btn{width:100%;padding:10px 12px;font-size:14px;margin:0}.tabbar{position:static}.tabbar .container{padding:8px 0}.tabbar a{font-size:14px;padding:8px 11px}.section{padding:48px 0}.hero-grid{gap:24px;padding:44px 0 26px}.hero-illus{display:none}.h1{font-size:clamp(34px,10.8vw,46px)}.hero-proof{grid-template-columns:1fr}.usp-row{display:grid}.curriculum-grid{grid-template-columns:1fr}.curriculum-card{min-height:0}}
+        @media(max-width:640px){.container{width:min(100% - 32px,1360px)}.topbar .container{font-size:13px;padding:8px 0}.topbar-content{gap:6px}.topbar-live{font-size:11px;padding:3px 8px}.topbar-note{display:none}.nav .row{grid-template-columns:1fr;gap:8px;min-height:0;padding:8px 0 10px}.brand,.nav-actions{justify-content:center}.brand img{height:74px;width:86px}.nav-actions{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:8px}.nav-actions .btn{width:100%;padding:10px 12px;font-size:14px;margin:0}.tabbar{position:static}.tabbar .container{padding:8px 0}.tabbar a{font-size:14px;padding:8px 11px}.section{padding:64px 0}.hero-grid{gap:24px;padding:44px 0 64px}.hero-illus{display:none}.curriculum-section{padding-top:82px;padding-bottom:72px}.testimonial-section,.support-section{padding-top:76px}.section-transition::before{height:20px}.h1{font-size:clamp(34px,10.8vw,46px)}.hero-proof{grid-template-columns:1fr}.usp-row{display:grid}.curriculum-grid{grid-template-columns:1fr}.curriculum-card{min-height:0}}
       </style>
     </head>
 
 <body>
-<div class='topbar'><div class='container'>Free 30-min trial class, live on Zoom.</div></div>
+<div class='topbar'><div class='container'><div class='topbar-content'><span class='topbar-live'><span class='topbar-dot'></span>Live on Zoom</span><span class='topbar-main'>Free 30-min trial class</span><span class='topbar-note'>Meet your tutor before enrolling</span></div></div></div>
 <div class='nav'><div class='container row'><div class="brand">
     <img src="logo.png" alt="TutorHive Logo">
   </div>
@@ -348,7 +369,7 @@
     </div>
   </section>
 
-  <div class='container testimonial-section' style='margin-top:40px'>
+  <div class='container testimonial-section section-transition'>
     <h2 class='h2 reveal'>What parents say</h2>
     <div class='carousel'><div class='carousel-track' id='track'>
       <article class='card testimonial-card'>
@@ -374,7 +395,7 @@
     </div></div>
   </div>
 
-  <div class='container section support-section'>
+  <div class='container section support-section section-transition'>
     <h2 class='h2 reveal'>Focused academic support for every school year</h2>
     <p class='small reveal'>Choose subject-wise online tuition built for clearer concepts, stronger revision, and visible progress across Classes 1-10.</p>
     <div class='grid cols-3' style='margin-top:18px'>
@@ -387,7 +408,7 @@
     </div>
   </div>
 
-  <div class='section alt'><div class='container'>
+  <div class='section alt'><div class='container home-section-flow section-transition'>
     <h2 class='h2 reveal'>Why parents trust TutorHive</h2>
     <div class='grid cols-3'>
       <div class='tile reveal'><strong>Expert-guided online tutoring</strong><p class='small'>Each tutor is screened, interviewed, and demo-tested before teaching.</p></div>
@@ -396,7 +417,7 @@
     </div>
   </div></div>
 
-  <div class='container section'>
+  <div class='container section home-section-flow section-transition'>
     <h2 class='h2 reveal'>Outcomes parents care about</h2>
     <div class='grid cols-3' style='margin-top:12px'>
       <div class='tile reveal' style='display:flex;align-items:center;gap:12px'>
@@ -414,7 +435,7 @@
     </div>
     <div class='card small reveal' style='margin-top:16px'>*Illustrative starter metrics. Replace with your real results.</div>
   </div>
-  <section id="benefits" class="container reveal">
+  <section id="benefits" class="container section section-transition reveal">
     <h2 class="h2">What changes for your child</h2>
     <div class="grid cols-2">
       <div class="card reveal">
@@ -436,13 +457,17 @@
     </div>
   </section>
 
-  <section class='container section'>
+  <section class='container section faq-home section-transition'>
     <h2 class='h2 reveal'>Frequently asked by parents</h2>
     <div class='faq-grid'>
       <article class='faq-item reveal'><h3>Which classes does TutorHive support?</h3><p class='small'>TutorHive supports school students from Classes 1 to 10 with online tuition built around each child's current level.</p></article>
       <article class='faq-item reveal'><h3>Can my child take only maths or science tuition?</h3><p class='small'>Yes. Parents can choose subject-specific support such as maths tuition, science tuition, English tuition, or broader CBSE support.</p></article>
       <article class='faq-item reveal'><h3>How do I know if the tutor is right for my child?</h3><p class='small'>Start with a Free Demo Class, discuss your child's needs, and review the tutor's teaching approach before continuing.</p></article>
       <article class='faq-item reveal'><h3>Do parents receive updates?</h3><p class='small'>Yes. TutorHive is designed around parent trust, with clear communication, progress visibility, and responsive support.</p></article>
+      <article class='faq-item reveal'><h3>Is the trial class really free?</h3><p class='small'>Yes. The 30-minute trial helps you understand tutor fit, teaching style, and your child's learning needs before you decide on regular classes.</p></article>
+      <article class='faq-item reveal'><h3>How are classes matched to my child's school board?</h3><p class='small'>We ask for the class, subject, curriculum, current chapters, and test schedule so tutoring can follow school expectations instead of a generic worksheet plan.</p></article>
+      <article class='faq-item reveal'><h3>Can classes help before exams or only for regular learning?</h3><p class='small'>Both. Students can use TutorHive for steady weekly learning, focused revision before tests, or targeted doubt-clearing when a chapter feels stuck.</p></article>
+      <article class='faq-item reveal'><h3>What happens after I submit the form?</h3><p class='small'>We review your child's details and reply with suitable demo options, timing availability, and next steps for the subject or curriculum you selected.</p></article>
     </div>
   </section>
 
@@ -456,8 +481,6 @@
         <div class='contact-info reveal'>
           <h3>Contact TutorHive</h3>
           <p class='small'>Email: <strong>hello@tutorhive.in</strong></p>
-          <p class='small'>Phone: <strong>+91 98765 43210</strong></p>
-          <p class='small'>Social: <a href='https://www.instagram.com/' target='_blank' rel='noopener'>Instagram</a> · <a href='https://www.linkedin.com/' target='_blank' rel='noopener'>LinkedIn</a> · <a href='https://www.youtube.com/' target='_blank' rel='noopener'>YouTube</a></p>
         </div>
       </div>
       <form id="bottomContactForm" class="form card contact-form-card reveal">
@@ -541,14 +564,6 @@
     <div class='footer-links'>
       <strong>Contact</strong>
       <span class='small'>hello@tutorhive.in</span>
-      <span class='small'>+91 98765 43210</span>
-      <a href='#contact' data-link='contact'>Contact</a>
-    </div>
-    <div class='footer-links'>
-      <strong>Social</strong>
-      <a href='https://www.instagram.com/' target='_blank' rel='noopener'>Instagram</a>
-      <a href='https://www.linkedin.com/' target='_blank' rel='noopener'>LinkedIn</a>
-      <a href='https://www.youtube.com/' target='_blank' rel='noopener'>YouTube</a>
     </div>
   </div>
 </footer>
@@ -557,7 +572,7 @@
 // SPA navigation
 const pages = document.querySelectorAll('section[data-page]');
 const links = document.querySelectorAll('[data-link]');
-const observer = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); observer.unobserve(e.target); } }); }, {threshold:0.08, rootMargin:"0px 0px -6% 0px"});
+const observer = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); observer.unobserve(e.target); } }); }, {threshold:0.05, rootMargin:"0px 0px -12% 0px"});
 function showPage(key){
   pages.forEach(p=>p.classList.toggle('active', p.dataset.page===key));
   links.forEach(a=>a.classList.toggle('active', a.dataset.link===key));
