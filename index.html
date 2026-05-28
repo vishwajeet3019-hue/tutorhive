@@ -163,6 +163,7 @@
         .menu a{padding:8px 12px;border-radius:10px;position:relative}
         .menu a:after{content:"";position:absolute;left:10px;right:10px;bottom:4px;height:2px;background:linear-gradient(90deg,var(--brand),var(--brand2));border-radius:2px;transform:scaleX(0);transition:transform .18s ease}
         .menu a:hover:after{transform:scaleX(1)}.menu a.active{font-weight:900}
+        .nav-dropdown{position:relative;padding:6px 0}.nav-dropdown>a{display:inline-flex;align-items:center;gap:6px}.nav-dropdown>a::before{content:"";width:6px;height:6px;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg);margin-top:-3px;order:2}.dropdown-menu{position:absolute;left:50%;top:100%;width:250px;display:grid;gap:6px;padding:10px;border:1px solid rgba(226,232,240,.95);border-radius:16px;background:#fff;box-shadow:0 22px 60px rgba(15,23,42,.14);transform:translate(-50%,8px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .16s ease,transform .16s ease;z-index:70}.nav-dropdown:hover .dropdown-menu,.nav-dropdown:focus-within .dropdown-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}.dropdown-menu a{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:12px;color:#102033;font-weight:900}.dropdown-menu a::after{display:none}.dropdown-menu a:hover{background:#fff7e8;color:#7c4a04}.dropdown-menu a span{color:#64748b;font-size:12px;font-weight:800}
         .nav-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;align-items:center}
         .premium-home{position:relative;overflow:hidden;padding-top:0;background:linear-gradient(180deg,#fffdf8 0%,#fff 44%,#fffaf0 72%,#fffdf8 100%)}
         .hero-grid{display:grid;gap:42px;align-items:center;padding:76px 0 116px}@media(min-width:900px){.hero-grid{grid-template-columns:1.06fr .94fr}}
@@ -253,7 +254,15 @@
   </div>
 <div class='menu'>
 <a href='#home' class='active' data-link='home'>Home</a>
-<a href='#subjects' data-link='subjects'>Subjects</a>
+<div class='nav-dropdown'><a href='#subjects' data-link='subjects'>Subjects</a><div class='dropdown-menu' aria-label='Subjects offered'>
+  <a href='online-maths-tuition/'>Maths</a>
+  <a href='online-science-tuition/'>Science</a>
+  <a href='english-tuition-school-students/'>English</a>
+  <a href='social-studies-tuition/'>Social Studies</a>
+  <a href='hindi-tuition/'>Hindi</a>
+  <a href='coding-classes/'>Coding</a>
+</div></div>
+<a href='about-us/'>About Us</a>
 <a href='#book' data-link='book'>Book Trial</a>
 <a href='#contact' data-link='contact'>Contact</a>
 <a href='blog/'>Blog</a>
@@ -261,6 +270,7 @@
 <div class='tabbar'><div class='container'>
   <a href='#home' class='active' data-link='home'>Home</a>
   <a href='#subjects' data-link='subjects'>Subjects</a>
+  <a href='about-us/'>About</a>
   <a href='#book' data-link='book'>Book</a>
   <a href='#contact' data-link='contact'>Contact</a>
   <a href='blog/'>Blog</a>
@@ -503,9 +513,9 @@
       <div class='tile reveal'><div class='icon-wrap'>➕</div><strong>Mathematics</strong><p class='small'>Number sense, arithmetic, fractions, algebra, geometry, word problems.</p><a href='online-maths-tuition/'>Online maths tuition</a></div>
       <div class='tile reveal'><div class='icon-wrap'>🔬</div><strong>Science</strong><p class='small'>Physics basics, chemistry basics, life sciences, experiments.</p><a href='online-science-tuition/'>Online science tuition</a></div>
       <div class='tile reveal'><div class='icon-wrap'>📘</div><strong>English</strong><p class='small'>Grammar, writing, comprehension, literature.</p><a href='english-tuition-school-students/'>English tuition for school students</a></div>
-      <div class='tile reveal'><div class='icon-wrap'>🗺️</div><strong>Social Studies</strong><p class='small'>History, civics, geography, timelines, maps, and projects.</p></div>
-      <div class='tile reveal'><div class='icon-wrap'>📝</div><strong>Hindi</strong><p class='small'>Reading, grammar, vocabulary, composition.</p></div>
-      <div class='tile reveal'><div class='icon-wrap'>💻</div><strong>Coding</strong><p class='small'>Scratch to Python or JavaScript, with logic, algorithms, and projects.</p></div>
+      <div class='tile reveal'><div class='icon-wrap'>🗺️</div><strong>Social Studies</strong><p class='small'>History, civics, geography, timelines, maps, and projects.</p><a href='social-studies-tuition/'>Social studies tuition</a></div>
+      <div class='tile reveal'><div class='icon-wrap'>📝</div><strong>Hindi</strong><p class='small'>Reading, grammar, vocabulary, composition.</p><a href='hindi-tuition/'>Hindi tuition</a></div>
+      <div class='tile reveal'><div class='icon-wrap'>💻</div><strong>Coding</strong><p class='small'>Scratch to Python or JavaScript, with logic, algorithms, and projects.</p><a href='coding-classes/'>Coding classes</a></div>
     </div>
   </div>
 </section>
