@@ -179,7 +179,7 @@
         .testimonial-name{display:block;color:#0f172a;font-weight:900;line-height:1.2}.testimonial-meta{display:block;color:#64748b;font-size:13px;font-weight:800;margin-top:2px}
         .section-transition{position:relative;isolation:isolate}
         .section-transition::before{content:"";display:block;height:26px}
-        .section-transition::after{content:"";position:absolute;left:50%;top:-26px;width:min(980px,92vw);height:96px;background:radial-gradient(ellipse at center,rgba(244,178,60,.09),rgba(255,255,255,0) 70%);transform:translateX(-50%);z-index:-1;pointer-events:none}
+        .section-transition::after{content:"";position:absolute;left:50%;top:-18px;width:min(880px,90vw);height:72px;background:radial-gradient(ellipse at center,rgba(244,178,60,.06),rgba(255,255,255,0) 72%);transform:translateX(-50%);z-index:-1;pointer-events:none}
         .testimonial-section{position:relative;padding:94px 0 36px}
         .testimonial-section .h2,.support-section .h2{text-wrap:balance}
         .support-section{position:relative;padding-top:106px}.support-section>.small{font-size:17px;max-width:760px;color:#526173}
@@ -209,14 +209,14 @@
         .footer-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:26px;align-items:start}
         .footer-note{max-width:560px}.footer-note .brand{margin-bottom:8px}.footer-links{display:grid;gap:9px}.footer-links a{color:var(--brand);font-weight:850}.footer-cta{margin-top:18px}
         /* animations */
-        .reveal{opacity:0;transform:translateY(22px);transition:opacity .72s cubic-bezier(.22,1,.36,1), transform .72s cubic-bezier(.22,1,.36,1);will-change:opacity,transform}
+        .reveal{opacity:.96;transform:translateY(14px);transition:opacity .42s ease-out, transform .52s cubic-bezier(.16,1,.3,1);will-change:opacity,transform}
         .reveal.show{opacity:1;transform:none}
-        .fade-up{opacity:0;transform:translateY(18px);transition:opacity .68s cubic-bezier(.22,1,.36,1), transform .68s cubic-bezier(.22,1,.36,1);will-change:opacity,transform}.fade-up.show{opacity:1;transform:none}
-        .grid .reveal:nth-child(2),.carousel-track .reveal:nth-child(2){transition-delay:.06s}
-        .grid .reveal:nth-child(3),.carousel-track .reveal:nth-child(3){transition-delay:.12s}
-        .grid .reveal:nth-child(4),.carousel-track .reveal:nth-child(4){transition-delay:.18s}
-        .grid .reveal:nth-child(5){transition-delay:.24s}
-        .grid .reveal:nth-child(6){transition-delay:.3s}
+        .fade-up{opacity:.96;transform:translateY(12px);transition:opacity .4s ease-out, transform .5s cubic-bezier(.16,1,.3,1);will-change:opacity,transform}.fade-up.show{opacity:1;transform:none}
+        .grid .reveal:nth-child(2),.carousel-track .reveal:nth-child(2){transition-delay:.03s}
+        .grid .reveal:nth-child(3),.carousel-track .reveal:nth-child(3){transition-delay:.06s}
+        .grid .reveal:nth-child(4),.carousel-track .reveal:nth-child(4){transition-delay:.09s}
+        .grid .reveal:nth-child(5){transition-delay:.12s}
+        .grid .reveal:nth-child(6){transition-delay:.15s}
         .hero-scene .lesson-shell,.hero-scene .lesson-panel,.hero-scene .student-a,.hero-scene .student-b,.hero-scene .note-card,.hero-scene .spark,.hero-scene .progress-fill,.hero-scene .orbit,.hero-scene .shine,.hero-scene .focus-ring,.hero-scene .lesson-line,.hero-scene .lesson-dot{transform-box:fill-box;transform-origin:center}
         .hero-scene .progress-fill{transform-origin:left center;transform:scaleX(.9)}
         @keyframes shellFloat{0%,100%{transform:translateY(0)}35%{transform:translateY(-8px)}70%{transform:translateY(-3px)}}
