@@ -185,6 +185,12 @@
         .support-section .grid{gap:20px}.support-section .topic-card{min-height:210px}
         .support-section .topic-card strong{font-size:20px;letter-spacing:-.01em}
         .support-section .topic-card a{color:var(--brand)}
+        .learning-band{position:relative;margin-top:14px;padding:96px 0 112px;background:linear-gradient(180deg,#fff 0%,#fffaf0 18%,#fffdf8 58%,#fff 100%)}
+        .learning-band::before{content:"";position:absolute;inset:0 0 auto;height:120px;background:linear-gradient(180deg,#fff,rgba(255,255,255,0));pointer-events:none}
+        .learning-band::after{content:"";position:absolute;left:0;right:0;bottom:0;height:120px;background:linear-gradient(180deg,rgba(255,255,255,0),#fff);pointer-events:none}
+        .learning-band>.container{position:relative;z-index:1}
+        .learning-band .section{padding:0}
+        .learning-band .faq-home{margin-top:104px}
         .curriculum-section{position:relative;padding:124px 0 88px;background:linear-gradient(180deg,rgba(255,253,248,.9) 0%,rgba(255,247,232,.6) 58%,rgba(255,255,255,.9) 100%)}
         .curriculum-section::before{content:"";position:absolute;inset:0 0 auto;height:190px;background:radial-gradient(circle at 18% 0,rgba(244,178,60,.18),transparent 34%),radial-gradient(circle at 80% 12%,rgba(31,95,139,.1),transparent 30%),linear-gradient(180deg,rgba(255,253,248,.98),rgba(255,255,255,0));pointer-events:none}
         .curriculum-section::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:72px;background:linear-gradient(180deg,rgba(255,255,255,0),#fff);pointer-events:none}
@@ -245,7 +251,7 @@
         @media(max-width:1020px){.nav .row{grid-template-columns:auto 1fr}.menu{display:none}.nav-actions{justify-content:flex-end}.tabbar{display:block}.tabbar .container{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.tabbar .container::-webkit-scrollbar{display:none}.tabbar a{white-space:nowrap}}
         @media(max-width:1020px){.curriculum-grid{grid-template-columns:repeat(2,1fr)}}
         @media(max-width:900px){.contact-panel,.footer-grid{grid-template-columns:1fr}.contact-section{background:linear-gradient(180deg,#102033 0%,#12355b 58%,#fffdf8 58%,#fffdf8 100%)}}
-        @media(max-width:640px){.container{width:min(100% - 32px,1360px)}.topbar .container{font-size:13px;padding:8px 0}.topbar-content{gap:6px}.topbar-live{font-size:11px;padding:3px 8px}.topbar-note{display:none}.nav .row{grid-template-columns:1fr;gap:8px;min-height:0;padding:8px 0 10px}.brand,.nav-actions{justify-content:center}.brand img{height:74px;width:86px}.nav-actions{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:8px}.nav-actions .btn{width:100%;padding:10px 12px;font-size:14px;margin:0}.tabbar{position:static}.tabbar .container{padding:8px 0}.tabbar a{font-size:14px;padding:8px 11px}.section{padding:64px 0}.hero-grid{gap:24px;padding:44px 0 64px}.hero-illus{display:none}.curriculum-section{padding-top:82px;padding-bottom:72px}.testimonial-section,.support-section{padding-top:76px}.section-transition::before{height:20px}.h1{font-size:clamp(34px,10.8vw,46px)}.hero-proof{grid-template-columns:1fr}.usp-row{display:grid}.curriculum-grid{grid-template-columns:1fr}.curriculum-card{min-height:0}}
+        @media(max-width:640px){.container{width:min(100% - 32px,1360px)}.topbar .container{font-size:13px;padding:8px 0}.topbar-content{gap:6px}.topbar-live{font-size:11px;padding:3px 8px}.topbar-note{display:none}.nav .row{grid-template-columns:1fr;gap:8px;min-height:0;padding:8px 0 10px}.brand,.nav-actions{justify-content:center}.brand img{height:74px;width:86px}.nav-actions{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:8px}.nav-actions .btn{width:100%;padding:10px 12px;font-size:14px;margin:0}.tabbar{position:static}.tabbar .container{padding:8px 0}.tabbar a{font-size:14px;padding:8px 11px}.section{padding:64px 0}.hero-grid{gap:24px;padding:44px 0 64px}.hero-illus{display:none}.curriculum-section{padding-top:82px;padding-bottom:72px}.testimonial-section,.support-section{padding-top:76px}.learning-band{padding:76px 0 88px}.learning-band .faq-home{margin-top:78px}.section-transition::before{height:20px}.h1{font-size:clamp(34px,10.8vw,46px)}.hero-proof{grid-template-columns:1fr}.usp-row{display:grid}.curriculum-grid{grid-template-columns:1fr}.curriculum-card{min-height:0}}
       </style>
     </head>
 
@@ -433,41 +439,43 @@
       </div>
     </div>
   </div>
-  <section id="benefits" class="container section section-transition reveal">
-    <h2 class="h2">What changes for your child</h2>
-    <div class="grid cols-2">
-      <div class="card reveal">
-        <h3 class="h3">Concept clarity</h3>
-        <p>Lessons slow down where needed, fix gaps early, and help children understand instead of memorize.</p>
+  <div class='learning-band'>
+    <section id="benefits" class="container section section-transition reveal">
+      <h2 class="h2">What changes for your child</h2>
+      <div class="grid cols-2">
+        <div class="card reveal">
+          <h3 class="h3">Concept clarity</h3>
+          <p>Lessons slow down where needed, fix gaps early, and help children understand instead of memorize.</p>
+        </div>
+        <div class="card reveal">
+          <h3 class="h3">Better study rhythm</h3>
+          <p>Regular classes, homework guidance, and parent updates make learning more consistent week by week.</p>
+        </div>
+        <div class="card reveal">
+          <h3 class="h3">1-on-1 attention</h3>
+          <p>Students ask more questions, receive faster feedback, and learn at a pace matched to their level.</p>
+        </div>
+        <div class="card reveal">
+          <h3 class="h3">School-aligned support</h3>
+          <p>CBSE-focused help for classwork, revision, tests, and long-term academic improvement.</p>
+        </div>
       </div>
-      <div class="card reveal">
-        <h3 class="h3">Better study rhythm</h3>
-        <p>Regular classes, homework guidance, and parent updates make learning more consistent week by week.</p>
-      </div>
-      <div class="card reveal">
-        <h3 class="h3">1-on-1 attention</h3>
-        <p>Students ask more questions, receive faster feedback, and learn at a pace matched to their level.</p>
-      </div>
-      <div class="card reveal">
-        <h3 class="h3">School-aligned support</h3>
-        <p>CBSE-focused help for classwork, revision, tests, and long-term academic improvement.</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class='container section faq-home section-transition'>
-    <h2 class='h2 reveal'>Frequently asked by parents</h2>
-    <div class='faq-grid'>
-      <article class='faq-item reveal'><h3>Which classes does TutorHive support?</h3><p class='small'>TutorHive supports school students from Classes 1 to 10 with online tuition built around each child's current level.</p></article>
-      <article class='faq-item reveal'><h3>Can my child take only maths or science tuition?</h3><p class='small'>Yes. Parents can choose subject-specific support such as maths tuition, science tuition, English tuition, or broader CBSE support.</p></article>
-      <article class='faq-item reveal'><h3>How do I know if the tutor is right for my child?</h3><p class='small'>Start with a Free Demo Class, discuss your child's needs, and review the tutor's teaching approach before continuing.</p></article>
-      <article class='faq-item reveal'><h3>Do parents receive updates?</h3><p class='small'>Yes. TutorHive is designed around parent trust, with clear communication, progress visibility, and responsive support.</p></article>
-      <article class='faq-item reveal'><h3>Is the trial class really free?</h3><p class='small'>Yes. The 30-minute trial helps you understand tutor fit, teaching style, and your child's learning needs before you decide on regular classes.</p></article>
-      <article class='faq-item reveal'><h3>How are classes matched to my child's school board?</h3><p class='small'>We ask for the class, subject, curriculum, current chapters, and test schedule so tutoring can follow school expectations instead of a generic worksheet plan.</p></article>
-      <article class='faq-item reveal'><h3>Can classes help before exams or only for regular learning?</h3><p class='small'>Both. Students can use TutorHive for steady weekly learning, focused revision before tests, or targeted doubt-clearing when a chapter feels stuck.</p></article>
-      <article class='faq-item reveal'><h3>What happens after I submit the form?</h3><p class='small'>We review your child's details and reply with suitable demo options, timing availability, and next steps for the subject or curriculum you selected.</p></article>
-    </div>
-  </section>
+    <section class='container section faq-home section-transition'>
+      <h2 class='h2 reveal'>Frequently asked by parents</h2>
+      <div class='faq-grid'>
+        <article class='faq-item reveal'><h3>Which classes does TutorHive support?</h3><p class='small'>TutorHive supports school students from Classes 1 to 10 with online tuition built around each child's current level.</p></article>
+        <article class='faq-item reveal'><h3>Can my child take only maths or science tuition?</h3><p class='small'>Yes. Parents can choose subject-specific support such as maths tuition, science tuition, English tuition, or broader CBSE support.</p></article>
+        <article class='faq-item reveal'><h3>How do I know if the tutor is right for my child?</h3><p class='small'>Start with a Free Demo Class, discuss your child's needs, and review the tutor's teaching approach before continuing.</p></article>
+        <article class='faq-item reveal'><h3>Do parents receive updates?</h3><p class='small'>Yes. TutorHive is designed around parent trust, with clear communication, progress visibility, and responsive support.</p></article>
+        <article class='faq-item reveal'><h3>Is the trial class really free?</h3><p class='small'>Yes. The 30-minute trial helps you understand tutor fit, teaching style, and your child's learning needs before you decide on regular classes.</p></article>
+        <article class='faq-item reveal'><h3>How are classes matched to my child's school board?</h3><p class='small'>We ask for the class, subject, curriculum, current chapters, and test schedule so tutoring can follow school expectations instead of a generic worksheet plan.</p></article>
+        <article class='faq-item reveal'><h3>Can classes help before exams or only for regular learning?</h3><p class='small'>Both. Students can use TutorHive for steady weekly learning, focused revision before tests, or targeted doubt-clearing when a chapter feels stuck.</p></article>
+        <article class='faq-item reveal'><h3>What happens after I submit the form?</h3><p class='small'>We review your child's details and reply with suitable demo options, timing availability, and next steps for the subject or curriculum you selected.</p></article>
+      </div>
+    </section>
+  </div>
 
   <section class='section contact-section' aria-labelledby='bottom-contact-heading'>
     <div class='container contact-panel'>
