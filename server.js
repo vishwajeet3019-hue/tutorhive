@@ -608,9 +608,10 @@ function renderSite(website) {
   const t = normalizeTemplate(website.publishedTemplate);
   const siteName = t.instituteName || t.tutorName || "Tutor Website";
   const siteDescription = t.headline || `${siteName} tutoring website`;
-  const faviconTags = t.logoUrl
-    ? `<link rel="icon" href="${escapeHtml(t.logoUrl)}"><link rel="apple-touch-icon" href="${escapeHtml(t.logoUrl)}">`
-    : "";
+  const initials = (siteName.match(/\b[A-Za-z0-9]/g) || ["T"]).slice(0, 2).join("").toUpperCase();
+  const generatedFavicon = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#12355b"/><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="#fff7e8" font-family="Arial, sans-serif" font-size="25" font-weight="800">${initials}</text></svg>`)}`;
+  const faviconHref = t.logoUrl || generatedFavicon;
+  const faviconTags = `<link rel="icon" href="${escapeHtml(faviconHref)}"><link rel="apple-touch-icon" href="${escapeHtml(faviconHref)}">`;
   const sections = (t.sectionOrder || ["courses", "reviews", "contact"]).filter(key => key !== "services").map(key => {
     if (key === "courses") {
       return `<section class="band tint" id="courses"><h2 class="section-title">Courses</h2><p class="section-copy">Choose the support that matches your learning goals.</p><div class="course-grid">${(t.courses || []).map(course => `<article class="course-card"><img src="${escapeHtml(course.imageUrl || defaultImage)}" alt="${escapeHtml(course.title || "Course")}"><div class="course-body"><strong>${escapeHtml(course.title || "Untitled course")}</strong><p>${escapeHtml(course.description || "Personalized support for steady academic progress.")}</p><div class="course-meta">${course.price ? `<span>${escapeHtml(course.price)}</span>` : ""}<a class="btn course-cta" href="#contact">${course.price ? "Enquire about this course" : "Ask for pricing"}</a></div></div></article>`).join("")}</div></section>`;
