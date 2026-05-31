@@ -147,14 +147,14 @@
         .price-note{margin-top:auto;padding-top:4px;color:#0f172a;font-weight:800}
         .icon-wrap{width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#fff7e8;border:1px solid #f8d39a}
         /* header */
-        .topbar{position:relative;overflow:hidden;background:linear-gradient(90deg,#102033 0%,#12355b 42%,#1f5f8b 72%,#102033 100%);font-weight:850;color:#fff7e8;box-shadow:inset 0 -1px 0 rgba(255,255,255,.12)}
-        .topbar::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 0%,transparent 36%,rgba(255,255,255,.12) 50%,transparent 64%,transparent 100%);opacity:.45}
-        .topbar .container{position:relative;z-index:1;padding:10px 0;text-align:center}
-        .topbar-content{display:inline-flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
-        .topbar-live{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.1);padding:4px 10px;color:#ffe0a6;font-size:13px;font-weight:1000;text-transform:uppercase}
+        .topbar{position:relative;overflow:hidden;background:linear-gradient(90deg,#fffdf8 0%,#fff7e8 46%,#edf5fb 100%);font-weight:850;color:var(--brand);border-bottom:1px solid rgba(228,221,209,.72)}
+        .topbar::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 22% 50%,rgba(244,178,60,.16),transparent 28%),radial-gradient(circle at 78% 50%,rgba(31,95,139,.14),transparent 30%);opacity:.8}
+        .topbar .container{position:relative;z-index:1;padding:8px 0;text-align:center}
+        .topbar-content{display:inline-flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:4px 12px;border:1px solid rgba(228,221,209,.8);border-radius:999px;background:rgba(255,255,255,.68);box-shadow:0 8px 24px rgba(16,32,51,.05)}
+        .topbar-live{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(244,178,60,.32);border-radius:999px;background:#fff7e8;padding:3px 9px;color:#7c4a04;font-size:12px;font-weight:1000;text-transform:uppercase}
         .topbar-dot{width:8px;height:8px;border-radius:50%;background:#f4b23c;box-shadow:0 0 0 5px rgba(244,178,60,.16)}
         .topbar-main{font-weight:950}
-        .topbar-note{color:#dbeafe;font-weight:800}
+        .topbar-note{color:#526173;font-weight:800}
         .nav{border-bottom:1px solid rgba(226,232,240,.9);background:rgba(255,255,255,.97);position:sticky;top:0;z-index:50;box-shadow:0 10px 30px rgba(15,23,42,.04)}
         .nav .row{min-height:78px;display:grid;grid-template-columns:210px minmax(0,1fr) auto;align-items:center;gap:18px}
         .brand{display:flex;align-items:center;gap:10px;font-weight:900}
@@ -170,6 +170,7 @@
         .hero-grid>.reveal:first-child{align-self:center}
         .hero-grid>.reveal:first-child>.small{font-size:18px;line-height:1.72;max-width:690px;color:#526173}
         .hero-illus{position:relative;border:1px solid rgba(148,163,184,.24);border-radius:24px;overflow:hidden;box-shadow:0 34px 80px rgba(15,23,42,.14);background:radial-gradient(circle at top left,#fff7e8 0,#fffdf8 34%,#edf5fb 100%);animation:heroEnter .45s cubic-bezier(.22,1,.36,1) both}
+        .hero-illus::after{content:"";position:absolute;inset:-20%;background:linear-gradient(115deg,transparent 34%,rgba(255,255,255,.38) 48%,transparent 62%);transform:translateX(-70%) rotate(2deg);animation:cardSweep 6.5s ease-in-out infinite;pointer-events:none}
         .carousel{position:relative;overflow:hidden}.carousel-track{display:flex;gap:18px;scroll-snap-type:x mandatory;overflow-x:auto;padding:4px 0 10px}.carousel .card{min-width:300px;scroll-snap-align:start}
         .testimonial-card{position:relative;min-width:320px;max-width:410px;border-color:#dbe5ed;border-radius:14px;padding:22px;box-shadow:0 14px 34px rgba(15,23,42,.07);overflow:hidden}
         .testimonial-card::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,var(--brand),var(--brand2),var(--honey))}
@@ -225,7 +226,18 @@
         .reveal,.fade-up{opacity:1;transform:none}
         .reveal.show,.fade-up.show{opacity:1;transform:none}
         .hero-scene .lesson-shell,.hero-scene .lesson-panel,.hero-scene .student-a,.hero-scene .student-b,.hero-scene .note-card,.hero-scene .spark,.hero-scene .progress-fill,.hero-scene .orbit,.hero-scene .shine,.hero-scene .focus-ring,.hero-scene .lesson-line,.hero-scene .lesson-dot{transform-box:fill-box;transform-origin:center}
-        .hero-scene .progress-fill{transform-origin:left center;transform:scaleX(.9)}
+        .hero-scene .lesson-shell{animation:shellFloat 7s ease-in-out infinite}
+        .hero-scene .lesson-panel{animation:panelGlow 4.8s ease-in-out infinite}
+        .hero-scene .student-a{animation:studentFloat 5.2s ease-in-out infinite}
+        .hero-scene .student-b{animation:studentFloat 5.2s ease-in-out .8s infinite}
+        .hero-scene .note-card{animation:noteFloat 6.2s ease-in-out infinite}
+        .hero-scene .spark{animation:sparkle 2.6s ease-in-out infinite}.hero-scene .spark.alt{animation-delay:.65s}
+        .hero-scene .orbit{animation:orbitDrift 8s ease-in-out infinite}.hero-scene .orbit.alt{animation-delay:1.4s}
+        .hero-scene .shine{animation:premiumShine 4.6s ease-in-out infinite}
+        .hero-scene .focus-ring{animation:focusPulse 3.6s ease-in-out infinite}
+        .hero-scene .lesson-line{transform-origin:left center;animation:lineReveal 4.6s ease-in-out infinite}.hero-scene .lesson-line.alt{animation-delay:.34s}
+        .hero-scene .lesson-dot{animation:dotPulse 2.2s ease-in-out infinite}.hero-scene .lesson-dot:nth-of-type(2){animation-delay:.24s}.hero-scene .lesson-dot:nth-of-type(3){animation-delay:.48s}
+        .hero-scene .progress-fill{transform-origin:left center;animation:premiumProgress 5.5s ease-in-out infinite}
         @keyframes shellFloat{0%,100%{transform:translateY(0)}35%{transform:translateY(-8px)}70%{transform:translateY(-3px)}}
         @keyframes panelGlow{0%,100%{opacity:.96}45%{opacity:1}}
         @keyframes studentFloat{0%,100%{transform:translateY(0)}40%{transform:translateY(-7px)}}
@@ -235,10 +247,11 @@
         @keyframes orbitDrift{0%,100%{transform:translate(0,0)}35%{transform:translate(14px,-10px)}70%{transform:translate(6px,-4px)}}
         @keyframes premiumShine{0%,18%{opacity:0;transform:translateX(-140px) skewX(-18deg)}34%{opacity:.8}52%,100%{opacity:0;transform:translateX(390px) skewX(-18deg)}}
         @keyframes heroEnter{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:none}}
+        @keyframes cardSweep{0%,52%{transform:translateX(-75%) rotate(2deg)}70%{transform:translateX(75%) rotate(2deg)}100%{transform:translateX(75%) rotate(2deg)}}
         @keyframes focusPulse{0%,100%{opacity:.28;transform:scale(.92)}48%{opacity:.78;transform:scale(1.08)}}
         @keyframes lineReveal{0%,12%{opacity:.28;transform:scaleX(.58)}45%,80%{opacity:.95;transform:scaleX(1)}100%{opacity:.28;transform:scaleX(.58)}}
         @keyframes dotPulse{0%,100%{opacity:.5;transform:scale(.86)}50%{opacity:1;transform:scale(1.12)}}
-        @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.reveal,.fade-up,.topbar::before,.topbar-dot{transition:none;animation:none}.reveal,.fade-up{opacity:1;transform:none}}
+        @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.reveal,.fade-up,.topbar::before,.topbar-dot,.hero-illus,.hero-illus::after,.hero-scene *{transition:none;animation:none}.reveal,.fade-up{opacity:1;transform:none}}
         /* forms */
         .form{display:grid;gap:10px}.input,select,textarea{width:100%;padding:14px;border:1px solid var(--border);border-radius:14px;background:#fff}
         /* footer */
