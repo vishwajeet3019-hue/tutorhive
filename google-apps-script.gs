@@ -17,6 +17,8 @@ function doPost(e) {
       data.parent || data.name || "",
       data.phone || "",
       data.email || "",
+      data.studentClass || "",
+      data.board || "",
       data.subject || "",
       data.notes || data.message || ""
     ]);
@@ -40,6 +42,8 @@ function testWrite() {
       parent: "Apps Script Test",
       phone: "0000000000",
       email: "test@example.com",
+      studentClass: "Class 8",
+      board: "CBSE",
       subject: "Mathematics",
       notes: "If this row appears, the script can write to the sheet."
     }
