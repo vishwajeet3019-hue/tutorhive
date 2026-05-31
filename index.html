@@ -210,6 +210,14 @@
         .contact-info h3{margin:0 0 12px;color:#fff}.contact-info p{margin:10px 0;color:#dbeafe}.contact-info a{color:#ffd98a;font-weight:900}
         .contact-form-card{border-radius:22px;padding:26px;border-color:#e7d9c2;box-shadow:0 24px 70px rgba(16,32,51,.14)}
         .contact-form-card .btn{width:100%;justify-content:center;border-radius:14px}
+        .form-success-overlay{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:20px;background:rgba(15,23,42,.46);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s ease,visibility .22s ease}
+        .form-success-overlay.active{opacity:1;visibility:visible;pointer-events:auto}
+        .success-card{width:min(440px,100%);position:relative;overflow:hidden;border:1px solid rgba(226,232,240,.92);border-radius:26px;background:#fffdf8;padding:30px;text-align:center;box-shadow:0 30px 90px rgba(16,32,51,.28);transform:translateY(14px) scale(.98);transition:transform .24s cubic-bezier(.16,1,.3,1)}
+        .form-success-overlay.active .success-card{transform:none}
+        .success-card::before{content:"";position:absolute;inset:0 0 auto;height:7px;background:linear-gradient(90deg,var(--brand),var(--brand2),var(--saffron))}
+        .success-graphic{width:118px;height:118px;margin:0 auto 18px;display:grid;place-items:center;border-radius:999px;background:radial-gradient(circle,#fff7e8 0%,#fffdf8 58%,#edf5fb 100%);box-shadow:inset 0 0 0 1px #eadfcf,0 16px 34px rgba(16,32,51,.1)}
+        .success-graphic svg{width:86px;height:86px}.success-card h3{font-size:28px;line-height:1.12;margin:0 0 8px}.success-card p{margin:0 auto;color:var(--sub);line-height:1.6;max-width:330px}.success-close{margin-top:22px;border-radius:999px}
+        .btn[disabled]{opacity:.78;cursor:wait;transform:none}
         .site-footer{background:#fffaf0;border-top:1px solid #eadfcf;padding:34px 0}
         .footer-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:26px;align-items:start}
         .footer-note{max-width:560px}.footer-note .brand{margin-bottom:8px}.footer-links{display:grid;gap:9px}.footer-links a{color:var(--brand);font-weight:850}.footer-cta{margin-top:18px}
@@ -505,6 +513,23 @@
   </section>
 </section>
 
+<div class="form-success-overlay" id="formSuccessOverlay" role="dialog" aria-modal="true" aria-labelledby="formSuccessTitle" aria-describedby="formSuccessCopy">
+  <div class="success-card">
+    <div class="success-graphic" aria-hidden="true">
+      <svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="48" cy="48" r="38" fill="#fff7e8"/>
+        <path d="M30 50.5 42.5 63 68 35" fill="none" stroke="#12355b" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M24 28c8-10 22-15 36-10" fill="none" stroke="#f4b23c" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="72" cy="63" r="6" fill="#1f5f8b"/>
+        <circle cx="23" cy="66" r="4" fill="#f4b23c"/>
+      </svg>
+    </div>
+    <h3 id="formSuccessTitle">Thank you!</h3>
+    <p id="formSuccessCopy">We received your request and will contact you within 24 hours with demo options.</p>
+    <button class="btn teal success-close" type="button" id="formSuccessClose">Done</button>
+  </div>
+</div>
+
 <!-- SUBJECTS -->
 <section class='section' data-page='subjects'>
   <div class='container'>
@@ -603,6 +628,9 @@ if(!location.hash || !document.querySelector("[data-page='"+location.hash.slice(
 </script>
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxT36vhIrw0yGRojuAE69i7d2OMlSgcQ9mvG1vl-JExEkQ-s9A1epJ2iN83dGKiYGh5VQ/exec";
+const formSuccessOverlay = document.getElementById("formSuccessOverlay");
+document.getElementById("formSuccessClose")?.addEventListener("click",()=>formSuccessOverlay?.classList.remove("active"));
+formSuccessOverlay?.addEventListener("click",(event)=>{ if(event.target === formSuccessOverlay) formSuccessOverlay.classList.remove("active"); });
 
 function wireForm(formId){
   const form = document.getElementById(formId);
@@ -611,6 +639,12 @@ function wireForm(formId){
     e.preventDefault();
     const data = Object.fromEntries(new FormData(form).entries());
     const body = new URLSearchParams(data).toString();
+    const button = form.querySelector("button[type='submit']");
+    const originalLabel = button?.textContent || "";
+    if(button){
+      button.disabled = true;
+      button.textContent = "Sending...";
+    }
     try{
       await fetch(SCRIPT_URL, {
         method: "POST",
@@ -623,11 +657,20 @@ function wireForm(formId){
         return;
       }
       const thanks = document.getElementById(formId + "Thanks");
-      if(thanks) thanks.style.display = "block";
+      if(formId === "bottomContactForm" && formSuccessOverlay){
+        formSuccessOverlay.classList.add("active");
+      } else if(thanks) {
+        thanks.style.display = "block";
+      }
       form.reset();
     }catch(err){
       console.error("Submit error:", err);
       alert("❌ Something went wrong. Please try again.");
+    }finally{
+      if(button){
+        button.disabled = false;
+        button.textContent = originalLabel;
+      }
     }
   });
 }
