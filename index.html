@@ -292,7 +292,7 @@
 </div></div>
 <a href='#about' data-link='about'>About Us</a>
 <a href='#book' data-link='book'>Book Trial</a>
-<a href='#contact' data-link='contact'>Contact</a>
+<a href='#home-contact' data-scroll='home-contact'>Contact</a>
 <a href='#blog' data-link='blog'>Blog</a>
 </div><div class='nav-actions'><a class='btn teal' href='#book' data-link='book'>Book Free Class</a></div></div></div>
 <div class='tabbar'><div class='container'>
@@ -300,7 +300,7 @@
   <a href='#subjects' data-link='subjects'>Subjects</a>
   <a href='#about' data-link='about'>About</a>
   <a href='#book' data-link='book'>Book</a>
-  <a href='#contact' data-link='contact'>Contact</a>
+  <a href='#home-contact' data-scroll='home-contact'>Contact</a>
   <a href='#blog' data-link='blog'>Blog</a>
 </div></div>
 
@@ -505,7 +505,7 @@
     </section>
   </div>
 
-  <section class='section contact-section' aria-labelledby='bottom-contact-heading'>
+  <section class='section contact-section' id='home-contact' aria-labelledby='bottom-contact-heading'>
     <div class='container contact-panel'>
       <div class='contact-copy'>
         <div>
@@ -589,26 +589,6 @@
     </div>
   </div>
 </section>
-<!-- CONTACT -->
-<section class='section' data-page='contact'>
-  <div class='container'>
-    <h1 class='h1'>Contact us</h1>
-    <p class='small'>We’re online-first. Reach us anytime.</p>
-    <div class='grid cols-2' style='margin-top:20px'>
-        <form id="contactForm" class="form card reveal">
-          <input type="hidden" name="form" value="Contact">
-          <input class="input" name="name" placeholder="Your name" required>
-          <input class="input" name="email" type="email" placeholder="Your email" required>
-          <input class="input" name="phone" type="tel" placeholder="Your phone number" required>
-          <textarea class="input" name="message" placeholder="Your message"></textarea>
-          <button class="btn teal" type="submit">Send</button>
-        </form>
-        <div id="contactFormThanks" class="small" style="display:none;margin-top:12px;color:green;">✅ Got it! We’ll reply soon.</div>
-      <div class='card reveal'><h3 style='margin:0 0 8px'>Other ways to reach us</h3><p class='small'>Email: <strong>hello@tutorhive.in</strong></p><p class='small'>Website: <strong>tutorhive.in</strong></p></div>
-    </div>
-  </div>
-</section>
-
 <!-- ABOUT -->
 <section class='section story-page' data-page='about'>
   <div class='container story-wrap'>
@@ -667,6 +647,7 @@
 // SPA navigation
 const pages = document.querySelectorAll('section[data-page]');
 const links = document.querySelectorAll('[data-link]');
+const scrollLinks = document.querySelectorAll('[data-scroll]');
 function revealNow(scope = document){
   scope.querySelectorAll('.reveal,.fade-up').forEach(el=>el.classList.add('show'));
 }
@@ -678,6 +659,17 @@ function showPage(key){
   revealNow(activePage || document);
 }
 links.forEach(a=>a.addEventListener('click', e=>{ e.preventDefault(); showPage(a.dataset.link); }));
+scrollLinks.forEach(a=>a.addEventListener('click', e=>{
+  e.preventDefault();
+  showPage('home');
+  requestAnimationFrame(()=>{
+    const target = document.getElementById(a.dataset.scroll);
+    if(target){
+      target.scrollIntoView({behavior:'smooth', block:'start'});
+      history.replaceState(null, "", "#"+a.dataset.scroll);
+    }
+  });
+}));
 if(location.hash && document.querySelector("[data-page='"+location.hash.slice(1)+"']")) showPage(location.hash.slice(1));
 
 // keep sections instantly visible so scrolling stays light and responsive
@@ -734,7 +726,7 @@ function wireForm(formId){
     }
   });
 }
-["trialForm","contactForm","bottomContactForm"].forEach(wireForm);
+["trialForm","bottomContactForm"].forEach(wireForm);
 </script>
 
 
