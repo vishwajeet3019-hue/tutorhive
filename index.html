@@ -503,7 +503,7 @@
       <form id="bottomContactForm" class="form card contact-form-card reveal">
         <input type="hidden" name="form" value="Homepage Contact">
         <input class='input' name='parent' placeholder='Parent name' required>
-        <input class='input' name='phone' placeholder='Phone' required>
+        <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Phone' required>
         <input class='input' name='email' type='email' placeholder='Email' required>
         <textarea class='input' name='notes' rows='4' placeholder='How can we help?'></textarea>
         <button class='btn teal' type='submit'>Book Free Class</button>
@@ -557,7 +557,7 @@
       <form id="trialForm" class="form card reveal">
         <input type="hidden" name="form" value="Trial Request">
         <input class='input' name='parent' placeholder='Parent name' required>
-        <input class='input' name='phone' placeholder='Phone' required>
+        <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Phone' required>
         <input class='input' name='email' type='email' placeholder='Email' required>
         <select name='studentClass' class='input' required><option value=''>Student class</option><option>Class 1</option><option>Class 2</option><option>Class 3</option><option>Class 4</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option></select>
         <select name='board' class='input' required><option value=''>Board / curriculum</option><option>CBSE</option><option>ICSE</option><option>IB</option><option>IGCSE</option><option>State Board</option><option>Other / Not sure</option></select>
@@ -664,12 +664,30 @@ const formSuccessOverlay = document.getElementById("formSuccessOverlay");
 document.getElementById("formSuccessClose")?.addEventListener("click",()=>formSuccessOverlay?.classList.remove("active"));
 formSuccessOverlay?.addEventListener("click",(event)=>{ if(event.target === formSuccessOverlay) formSuccessOverlay.classList.remove("active"); });
 
+function normalizeIndianPhone(value){
+  let digits = String(value || "").replace(/\D/g, "");
+  if(digits.length === 11 && digits.startsWith("0")) digits = digits.slice(1);
+  if(digits.length === 12 && digits.startsWith("91")) digits = digits.slice(2);
+  return /^[6-9]\d{9}$/.test(digits) ? digits : "";
+}
+
 function wireForm(formId){
   const form = document.getElementById(formId);
   if(!form) return;
+  const phoneInput = form.querySelector("[name='phone']");
+  phoneInput?.addEventListener("input",()=>phoneInput.setCustomValidity(""));
   form.addEventListener("submit", async (e)=>{
     e.preventDefault();
     const data = Object.fromEntries(new FormData(form).entries());
+    const verifiedPhone = normalizeIndianPhone(data.phone);
+    if(!verifiedPhone){
+      phoneInput?.setCustomValidity("Please enter a valid 10-digit Indian mobile number.");
+      phoneInput?.reportValidity();
+      phoneInput?.focus();
+      return;
+    }
+    phoneInput?.setCustomValidity("");
+    data.phone = verifiedPhone;
     const body = new URLSearchParams(data).toString();
     const button = form.querySelector("button[type='submit']");
     const originalLabel = button?.textContent || "";
