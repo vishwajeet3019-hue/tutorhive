@@ -558,7 +558,6 @@
         <input type="hidden" name="form" value="Trial Request">
         <input class='input' name='parent' placeholder='Parent name' required>
         <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Phone' required>
-        <input class='input' name='confirmPhone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Confirm phone' required>
         <input class='input' name='email' type='email' placeholder='Email' required>
         <select name='studentClass' class='input' required><option value=''>Student class</option><option>Class 1</option><option>Class 2</option><option>Class 3</option><option>Class 4</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option></select>
         <select name='board' class='input' required><option value=''>Board / curriculum</option><option>CBSE</option><option>ICSE</option><option>IB</option><option>IGCSE</option><option>State Board</option><option>Other / Not sure</option></select>
@@ -673,34 +672,42 @@ function normalizeIndianPhone(value){
   return /^[6-9]\d{9}$/.test(digits) ? digits : "";
 }
 
+function isLikelyRealPhone(digits){
+  if(!digits) return false;
+  const commonFakeNumbers = new Set([
+    "9876543210",
+    "9123456789",
+    "9999999999",
+    "8888888888",
+    "7777777777",
+    "6666666666"
+  ]);
+  const ascending = "0123456789";
+  const descending = "9876543210";
+  if(commonFakeNumbers.has(digits)) return false;
+  if(/^(\d)\1{9}$/.test(digits)) return false;
+  if(ascending.includes(digits) || descending.includes(digits)) return false;
+  if(/(\d)\1{5,}/.test(digits)) return false;
+  return new Set(digits).size >= 4;
+}
+
 function wireForm(formId){
   const form = document.getElementById(formId);
   if(!form) return;
   const phoneInput = form.querySelector("[name='phone']");
-  const confirmPhoneInput = form.querySelector("[name='confirmPhone']");
   phoneInput?.addEventListener("input",()=>phoneInput.setCustomValidity(""));
-  confirmPhoneInput?.addEventListener("input",()=>confirmPhoneInput.setCustomValidity(""));
   form.addEventListener("submit", async (e)=>{
     e.preventDefault();
     const data = Object.fromEntries(new FormData(form).entries());
     const verifiedPhone = normalizeIndianPhone(data.phone);
-    const verifiedConfirmPhone = normalizeIndianPhone(data.confirmPhone);
-    if(!verifiedPhone){
-      phoneInput?.setCustomValidity("Please enter a valid 10-digit Indian mobile number.");
+    if(!isLikelyRealPhone(verifiedPhone)){
+      phoneInput?.setCustomValidity("Please enter a real 10-digit Indian mobile number for WhatsApp or call follow-up.");
       phoneInput?.reportValidity();
       phoneInput?.focus();
       return;
     }
-    if(confirmPhoneInput && verifiedPhone !== verifiedConfirmPhone){
-      confirmPhoneInput.setCustomValidity("Phone numbers do not match.");
-      confirmPhoneInput.reportValidity();
-      confirmPhoneInput.focus();
-      return;
-    }
     phoneInput?.setCustomValidity("");
-    confirmPhoneInput?.setCustomValidity("");
     data.phone = verifiedPhone;
-    delete data.confirmPhone;
     const body = new URLSearchParams(data).toString();
     const button = form.querySelector("button[type='submit']");
     const originalLabel = button?.textContent || "";
