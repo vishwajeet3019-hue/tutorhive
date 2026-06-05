@@ -298,7 +298,7 @@
   <a href='english-tuition-school-students/'>English</a>
   <a href='social-studies-tuition/'>Social Studies</a>
 </div></div>
-<a href='about/'>About Us</a>
+<a href='about/' data-link='about'>About Us</a>
 <a href='#book' data-link='book'>Book Trial</a>
 <a href='#home-contact' data-scroll='home-contact'>Contact</a>
 <a href='#blog' data-link='blog'>Blog</a>
@@ -306,7 +306,7 @@
 <div class='tabbar'><div class='container'>
   <a href='#home' class='active' data-link='home'>Home</a>
   <a href='#subjects' data-link='subjects'>Subjects</a>
-  <a href='about/'>About</a>
+  <a href='about/' data-link='about'>About</a>
   <a href='#book' data-link='book'>Book</a>
   <a href='#home-contact' data-scroll='home-contact'>Contact</a>
   <a href='#blog' data-link='blog'>Blog</a>
@@ -671,7 +671,7 @@ function revealNow(scope = document){
 function showPage(key){
   pages.forEach(p=>p.classList.toggle('active', p.dataset.page===key));
   links.forEach(a=>a.classList.toggle('active', a.dataset.link===key));
-  history.replaceState(null, "", "#"+key);
+  history.replaceState(null, "", key === "about" ? "about/" : "#"+key);
   const activePage = document.querySelector("section[data-page='"+key+"']");
   revealNow(activePage || document);
 }
