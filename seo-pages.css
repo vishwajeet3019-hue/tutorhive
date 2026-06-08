@@ -50,6 +50,13 @@ h3{margin:0 0 8px}
 .topic-list a,.topic-list span{display:flex;justify-content:space-between;gap:12px;border:1px solid #dde6ee;border-radius:14px;background:#fff;padding:12px 14px;font-weight:900;box-shadow:0 10px 26px rgba(15,23,42,.04)}
 .topic-list a{color:var(--brand)}
 .small{font-size:15px;color:var(--sub)}
+.article-section{padding:56px 0 64px}
+.article-body{max-width:920px}
+.article-body h2{font-size:clamp(22px,2vw,30px);line-height:1.2;letter-spacing:0;margin:30px 0 10px}
+.article-body h2:first-child{margin-top:0}
+.article-body p.small{position:relative;max-width:860px;margin:0 0 18px;padding-left:24px;font-size:17px;line-height:1.78;color:#334155}
+.article-body h2+p.small::before{content:"";position:absolute;left:0;top:.78em;width:8px;height:8px;border-radius:50%;background:var(--saffron);box-shadow:0 0 0 4px rgba(244,178,60,.14)}
+.article-body a{color:var(--brand);font-weight:850;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
 .link-list{display:flex;gap:10px;flex-wrap:wrap}
 .link-pill{border:1px solid var(--border);border-radius:999px;padding:9px 13px;background:#fff;font-weight:800}
 .course-options{align-items:stretch}.course-option{display:flex;flex-direction:column;gap:10px;min-height:230px}.course-option .badge{align-self:flex-start}.course-option ul{margin:0;padding-left:20px;color:var(--sub)}.course-option li{margin:6px 0}.course-option .btn{margin-top:auto;align-self:flex-start}
@@ -95,6 +102,9 @@ footer{border-top:1px solid var(--border);padding:22px 0}
   .nav-actions{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:8px}
   .nav-actions .btn{width:100%;padding:10px 12px;font-size:14px;margin:0}
   .section{padding:48px 0}
+  .article-section{padding:42px 0 48px}
+  .article-body h2{font-size:clamp(21px,6vw,26px);line-height:1.22}
+  .article-body p.small{font-size:16px;line-height:1.72;padding-left:20px}
   .about-hero{padding:58px 0 46px}.belief-card{left:18px;right:18px;top:70px}.belief-list{left:18px;right:18px}.values-grid{grid-template-columns:1fr}
   h1{font-size:clamp(34px,10.8vw,46px)}
 }
