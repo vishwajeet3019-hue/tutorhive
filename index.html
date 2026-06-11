@@ -212,7 +212,7 @@
         .stats-band{background:linear-gradient(135deg,#12355b 0%,#1f5f8b 64%,#f4b23c 160%);padding:70px 0 76px}
         .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}.stat-card{border-radius:18px;background:#fff;padding:26px 18px;text-align:center;box-shadow:0 18px 45px rgba(6,24,44,.18)}.stat-card strong{display:block;color:var(--brand);font-size:clamp(28px,3.1vw,42px);line-height:1;font-weight:1000}.stat-card span{display:block;margin-top:14px;color:#12355b;font-size:16px;font-weight:900;letter-spacing:.02em}
         .trust-section{position:relative;background:linear-gradient(180deg,#fff 0%,#fffdf8 62%,#f8fbff 100%);padding:104px 0}
-        .trust-section .section-head{max-width:900px;margin-bottom:34px}.trust-section .h2{font-size:clamp(34px,4vw,56px);max-width:860px}.trust-section .h2 .impact{background:linear-gradient(90deg,var(--brand2),var(--saffron));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .trust-section .section-head{max-width:900px;margin-bottom:34px}.trust-section .h2{font-size:clamp(30px,3vw,44px);font-weight:850;letter-spacing:-.018em;max-width:760px}.trust-section .h2 .impact{background:linear-gradient(90deg,var(--brand2),var(--saffron));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .trust-section .section-head p{max-width:720px;margin:14px 0 0}
         .trust-reasons{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
         .trust-card{position:relative;overflow:hidden;border:1px solid rgba(207,224,236,.95);border-radius:18px;background:#fff;padding:24px;box-shadow:0 16px 38px rgba(16,32,51,.07);min-height:220px}
@@ -229,6 +229,13 @@
         .learning-band>.container{position:relative;z-index:1}
         .learning-band .section{padding:0}
         .learning-band .faq-home{margin-top:104px}
+        .child-change-head{max-width:760px;margin-bottom:28px}.child-change-head .h2{font-size:clamp(30px,3.2vw,44px);font-weight:850}.child-change-head p{margin:10px 0 0;color:var(--sub);font-size:17px;line-height:1.65}
+        .change-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+        .change-card{position:relative;border:1px solid rgba(207,224,236,.95);border-radius:18px;background:#fff;padding:20px;box-shadow:0 14px 34px rgba(16,32,51,.065);overflow:hidden}
+        .change-card::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,var(--brand),var(--brand2),var(--saffron))}
+        .change-step{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#fff7e8;color:#7c4a04;font-weight:1000;margin-bottom:14px;border:1px solid rgba(244,178,60,.46)}
+        .change-card strong{display:block;color:#102033;font-size:18px;line-height:1.16;margin-bottom:8px}.change-card p{margin:0;color:#526173;font-size:14px;line-height:1.55}
+        .change-result{margin-top:18px;padding-top:14px;border-top:1px solid #e7edf3;color:#12355b;font-size:14px;font-weight:900}
         .curriculum-section{position:relative;padding:104px 0 96px;background:linear-gradient(180deg,#fffdf8 0%,#fffaf0 42%,#fffdf8 74%,#fff 100%)}
         .curriculum-section::before,.curriculum-section::after{display:none}
         .section-head{max-width:820px;margin-bottom:22px}.section-head p{font-size:17px;line-height:1.65;color:var(--sub)}
@@ -353,9 +360,9 @@
         @media(max-width:1020px){.nav .row{grid-template-columns:auto 1fr}.menu{display:none}.nav-actions{justify-content:flex-end}.tabbar{display:block}.tabbar .container{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.tabbar .container::-webkit-scrollbar{display:none}.tabbar a{white-space:nowrap}}
         @media(max-width:1020px){.curriculum-grid{grid-template-columns:repeat(2,1fr)}}
         @media(max-width:900px){.contact-panel,.footer-grid,.subjects-layout{grid-template-columns:1fr}.subjects-intro{position:static;padding:0}.contact-section{background:linear-gradient(180deg,#102033 0%,#12355b 58%,#fffdf8 58%,#fffdf8 100%)}.trial-grid{max-width:680px;margin-left:auto;margin-right:auto}}
-        @media(max-width:900px){.review-layout{grid-template-columns:1fr;gap:18px}.review-summary{display:grid;justify-items:center}.stats-grid{grid-template-columns:repeat(2,1fr)}.trust-reasons{grid-template-columns:1fr 1fr}.reviews-wrap{padding-top:72px}}
+        @media(max-width:900px){.review-layout{grid-template-columns:1fr;gap:18px}.review-summary{display:grid;justify-items:center}.stats-grid{grid-template-columns:repeat(2,1fr)}.trust-reasons{grid-template-columns:1fr 1fr}.change-grid{grid-template-columns:repeat(2,1fr)}.reviews-wrap{padding-top:72px}}
         @media(max-width:640px){.container{width:min(100% - 32px,1360px)}.topbar .container{font-size:13px;padding:8px 0}.topbar-content{gap:6px}.topbar-live{font-size:11px;padding:3px 8px}.topbar-main{font-size:12px}.topbar-note{display:none}.nav .row{grid-template-columns:1fr;gap:8px;min-height:0;padding:8px 0 10px}.brand,.nav-actions{justify-content:center}.brand img{height:74px;width:86px}.nav-actions{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:8px}.nav-actions .btn{width:100%;padding:10px 12px;font-size:14px;margin:0}.tabbar{position:static}.tabbar .container{padding:8px 0}.tabbar a{font-size:14px;padding:8px 11px}.section{padding:64px 0}.hero-grid{gap:24px;padding:58px 0 64px}.hero-title{font-size:clamp(30px,8.5vw,38px);letter-spacing:-.02em}.hero-subjects{margin-top:20px;margin-bottom:22px}.hero-illus{display:none}.curriculum-section{padding-top:82px;padding-bottom:72px}.testimonial-section{padding-top:76px}.learning-band{padding:76px 0 88px}.learning-band .faq-home{margin-top:78px}.section-transition::before{height:24px}.h1{font-size:clamp(34px,10.8vw,46px)}section[data-page='book']{overflow:hidden}section[data-page='book'] .h1{font-size:clamp(30px,8.6vw,38px);overflow-wrap:break-word}section[data-page='book'] .container{width:calc(100vw - 32px);max-width:calc(100vw - 32px);margin-left:auto;margin-right:auto}.subjects-intro .h1{width:min(100%,320px);font-size:clamp(28px,7.8vw,36px);line-height:1.08;letter-spacing:0}.subjects-intro p{width:min(100%,320px);overflow-wrap:break-word}.trial-grid{width:100%;max-width:100%;gap:12px}.trial-form-card,.trial-info-card{width:100%;max-width:100%}.trial-form-title{min-height:48px;font-size:16px;padding:12px 14px}.trial-form-fields{gap:10px;padding:16px}.trial-field-row{grid-template-columns:1fr;gap:10px}.trial-form-card .input{padding:10px 12px;min-height:46px}.trial-form-card textarea.input{min-height:76px}.trial-form-card .btn{width:100%;min-width:0}.trial-info-card{padding:16px 18px}.trial-info-card .h2{font-size:clamp(24px,7.2vw,30px);line-height:1.12}.trial-lede{font-size:15px;line-height:1.45;overflow-wrap:break-word}.trial-benefits{gap:8px}.trial-benefit{padding-bottom:8px}.usp-row{display:grid}.curriculum-grid,.subjects-grid{grid-template-columns:1fr}.curriculum-card{min-height:0}}
-        @media(max-width:640px){.review-heading{text-align:left}.review-heading .h2{font-size:clamp(28px,8vw,36px)}.carousel{mask-image:none;margin-left:-16px;margin-right:-16px}.carousel-track{animation-duration:28s}.testimonial-card{width:260px;min-height:246px}.stats-band{padding:42px 0}.stats-grid{grid-template-columns:1fr;gap:14px}.stat-card{padding:22px 16px}.stat-card span{font-size:15px}.trust-section{padding:72px 0}.trust-reasons{grid-template-columns:1fr}.trust-card{min-height:0;padding:20px}.footer-grid{gap:28px}.site-footer{padding-top:44px}}
+        @media(max-width:640px){.review-heading{text-align:left}.review-heading .h2{font-size:clamp(28px,8vw,36px)}.carousel{mask-image:none;margin-left:-16px;margin-right:-16px}.carousel-track{animation-duration:28s}.testimonial-card{width:260px;min-height:246px}.stats-band{padding:42px 0}.stats-grid{grid-template-columns:1fr;gap:14px}.stat-card{padding:22px 16px}.stat-card span{font-size:15px}.trust-section{padding:72px 0}.trust-section .h2{font-size:clamp(28px,8vw,36px)}.trust-reasons{grid-template-columns:1fr}.trust-card{min-height:0;padding:20px}.change-grid{grid-template-columns:1fr}.change-card{padding:18px}.footer-grid{gap:28px}.site-footer{padding-top:44px}}
       </style>
     </head>
 
@@ -626,24 +633,35 @@
 
   <div class='learning-band'>
     <section id="benefits" class="container section section-transition reveal">
-      <h2 class="h2">What changes for your child</h2>
-      <div class="grid cols-2">
-        <div class="card reveal">
-          <h3 class="h3">Concept clarity</h3>
-          <p>Lessons slow down where needed, fix gaps early, and help children understand instead of memorize.</p>
-        </div>
-        <div class="card reveal">
-          <h3 class="h3">Better study rhythm</h3>
-          <p>Regular classes, homework guidance, and parent updates make learning more consistent week by week.</p>
-        </div>
-        <div class="card reveal">
-          <h3 class="h3">1-on-1 attention</h3>
-          <p>Students ask more questions, receive faster feedback, and learn at a pace matched to their level.</p>
-        </div>
-        <div class="card reveal">
-          <h3 class="h3">School-aligned support</h3>
-          <p>CBSE-focused help for classwork, revision, tests, and long-term academic improvement.</p>
-        </div>
+      <div class="child-change-head">
+        <h2 class="h2">What changes for your child</h2>
+        <p>Tuition should not only add more study time. It should make learning calmer, clearer, and easier to continue every week.</p>
+      </div>
+      <div class="change-grid">
+        <article class="change-card reveal">
+          <div class="change-step">1</div>
+          <strong>Confusion becomes clarity</strong>
+          <p>Weak chapters are broken into smaller steps so the child understands the reason behind each answer.</p>
+          <div class="change-result">Better concept confidence</div>
+        </article>
+        <article class="change-card reveal">
+          <div class="change-step">2</div>
+          <strong>Doubts are handled early</strong>
+          <p>Students get regular space to ask questions before small gaps turn into test-time stress.</p>
+          <div class="change-result">Fewer repeated mistakes</div>
+        </article>
+        <article class="change-card reveal">
+          <div class="change-step">3</div>
+          <strong>Practice becomes structured</strong>
+          <p>Homework, revision, and test preparation follow the child's current school chapters.</p>
+          <div class="change-result">Steadier study rhythm</div>
+        </article>
+        <article class="change-card reveal">
+          <div class="change-step">4</div>
+          <strong>Parents stay informed</strong>
+          <p>You know what improved, what still needs work, and what the tutor will focus on next.</p>
+          <div class="change-result">Clear progress visibility</div>
+        </article>
       </div>
     </section>
 
