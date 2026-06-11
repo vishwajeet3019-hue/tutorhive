@@ -13,19 +13,19 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- ✅ SEO Title & Description -->
-      <title>Personalized Online Tuition for Classes 1-10 | TutorHive</title>
+      <title>Personalized Online Tuition for Classes 5-10 | TutorHive</title>
       <!-- ✅ Favicon -->
       <link rel="icon" type="image/png" href="favicon.png">
       <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
 
-          <meta name="description" content="Personalized online tuition for school students in India. Expert-guided maths, science, English, and curriculum support with a Free Demo Class for Classes 1-10.">
+          <meta name="description" content="Personalized online tuition for Classes 5-10 in India. Expert-guided maths, science, English, social studies, and curriculum support with a Free Demo Class.">
       <!-- ✅ Keywords -->
-      <meta name="keywords" content="online tuition India, online maths tuition, science tutor online India, CBSE online tuition, tuition for class 1-10, online tutoring for school students, 1-on-1 online classes">
+      <meta name="keywords" content="online tuition India, online maths tuition, science tutor online India, CBSE online tuition, tuition for classes 5-10, online tutoring for school students, 1-on-1 online classes">
 
       <!-- ✅ Social Sharing (Open Graph) -->
-      <meta property="og:title" content="Personalized Online Tuition for Classes 1-10 | TutorHive">
-      <meta property="og:description" content="Trusted online tuition for parents seeking maths, science, English, and curriculum support. Book a Free Demo Class for Classes 1-10.">
+      <meta property="og:title" content="Personalized Online Tuition for Classes 5-10 | TutorHive">
+      <meta property="og:description" content="Trusted online tuition for parents seeking maths, science, English, social studies, and curriculum support. Book a Free Demo Class for Classes 5-10.">
       <meta property="og:url" content="https://tutorhive.in">
       <meta property="og:type" content="website">
       <meta property="og:image" content="https://tutorhive.in/logo.png">
@@ -77,7 +77,7 @@
                 "name": "Which classes does TutorHive support?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "TutorHive provides online tuition for school students from Classes 1 to 10."
+                  "text": "TutorHive provides online tuition for school students from Classes 5 to 10."
                 }
               },
               {
@@ -122,7 +122,9 @@
         .btn.primary{border:none;color:#172033;background:linear-gradient(120deg,var(--saffron),#ffe0a6);box-shadow:0 12px 26px rgba(245,158,11,.24)}
         .btn.teal{border:none;color:#fff;background:linear-gradient(120deg,var(--brand),var(--brand2));box-shadow:0 12px 28px rgba(18,53,91,.22)}
         .badge{display:inline-block;border:1px dashed var(--saffron);background:#fff7e8;border-radius:999px;padding:6px 10px;font-weight:700}
-        .hero-eyebrow{display:inline-flex;align-items:center;color:#7c4a04;font-size:14px;font-weight:900;letter-spacing:.02em}
+        .hero-eyebrow{position:relative;display:inline-flex;align-items:center;gap:8px;overflow:hidden;border:1px solid rgba(244,178,60,.45);border-radius:999px;background:linear-gradient(120deg,#fff7e8,#fff,#edf5fb);padding:7px 13px;color:#7c4a04;font-size:14px;font-weight:900;letter-spacing:.02em;box-shadow:0 12px 30px rgba(18,53,91,.08)}
+        .hero-eyebrow::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--saffron);box-shadow:0 0 0 6px rgba(244,178,60,.16);animation:trustPulse 2.2s ease-in-out infinite;flex:0 0 auto}
+        .hero-eyebrow::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 0%,transparent 35%,rgba(255,255,255,.72) 48%,transparent 62%,transparent 100%);transform:translateX(-110%);animation:trustSweep 4.8s ease-in-out infinite;pointer-events:none}
         .hero-subjects{display:flex;gap:9px;flex-wrap:wrap;margin-top:26px;margin-bottom:26px}
         .hero-subject{display:inline-flex;align-items:center;justify-content:center;min-width:84px;border:1px solid rgba(244,178,60,.52);border-radius:8px;background:#fff7e8;padding:8px 13px;color:#12355b;font-size:13px;font-weight:950;letter-spacing:.02em;box-shadow:0 8px 18px rgba(245,158,11,.08)}
         .usp-row{display:flex;gap:10px 16px;flex-wrap:wrap;margin-top:0}.usp-pill{display:flex;align-items:flex-start;gap:8px;font-size:15px;font-weight:800;color:#334155}.usp-pill::before{content:"";width:7px;height:12px;border:solid var(--saffron);border-width:0 2px 2px 0;transform:rotate(45deg);margin:2px 3px 0 2px;flex:0 0 auto}
@@ -142,9 +144,13 @@
         .trust-grid{display:grid;gap:18px}
         .trust-point{display:flex;gap:12px;align-items:flex-start}
         .trust-point strong{display:block;margin-bottom:4px}
-        .faq-grid{display:grid;gap:14px}
-        .faq-item{border:1px solid #dde6ee;border-radius:14px;padding:20px;background:#fff;box-shadow:0 10px 26px rgba(15,23,42,.04)}
-        .faq-item h3{margin:0 0 8px;font-size:18px}
+        .faq-grid{display:grid;gap:12px}
+        .faq-item{border:1px solid #dde6ee;border-radius:14px;background:#fff;box-shadow:0 10px 26px rgba(15,23,42,.04);overflow:hidden}
+        .faq-item summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;cursor:pointer;color:#102033;font-size:18px;font-weight:900;list-style:none}
+        .faq-item summary::-webkit-details-marker{display:none}
+        .faq-item summary::after{content:"";width:9px;height:9px;border:solid var(--brand2);border-width:0 2px 2px 0;transform:rotate(45deg);transition:transform .18s ease;flex:0 0 auto}
+        .faq-item[open] summary::after{transform:rotate(-135deg)}
+        .faq-item p{margin:0;padding:0 20px 18px}
         .price-note{margin-top:auto;padding-top:4px;color:#0f172a;font-weight:800}
         .icon-wrap{width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#fff7e8;border:1px solid #f8d39a}
         .subjects-layout{display:grid;grid-template-columns:.72fr 1.28fr;gap:28px;align-items:start;margin-top:28px}
@@ -261,9 +267,12 @@
         .success-graphic{width:118px;height:118px;margin:0 auto 18px;display:grid;place-items:center;border-radius:999px;background:radial-gradient(circle,#fff7e8 0%,#fffdf8 58%,#edf5fb 100%);box-shadow:inset 0 0 0 1px #eadfcf,0 16px 34px rgba(16,32,51,.1)}
         .success-graphic svg{width:86px;height:86px}.success-card h3{font-size:28px;line-height:1.12;margin:0 0 8px}.success-card p{margin:0 auto;color:var(--sub);line-height:1.6;max-width:330px}.success-close{margin-top:22px;border-radius:999px}
         .btn[disabled]{opacity:.78;cursor:wait;transform:none}
-        .site-footer{background:#fffaf0;border-top:1px solid #eadfcf;padding:34px 0}
-        .footer-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:26px;align-items:start}
-        .footer-note{max-width:560px}.footer-note .brand{margin-bottom:8px}.footer-links{display:grid;gap:9px}.footer-links a{color:var(--brand);font-weight:850}.footer-cta{margin-top:18px}
+        .site-footer{background:linear-gradient(135deg,#071827 0%,#102033 45%,#12355b 100%);border-top:1px solid rgba(244,178,60,.3);padding:58px 0 28px;color:#fff}
+        .footer-grid{display:grid;grid-template-columns:1.15fr .7fr .9fr;gap:42px;align-items:start}
+        .footer-note{max-width:420px}.footer-note .brand{margin-bottom:14px;color:#fff}.footer-note .brand img{height:80px;width:92px}.footer-note .small,.footer-contact .small{color:#dbeafe;font-size:15px;line-height:1.7}
+        .footer-column{display:grid;gap:12px}.footer-column h3{margin:0 0 8px;font-size:22px;line-height:1.15}.footer-column a{color:#eef6ff;font-weight:750}.footer-column a:hover{color:#ffe0a6}
+        .footer-contact p{margin:0}.social-links{display:flex;gap:12px;margin-top:8px}.social-link{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--brand);box-shadow:0 10px 24px rgba(0,0,0,.16);transition:transform .18s ease,background .18s ease}.social-link:hover{transform:translateY(-2px);background:#fff7e8}.social-link svg{width:20px;height:20px;fill:currentColor}
+        .footer-legal{margin-top:38px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);text-align:center;color:#cbd5e1;font-size:13px}
         /* animations */
         .reveal,.fade-up{opacity:1;transform:none}
         .reveal.show,.fade-up.show{opacity:1;transform:none}
@@ -293,7 +302,9 @@
         @keyframes focusPulse{0%,100%{opacity:.28;transform:scale(.92)}48%{opacity:.78;transform:scale(1.08)}}
         @keyframes lineReveal{0%,12%{opacity:.28;transform:scaleX(.58)}45%,80%{opacity:.95;transform:scaleX(1)}100%{opacity:.28;transform:scaleX(.58)}}
         @keyframes dotPulse{0%,100%{opacity:.5;transform:scale(.86)}50%{opacity:1;transform:scale(1.12)}}
-        @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.reveal,.fade-up,.topbar::before,.topbar-dot,.hero-illus,.hero-illus::after,.hero-scene *{transition:none;animation:none}.reveal,.fade-up{opacity:1;transform:none}}
+        @keyframes trustPulse{0%,100%{transform:scale(.9);box-shadow:0 0 0 5px rgba(244,178,60,.14)}50%{transform:scale(1.08);box-shadow:0 0 0 9px rgba(244,178,60,.07)}}
+        @keyframes trustSweep{0%,48%{transform:translateX(-110%)}68%,100%{transform:translateX(110%)}}
+        @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.reveal,.fade-up,.topbar::before,.topbar-dot,.hero-eyebrow::before,.hero-eyebrow::after,.hero-illus,.hero-illus::after,.hero-scene *{transition:none;animation:none}.reveal,.fade-up{opacity:1;transform:none}}
         /* forms */
         .form{display:grid;gap:10px}.input,select,textarea{width:100%;padding:14px;border:1px solid var(--border);border-radius:14px;background:#fff}
         /* footer */
@@ -345,7 +356,7 @@
 <section class='section active premium-home' data-page='home'>
   <div class='container hero-grid'>
     <div class='reveal'>
-      <span class='hero-eyebrow'>Trusted online tuition in India</span>
+      <span class='hero-eyebrow'>Trusted by 1,200+ parents in India</span>
       <h1 class='h1 hero-title'>Personalized Online Tuition for School Students for Classes 5-10</h1>
       <div class='hero-subjects' aria-label='Subjects offered'>
         <span class='hero-subject'>Maths</span>
@@ -420,7 +431,7 @@
         <article class='curriculum-card reveal'>
           <div class='curriculum-logo'><img src='assets/curriculum/cbse-logo.png' alt='CBSE logo'></div>
           <strong>CBSE</strong>
-          <p>Chapter-aligned practice, school test preparation, and steady revision support for Classes 1-10.</p>
+          <p>Chapter-aligned practice, school test preparation, and steady revision support for Classes 5-10.</p>
         </article>
         <article class='curriculum-card reveal'>
           <div class='curriculum-logo'><img src='assets/curriculum/cisce-logo.png' alt='CISCE ICSE logo'></div>
@@ -471,7 +482,7 @@
     <h2 class='h2 reveal'>Why parents trust TutorHive</h2>
     <div class='grid cols-3'>
       <div class='tile reveal'><strong>Expert-guided online tutoring</strong><p class='small'>Each tutor is screened, interviewed, and demo-tested before teaching.</p></div>
-      <div class='tile reveal'><strong>Curriculum-aligned</strong><p class='small'>CBSE, ICSE, IB, and IGCSE support for Classes 1-10.</p></div>
+      <div class='tile reveal'><strong>Curriculum-aligned</strong><p class='small'>CBSE, ICSE, IB, and IGCSE support for Classes 5-10.</p></div>
       <div class='tile reveal'><strong>Personalized learning for every student</strong><p class='small'>Lessons adapt to each child’s level, pace, and board syllabus.</p></div>
     </div>
   </div></div>
@@ -516,17 +527,17 @@
       </div>
     </section>
 
-    <section class='container section faq-home section-transition'>
+    <section class='container section faq-home section-transition' id='faq'>
       <h2 class='h2 reveal'>Frequently asked by parents</h2>
       <div class='faq-grid'>
-        <article class='faq-item reveal'><h3>Which classes does TutorHive support?</h3><p class='small'>TutorHive supports school students from Classes 1 to 10 with online tuition built around each child's current level.</p></article>
-        <article class='faq-item reveal'><h3>Can my child take only maths or science tuition?</h3><p class='small'>Yes. Parents can choose subject-specific support such as maths tuition, science tuition, English tuition, or broader CBSE support.</p></article>
-        <article class='faq-item reveal'><h3>How do I know if the tutor is right for my child?</h3><p class='small'>Start with a Free Demo Class, discuss your child's needs, and review the tutor's teaching approach before continuing.</p></article>
-        <article class='faq-item reveal'><h3>Do parents receive updates?</h3><p class='small'>Yes. TutorHive is designed around parent trust, with clear communication, progress visibility, and responsive support.</p></article>
-        <article class='faq-item reveal'><h3>Is the trial class really free?</h3><p class='small'>Yes. The 30-minute trial helps you understand tutor fit, teaching style, and your child's learning needs before you decide on regular classes.</p></article>
-        <article class='faq-item reveal'><h3>How are classes matched to my child's school board?</h3><p class='small'>We ask for the class, subject, curriculum, current chapters, and test schedule so tutoring can follow school expectations instead of a generic worksheet plan.</p></article>
-        <article class='faq-item reveal'><h3>Can classes help before exams or only for regular learning?</h3><p class='small'>Both. Students can use TutorHive for steady weekly learning, focused revision before tests, or targeted doubt-clearing when a chapter feels stuck.</p></article>
-        <article class='faq-item reveal'><h3>What happens after I submit the form?</h3><p class='small'>We review your child's details and reply with suitable demo options, timing availability, and next steps for the subject or curriculum you selected.</p></article>
+        <details class='faq-item reveal'><summary>Which classes does TutorHive support?</summary><p class='small'>TutorHive supports school students from Classes 5 to 10 with online tuition built around each child's current level.</p></details>
+        <details class='faq-item reveal'><summary>Can my child take only maths or science tuition?</summary><p class='small'>Yes. Parents can choose subject-specific support such as maths tuition, science tuition, English tuition, social studies, or broader curriculum support.</p></details>
+        <details class='faq-item reveal'><summary>How do I know if the tutor is right for my child?</summary><p class='small'>Start with a Free Demo Class, discuss your child's needs, and review the tutor's teaching approach before continuing.</p></details>
+        <details class='faq-item reveal'><summary>Do parents receive updates?</summary><p class='small'>Yes. TutorHive is designed around parent trust, with clear communication, progress visibility, and responsive support.</p></details>
+        <details class='faq-item reveal'><summary>Is the trial class really free?</summary><p class='small'>Yes. The 30-minute trial helps you understand tutor fit, teaching style, and your child's learning needs before you decide on regular classes.</p></details>
+        <details class='faq-item reveal'><summary>How are classes matched to my child's school board?</summary><p class='small'>We ask for the class, subject, curriculum, current chapters, and test schedule so tutoring can follow school expectations instead of a generic worksheet plan.</p></details>
+        <details class='faq-item reveal'><summary>Can classes help before exams or only for regular learning?</summary><p class='small'>Both. Students can use TutorHive for steady weekly learning, focused revision before tests, or targeted doubt-clearing when a chapter feels stuck.</p></details>
+        <details class='faq-item reveal'><summary>What happens after I submit the form?</summary><p class='small'>We review your child's details and reply with suitable demo options, timing availability, and next steps for the subject or curriculum you selected.</p></details>
       </div>
     </section>
   </div>
@@ -536,22 +547,24 @@
       <div class='contact-copy'>
         <div>
           <h2 class='h2 reveal' id='bottom-contact-heading'>Book a Free Class with TutorHive</h2>
-          <p class='small reveal'>Share your contact details and a short note. We will reply with demo options, tutor fit, and pricing guidance.</p>
+          <p class='small reveal'>Share your child's class, subject, and contact number. We will reply with demo options, tutor fit, and pricing guidance.</p>
         </div>
         <div class='contact-info reveal'>
           <h3>Contact TutorHive</h3>
-          <p class='small'>Email: <strong>hello@tutorhive.in</strong></p>
+          <p class='small'>Email: <strong>contact@tutorhive.in</strong></p>
         </div>
       </div>
-      <form id="bottomContactForm" class="form card contact-form-card reveal">
-        <input type="hidden" name="form" value="Homepage Contact">
+      <form id="bottomTrialForm" class="form card contact-form-card reveal">
+        <input type="hidden" name="form" value="Homepage Trial Request">
         <input class='input' name='parent' placeholder='Parent name' required>
         <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Phone' required>
-        <input class='input' name='email' type='email' placeholder='Email' required>
-        <textarea class='input' name='notes' rows='4' placeholder='How can we help?'></textarea>
-        <button class='btn teal' type='submit'>Book Free Class</button>
+        <select name='studentClass' class='input' required><option value=''>Student class</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option></select>
+        <select name='board' class='input' required><option value=''>Board / curriculum</option><option>CBSE</option><option>ICSE</option><option>IB</option><option>IGCSE</option><option>State Board</option><option>Other / Not sure</option></select>
+        <select name='subject' class='input' required><option value=''>Preferred Subject</option><option>Mathematics</option><option>Science</option><option>English</option><option>Social Studies</option></select>
+        <textarea class='input' name='notes' rows='4' placeholder='Anything we should know?'></textarea>
+        <button class='btn teal' type='submit'>Request Trial</button>
       </form>
-      <div id="bottomContactFormThanks" class="small" style="display:none;margin-top:12px;color:green;">Thank you. We will contact you within 24 hours.</div>
+      <div id="bottomTrialFormThanks" class="small" style="display:none;margin-top:12px;color:green;">Thank you. We will contact you within 24 hours.</div>
     </div>
   </section>
 </section>
@@ -578,7 +591,7 @@
   <div class='container'>
     <div class='subjects-layout'>
       <div class='subjects-intro'>
-        <span class='badge'>Classes 1-10</span>
+        <span class='badge'>Classes 5-10</span>
         <h1 class='h1'>Subjects we cover for school students</h1>
         <p class='small'>Explore subject-specific online tuition tailored to your child's current chapters, board syllabus, and assessment goals.</p>
         <a class='btn primary' href='#book' data-link='book'>Book Free Trial</a>
@@ -691,16 +704,39 @@
 </section>
 
 <footer class='site-footer'>
-  <div class='container footer-grid'>
-    <div class='footer-note'>
-      <div class='brand'><img src='logo.png' alt='TutorHive logo'>TutorHive</div>
-      <p class='small'>We are committed to protecting parent and student data. Contact details and learning notes are used only to arrange classes, support progress tracking, and communicate with families.</p>
-      <a class='btn primary footer-cta' href='#book' data-link='book'>Book Free Class</a>
+  <div class='container'>
+    <div class='footer-grid'>
+      <div class='footer-note'>
+        <div class='brand'><img src='logo.png' alt='TutorHive logo'>TutorHive</div>
+        <p class='small'>TutorHive offers personalised online tuition for Classes 5-10 through one-to-one teaching, flexible schedules, and parent-friendly progress updates.</p>
+        <a class='btn primary footer-cta' href='#book' data-link='book'>Book Free Class</a>
+      </div>
+      <div class='footer-column'>
+        <h3>Resources</h3>
+        <a href='#blog' data-link='blog'>Blog</a>
+        <a href='#home-contact' data-scroll='home-contact'>Contact Us</a>
+        <a href='about/' data-link='about'>About Us</a>
+        <a href='#faq' data-scroll='faq'>FAQ</a>
+      </div>
+      <div class='footer-column footer-contact'>
+        <h3>Contact</h3>
+        <p class='small'>Bangalore, Karnataka, India</p>
+        <p class='small'><a href='mailto:contact@tutorhive.in'>contact@tutorhive.in</a></p>
+        <div class='social-links' aria-label='Social links'>
+          <a class='social-link' href='' aria-label='Facebook'>
+            <svg viewBox='0 0 24 24' aria-hidden='true'><path d='M14.2 8.1V6.7c0-.7.5-.9.9-.9h2.3V2h-3.2c-3.5 0-4.3 2.6-4.3 4.3v1.8H7v3.9h2.9v10h4.3V12h3.1l.5-3.9h-3.6z'/></svg>
+          </a>
+          <a class='social-link' href='' aria-label='Instagram'>
+            <svg viewBox='0 0 24 24' aria-hidden='true'><path d='M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2zm0 2A3.8 3.8 0 0 0 4 7.8v8.4A3.8 3.8 0 0 0 7.8 20h8.4a3.8 3.8 0 0 0 3.8-3.8V7.8A3.8 3.8 0 0 0 16.2 4H7.8zm8.7 2.6a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM12 7.4a4.6 4.6 0 1 1 0 9.2 4.6 4.6 0 0 1 0-9.2zm0 2a2.6 2.6 0 1 0 0 5.2 2.6 2.6 0 0 0 0-5.2z'/></svg>
+          </a>
+          <a class='social-link' href='https://www.linkedin.com/company/tutorhiveindia' target='_blank' rel='noopener noreferrer' aria-label='LinkedIn'>
+            <svg viewBox='0 0 24 24' aria-hidden='true'><path d='M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9.5h4v12H3v-12zm6.5 0h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6.3h-4v-5.6c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9v5.7h-4v-12z'/></svg>
+          </a>
+        </div>
+      </div>
     </div>
-    <div class='footer-links'>
-      <strong>Contact</strong>
-      <span class='small'>hello@tutorhive.in</span>
-      <a href='https://www.linkedin.com/company/tutorhiveindia' target='_blank' rel='noopener noreferrer'>LinkedIn</a>
+    <div class='footer-legal'>
+      Privacy Policy | Terms & Conditions
     </div>
   </div>
 </footer>
@@ -803,14 +839,12 @@ function wireForm(formId){
         headers: {"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
         body
       });
-      if(formId === "trialForm"){
+      if(formId === "trialForm" || formId === "bottomTrialForm"){
         window.location.href = "trial-thank-you.html";
         return;
       }
       const thanks = document.getElementById(formId + "Thanks");
-      if(formId === "bottomContactForm" && formSuccessOverlay){
-        formSuccessOverlay.classList.add("active");
-      } else if(thanks) {
+      if(thanks) {
         thanks.style.display = "block";
       }
       form.reset();
@@ -825,7 +859,7 @@ function wireForm(formId){
     }
   });
 }
-["trialForm","bottomContactForm"].forEach(wireForm);
+["trialForm","bottomTrialForm"].forEach(wireForm);
 </script>
 
 
