@@ -605,6 +605,17 @@
     <h1 class='h1'>Book a free 30-min trial class</h1>
     <p class='small'>We’ll reply by email/WhatsApp with a Zoom link and timing options within 24 hours.</p>
     <div class='grid cols-2 trial-grid'>
+      <form id="trialForm" class="form card trial-form-card reveal">
+        <input type="hidden" name="form" value="Trial Request">
+        <input class='input' name='parent' placeholder='Parent name' required>
+        <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Phone' required>
+        <input class='input' name='email' type='email' placeholder='Email' required>
+        <select name='studentClass' class='input' required><option value=''>Student class</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option></select>
+        <select name='board' class='input' required><option value=''>Board / curriculum</option><option>CBSE</option><option>ICSE</option><option>IB</option><option>IGCSE</option><option>State Board</option><option>Other / Not sure</option></select>
+        <select name='subject' class='input' required><option value=''>Preferred Subject</option><option>Mathematics</option><option>Science</option><option>English</option><option>Social Studies</option></select>
+        <textarea class='input' name='notes' rows='4' placeholder='Anything we should know?'></textarea>
+        <button class='btn teal' type='submit'>Request Trial</button>
+      </form>
       <div class='card trial-info-card reveal'>
         <h2 class='h2'>Benefits of 1:1 Classes</h2>
         <p class='trial-lede'>One-to-one tuition gives your child focused time with the tutor, so lessons can move at the right pace and target the exact gaps holding them back.</p>
@@ -617,17 +628,6 @@
           <li class='trial-benefit'><strong>Clear parent updates</strong><span>You know what improved, what is still weak, and what comes next.</span></li>
         </ul>
       </div>
-      <form id="trialForm" class="form card trial-form-card reveal">
-        <input type="hidden" name="form" value="Trial Request">
-        <input class='input' name='parent' placeholder='Parent name' required>
-        <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Phone' required>
-        <input class='input' name='email' type='email' placeholder='Email' required>
-        <select name='studentClass' class='input' required><option value=''>Student class</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option></select>
-        <select name='board' class='input' required><option value=''>Board / curriculum</option><option>CBSE</option><option>ICSE</option><option>IB</option><option>IGCSE</option><option>State Board</option><option>Other / Not sure</option></select>
-        <select name='subject' class='input' required><option value=''>Preferred Subject</option><option>Mathematics</option><option>Science</option><option>English</option><option>Social Studies</option></select>
-        <textarea class='input' name='notes' rows='4' placeholder='Anything we should know?'></textarea>
-        <button class='btn teal' type='submit'>Request Trial</button>
-      </form>
       <div id="trialFormThanks"  class="small" style="display:none;margin-top:12px;color:green;">✅ Thank you! We’ll contact you within 24 hours.</div>
     </div>
   </div>
