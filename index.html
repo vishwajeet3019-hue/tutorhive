@@ -123,6 +123,8 @@
         .btn.teal{border:none;color:#fff;background:linear-gradient(120deg,var(--brand),var(--brand2));box-shadow:0 12px 28px rgba(18,53,91,.22)}
         .badge{display:inline-block;border:1px dashed var(--saffron);background:#fff7e8;border-radius:999px;padding:6px 10px;font-weight:700}
         .hero-eyebrow{display:inline-flex;align-items:center;color:#7c4a04;font-size:14px;font-weight:900;letter-spacing:.02em}
+        .hero-subjects{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+        .hero-subject{display:inline-flex;align-items:center;justify-content:center;min-width:84px;border:1px solid rgba(244,178,60,.52);border-radius:8px;background:#fff7e8;padding:8px 13px;color:#12355b;font-size:13px;font-weight:950;letter-spacing:.02em;box-shadow:0 8px 18px rgba(245,158,11,.08)}
         .usp-row{display:flex;gap:10px 16px;flex-wrap:wrap;margin-top:18px}.usp-pill{display:flex;align-items:flex-start;gap:8px;font-size:15px;font-weight:800;color:#334155}.usp-pill::before{content:"";width:7px;height:12px;border:solid var(--saffron);border-width:0 2px 2px 0;transform:rotate(45deg);margin:2px 3px 0 2px;flex:0 0 auto}
         .hero-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:24px}.text-link{display:inline-flex;align-items:center;gap:6px;color:var(--brand);font-weight:900}.text-link:hover{text-decoration:underline;text-underline-offset:4px}
         .hero-proof{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:26px;max-width:650px}.hero-proof span{display:block;border:1px solid rgba(148,163,184,.28);background:rgba(255,255,255,.74);border-radius:10px;padding:13px 14px;box-shadow:0 10px 24px rgba(15,23,42,.05)}.hero-proof strong{display:block;font-size:18px;line-height:1.1}.hero-proof small{display:block;margin-top:4px;color:#64748b;font-weight:800}
@@ -343,7 +345,12 @@
     <div class='reveal'>
       <span class='hero-eyebrow'>Trusted online tuition in India</span>
       <h1 class='h1 hero-title'>Personalized Online Tuition for School Students for Classes 5-10</h1>
-      <p class='small' style='font-size:16px;color:var(--sub)'>Maths, Science, English and Social Studies.</p>
+      <div class='hero-subjects' aria-label='Subjects offered'>
+        <span class='hero-subject'>Maths</span>
+        <span class='hero-subject'>Science</span>
+        <span class='hero-subject'>English</span>
+        <span class='hero-subject'>Social Studies</span>
+      </div>
       <div class='usp-row'>
         <span class='usp-pill'>One-to-one attention</span>
         <span class='usp-pill'>Experienced subject teachers</span>
