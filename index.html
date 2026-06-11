@@ -169,7 +169,8 @@
         .topbar-dot{width:8px;height:8px;border-radius:50%;background:#f4b23c;box-shadow:0 0 0 5px rgba(244,178,60,.16)}
         .topbar-main{font-weight:950}
         .topbar-note{color:#dbeafe;font-weight:800}
-        .nav{border-bottom:1px solid rgba(226,232,240,.9);background:rgba(255,255,255,.97);position:sticky;top:0;z-index:50;box-shadow:0 10px 30px rgba(15,23,42,.04)}
+        .nav{border-bottom:0;background:rgba(255,255,255,.97);position:sticky;top:0;z-index:50;box-shadow:0 10px 30px rgba(15,23,42,.04)}
+        .nav::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,rgba(18,53,91,.18),rgba(31,95,139,.52),rgba(244,178,60,.62),rgba(31,95,139,.28));box-shadow:0 1px 8px rgba(31,95,139,.12);pointer-events:none}
         .nav .row{min-height:78px;display:grid;grid-template-columns:210px minmax(0,1fr) auto;align-items:center;gap:18px}
         .brand{display:flex;align-items:center;gap:10px;font-weight:900}
         .brand img{height:70px;width:82px;object-fit:contain}
