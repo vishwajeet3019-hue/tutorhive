@@ -232,6 +232,10 @@
         .trial-benefit::marker{color:var(--brand2);font-size:1.05em}
         .trial-benefit strong{display:block;color:#102033;font-size:17px;line-height:1.25}
         .trial-benefit span{display:block;margin-top:5px;color:#526173;font-size:15px;line-height:1.52;overflow-wrap:break-word}
+        .trial-form-card{position:relative;overflow:hidden;border-color:#cfe0ec;background:linear-gradient(180deg,#fff 0%,#fffdf8 100%);box-shadow:0 22px 58px rgba(18,53,91,.13)}
+        .trial-form-card::before{content:"";position:absolute;inset:0 0 auto;height:5px;background:linear-gradient(90deg,var(--brand),var(--brand2),var(--saffron))}
+        .trial-form-card .input{border-color:#dfd4c4;background:rgba(255,255,255,.96)}
+        .trial-form-card .input:focus{outline:0;border-color:#1f5f8b;box-shadow:0 0 0 4px rgba(31,95,139,.1)}
         .story-page{background:linear-gradient(180deg,#fffdf8 0%,#fff 58%,#fffaf0 100%)}
         .story-wrap{max-width:980px}.story-kicker{display:inline-flex;margin-bottom:14px;color:#7c4a04;font-weight:950}
         .story-copy{display:grid;gap:16px;margin-top:22px;color:#334155;font-size:18px;line-height:1.72}
@@ -612,7 +616,7 @@
           <li class='trial-benefit'><strong>Clear parent updates</strong><span>You know what improved, what is still weak, and what comes next.</span></li>
         </ul>
       </div>
-      <form id="trialForm" class="form card reveal">
+      <form id="trialForm" class="form card trial-form-card reveal">
         <input type="hidden" name="form" value="Trial Request">
         <input class='input' name='parent' placeholder='Parent name' required>
         <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Phone' required>
