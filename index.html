@@ -194,14 +194,22 @@
         .hero-grid>.reveal:first-child>.small{font-size:18px;line-height:1.72;max-width:690px;color:#526173}
         .hero-illus{position:relative;border:1px solid rgba(148,163,184,.24);border-radius:24px;overflow:hidden;box-shadow:0 34px 80px rgba(15,23,42,.14);background:radial-gradient(circle at top left,#fff7e8 0,#fffdf8 34%,#edf5fb 100%);animation:heroEnter .45s cubic-bezier(.22,1,.36,1) both}
         .hero-illus::after{content:"";position:absolute;inset:-20%;background:linear-gradient(115deg,transparent 34%,rgba(255,255,255,.38) 48%,transparent 62%);transform:translateX(-70%) rotate(2deg);animation:cardSweep 6.5s ease-in-out infinite;pointer-events:none}
-        .carousel{position:relative;overflow:hidden}.carousel-track{display:flex;gap:18px;scroll-snap-type:x mandatory;overflow-x:auto;padding:4px 0 10px}.carousel .card{min-width:300px;scroll-snap-align:start}
-        .testimonial-card{position:relative;min-width:320px;max-width:410px;border-color:#dbe5ed;border-radius:14px;padding:22px;box-shadow:0 14px 34px rgba(15,23,42,.07);overflow:hidden}
-        .testimonial-card::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,var(--brand),var(--brand2),var(--honey))}
-        .testimonial-stars{color:#f6b51e;font-size:15px;letter-spacing:1px;font-weight:1000;margin-bottom:12px}
-        .testimonial-quote{margin:0;color:#334155;font-size:16px;line-height:1.62}
-        .testimonial-parent{display:flex;align-items:center;gap:10px;margin-top:18px;padding-top:14px;border-top:1px solid #eef2f7}
-        .testimonial-avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#fff7e8;color:#7c4a04;font-weight:1000;flex:0 0 auto}
-        .testimonial-name{display:block;color:#0f172a;font-weight:900;line-height:1.2}.testimonial-meta{display:block;color:#64748b;font-size:13px;font-weight:800;margin-top:2px}
+        .reviews-wrap{background:#f8fafc;padding:88px 0 0}
+        .review-heading{text-align:center;margin-bottom:30px}.review-heading .impact{-webkit-text-fill-color:initial;background:none;color:var(--brand2)}
+        .review-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px;align-items:center}
+        .google-summary{text-align:center}.google-summary strong{display:block;color:#0f172a;font-size:20px;letter-spacing:.02em}.google-summary .testimonial-stars{font-size:30px;margin:8px 0 4px}.google-summary p{margin:0;color:#334155;font-size:15px}.google-wordmark{display:inline-flex;margin-top:10px;font-size:28px;font-weight:800;letter-spacing:-.04em}.google-wordmark span:nth-child(1){color:#4285f4}.google-wordmark span:nth-child(2){color:#ea4335}.google-wordmark span:nth-child(3){color:#fbbc05}.google-wordmark span:nth-child(4){color:#4285f4}.google-wordmark span:nth-child(5){color:#34a853}.google-wordmark span:nth-child(6){color:#ea4335}
+        .carousel{position:relative;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+        .carousel-track{display:flex;gap:18px;width:max-content;padding:4px 0 18px;animation:reviewScroll 34s linear infinite}
+        .carousel:hover .carousel-track{animation-play-state:paused}
+        .testimonial-card{position:relative;width:280px;min-height:238px;border:0;border-radius:12px;padding:18px 18px 20px;box-shadow:0 16px 36px rgba(15,23,42,.08);overflow:hidden;background:#fff}
+        .testimonial-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}.testimonial-google{margin-left:auto;width:22px;height:22px;display:grid;place-items:center;font-weight:1000;font-size:18px;color:#4285f4}
+        .testimonial-stars{color:#f6b51e;font-size:17px;letter-spacing:1px;font-weight:1000;margin-bottom:9px}
+        .testimonial-quote{margin:0;color:#0f172a;font-size:16px;line-height:1.45}
+        .testimonial-avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#12355b;color:#fff;font-weight:1000;flex:0 0 auto}
+        .testimonial-avatar.alt{background:#1f5f8b}.testimonial-avatar.gold{background:#f4b23c;color:#102033}.testimonial-avatar.sky{background:#0ea5e9}
+        .testimonial-name{display:block;color:#0f172a;font-weight:900;line-height:1.15}.testimonial-meta{display:block;color:#64748b;font-size:13px;font-weight:700;margin-top:3px}
+        .stats-band{background:linear-gradient(135deg,#12355b 0%,#1f5f8b 64%,#f4b23c 160%);padding:70px 0 76px}
+        .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}.stat-card{border-radius:18px;background:#fff;padding:30px 18px;text-align:center;box-shadow:0 18px 45px rgba(6,24,44,.18)}.stat-card strong{display:block;color:var(--brand);font-size:clamp(30px,3.6vw,46px);line-height:1;font-weight:1000}.stat-card span{display:block;margin-top:16px;color:#12355b;font-size:18px;font-weight:900;letter-spacing:.04em}
         .section-transition{position:relative}
         .section-transition::before{content:"";display:block;height:42px}
         .testimonial-section{position:relative;padding:94px 0 36px}
@@ -271,7 +279,7 @@
         .footer-grid{display:grid;grid-template-columns:1.15fr .7fr .9fr;gap:42px;align-items:start}
         .footer-note{max-width:420px}.footer-note .brand{margin-bottom:14px;color:#fff}.footer-note .brand img{height:80px;width:92px}.footer-note .small,.footer-contact .small{color:#dbeafe;font-size:15px;line-height:1.7}
         .footer-column{display:grid;gap:12px}.footer-column h3{margin:0 0 8px;font-size:22px;line-height:1.15}.footer-column a{color:#eef6ff;font-weight:750}.footer-column a:hover{color:#ffe0a6}
-        .footer-contact p{margin:0}.social-links{display:flex;gap:12px;margin-top:8px}.social-link{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--brand);box-shadow:0 10px 24px rgba(0,0,0,.16);transition:transform .18s ease,background .18s ease}.social-link:hover{transform:translateY(-2px);background:#fff7e8}.social-link svg{width:20px;height:20px;fill:currentColor}
+        .footer-contact p{margin:0}.social-links{display:flex;gap:12px;margin-top:8px}.social-link{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--brand);box-shadow:0 10px 24px rgba(0,0,0,.16);transition:transform .18s ease,filter .18s ease}.social-link:hover{transform:translateY(-2px);filter:brightness(1.05)}.social-link svg{width:20px;height:20px;fill:currentColor}.social-link.facebook{background:#1877f2;color:#fff}.social-link.instagram{background:radial-gradient(circle at 30% 107%,#fdf497 0 5%,#fd5949 45%,#d6249f 60%,#285aeb 90%);color:#fff}.social-link.linkedin{background:#0a66c2;color:#fff}
         .footer-legal{margin-top:38px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);text-align:center;color:#cbd5e1;font-size:13px}
         /* animations */
         .reveal,.fade-up{opacity:1;transform:none}
@@ -304,7 +312,8 @@
         @keyframes dotPulse{0%,100%{opacity:.5;transform:scale(.86)}50%{opacity:1;transform:scale(1.12)}}
         @keyframes trustPulse{0%,100%{transform:scale(.9);box-shadow:0 0 0 5px rgba(244,178,60,.14)}50%{transform:scale(1.08);box-shadow:0 0 0 9px rgba(244,178,60,.07)}}
         @keyframes trustSweep{0%,48%{transform:translateX(-110%)}68%,100%{transform:translateX(110%)}}
-        @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.reveal,.fade-up,.topbar::before,.topbar-dot,.hero-eyebrow::before,.hero-eyebrow::after,.hero-illus,.hero-illus::after,.hero-scene *{transition:none;animation:none}.reveal,.fade-up{opacity:1;transform:none}}
+        @keyframes reviewScroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 9px))}}
+        @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.reveal,.fade-up,.topbar::before,.topbar-dot,.hero-eyebrow::before,.hero-eyebrow::after,.carousel-track,.hero-illus,.hero-illus::after,.hero-scene *{transition:none;animation:none}.reveal,.fade-up{opacity:1;transform:none}}
         /* forms */
         .form{display:grid;gap:10px}.input,select,textarea{width:100%;padding:14px;border:1px solid var(--border);border-radius:14px;background:#fff}
         /* footer */
@@ -317,7 +326,9 @@
         @media(max-width:1020px){.nav .row{grid-template-columns:auto 1fr}.menu{display:none}.nav-actions{justify-content:flex-end}.tabbar{display:block}.tabbar .container{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.tabbar .container::-webkit-scrollbar{display:none}.tabbar a{white-space:nowrap}}
         @media(max-width:1020px){.curriculum-grid{grid-template-columns:repeat(2,1fr)}}
         @media(max-width:900px){.contact-panel,.footer-grid,.subjects-layout{grid-template-columns:1fr}.subjects-intro{position:static;padding:0}.contact-section{background:linear-gradient(180deg,#102033 0%,#12355b 58%,#fffdf8 58%,#fffdf8 100%)}.trial-grid{max-width:680px;margin-left:auto;margin-right:auto}}
+        @media(max-width:900px){.review-layout{grid-template-columns:1fr;gap:18px}.google-summary{display:grid;justify-items:center}.stats-grid{grid-template-columns:repeat(2,1fr)}.reviews-wrap{padding-top:72px}}
         @media(max-width:640px){.container{width:min(100% - 32px,1360px)}.topbar .container{font-size:13px;padding:8px 0}.topbar-content{gap:6px}.topbar-live{font-size:11px;padding:3px 8px}.topbar-main{font-size:12px}.topbar-note{display:none}.nav .row{grid-template-columns:1fr;gap:8px;min-height:0;padding:8px 0 10px}.brand,.nav-actions{justify-content:center}.brand img{height:74px;width:86px}.nav-actions{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:8px}.nav-actions .btn{width:100%;padding:10px 12px;font-size:14px;margin:0}.tabbar{position:static}.tabbar .container{padding:8px 0}.tabbar a{font-size:14px;padding:8px 11px}.section{padding:64px 0}.hero-grid{gap:24px;padding:58px 0 64px}.hero-title{font-size:clamp(30px,8.5vw,38px);letter-spacing:-.02em}.hero-subjects{margin-top:20px;margin-bottom:22px}.hero-illus{display:none}.curriculum-section{padding-top:82px;padding-bottom:72px}.testimonial-section{padding-top:76px}.learning-band{padding:76px 0 88px}.learning-band .faq-home{margin-top:78px}.section-transition::before{height:24px}.h1{font-size:clamp(34px,10.8vw,46px)}section[data-page='book']{overflow:hidden}section[data-page='book'] .h1{font-size:clamp(30px,8.6vw,38px);overflow-wrap:break-word}section[data-page='book'] .container{width:calc(100vw - 32px);max-width:calc(100vw - 32px);margin-left:auto;margin-right:auto}.subjects-intro .h1{width:min(100%,320px);font-size:clamp(28px,7.8vw,36px);line-height:1.08;letter-spacing:0}.subjects-intro p{width:min(100%,320px);overflow-wrap:break-word}.trial-grid{width:100%;max-width:100%;gap:12px}.trial-form-card,.trial-info-card{width:100%;max-width:100%}.trial-form-title{min-height:48px;font-size:16px;padding:12px 14px}.trial-form-fields{gap:10px;padding:16px}.trial-field-row{grid-template-columns:1fr;gap:10px}.trial-form-card .input{padding:10px 12px;min-height:46px}.trial-form-card textarea.input{min-height:76px}.trial-form-card .btn{width:100%;min-width:0}.trial-info-card{padding:16px 18px}.trial-info-card .h2{font-size:clamp(24px,7.2vw,30px);line-height:1.12}.trial-lede{font-size:15px;line-height:1.45;overflow-wrap:break-word}.trial-benefits{gap:8px}.trial-benefit{padding-bottom:8px}.usp-row{display:grid}.curriculum-grid,.subjects-grid{grid-template-columns:1fr}.curriculum-card{min-height:0}}
+        @media(max-width:640px){.review-heading{text-align:left}.review-heading .h2{font-size:clamp(28px,8vw,36px)}.carousel{mask-image:none;margin-left:-16px;margin-right:-16px}.carousel-track{animation-duration:28s}.testimonial-card{width:260px;min-height:246px}.stats-band{padding:42px 0}.stats-grid{grid-template-columns:1fr;gap:14px}.stat-card{padding:24px 16px}.stat-card span{font-size:16px}.footer-grid{gap:28px}.site-footer{padding-top:44px}}
       </style>
     </head>
 
@@ -452,31 +463,75 @@
     </div>
   </section>
 
-  <div class='container testimonial-section section-transition' id='home-reviews'>
-    <h2 class='h2 reveal'>What parents say</h2>
-    <div class='carousel'><div class='carousel-track' id='track'>
-      <article class='card testimonial-card'>
-        <div class='testimonial-stars' aria-label='5 out of 5 stars'>★★★★★</div>
-        <p class='testimonial-quote'>“Ananya ma'am made maths feel lighter for my son. The weekly updates help us understand exactly where he is improving.”</p>
-        <div class='testimonial-parent'><span class='testimonial-avatar'>A</span><span><strong class='testimonial-name'>Asha Sharma</strong><span class='testimonial-meta'>Class 5 parent</span></span></div>
-      </article>
-      <article class='card testimonial-card'>
-        <div class='testimonial-stars' aria-label='5 out of 5 stars'>★★★★★</div>
-        <p class='testimonial-quote'>“Meera ma'am improved my daughter's English writing and confidence. She now participates more in class and asks better questions.”</p>
-        <div class='testimonial-parent'><span class='testimonial-avatar'>V</span><span><strong class='testimonial-name'>Vikram Iyer</strong><span class='testimonial-meta'>Class 7 parent</span></span></div>
-      </article>
-      <article class='card testimonial-card'>
-        <div class='testimonial-stars' aria-label='5 out of 5 stars'>★★★★★</div>
-        <p class='testimonial-quote'>“Raghav sir helped my son revise Class 9 science chapter by chapter. Tests feel less stressful now because revision is planned.”</p>
-        <div class='testimonial-parent'><span class='testimonial-avatar'>N</span><span><strong class='testimonial-name'>Nidhi Verma</strong><span class='testimonial-meta'>Class 9 parent</span></span></div>
-      </article>
-      <article class='card testimonial-card'>
-        <div class='testimonial-stars' aria-label='5 out of 5 stars'>★★★★★</div>
-        <p class='testimonial-quote'>“Kavita ma'am gave my daughter a clear Class 10 maths plan. Her confidence in board-style questions has improved a lot.”</p>
-        <div class='testimonial-parent'><span class='testimonial-avatar'>R</span><span><strong class='testimonial-name'>Raj Malhotra</strong><span class='testimonial-meta'>Class 10 parent</span></span></div>
-      </article>
-    </div></div>
-  </div>
+  <section class='reviews-wrap section-transition' id='home-reviews'>
+    <div class='container'>
+      <div class='review-heading'>
+        <h2 class='h2 reveal'>Reviews From Our <span class='impact'>TutorHive Family</span></h2>
+      </div>
+      <div class='review-layout'>
+        <div class='google-summary reveal'>
+          <strong>EXCELLENT</strong>
+          <div class='testimonial-stars' aria-label='5 out of 5 stars'>★★★★★</div>
+          <p>Based on <strong style='display:inline;font-size:inherit'>1,200+ parent reviews</strong></p>
+          <div class='google-wordmark' aria-label='Google'>
+            <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+          </div>
+        </div>
+        <div class='carousel' aria-label='Parent reviews'>
+          <div class='carousel-track'>
+            <article class='testimonial-card'>
+              <div class='testimonial-head'><span class='testimonial-avatar'>A</span><span><strong class='testimonial-name'>Asha Sharma</strong><span class='testimonial-meta'>Class 5 parent</span></span><span class='testimonial-google'>G</span></div>
+              <div class='testimonial-stars' aria-label='5 out of 5 stars'>★★★★★</div>
+              <p class='testimonial-quote'>Ananya ma'am made maths feel lighter for my son. The weekly updates help us understand exactly where he is improving.</p>
+            </article>
+            <article class='testimonial-card'>
+              <div class='testimonial-head'><span class='testimonial-avatar alt'>V</span><span><strong class='testimonial-name'>Vikram Iyer</strong><span class='testimonial-meta'>Class 7 parent</span></span><span class='testimonial-google'>G</span></div>
+              <div class='testimonial-stars' aria-label='5 out of 5 stars'>★★★★★</div>
+              <p class='testimonial-quote'>Meera ma'am improved my daughter's English writing and confidence. She now participates more in class.</p>
+            </article>
+            <article class='testimonial-card'>
+              <div class='testimonial-head'><span class='testimonial-avatar gold'>N</span><span><strong class='testimonial-name'>Nidhi Verma</strong><span class='testimonial-meta'>Class 9 parent</span></span><span class='testimonial-google'>G</span></div>
+              <div class='testimonial-stars' aria-label='5 out of 5 stars'>★★★★★</div>
+              <p class='testimonial-quote'>Raghav sir helped my son revise science chapter by chapter. Tests feel less stressful now because revision is planned.</p>
+            </article>
+            <article class='testimonial-card'>
+              <div class='testimonial-head'><span class='testimonial-avatar sky'>R</span><span><strong class='testimonial-name'>Raj Malhotra</strong><span class='testimonial-meta'>Class 10 parent</span></span><span class='testimonial-google'>G</span></div>
+              <div class='testimonial-stars' aria-label='5 out of 5 stars'>★★★★★</div>
+              <p class='testimonial-quote'>Kavita ma'am gave my daughter a clear Class 10 maths plan. Her confidence in board-style questions improved a lot.</p>
+            </article>
+            <article class='testimonial-card' aria-hidden='true'>
+              <div class='testimonial-head'><span class='testimonial-avatar'>A</span><span><strong class='testimonial-name'>Asha Sharma</strong><span class='testimonial-meta'>Class 5 parent</span></span><span class='testimonial-google'>G</span></div>
+              <div class='testimonial-stars'>★★★★★</div>
+              <p class='testimonial-quote'>Ananya ma'am made maths feel lighter for my son. The weekly updates help us understand exactly where he is improving.</p>
+            </article>
+            <article class='testimonial-card' aria-hidden='true'>
+              <div class='testimonial-head'><span class='testimonial-avatar alt'>V</span><span><strong class='testimonial-name'>Vikram Iyer</strong><span class='testimonial-meta'>Class 7 parent</span></span><span class='testimonial-google'>G</span></div>
+              <div class='testimonial-stars'>★★★★★</div>
+              <p class='testimonial-quote'>Meera ma'am improved my daughter's English writing and confidence. She now participates more in class.</p>
+            </article>
+            <article class='testimonial-card' aria-hidden='true'>
+              <div class='testimonial-head'><span class='testimonial-avatar gold'>N</span><span><strong class='testimonial-name'>Nidhi Verma</strong><span class='testimonial-meta'>Class 9 parent</span></span><span class='testimonial-google'>G</span></div>
+              <div class='testimonial-stars'>★★★★★</div>
+              <p class='testimonial-quote'>Raghav sir helped my son revise science chapter by chapter. Tests feel less stressful now because revision is planned.</p>
+            </article>
+            <article class='testimonial-card' aria-hidden='true'>
+              <div class='testimonial-head'><span class='testimonial-avatar sky'>R</span><span><strong class='testimonial-name'>Raj Malhotra</strong><span class='testimonial-meta'>Class 10 parent</span></span><span class='testimonial-google'>G</span></div>
+              <div class='testimonial-stars'>★★★★★</div>
+              <p class='testimonial-quote'>Kavita ma'am gave my daughter a clear Class 10 maths plan. Her confidence in board-style questions improved a lot.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='stats-band'>
+      <div class='container stats-grid'>
+        <div class='stat-card reveal'><strong>1,200+</strong><span>Parent Enquiries</span></div>
+        <div class='stat-card reveal'><strong>35+</strong><span>Expert Tutors</span></div>
+        <div class='stat-card reveal'><strong>4</strong><span>Core Subjects</span></div>
+        <div class='stat-card reveal'><strong>5-10</strong><span>Classes Covered</span></div>
+      </div>
+    </div>
+  </section>
 
   <div class='section alt'><div class='container home-section-flow section-transition'>
     <h2 class='h2 reveal'>Why parents trust TutorHive</h2>
@@ -487,23 +542,6 @@
     </div>
   </div></div>
 
-  <div class='container section home-section-flow section-transition'>
-    <h2 class='h2 reveal'>Outcomes parents care about</h2>
-    <div class='grid cols-3' style='margin-top:12px'>
-      <div class='tile reveal' style='display:flex;align-items:center;gap:12px'>
-        <svg width='100' height='100' viewBox='0 0 120 120'><circle cx='60' cy='60' r='46' stroke='#e5e7eb' stroke-width='12' fill='none'/><circle cx='60' cy='60' r='46' stroke='#12355b' stroke-width='12' fill='none' stroke-linecap='round' transform='rotate(-90 60 60)' stroke-dasharray='220 290'/><text x='60' y='66' text-anchor='middle' font-size='22' font-weight='900' fill='#0f172a'>2×</text></svg>
-        <div><strong>Homework completion</strong></div>
-      </div>
-      <div class='tile reveal' style='display:flex;align-items:center;gap:12px'>
-        <svg width='100' height='100' viewBox='0 0 120 120'><circle cx='60' cy='60' r='46' stroke='#e5e7eb' stroke-width='12' fill='none'/><circle cx='60' cy='60' r='46' stroke='#f4b23c' stroke-width='12' fill='none' stroke-linecap='round' transform='rotate(-90 60 60)' stroke-dasharray='165 290'/><text x='60' y='66' text-anchor='middle' font-size='22' font-weight='900' fill='#0f172a'>+25%</text></svg>
-        <div><strong>Problem solving speed</strong></div>
-      </div>
-      <div class='tile reveal' style='display:flex;align-items:center;gap:12px'>
-        <svg width='100' height='100' viewBox='0 0 120 120'><circle cx='60' cy='60' r='46' stroke='#e5e7eb' stroke-width='12' fill='none'/><circle cx='60' cy='60' r='46' stroke='#1f5f8b' stroke-width='12' fill='none' stroke-linecap='round' transform='rotate(-90 60 60)' stroke-dasharray='275 290'/><text x='60' y='66' text-anchor='middle' font-size='22' font-weight='900' fill='#0f172a'>95%</text></svg>
-        <div><strong>Parent recommendation</strong></div>
-      </div>
-    </div>
-  </div>
   <div class='learning-band'>
     <section id="benefits" class="container section section-transition reveal">
       <h2 class="h2">What changes for your child</h2>
@@ -723,13 +761,13 @@
         <p class='small'>Bangalore, Karnataka, India</p>
         <p class='small'><a href='mailto:contact@tutorhive.in'>contact@tutorhive.in</a></p>
         <div class='social-links' aria-label='Social links'>
-          <a class='social-link' href='' aria-label='Facebook'>
+          <a class='social-link facebook' href='' aria-label='Facebook'>
             <svg viewBox='0 0 24 24' aria-hidden='true'><path d='M14.2 8.1V6.7c0-.7.5-.9.9-.9h2.3V2h-3.2c-3.5 0-4.3 2.6-4.3 4.3v1.8H7v3.9h2.9v10h4.3V12h3.1l.5-3.9h-3.6z'/></svg>
           </a>
-          <a class='social-link' href='' aria-label='Instagram'>
+          <a class='social-link instagram' href='' aria-label='Instagram'>
             <svg viewBox='0 0 24 24' aria-hidden='true'><path d='M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2zm0 2A3.8 3.8 0 0 0 4 7.8v8.4A3.8 3.8 0 0 0 7.8 20h8.4a3.8 3.8 0 0 0 3.8-3.8V7.8A3.8 3.8 0 0 0 16.2 4H7.8zm8.7 2.6a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM12 7.4a4.6 4.6 0 1 1 0 9.2 4.6 4.6 0 0 1 0-9.2zm0 2a2.6 2.6 0 1 0 0 5.2 2.6 2.6 0 0 0 0-5.2z'/></svg>
           </a>
-          <a class='social-link' href='https://www.linkedin.com/company/tutorhiveindia' target='_blank' rel='noopener noreferrer' aria-label='LinkedIn'>
+          <a class='social-link linkedin' href='https://www.linkedin.com/company/tutorhiveindia' target='_blank' rel='noopener noreferrer' aria-label='LinkedIn'>
             <svg viewBox='0 0 24 24' aria-hidden='true'><path d='M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9.5h4v12H3v-12zm6.5 0h3.8v1.6h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.8 2.6 4.8 6v6.3h-4v-5.6c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9v5.7h-4v-12z'/></svg>
           </a>
         </div>
