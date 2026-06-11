@@ -191,6 +191,7 @@
         .hero-grid{display:grid;gap:42px;align-items:center;padding:94px 0 116px}@media(min-width:900px){.hero-grid{grid-template-columns:1.06fr .94fr}}
         .hero-grid>.reveal:first-child{align-self:center}
         .hero-title{font-size:clamp(34px,4.1vw,54px);max-width:720px;margin-top:14px}
+        .hero-title .title-gradient{background:linear-gradient(90deg,var(--brand) 0%,var(--brand2) 58%,var(--saffron) 112%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
         .hero-grid>.reveal:first-child>.small{font-size:18px;line-height:1.72;max-width:690px;color:#526173}
         .hero-illus{position:relative;border:1px solid rgba(148,163,184,.24);border-radius:24px;overflow:hidden;box-shadow:0 34px 80px rgba(15,23,42,.14);background:radial-gradient(circle at top left,#fff7e8 0,#fffdf8 34%,#edf5fb 100%);animation:heroEnter .45s cubic-bezier(.22,1,.36,1) both}
         .hero-illus::after{content:"";position:absolute;inset:-20%;background:linear-gradient(115deg,transparent 34%,rgba(255,255,255,.38) 48%,transparent 62%);transform:translateX(-70%) rotate(2deg);animation:cardSweep 6.5s ease-in-out infinite;pointer-events:none}
@@ -376,7 +377,7 @@
   <div class='container hero-grid'>
     <div class='reveal'>
       <span class='hero-eyebrow'>Trusted by 1,200+ parents in India</span>
-      <h1 class='h1 hero-title'>Personalized Online Tuition for School Students for Classes 5-10</h1>
+      <h1 class='h1 hero-title'><span class='title-gradient'>Personalized Online Tuition</span> for School Students for Classes 5-10</h1>
       <div class='hero-subjects' aria-label='Subjects offered'>
         <span class='hero-subject'>Maths</span>
         <span class='hero-subject'>Science</span>
@@ -770,6 +771,7 @@
     <p class='small' style='font-size:18px;max-width:760px;margin-top:16px'>Read focused guides on online tuition fees, tutor selection, CBSE exam preparation, maths support, and choosing the right class format for your child.</p>
     <div class='grid cols-3' style='margin-top:26px'>
       <article class='tile blog-card reveal'><span class='badge'>Pricing</span><h2>Online tuition fees in India</h2><p class='small'>Understand what affects pricing and how to compare 1:1 and small group tuition.</p><a class='text-link' href='blog/online-tuition-fees-india/'>Read guide <span aria-hidden='true'>→</span></a></article>
+      <article class='tile blog-card reveal'><span class='badge'>Classes 5-10</span><h2>Best online tuition when marks are dropping</h2><p class='small'>A parent action plan for choosing the right online support before gaps become exam stress.</p><a class='text-link' href='blog/best-online-tuition-classes-5-10-marks-dropping/'>Read guide <span aria-hidden='true'>→</span></a></article>
       <article class='tile blog-card reveal'><span class='badge'>Classes 6-10</span><h2>Best online tuition for Classes 6-10</h2><p class='small'>A parent checklist for choosing school-aligned support before enrolling.</p><a class='text-link' href='blog/best-online-tuition-classes-6-10/'>Read guide <span aria-hidden='true'>→</span></a></article>
       <article class='tile blog-card reveal'><span class='badge'>Class 8 maths</span><h2>Online maths tuition for Class 8</h2><p class='small'>Spot the signs that maths gaps need focused support before Class 9.</p><a class='text-link' href='blog/online-maths-tuition-class-8/'>Read guide <span aria-hidden='true'>→</span></a></article>
       <article class='tile blog-card reveal'><span class='badge'>CBSE exams</span><h2>CBSE exam preparation with online tuition</h2><p class='small'>Plan chapter revision, doubt clearing, and school-test practice.</p><a class='text-link' href='blog/cbse-exam-preparation-online-tuition/'>Read guide <span aria-hidden='true'>→</span></a></article>
