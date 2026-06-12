@@ -15,7 +15,8 @@
       <!-- ✅ SEO Title & Description -->
       <title>Personalized Online Tuition for Classes 5-10 | TutorHive</title>
       <!-- ✅ Favicon -->
-      <link rel="icon" type="image/png" href="favicon.png">
+      <link rel="icon" type="image/svg+xml" href="favicon.svg">
+      <link rel="alternate icon" type="image/png" href="favicon.png">
       <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
 
@@ -186,9 +187,15 @@
         .topbar-note{color:#d8f5f1;font-weight:800}
         .nav{border-bottom:0;background:rgba(255,255,255,.9);position:sticky;top:0;z-index:50;box-shadow:0 10px 30px rgba(15,23,42,.04)}
         .nav::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,rgba(7,20,47,.18),rgba(20,184,166,.52),rgba(20,184,166,.62),rgba(20,184,166,.28));box-shadow:0 1px 8px rgba(20,184,166,.12);pointer-events:none}
-        .nav .row{min-height:78px;display:grid;grid-template-columns:210px minmax(0,1fr) auto;align-items:center;gap:18px}
-        .brand{display:flex;align-items:center;gap:10px;font-weight:900}
-        .brand img{height:70px;width:82px;object-fit:contain}
+        .nav .row{min-height:78px;display:grid;grid-template-columns:260px minmax(0,1fr) auto;align-items:center;gap:18px}
+        .brand{display:inline-grid;justify-items:start;align-items:center;gap:4px;font-weight:900;min-width:0}
+        .brand-main{display:inline-flex;align-items:center;gap:10px;min-width:0}
+        .brand img{height:54px;width:54px;object-fit:contain;flex:0 0 auto}
+        .brand-wordmark{display:inline-flex;align-items:baseline;font-size:38px;line-height:1;font-weight:950;letter-spacing:0;white-space:nowrap}
+        .brand-tutor{color:var(--brand)}
+        .brand-hive{color:var(--brand2)}
+        .brand-swoosh{display:block;width:100%;height:12px}
+        .brand-swoosh svg{display:block;width:100%;height:100%}
         .menu{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;align-items:center}
         .menu a{padding:8px 12px;border-radius:10px;position:relative;font-weight:820}
         .menu a:after{content:"";position:absolute;left:10px;right:10px;bottom:4px;height:2px;background:linear-gradient(90deg,var(--brand),var(--brand2));border-radius:2px;transform:scaleX(0);transition:transform .18s ease}
@@ -325,7 +332,7 @@
         .btn[disabled]{opacity:.78;cursor:wait;transform:none}
         .site-footer{background:linear-gradient(135deg,#050b1f 0%,#0b1228 45%,#07142f 100%);border-top:1px solid rgba(20,184,166,.3);padding:58px 0 28px;color:#fff}
         .footer-grid{display:grid;grid-template-columns:1.15fr .7fr .9fr;gap:42px;align-items:start}
-        .footer-note{max-width:420px}.footer-note .brand{margin-bottom:14px;color:#fff}.footer-note .brand img{height:80px;width:92px}.footer-note .small,.footer-contact .small{color:#d8f5f1;font-size:15px;line-height:1.7}
+        .footer-note{max-width:420px}.footer-note .brand{margin-bottom:14px;color:#fff}.footer-note .brand img{height:50px;width:50px}.footer-note .brand-wordmark{font-size:34px}.footer-note .small,.footer-contact .small{color:#d8f5f1;font-size:15px;line-height:1.7}
         .footer-column{display:grid;gap:12px}.footer-column h3{margin:0 0 8px;font-size:22px;line-height:1.15}.footer-column a{color:#eef6ff;font-weight:750}.footer-column a:hover{color:#99f6e4}
         .footer-contact p{margin:0}.social-links{display:flex;gap:12px;margin-top:8px}.social-link{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--brand);box-shadow:0 10px 24px rgba(0,0,0,.16);transition:transform .18s ease,filter .18s ease}.social-link:hover{transform:translateY(-2px);filter:brightness(1.05)}.social-link svg{width:20px;height:20px;fill:currentColor}.social-link.facebook{background:#1877f2;color:#fff}.social-link.instagram{background:radial-gradient(circle at 30% 107%,#fdf497 0 5%,#fd5949 45%,#d6249f 60%,#285aeb 90%);color:#fff}.social-link.linkedin{background:#0a66c2;color:#fff}
         .footer-legal{margin-top:38px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);text-align:center;color:#cbd5e1;font-size:13px}
@@ -379,15 +386,24 @@
         @media(max-width:1020px){.curriculum-grid{grid-template-columns:repeat(2,1fr)}}
         @media(max-width:900px){.contact-panel,.footer-grid,.subjects-layout{grid-template-columns:1fr}.subjects-intro{position:static;padding:0}.contact-section{background:linear-gradient(180deg,#0b1228 0%,#07142f 58%,#ffffff 58%,#ffffff 100%)}.trial-grid{max-width:680px;margin-left:auto;margin-right:auto}}
         @media(max-width:900px){.review-layout{grid-template-columns:1fr;gap:18px}.review-summary{display:grid;justify-items:center}.stats-grid{grid-template-columns:repeat(2,1fr)}.trust-reasons{grid-template-columns:1fr 1fr}.change-grid{grid-template-columns:repeat(2,1fr)}.reviews-wrap{padding-top:72px}}
-        @media(max-width:640px){html{scroll-padding-top:0}.container{width:min(100% - 32px,1360px)}.topbar .container{font-size:13px;padding:9px 0}.topbar-content{gap:8px;flex-wrap:nowrap}.topbar-live{font-size:11px;padding:5px 10px;white-space:nowrap}.topbar-main{font-size:15px;white-space:nowrap}.topbar-note{display:none}.nav{position:relative}.nav .row{grid-template-columns:1fr;gap:10px;min-height:0;padding:16px 0 14px}.brand,.nav-actions{justify-content:center}.brand img{height:86px;width:104px}.nav-actions{display:flex;width:100%;justify-content:center}.nav-actions .btn{width:min(100%,360px);justify-content:center;padding:16px 18px;font-size:18px;margin:0}.tabbar{position:static}.tabbar .container{width:100%;margin:0;padding:10px 16px;gap:10px}.tabbar a{font-size:15px;padding:9px 16px;border-radius:13px;flex:0 0 auto}.section{padding:50px 0}.hero-grid{gap:20px;padding:34px 0 48px}.hero-title{font-size:clamp(30px,8.5vw,38px);letter-spacing:-.02em}.hero-eyebrow{font-size:13px;max-width:100%;white-space:normal}.hero-subjects{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px;margin-bottom:22px}.hero-subject{width:100%;min-width:0;padding:11px 12px;font-size:15px}.hero-illus{max-width:420px;margin:0 auto}.hero-actions{display:grid;grid-template-columns:1fr;gap:12px}.hero-actions .btn{justify-content:center}.curriculum-section{padding-top:60px;padding-bottom:60px}.reviews-wrap{padding-top:56px}.testimonial-section{padding-top:60px}.learning-band{padding:46px 0 62px}.learning-band .faq-home{margin-top:54px}.section-transition::before{height:14px}.h1{font-size:clamp(34px,10.8vw,46px)}section[data-page='book']{overflow:hidden}section[data-page='book'] .h1{font-size:clamp(30px,8.6vw,38px);overflow-wrap:break-word}section[data-page='book'] .container{width:calc(100vw - 32px);max-width:calc(100vw - 32px);margin-left:auto;margin-right:auto}.subjects-intro .h1{width:min(100%,320px);font-size:clamp(28px,7.8vw,36px);line-height:1.08;letter-spacing:0}.subjects-intro p{width:min(100%,320px);overflow-wrap:break-word}.trial-grid{width:100%;max-width:100%;gap:12px}.trial-form-card,.trial-info-card{width:100%;max-width:100%}.trial-form-title{min-height:48px;font-size:16px;padding:12px 14px}.trial-form-fields{gap:10px;padding:16px}.trial-field-row{grid-template-columns:1fr;gap:10px}.trial-form-card .input{padding:10px 12px;min-height:46px}.trial-form-card textarea.input{min-height:76px}.trial-form-card .btn{width:100%;min-width:0}.trial-info-card{padding:16px 18px}.trial-info-card .h2{font-size:clamp(24px,7.2vw,30px);line-height:1.12}.trial-lede{font-size:15px;line-height:1.45;overflow-wrap:break-word}.trial-benefits{gap:8px}.trial-benefit{padding-bottom:8px}.usp-row{display:grid;gap:12px}.usp-pill{font-size:17px}.curriculum-grid,.subjects-grid{grid-template-columns:1fr}.curriculum-card{min-height:0}}
+        @media(max-width:640px){html{scroll-padding-top:0}.container{width:min(100% - 32px,1360px)}.topbar .container{font-size:13px;padding:9px 0}.topbar-content{gap:8px;flex-wrap:nowrap}.topbar-live{font-size:11px;padding:5px 10px;white-space:nowrap}.topbar-main{font-size:15px;white-space:nowrap}.topbar-note{display:none}.nav{position:relative}.nav .row{grid-template-columns:1fr;gap:10px;min-height:0;padding:16px 0 14px}.brand,.nav-actions{justify-content:center}.brand{justify-items:center}.brand img{height:46px;width:46px}.brand-wordmark{font-size:clamp(30px,10vw,42px)}.brand-swoosh{width:min(100%,240px)}.nav-actions{display:flex;width:100%;justify-content:center}.nav-actions .btn{width:min(100%,360px);justify-content:center;padding:16px 18px;font-size:18px;margin:0}.tabbar{position:static}.tabbar .container{width:100%;margin:0;padding:10px 16px;gap:10px}.tabbar a{font-size:15px;padding:9px 16px;border-radius:13px;flex:0 0 auto}.section{padding:50px 0}.hero-grid{gap:20px;padding:34px 0 48px}.hero-title{font-size:clamp(30px,8.5vw,38px);letter-spacing:-.02em}.hero-eyebrow{font-size:13px;max-width:100%;white-space:normal}.hero-subjects{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px;margin-bottom:22px}.hero-subject{width:100%;min-width:0;padding:11px 12px;font-size:15px}.hero-illus{max-width:420px;margin:0 auto}.hero-actions{display:grid;grid-template-columns:1fr;gap:12px}.hero-actions .btn{justify-content:center}.curriculum-section{padding-top:60px;padding-bottom:60px}.reviews-wrap{padding-top:56px}.testimonial-section{padding-top:60px}.learning-band{padding:46px 0 62px}.learning-band .faq-home{margin-top:54px}.section-transition::before{height:14px}.h1{font-size:clamp(34px,10.8vw,46px)}section[data-page='book']{overflow:hidden}section[data-page='book'] .h1{font-size:clamp(30px,8.6vw,38px);overflow-wrap:break-word}section[data-page='book'] .container{width:calc(100vw - 32px);max-width:calc(100vw - 32px);margin-left:auto;margin-right:auto}.subjects-intro .h1{width:min(100%,320px);font-size:clamp(28px,7.8vw,36px);line-height:1.08;letter-spacing:0}.subjects-intro p{width:min(100%,320px);overflow-wrap:break-word}.trial-grid{width:100%;max-width:100%;gap:12px}.trial-form-card,.trial-info-card{width:100%;max-width:100%}.trial-form-title{min-height:48px;font-size:16px;padding:12px 14px}.trial-form-fields{gap:10px;padding:16px}.trial-field-row{grid-template-columns:1fr;gap:10px}.trial-form-card .input{padding:10px 12px;min-height:46px}.trial-form-card textarea.input{min-height:76px}.trial-form-card .btn{width:100%;min-width:0}.trial-info-card{padding:16px 18px}.trial-info-card .h2{font-size:clamp(24px,7.2vw,30px);line-height:1.12}.trial-lede{font-size:15px;line-height:1.45;overflow-wrap:break-word}.trial-benefits{gap:8px}.trial-benefit{padding-bottom:8px}.usp-row{display:grid;gap:12px}.usp-pill{font-size:17px}.curriculum-grid,.subjects-grid{grid-template-columns:1fr}.curriculum-card{min-height:0}}
         @media(max-width:640px){.review-heading{text-align:left}.review-heading .h2{font-size:clamp(28px,8vw,36px)}.carousel{mask-image:none;margin-left:-16px;margin-right:-16px}.carousel-track{animation-duration:28s}.testimonial-card{width:260px;min-height:246px}.stats-band{padding:42px 0}.stats-grid{grid-template-columns:1fr;gap:14px}.stat-card{padding:22px 16px}.stat-card span{font-size:15px}.trust-section{padding:72px 0}.trust-section .h2{font-size:clamp(28px,8vw,36px)}.trust-reasons{grid-template-columns:1fr}.trust-card{min-height:0;padding:20px}.child-change-head{text-align:left}.change-grid{grid-template-columns:1fr}.change-card{padding:18px}.footer-grid{gap:28px}.site-footer{padding-top:44px}}
       </style>
     </head>
 
 <body>
 <div class='topbar'><div class='container'><div class='topbar-content'><span class='topbar-live'><span class='topbar-dot'></span>Live on Zoom</span><span class='topbar-main'>Free 30-min trial class</span><span class='topbar-note'>Meet your tutor before enrolling</span></div></div></div>
-<div class='nav'><div class='container row'><div class="brand">
-    <img src="logo.png" alt="TutorHive Logo">
+<div class='nav'><div class='container row'><div class="brand" aria-label="TutorHive">
+    <div class="brand-main">
+      <img src="brand-mark.svg" alt="TutorHive">
+      <span class="brand-wordmark" aria-hidden="true"><span class="brand-tutor">Tutor</span><span class="brand-hive">Hive</span></span>
+    </div>
+    <span class="brand-swoosh" aria-hidden="true">
+      <svg viewBox="0 0 280 16" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M8 11.5C74 4.2 161 2.8 272 11.5" fill="none" stroke="#07142f" stroke-width="5" stroke-linecap="round"/>
+        <path d="M118 11.2C165 7.7 213 7.8 272 11.2" fill="none" stroke="#14b8a6" stroke-width="5" stroke-linecap="round"/>
+      </svg>
+    </span>
   </div>
 <div class='menu'>
 <a href='#home' class='active' data-link='home'>Home</a>
@@ -853,7 +869,18 @@
   <div class='container'>
     <div class='footer-grid'>
       <div class='footer-note'>
-        <div class='brand'><img src='footer-logo.png' alt='TutorHive logo'>TutorHive</div>
+        <div class='brand' aria-label='TutorHive'>
+          <div class='brand-main'>
+            <img src='brand-mark.svg' alt='TutorHive logo'>
+            <span class='brand-wordmark' aria-hidden='true'><span class='brand-tutor'>Tutor</span><span class='brand-hive'>Hive</span></span>
+          </div>
+          <span class='brand-swoosh' aria-hidden='true'>
+            <svg viewBox='0 0 280 16' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'>
+              <path d='M8 11.5C74 4.2 161 2.8 272 11.5' fill='none' stroke='#ffffff' stroke-opacity='.82' stroke-width='5' stroke-linecap='round'/>
+              <path d='M118 11.2C165 7.7 213 7.8 272 11.2' fill='none' stroke='#5eead4' stroke-width='5' stroke-linecap='round'/>
+            </svg>
+          </span>
+        </div>
         <p class='small'>TutorHive offers personalised online tuition for Classes 5-10 through one-to-one teaching, flexible schedules, and parent-friendly progress updates.</p>
         <a class='btn primary footer-cta' href='#book' data-link='book'>Book Free Class</a>
       </div>
