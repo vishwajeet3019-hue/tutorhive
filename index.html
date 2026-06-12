@@ -193,8 +193,10 @@
         .hero-title{font-size:clamp(34px,4.1vw,54px);max-width:720px;margin-top:14px}
         .hero-title .title-gradient{background:linear-gradient(90deg,var(--brand) 0%,var(--brand2) 58%,var(--saffron) 112%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
         .hero-grid>.reveal:first-child>.small{font-size:18px;line-height:1.72;max-width:690px;color:#526173}
-        .hero-illus{position:relative;border:1px solid rgba(148,163,184,.24);border-radius:24px;overflow:hidden;box-shadow:0 34px 80px rgba(15,23,42,.14);background:radial-gradient(circle at top left,#fff7e8 0,#fffdf8 34%,#edf5fb 100%);animation:heroEnter .45s cubic-bezier(.22,1,.36,1) both}
-        .hero-illus::after{content:"";position:absolute;inset:-20%;background:linear-gradient(115deg,transparent 34%,rgba(255,255,255,.38) 48%,transparent 62%);transform:translateX(-70%) rotate(2deg);animation:cardSweep 6.5s ease-in-out infinite;pointer-events:none}
+        .hero-illus{position:relative;border:1px solid rgba(148,163,184,.22);border-radius:24px;overflow:hidden;box-shadow:0 34px 80px rgba(15,23,42,.14);background:radial-gradient(circle at 24% 18%,#fff7e8 0,#fffdf8 32%,#edf5fb 72%,#ffffff 100%);animation:heroEnter .45s cubic-bezier(.22,1,.36,1) both}
+        .hero-illus::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 76% 22%,rgba(31,95,139,.18),transparent 31%),radial-gradient(circle at 16% 82%,rgba(244,178,60,.24),transparent 30%);pointer-events:none}
+        .hero-illus::after{content:"";position:absolute;inset:-25%;background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,.36) 49%,transparent 60%);transform:translateX(-76%) rotate(2deg);animation:cardSweep 7.5s ease-in-out infinite;pointer-events:none}
+        .hero-scene{position:relative;z-index:1;display:block;width:100%;height:auto}
         .reviews-wrap{background:#f8fafc;padding:88px 0 0}
         .review-heading{text-align:center;margin-bottom:30px}.review-heading .impact{-webkit-text-fill-color:initial;background:none;color:var(--brand2)}
         .review-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px;align-items:center}
@@ -300,54 +302,40 @@
         /* animations */
         .reveal,.fade-up{opacity:1;transform:none}
         .reveal.show,.fade-up.show{opacity:1;transform:none}
-        .hero-scene .lesson-shell,.hero-scene .lesson-panel,.hero-scene .student-a,.hero-scene .student-b,.hero-scene .note-card,.hero-scene .spark,.hero-scene .progress-fill,.hero-scene .orbit,.hero-scene .shine,.hero-scene .focus-ring,.hero-scene .lesson-line,.hero-scene .lesson-dot,.hero-scene .formula-card,.hero-scene .chem-card,.hero-scene .float-symbol,.hero-scene .molecule,.hero-scene .molecule-dot,.hero-scene .flask,.hero-scene .bubble,.hero-scene .graph-line,.hero-scene .equation-line{transform-box:fill-box;transform-origin:center}
-        .hero-scene .lesson-shell{animation:shellFloat 7s ease-in-out infinite}
-        .hero-scene .lesson-panel{animation:panelGlow 4.8s ease-in-out infinite}
-        .hero-scene .student-a{animation:studentFloat 5.2s ease-in-out infinite}
-        .hero-scene .student-b{animation:studentFloat 5.2s ease-in-out .8s infinite}
-        .hero-scene .note-card{animation:noteFloat 6.2s ease-in-out infinite}
-        .hero-scene .spark{animation:sparkle 2.6s ease-in-out infinite}.hero-scene .spark.alt{animation-delay:.65s}
-        .hero-scene .orbit{animation:orbitDrift 8s ease-in-out infinite}.hero-scene .orbit.alt{animation-delay:1.4s}
-        .hero-scene .shine{animation:premiumShine 4.6s ease-in-out infinite}
-        .hero-scene .focus-ring{animation:focusPulse 3.6s ease-in-out infinite}
-        .hero-scene .lesson-line{transform-origin:left center;animation:lineReveal 4.6s ease-in-out infinite}.hero-scene .lesson-line.alt{animation-delay:.34s}
-        .hero-scene .lesson-dot{animation:dotPulse 2.2s ease-in-out infinite}.hero-scene .lesson-dot:nth-of-type(2){animation-delay:.24s}.hero-scene .lesson-dot:nth-of-type(3){animation-delay:.48s}
-        .hero-scene .progress-fill{transform-origin:left center;animation:premiumProgress 5.5s ease-in-out infinite}
-        .hero-scene .formula-card{animation:formulaFloat 6.4s ease-in-out infinite}
-        .hero-scene .formula-card.alt{animation-delay:1.1s}.hero-scene .formula-card.third{animation-delay:2s}
-        .hero-scene .chem-card{animation:chemFloat 7s ease-in-out infinite}
-        .hero-scene .float-symbol{animation:symbolDrift 5.8s ease-in-out infinite}.hero-scene .float-symbol.alt{animation-delay:1.35s}.hero-scene .float-symbol.third{animation-delay:2.2s}
-        .hero-scene .molecule{animation:moleculeFloat 8s ease-in-out infinite}
-        .hero-scene .molecule-dot{animation:atomPulse 2.8s ease-in-out infinite}.hero-scene .molecule-dot.alt{animation-delay:.7s}
-        .hero-scene .flask{animation:flaskFloat 6.8s ease-in-out infinite}
-        .hero-scene .bubble{animation:bubbleRise 3.6s ease-in-out infinite}.hero-scene .bubble.alt{animation-delay:1.1s}.hero-scene .bubble.third{animation-delay:2s}
-        .hero-scene .graph-line{stroke-dasharray:420;stroke-dashoffset:420;animation:drawGraph 5.8s ease-in-out infinite}
-        .hero-scene .equation-line{transform-origin:left center;animation:lineReveal 4.8s ease-in-out infinite}
-        @keyframes shellFloat{0%,100%{transform:translateY(0)}35%{transform:translateY(-8px)}70%{transform:translateY(-3px)}}
-        @keyframes panelGlow{0%,100%{opacity:.96}45%{opacity:1}}
-        @keyframes studentFloat{0%,100%{transform:translateY(0)}40%{transform:translateY(-7px)}}
-        @keyframes noteFloat{0%,100%{transform:translateY(0) rotate(-2deg)}40%{transform:translateY(-10px) rotate(1deg)}}
-        @keyframes sparkle{0%,100%{opacity:.28;transform:scale(.88)}45%{opacity:1;transform:scale(1.1)}}
-        @keyframes premiumProgress{0%,10%{transform:scaleX(.1)}58%{transform:scaleX(.78)}78%,100%{transform:scaleX(.9)}}
-        @keyframes orbitDrift{0%,100%{transform:translate(0,0)}35%{transform:translate(14px,-10px)}70%{transform:translate(6px,-4px)}}
-        @keyframes premiumShine{0%,18%{opacity:0;transform:translateX(-140px) skewX(-18deg)}34%{opacity:.8}52%,100%{opacity:0;transform:translateX(390px) skewX(-18deg)}}
+        .hero-scene .aura,.hero-scene .core,.hero-scene .icon-token,.hero-scene .symbol,.hero-scene .bolt,.hero-scene .beaker,.hero-scene .bubble,.hero-scene .orbit-path,.hero-scene .glint,.hero-scene .beam{transform-box:fill-box;transform-origin:center}
+        .hero-scene .aura{animation:auraBreathe 7.5s ease-in-out infinite}
+        .hero-scene .core{animation:coreFloat 7s ease-in-out infinite}
+        .hero-scene .orbit-path{stroke-dasharray:12 18;animation:orbitSpin 28s linear infinite}
+        .hero-scene .orbit-path.alt{animation-duration:36s;animation-direction:reverse}
+        .hero-scene .icon-token{animation:tokenFloat 6.8s ease-in-out infinite}
+        .hero-scene .icon-token.pi{animation-delay:.15s}
+        .hero-scene .icon-token.sigma{animation-delay:1.2s}
+        .hero-scene .icon-token.flash{animation-delay:2.05s}
+        .hero-scene .icon-token.beaker-token{animation-delay:3s}
+        .hero-scene .symbol{animation:symbolPulse 3.8s ease-in-out infinite}
+        .hero-scene .bolt{animation:boltFlash 2.8s ease-in-out infinite}
+        .hero-scene .beaker{animation:beakerTilt 5.6s ease-in-out infinite}
+        .hero-scene .bubble{animation:bubbleRise 4s ease-in-out infinite}
+        .hero-scene .bubble.alt{animation-delay:1.2s}.hero-scene .bubble.third{animation-delay:2.3s}
+        .hero-scene .glint{animation:glintBlink 3s ease-in-out infinite}.hero-scene .glint.alt{animation-delay:1.1s}.hero-scene .glint.third{animation-delay:2s}
+        .hero-scene .beam{stroke-dasharray:360;stroke-dashoffset:360;animation:beamFlow 6.4s ease-in-out infinite}
+        .hero-scene .beam.alt{animation-delay:1.1s}.hero-scene .beam.third{animation-delay:2.1s}
+        @keyframes auraBreathe{0%,100%{opacity:.65;transform:scale(.98)}50%{opacity:1;transform:scale(1.04)}}
+        @keyframes coreFloat{0%,100%{transform:translateY(0) scale(1)}45%{transform:translateY(-8px) scale(1.012)}}
+        @keyframes orbitSpin{from{stroke-dashoffset:0}to{stroke-dashoffset:-420}}
+        @keyframes tokenFloat{0%,100%{transform:translate(0,0) rotate(0)}38%{transform:translate(8px,-13px) rotate(2deg)}72%{transform:translate(-5px,-5px) rotate(-1deg)}}
+        @keyframes symbolPulse{0%,100%{opacity:.88;transform:scale(.98)}50%{opacity:1;transform:scale(1.07)}}
+        @keyframes boltFlash{0%,100%{filter:drop-shadow(0 0 0 rgba(244,178,60,0));transform:scale(.98)}45%{filter:drop-shadow(0 0 16px rgba(244,178,60,.52));transform:scale(1.08)}}
         @keyframes heroEnter{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:none}}
         @keyframes cardSweep{0%,52%{transform:translateX(-75%) rotate(2deg)}70%{transform:translateX(75%) rotate(2deg)}100%{transform:translateX(75%) rotate(2deg)}}
-        @keyframes focusPulse{0%,100%{opacity:.28;transform:scale(.92)}48%{opacity:.78;transform:scale(1.08)}}
-        @keyframes lineReveal{0%,12%{opacity:.28;transform:scaleX(.58)}45%,80%{opacity:.95;transform:scaleX(1)}100%{opacity:.28;transform:scaleX(.58)}}
-        @keyframes dotPulse{0%,100%{opacity:.5;transform:scale(.86)}50%{opacity:1;transform:scale(1.12)}}
-        @keyframes formulaFloat{0%,100%{transform:translateY(0) rotate(-1deg)}45%{transform:translateY(-10px) rotate(1deg)}}
-        @keyframes chemFloat{0%,100%{transform:translateY(0) rotate(1deg)}50%{transform:translateY(-9px) rotate(-1deg)}}
-        @keyframes symbolDrift{0%,100%{opacity:.52;transform:translate(0,0) scale(.98)}50%{opacity:1;transform:translate(6px,-12px) scale(1.06)}}
-        @keyframes moleculeFloat{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(-7px,-9px) rotate(2deg)}}
-        @keyframes atomPulse{0%,100%{transform:scale(.92);opacity:.76}50%{transform:scale(1.12);opacity:1}}
-        @keyframes flaskFloat{0%,100%{transform:translateY(0)}45%{transform:translateY(-8px)}}
-        @keyframes bubbleRise{0%{opacity:0;transform:translateY(16px) scale(.72)}35%{opacity:.95}100%{opacity:0;transform:translateY(-26px) scale(1.08)}}
-        @keyframes drawGraph{0%,12%{stroke-dashoffset:420;opacity:.55}45%,72%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:-420;opacity:.55}}
+        @keyframes beakerTilt{0%,100%{transform:rotate(0)}42%{transform:rotate(-3deg)}72%{transform:rotate(2deg)}}
+        @keyframes bubbleRise{0%{opacity:0;transform:translateY(18px) scale(.68)}35%{opacity:.9}100%{opacity:0;transform:translateY(-28px) scale(1.08)}}
+        @keyframes glintBlink{0%,100%{opacity:.16;transform:scale(.82)}48%{opacity:.9;transform:scale(1.14)}}
+        @keyframes beamFlow{0%,18%{stroke-dashoffset:360;opacity:.08}52%,76%{stroke-dashoffset:0;opacity:.42}100%{stroke-dashoffset:-360;opacity:.08}}
         @keyframes trustPulse{0%,100%{transform:scale(.9);box-shadow:0 0 0 5px rgba(244,178,60,.14)}50%{transform:scale(1.08);box-shadow:0 0 0 9px rgba(244,178,60,.07)}}
         @keyframes trustSweep{0%,48%{transform:translateX(-110%)}68%,100%{transform:translateX(110%)}}
         @keyframes reviewScroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 9px))}}
-        @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.reveal,.fade-up,.topbar::before,.topbar-dot,.hero-eyebrow::before,.hero-eyebrow::after,.carousel-track,.hero-illus,.hero-illus::after,.hero-scene *{transition:none;animation:none}.reveal,.fade-up{opacity:1;transform:none}}
+        @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.reveal,.fade-up,.topbar::before,.topbar-dot,.hero-eyebrow::before,.hero-eyebrow::after,.carousel-track,.hero-illus,.hero-illus::before,.hero-illus::after,.hero-scene *{transition:none;animation:none}.reveal,.fade-up{opacity:1;transform:none}}
         /* forms */
         .form{display:grid;gap:10px}.input,select,textarea{width:100%;padding:14px;border:1px solid var(--border);border-radius:14px;background:#fff}
         /* footer */
@@ -361,7 +349,7 @@
         @media(max-width:1020px){.curriculum-grid{grid-template-columns:repeat(2,1fr)}}
         @media(max-width:900px){.contact-panel,.footer-grid,.subjects-layout{grid-template-columns:1fr}.subjects-intro{position:static;padding:0}.contact-section{background:linear-gradient(180deg,#102033 0%,#12355b 58%,#fffdf8 58%,#fffdf8 100%)}.trial-grid{max-width:680px;margin-left:auto;margin-right:auto}}
         @media(max-width:900px){.review-layout{grid-template-columns:1fr;gap:18px}.review-summary{display:grid;justify-items:center}.stats-grid{grid-template-columns:repeat(2,1fr)}.trust-reasons{grid-template-columns:1fr 1fr}.change-grid{grid-template-columns:repeat(2,1fr)}.reviews-wrap{padding-top:72px}}
-        @media(max-width:640px){.container{width:min(100% - 32px,1360px)}.topbar .container{font-size:13px;padding:8px 0}.topbar-content{gap:6px}.topbar-live{font-size:11px;padding:3px 8px}.topbar-main{font-size:12px}.topbar-note{display:none}.nav .row{grid-template-columns:1fr;gap:8px;min-height:0;padding:8px 0 10px}.brand,.nav-actions{justify-content:center}.brand img{height:74px;width:86px}.nav-actions{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:8px}.nav-actions .btn{width:100%;padding:10px 12px;font-size:14px;margin:0}.tabbar{position:static}.tabbar .container{padding:8px 0}.tabbar a{font-size:14px;padding:8px 11px}.section{padding:64px 0}.hero-grid{gap:24px;padding:58px 0 64px}.hero-title{font-size:clamp(30px,8.5vw,38px);letter-spacing:-.02em}.hero-subjects{margin-top:20px;margin-bottom:22px}.hero-illus{display:none}.curriculum-section{padding-top:82px;padding-bottom:72px}.testimonial-section{padding-top:76px}.learning-band{padding:76px 0 88px}.learning-band .faq-home{margin-top:78px}.section-transition::before{height:24px}.h1{font-size:clamp(34px,10.8vw,46px)}section[data-page='book']{overflow:hidden}section[data-page='book'] .h1{font-size:clamp(30px,8.6vw,38px);overflow-wrap:break-word}section[data-page='book'] .container{width:calc(100vw - 32px);max-width:calc(100vw - 32px);margin-left:auto;margin-right:auto}.subjects-intro .h1{width:min(100%,320px);font-size:clamp(28px,7.8vw,36px);line-height:1.08;letter-spacing:0}.subjects-intro p{width:min(100%,320px);overflow-wrap:break-word}.trial-grid{width:100%;max-width:100%;gap:12px}.trial-form-card,.trial-info-card{width:100%;max-width:100%}.trial-form-title{min-height:48px;font-size:16px;padding:12px 14px}.trial-form-fields{gap:10px;padding:16px}.trial-field-row{grid-template-columns:1fr;gap:10px}.trial-form-card .input{padding:10px 12px;min-height:46px}.trial-form-card textarea.input{min-height:76px}.trial-form-card .btn{width:100%;min-width:0}.trial-info-card{padding:16px 18px}.trial-info-card .h2{font-size:clamp(24px,7.2vw,30px);line-height:1.12}.trial-lede{font-size:15px;line-height:1.45;overflow-wrap:break-word}.trial-benefits{gap:8px}.trial-benefit{padding-bottom:8px}.usp-row{display:grid}.curriculum-grid,.subjects-grid{grid-template-columns:1fr}.curriculum-card{min-height:0}}
+        @media(max-width:640px){.container{width:min(100% - 32px,1360px)}.topbar .container{font-size:13px;padding:8px 0}.topbar-content{gap:6px}.topbar-live{font-size:11px;padding:3px 8px}.topbar-main{font-size:12px}.topbar-note{display:none}.nav .row{grid-template-columns:1fr;gap:8px;min-height:0;padding:8px 0 10px}.brand,.nav-actions{justify-content:center}.brand img{height:74px;width:86px}.nav-actions{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:8px}.nav-actions .btn{width:100%;padding:10px 12px;font-size:14px;margin:0}.tabbar{position:static}.tabbar .container{padding:8px 0}.tabbar a{font-size:14px;padding:8px 11px}.section{padding:64px 0}.hero-grid{gap:24px;padding:58px 0 64px}.hero-title{font-size:clamp(30px,8.5vw,38px);letter-spacing:-.02em}.hero-subjects{margin-top:20px;margin-bottom:22px}.hero-illus{max-width:420px;margin:0 auto}.curriculum-section{padding-top:82px;padding-bottom:72px}.testimonial-section{padding-top:76px}.learning-band{padding:76px 0 88px}.learning-band .faq-home{margin-top:78px}.section-transition::before{height:24px}.h1{font-size:clamp(34px,10.8vw,46px)}section[data-page='book']{overflow:hidden}section[data-page='book'] .h1{font-size:clamp(30px,8.6vw,38px);overflow-wrap:break-word}section[data-page='book'] .container{width:calc(100vw - 32px);max-width:calc(100vw - 32px);margin-left:auto;margin-right:auto}.subjects-intro .h1{width:min(100%,320px);font-size:clamp(28px,7.8vw,36px);line-height:1.08;letter-spacing:0}.subjects-intro p{width:min(100%,320px);overflow-wrap:break-word}.trial-grid{width:100%;max-width:100%;gap:12px}.trial-form-card,.trial-info-card{width:100%;max-width:100%}.trial-form-title{min-height:48px;font-size:16px;padding:12px 14px}.trial-form-fields{gap:10px;padding:16px}.trial-field-row{grid-template-columns:1fr;gap:10px}.trial-form-card .input{padding:10px 12px;min-height:46px}.trial-form-card textarea.input{min-height:76px}.trial-form-card .btn{width:100%;min-width:0}.trial-info-card{padding:16px 18px}.trial-info-card .h2{font-size:clamp(24px,7.2vw,30px);line-height:1.12}.trial-lede{font-size:15px;line-height:1.45;overflow-wrap:break-word}.trial-benefits{gap:8px}.trial-benefit{padding-bottom:8px}.usp-row{display:grid}.curriculum-grid,.subjects-grid{grid-template-columns:1fr}.curriculum-card{min-height:0}}
         @media(max-width:640px){.review-heading{text-align:left}.review-heading .h2{font-size:clamp(28px,8vw,36px)}.carousel{mask-image:none;margin-left:-16px;margin-right:-16px}.carousel-track{animation-duration:28s}.testimonial-card{width:260px;min-height:246px}.stats-band{padding:42px 0}.stats-grid{grid-template-columns:1fr;gap:14px}.stat-card{padding:22px 16px}.stat-card span{font-size:15px}.trust-section{padding:72px 0}.trust-section .h2{font-size:clamp(28px,8vw,36px)}.trust-reasons{grid-template-columns:1fr}.trust-card{min-height:0;padding:20px}.change-grid{grid-template-columns:1fr}.change-card{padding:18px}.footer-grid{gap:28px}.site-footer{padding-top:44px}}
       </style>
     </head>
@@ -421,68 +409,59 @@
       </div>
     </div>
     <div class='hero-illus'>
-      <svg class='hero-scene' viewBox='0 0 880 540' xmlns='http://www.w3.org/2000/svg' role='img' aria-label='Animated premium maths and science learning dashboard'>
+      <svg class='hero-scene' viewBox='0 0 880 540' xmlns='http://www.w3.org/2000/svg' role='img' aria-label='Animated learning symbols'>
         <defs>
-          <linearGradient id='panel' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#fffdf8'/><stop offset='1' stop-color='#fff4d8'/></linearGradient>
-          <linearGradient id='lesson' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#102033'/><stop offset='.55' stop-color='#12355b'/><stop offset='1' stop-color='#1f5f8b'/></linearGradient>
-          <linearGradient id='accent' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#f4b23c'/><stop offset='1' stop-color='#ffe0a6'/></linearGradient>
-          <linearGradient id='science' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#dbeafe'/><stop offset='.55' stop-color='#edf5fb'/><stop offset='1' stop-color='#fff7e8'/></linearGradient>
-          <linearGradient id='glass' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#ffffff' stop-opacity='.98'/><stop offset='1' stop-color='#ffffff' stop-opacity='.82'/></linearGradient>
-          <filter id='softShadow' x='-30%' y='-30%' width='160%' height='160%'><feDropShadow dx='0' dy='18' stdDeviation='18' flood-color='#0f172a' flood-opacity='.14'/></filter>
+          <radialGradient id='bannerGlow' cx='.42' cy='.42' r='.72'><stop offset='0' stop-color='#ffffff'/><stop offset='.46' stop-color='#fff7e8'/><stop offset='1' stop-color='#edf5fb'/></radialGradient>
+          <linearGradient id='tokenBlue' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#102033'/><stop offset='.58' stop-color='#12355b'/><stop offset='1' stop-color='#1f5f8b'/></linearGradient>
+          <linearGradient id='tokenGold' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#f4b23c'/><stop offset='1' stop-color='#ffe0a6'/></linearGradient>
+          <linearGradient id='tokenGlass' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#ffffff' stop-opacity='.98'/><stop offset='1' stop-color='#eef7ff' stop-opacity='.9'/></linearGradient>
+          <filter id='symbolShadow' x='-35%' y='-35%' width='170%' height='170%'><feDropShadow dx='0' dy='20' stdDeviation='18' flood-color='#0f172a' flood-opacity='.16'/></filter>
+          <filter id='softGlow' x='-50%' y='-50%' width='200%' height='200%'><feGaussianBlur stdDeviation='18'/></filter>
         </defs>
-        <rect width='880' height='540' rx='28' fill='url(#panel)'/>
-        <circle class='orbit' cx='748' cy='102' r='86' fill='#dbeafe'/>
-        <circle class='orbit alt' cx='118' cy='434' r='70' fill='#fff0c7'/>
-        <g class='lesson-shell' filter='url(#softShadow)'>
-          <rect x='124' y='70' width='632' height='400' rx='34' fill='#fff'/>
-          <rect x='124' y='70' width='632' height='54' rx='34' fill='#0f172a'/>
-          <circle cx='154' cy='97' r='6' fill='#f87171'/><circle cx='176' cy='97' r='6' fill='#f4b23c'/><circle cx='198' cy='97' r='6' fill='#1f5f8b'/>
-          <text x='232' y='103' fill='#dbeafe' font-size='16' font-weight='900'>Live concept board</text>
+        <rect width='880' height='540' rx='28' fill='url(#bannerGlow)'/>
+        <circle class='aura' cx='438' cy='270' r='178' fill='#f4b23c' opacity='.16' filter='url(#softGlow)'/>
+        <circle class='aura' cx='438' cy='270' r='124' fill='#1f5f8b' opacity='.12' filter='url(#softGlow)'/>
+        <path class='orbit-path' d='M160 270c72-112 180-168 300-148 128 22 204 96 254 186' fill='none' stroke='#12355b' stroke-width='3' opacity='.22' stroke-linecap='round'/>
+        <path class='orbit-path alt' d='M154 320c116 102 258 128 408 70 94-36 150-108 170-212' fill='none' stroke='#f4b23c' stroke-width='3' opacity='.32' stroke-linecap='round'/>
+        <path class='beam' d='M294 162 C362 216 454 230 558 168' fill='none' stroke='#1f5f8b' stroke-width='5' stroke-linecap='round'/>
+        <path class='beam alt' d='M270 352 C360 296 484 296 604 360' fill='none' stroke='#f4b23c' stroke-width='5' stroke-linecap='round'/>
+        <path class='beam third' d='M198 258 C310 232 470 246 690 268' fill='none' stroke='#94a3b8' stroke-width='4' stroke-linecap='round'/>
 
-          <rect class='lesson-panel' x='154' y='150' width='382' height='230' rx='28' fill='url(#lesson)'/>
-          <rect class='shine' x='170' y='150' width='80' height='230' fill='rgba(255,255,255,.14)' opacity='0'/>
-          <text x='190' y='204' fill='#fff' font-size='25' font-weight='900'>x^2 + 5x = 24</text>
-          <path class='equation-line' d='M190 226h236' stroke='rgba(255,255,255,.28)' stroke-width='7' stroke-linecap='round'/>
-          <text x='190' y='272' fill='#fde68a' font-size='22' font-weight='900'>Step 1: factorise</text>
-          <path d='M190 330h292' stroke='rgba(255,255,255,.16)' stroke-width='2'/>
-          <path d='M206 314v-94M206 314h250' stroke='rgba(255,255,255,.32)' stroke-width='4' stroke-linecap='round'/>
-          <path class='graph-line' d='M212 300 C258 284 292 254 334 242 C380 230 420 204 454 182' fill='none' stroke='#f4b23c' stroke-width='7' stroke-linecap='round'/>
+        <g class='core' filter='url(#symbolShadow)'>
+          <circle cx='440' cy='270' r='104' fill='#fff'/>
+          <circle cx='440' cy='270' r='78' fill='none' stroke='#dbeafe' stroke-width='18'/>
+          <path d='M440 192a78 78 0 0 1 76 95h-76z' fill='#f4b23c'/>
+          <path d='M440 192v95h-76a78 78 0 0 1 76-95z' fill='#12355b'/>
+          <path d='M440 287h76a78 78 0 0 1-128 48z' fill='#1f5f8b'/>
+          <circle cx='440' cy='270' r='38' fill='#fffdf8'/>
+        </g>
 
-          <g class='formula-card'>
-            <rect x='566' y='150' width='152' height='82' rx='20' fill='#fff7e8' stroke='#f8d39a'/>
-            <text x='592' y='188' fill='#7c4a04' font-size='20' font-weight='900'>Maths</text>
-            <text x='592' y='214' fill='#12355b' font-size='18' font-weight='900'>a/b + c</text>
+        <g class='icon-token pi' filter='url(#symbolShadow)'>
+          <circle cx='228' cy='154' r='76' fill='url(#tokenBlue)'/>
+          <text class='symbol' x='228' y='184' text-anchor='middle' fill='#fff' font-size='92' font-family='Georgia,serif' font-weight='900'>π</text>
+        </g>
+        <g class='icon-token sigma' filter='url(#symbolShadow)'>
+          <circle cx='636' cy='154' r='72' fill='url(#tokenGlass)' stroke='#cfe0ec' stroke-width='2'/>
+          <text class='symbol' x='636' y='184' text-anchor='middle' fill='#12355b' font-size='86' font-family='Georgia,serif' font-weight='900'>Σ</text>
+        </g>
+        <g class='icon-token flash' filter='url(#symbolShadow)'>
+          <circle cx='682' cy='356' r='78' fill='url(#tokenGold)'/>
+          <polygon class='bolt' points='692,296 642,368 681,366 665,420 726,338 688,341' fill='#102033'/>
+        </g>
+        <g class='icon-token beaker-token' filter='url(#symbolShadow)'>
+          <circle cx='234' cy='366' r='78' fill='#fff' stroke='#eadfcf' stroke-width='2'/>
+          <g class='beaker'>
+            <path d='M208 303h52M220 303v45l-34 58c-6 11 2 24 15 24h86c13 0 21-13 15-24l-34-58v-45' fill='#edf5fb' stroke='#12355b' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'/>
+            <path d='M203 390c24 12 58 12 82 0l12 21c3 6-1 12-8 12h-90c-7 0-11-6-8-12z' fill='#bfdbfe'/>
+            <circle class='bubble' cx='226' cy='374' r='7' fill='#f4b23c'/>
+            <circle class='bubble alt' cx='260' cy='356' r='6' fill='#1f5f8b'/>
+            <circle class='bubble third' cx='245' cy='338' r='5' fill='#f4b23c'/>
           </g>
-
-          <g class='chem-card'>
-            <rect x='566' y='252' width='152' height='128' rx='20' fill='url(#science)' stroke='#cfe0ec'/>
-            <text x='592' y='286' fill='#12355b' font-size='20' font-weight='900'>Science</text>
-            <path class='flask' d='M638 300h36M648 300v28l-28 48c-4 8 2 17 11 17h60c9 0 15-9 11-17l-28-48v-28' fill='rgba(191,219,254,.72)' stroke='#12355b' stroke-width='4' stroke-linejoin='round'/>
-            <path d='M630 368c20 8 44 8 64 0l9 17c2 4-1 8-6 8h-72c-5 0-8-4-6-8l11-17z' fill='#bfdbfe'/>
-            <circle class='bubble' cx='644' cy='356' r='5' fill='#f4b23c'/>
-            <circle class='bubble alt' cx='678' cy='344' r='4' fill='#1f5f8b'/>
-          </g>
-
-          <rect x='154' y='408' width='564' height='10' rx='5' fill='#e2e8f0'/>
-          <rect class='progress-fill' x='154' y='408' width='564' height='10' rx='5' fill='url(#accent)'/>
         </g>
 
-        <g class='formula-card alt' filter='url(#softShadow)'>
-          <rect x='76' y='158' width='142' height='78' rx='18' fill='url(#glass)'/>
-          <text x='104' y='202' fill='#12355b' font-size='21' font-weight='900'>+12 marks</text>
-        </g>
-        <g class='molecule' filter='url(#softShadow)'>
-          <rect x='586' y='404' width='176' height='70' rx='20' fill='#fff'/>
-          <path d='M628 438 670 420 714 438' stroke='#12355b' stroke-width='4' stroke-linecap='round'/>
-          <circle class='molecule-dot' cx='628' cy='438' r='10' fill='#f4b23c'/>
-          <circle class='molecule-dot alt' cx='670' cy='420' r='13' fill='#1f5f8b'/>
-          <circle class='molecule-dot' cx='714' cy='438' r='10' fill='#bfdbfe'/>
-          <text x='618' y='464' fill='#526173' font-size='13' font-weight='900'>chemistry basics</text>
-        </g>
-        <g>
-          <polygon class='spark' points='790,270 796,283 810,285 800,294 803,308 790,301 777,308 780,294 770,285 784,283' fill='#f4b23c'/>
-          <polygon class='spark alt' points='86,366 91,377 104,379 95,388 97,401 86,394 75,401 77,388 68,379 81,377' fill='#bfdbfe'/>
-        </g>
+        <circle class='glint' cx='136' cy='244' r='7' fill='#f4b23c'/>
+        <circle class='glint alt' cx='742' cy='248' r='6' fill='#12355b'/>
+        <circle class='glint third' cx='482' cy='94' r='5' fill='#1f5f8b'/>
       </svg>
     </div>
   </div>
