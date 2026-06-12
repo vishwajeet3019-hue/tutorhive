@@ -887,29 +887,67 @@
 const pages = document.querySelectorAll('section[data-page]');
 const links = document.querySelectorAll('[data-link]');
 const scrollLinks = document.querySelectorAll('[data-scroll]');
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 function revealNow(scope = document){
   scope.querySelectorAll('.reveal,.fade-up').forEach(el=>el.classList.add('show'));
 }
-function showPage(key){
+function getStickyOffset(){
+  let offset = 14;
+  [document.querySelector('.nav'), document.querySelector('.tabbar')].forEach(el=>{
+    if(!el) return;
+    const style = window.getComputedStyle(el);
+    if(style.display !== "none" && (style.position === "sticky" || style.position === "fixed")){
+      offset += el.getBoundingClientRect().height;
+    }
+  });
+  return offset;
+}
+function smoothScrollTo(target){
+  if(!target) return;
+  const top = Math.max(0, window.scrollY + target.getBoundingClientRect().top - getStickyOffset());
+  window.scrollTo({top, behavior: prefersReducedMotion ? "auto" : "smooth"});
+}
+function smoothScrollTop(){
+  window.scrollTo({top: 0, behavior: prefersReducedMotion ? "auto" : "smooth"});
+}
+function afterLayout(callback){
+  requestAnimationFrame(()=>requestAnimationFrame(callback));
+}
+function showPage(key, shouldScroll = true){
   pages.forEach(p=>p.classList.toggle('active', p.dataset.page===key));
   links.forEach(a=>a.classList.toggle('active', a.dataset.link===key));
   history.replaceState(null, "", key === "about" ? "about/" : "#"+key);
   const activePage = document.querySelector("section[data-page='"+key+"']");
   revealNow(activePage || document);
+  if(shouldScroll) afterLayout(smoothScrollTop);
 }
-links.forEach(a=>a.addEventListener('click', e=>{ e.preventDefault(); showPage(a.dataset.link); }));
+links.forEach(a=>a.addEventListener('click', e=>{
+  e.preventDefault();
+  showPage(a.dataset.link);
+}));
 scrollLinks.forEach(a=>a.addEventListener('click', e=>{
   e.preventDefault();
-  showPage('home');
-  requestAnimationFrame(()=>{
+  showPage('home', false);
+  afterLayout(()=>{
     const target = document.getElementById(a.dataset.scroll);
     if(target){
-      target.scrollIntoView({behavior:'smooth', block:'start'});
+      smoothScrollTo(target);
       history.replaceState(null, "", "#"+a.dataset.scroll);
     }
   });
 }));
-if(location.hash && document.querySelector("[data-page='"+location.hash.slice(1)+"']")) showPage(location.hash.slice(1));
+if(location.hash){
+  const hashKey = location.hash.slice(1);
+  if(document.querySelector("[data-page='"+hashKey+"']")){
+    showPage(hashKey, false);
+  }else{
+    const hashTarget = document.getElementById(hashKey);
+    if(hashTarget){
+      showPage('home', false);
+      afterLayout(()=>smoothScrollTo(hashTarget));
+    }
+  }
+}
 
 // keep sections instantly visible so scrolling stays light and responsive
 if(!location.hash || !document.querySelector("[data-page='"+location.hash.slice(1)+"']")){
