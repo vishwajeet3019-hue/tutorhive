@@ -36,6 +36,9 @@
 
   .mobile-nav {
     display: none !important;
+    position: static !important;
+    top: auto !important;
+    z-index: 20 !important;
   }
 
   .mobile-nav .container {
@@ -156,6 +159,27 @@
   .hero-actions .text-link {
     justify-content: center !important;
     padding: 0 12px !important;
+  }
+
+  .contact-section {
+    padding: 0 0 38px !important;
+    background: linear-gradient(180deg, #0b1228 0%, #07142f 34%, #ffffff 34%, #ffffff 100%) !important;
+  }
+
+  .contact-section > .container {
+    padding-bottom: 14px !important;
+  }
+
+  .contact-panel {
+    gap: 18px !important;
+  }
+
+  .contact-info {
+    padding: 20px !important;
+  }
+
+  .contact-form-card {
+    margin-bottom: 6px !important;
   }
 }
 
