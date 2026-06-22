@@ -1106,6 +1106,8 @@ function wireForm(formId){
       button.textContent = "Sending...";
     }
     try{
+      console.log("recaptchaToken value:", form.querySelector("[name='recaptchaToken']").value);
+      console.log("body being sent:", body);
       await fetch(SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
@@ -1113,7 +1115,7 @@ function wireForm(formId){
         body
       });
       if(formId === "trialForm" || formId === "bottomTrialForm"){
-        window.location.href = "trial-thank-you.html";
+        // window.location.href = "trial-thank-you.html";
         return;
       }
       const thanks = document.getElementById(formId + "Thanks");
