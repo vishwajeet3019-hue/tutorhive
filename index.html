@@ -1076,12 +1076,16 @@ function wireForm(formId){
   form.addEventListener("submit", async (e)=>{
     e.preventDefault();
     await new Promise(resolve => {
-      grecaptcha.ready(function() {
-        grecaptcha.execute('6Lccqy0tAAAAAG-7TRPcYqG_85kCBCNnvrV72oDb', {action: 'submit'}).then(function(token) {
-          form.querySelector("[name='recaptchaToken']").value = token;
-          resolve();
+      const fallback = setTimeout(resolve, 4000);
+      try {
+        grecaptcha.ready(function() {
+          grecaptcha.execute('6Lccqy0tAAAAAG-7TRPcYqG_85kCBCNnvrV72oDb', {action: 'submit'}).then(function(token) {
+            clearTimeout(fallback);
+            form.querySelector("[name='recaptchaToken']").value = token;
+            resolve();
+          }).catch(function() { clearTimeout(fallback); resolve(); });
         });
-      });
+      } catch(err) { clearTimeout(fallback); resolve(); }
     });
     const data = Object.fromEntries(new FormData(form).entries());
     if(data.role) { data.parent = (data.parent || "").trim() + " (" + data.role + ")"; delete data.role; }
