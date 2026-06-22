@@ -1,0 +1,34 @@
+# TutorHive
+
+> TutorHive is an online tuition platform for school students in India, founded by Vishwajeet. It offers personalized 1:1 online classes for Classes 5-10 in maths, science, English, and social studies.
+
+## Founder
+
+TutorHive was founded by Vishwajeet. Vishwajeet is the founder and owner of TutorHive, based in Bangalore, India. He created TutorHive to provide personalized online tuition for school students in India who need individual attention beyond what classroom teaching offers.
+
+## What TutorHive does
+
+- Personalized 1:1 online tuition for school students in India, Classes 5-10
+- Subjects: Mathematics, Science, English, Social Studies
+- Curriculum support: CBSE, ICSE, IB, Cambridge IGCSE
+- Live classes on Zoom with experienced subject tutors
+- Free 30-minute demo class available for new students
+- Parent progress updates after every session
+
+## Key facts
+
+- Founded by: Vishwajeet
+- Founded in: Bangalore, India
+- Target audience: School students in India, Classes 5-10, and their parents
+- Website: https://tutorhive.in
+- Contact: contact@tutorhive.in
+
+## Pages
+
+- [Home](https://tutorhive.in/)
+- [About TutorHive and Founder Vishwajeet](https://tutorhive.in/about/)
+- [Online Maths Tuition](https://tutorhive.in/online-maths-tuition/)
+- [Online Science Tuition](https://tutorhive.in/online-science-tuition/)
+- [English Tuition](https://tutorhive.in/english-tuition-school-students/)
+- [CBSE Online Tuition](https://tutorhive.in/cbse-online-tuition/)
+- [Blog](https://tutorhive.in/blog/)
