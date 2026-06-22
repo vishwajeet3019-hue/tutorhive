@@ -3,6 +3,7 @@
     <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18159999181"></script>
+  <script src="https://www.google.com/recaptcha/api.js?render=6Lccqy0tAAAAAG-7TRPcYqG_85kCBCNnvrV72oDb"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -753,6 +754,7 @@
       <form id="bottomTrialForm" class="form card contact-form-card reveal">
         <input type="hidden" name="form" value="Homepage Trial Request">
         <input type="hidden" id="bottomUserIp" name="userIp">
+        <input type="hidden" id="recaptchaTokenBottom" name="recaptchaToken" value="">
         <select name='role' class='input' required><option value=''>Are you a parent or student?</option><option>Parent</option><option>Student</option></select>
         <input class='input' name='parent' placeholder='Your name' required>
         <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Phone' required>
@@ -835,6 +837,7 @@
         <div class='trial-form-fields'>
           <input type="hidden" name="form" value="Trial Request">
           <input type="hidden" id="userIp" name="userIp">
+          <input type="hidden" id="recaptchaToken" name="recaptchaToken" value="">
           <select name='role' class='input' required><option value=''>Are you a parent or student?</option><option>Parent</option><option>Student</option></select>
           <input class='input' name='parent' placeholder='Your name' required>
           <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Phone' required>
@@ -1071,6 +1074,14 @@ function wireForm(formId){
   phoneInput?.addEventListener("input",()=>phoneInput.setCustomValidity(""));
   form.addEventListener("submit", async (e)=>{
     e.preventDefault();
+    await new Promise(resolve => {
+      grecaptcha.ready(function() {
+        grecaptcha.execute('6Lccqy0tAAAAAG-7TRPcYqG_85kCBCNnvrV72oDb', {action: 'submit'}).then(function(token) {
+          form.querySelector("[name='recaptchaToken']").value = token;
+          resolve();
+        });
+      });
+    });
     const data = Object.fromEntries(new FormData(form).entries());
     if(data.role) { data.parent = (data.parent || "").trim() + " (" + data.role + ")"; delete data.role; }
     const verifiedPhone = normalizeIndianPhone(data.phone);
