@@ -11,6 +11,7 @@ function doPost(e) {
     if (!sheet) throw new Error("Sheet not found");
 
     const data = (e && e.parameter) || {};
+    const userIp = data.userIp || "not captured";
     sheet.appendRow([
       new Date(),
       data.form || "",
@@ -20,7 +21,8 @@ function doPost(e) {
       data.studentClass || "",
       data.board || "",
       data.subject || "",
-      data.notes || data.message || ""
+      data.notes || data.message || "",
+      userIp
     ]);
 
     return ContentService

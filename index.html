@@ -752,6 +752,7 @@
       </div>
       <form id="bottomTrialForm" class="form card contact-form-card reveal">
         <input type="hidden" name="form" value="Homepage Trial Request">
+        <input type="hidden" id="bottomUserIp" name="userIp">
         <select name='role' class='input' required><option value=''>Are you a parent or student?</option><option>Parent</option><option>Student</option></select>
         <input class='input' name='parent' placeholder='Your name' required>
         <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Phone' required>
@@ -833,6 +834,7 @@
         <h2 class='trial-form-title'>Request a free demo</h2>
         <div class='trial-form-fields'>
           <input type="hidden" name="form" value="Trial Request">
+          <input type="hidden" id="userIp" name="userIp">
           <select name='role' class='input' required><option value=''>Are you a parent or student?</option><option>Parent</option><option>Student</option></select>
           <input class='input' name='parent' placeholder='Your name' required>
           <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Phone' required>
@@ -1115,6 +1117,14 @@ function wireForm(formId){
   });
 }
 ["trialForm","bottomTrialForm"].forEach(wireForm);
+</script>
+<script>
+fetch("https://api.ipify.org?format=json")
+  .then(r => r.json())
+  .then(d => {
+    document.querySelectorAll("input[name='userIp']").forEach(el => el.value = d.ip);
+  })
+  .catch(() => {});
 </script>
 
 
