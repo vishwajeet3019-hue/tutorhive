@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
-  <title id="title">TutorHive brand mark</title>
-  <desc id="desc">Three connected hexagons forming the TutorHive icon.</desc>
-  <path d="M64 10 87 23v26L64 62 41 49V23z" fill="none" stroke="#07142f" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
-  <path d="M41 49 64 62v26L41 101 18 88V62z" fill="none" stroke="#07142f" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
-  <path d="M87 49 110 62v26L87 101 64 88V62z" fill="none" stroke="#14b8a6" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
-  <path d="M56 57V45M64 62V49M72 57V45" fill="none" stroke="#07142f" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
-</svg>
