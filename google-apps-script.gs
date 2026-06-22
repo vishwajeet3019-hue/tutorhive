@@ -1,5 +1,19 @@
 const SPREADSHEET_ID = "1eJXQSa2VjP2nFW2z8tLS6FkLZ05xTJOVwrYHQ_goN98";
 const SHEET_NAME = "";
+const RECAPTCHA_SECRET = "YOUR_RECAPTCHA_V3_SECRET_KEY_HERE";
+
+function verifyRecaptcha(token) {
+  if (!token) return { success: false, score: "no token" };
+  try {
+    const response = UrlFetchApp.fetch("https://www.google.com/recaptcha/api/siteverify", {
+      method: "post",
+      payload: { secret: RECAPTCHA_SECRET, response: token }
+    });
+    return JSON.parse(response.getContentText());
+  } catch (err) {
+    return { success: false, score: "verify failed" };
+  }
+}
 
 function doPost(e) {
   const lock = LockService.getScriptLock();
@@ -12,6 +26,9 @@ function doPost(e) {
 
     const data = (e && e.parameter) || {};
     const userIp = data.userIp || "not captured";
+    const recaptchaResult = verifyRecaptcha(data.recaptchaToken || "");
+    const recaptchaScore = recaptchaResult.score !== undefined ? recaptchaResult.score : "n/a";
+
     sheet.appendRow([
       new Date(),
       data.form || "",
@@ -22,7 +39,8 @@ function doPost(e) {
       data.board || "",
       data.subject || "",
       data.notes || data.message || "",
-      userIp
+      userIp,
+      recaptchaScore
     ]);
 
     return ContentService
