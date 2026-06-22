@@ -1,7 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <rect width="128" height="128" rx="30" fill="#f4fbfb"/>
-  <path d="M64 16 88 30v28L64 72 40 58V30z" fill="none" stroke="#07142f" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
-  <path d="M40 58 64 72v28l-24 14-24-14V72z" fill="none" stroke="#07142f" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
-  <path d="M88 58 112 72v28l-24 14-24-14V72z" fill="none" stroke="#14b8a6" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
-  <path d="M56 66V54M64 72V58M72 66V54" fill="none" stroke="#07142f" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 90">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0dd3e8"/>
+      <stop offset="100%" stop-color="#14d4a6"/>
+    </linearGradient>
+  </defs>
+  <polygon points="50,10 67.3,20 67.3,40 50,50 32.7,40 32.7,20" fill="none" stroke="url(#g)" stroke-width="5.5" stroke-linejoin="round"/>
+  <polygon points="32.7,40 50,50 50,70 32.7,80 15.4,70 15.4,50" fill="none" stroke="url(#g)" stroke-width="5.5" stroke-linejoin="round"/>
+  <polygon points="67.3,40 84.6,50 84.6,70 67.3,80 50,70 50,50" fill="none" stroke="url(#g)" stroke-width="5.5" stroke-linejoin="round"/>
 </svg>
