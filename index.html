@@ -756,6 +756,9 @@
         <input type="hidden" name="form" value="Homepage Trial Request">
         <input type="hidden" id="bottomUserIp" name="userIp">
         <input type="hidden" id="recaptchaTokenBottom" name="recaptchaToken" value="">
+        <input type="hidden" name="trafficSource" value="">
+        <input type="hidden" name="gclid" value="">
+        <input type="hidden" name="referrer" value="">
         <select name='role' class='input' required><option value=''>Are you a parent or student?</option><option>Parent</option><option>Student</option></select>
         <input class='input' name='parent' placeholder='Your name' required>
         <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Phone' required>
@@ -840,6 +843,9 @@
           <input type="hidden" name="form" value="Trial Request">
           <input type="hidden" id="userIp" name="userIp">
           <input type="hidden" id="recaptchaToken" name="recaptchaToken" value="">
+          <input type="hidden" name="trafficSource" value="">
+          <input type="hidden" name="gclid" value="">
+          <input type="hidden" name="referrer" value="">
           <select name='role' class='input' required><option value=''>Are you a parent or student?</option><option>Parent</option><option>Student</option></select>
           <input class='input' name='parent' placeholder='Your name' required>
           <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Phone' required>
@@ -1143,6 +1149,21 @@ fetch("https://api.ipify.org?format=json")
     document.querySelectorAll("input[name='userIp']").forEach(el => el.value = d.ip);
   })
   .catch(() => {});
+</script>
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var gclid = params.get("gclid") || sessionStorage.getItem("gclid") || "";
+  if (params.get("gclid")) sessionStorage.setItem("gclid", params.get("gclid"));
+  var ref = document.referrer || "";
+  var source = gclid ? "Google Ads"
+    : ref.indexOf("google") !== -1 ? "Google Organic"
+    : ref === "" ? "Direct"
+    : "Referral";
+  document.querySelectorAll("input[name='trafficSource']").forEach(function(el){ el.value = source; });
+  document.querySelectorAll("input[name='gclid']").forEach(function(el){ el.value = gclid; });
+  document.querySelectorAll("input[name='referrer']").forEach(function(el){ el.value = ref; });
+})();
 </script>
 
 
