@@ -789,8 +789,8 @@ src="https://www.facebook.com/tr?id=2403385750188307&ev=PageView&noscript=1"/>
         <input type="hidden" id="recaptchaTokenBottom" name="recaptchaToken" value="">
         <input type="hidden" name="trafficSource" value="">
         <input type="hidden" name="gclid" value="">
+        <input type="hidden" name="fbclid" value="">
         <input type="hidden" name="referrer" value="">
-        <input type="hidden" name="pageUrl" value="">
         <select name='role' class='input' required><option value=''>Are you a parent or student?</option><option>Parent</option><option>Student</option></select>
         <input class='input' name='parent' placeholder='Your name' required>
         <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Phone' required>
@@ -877,6 +877,7 @@ src="https://www.facebook.com/tr?id=2403385750188307&ev=PageView&noscript=1"/>
           <input type="hidden" id="recaptchaToken" name="recaptchaToken" value="">
           <input type="hidden" name="trafficSource" value="">
           <input type="hidden" name="gclid" value="">
+          <input type="hidden" name="fbclid" value="">
           <input type="hidden" name="referrer" value="">
           <select name='role' class='input' required><option value=''>Are you a parent or student?</option><option>Parent</option><option>Student</option></select>
           <input class='input' name='parent' placeholder='Your name' required>
@@ -1195,13 +1196,17 @@ fetch("https://api.ipify.org?format=json")
   var params = new URLSearchParams(window.location.search);
   var gclid = params.get("gclid") || sessionStorage.getItem("gclid") || "";
   if (params.get("gclid")) sessionStorage.setItem("gclid", params.get("gclid"));
+  var fbclid = params.get("fbclid") || sessionStorage.getItem("fbclid") || "";
+  if (params.get("fbclid")) sessionStorage.setItem("fbclid", params.get("fbclid"));
   var ref = document.referrer || "";
   var source = gclid ? "Google Ads"
+    : fbclid ? "Meta Ads"
     : ref.indexOf("google") !== -1 ? "Google Organic"
     : ref === "" ? "Direct"
     : "Referral";
   document.querySelectorAll("input[name='trafficSource']").forEach(function(el){ el.value = source; });
   document.querySelectorAll("input[name='gclid']").forEach(function(el){ el.value = gclid; });
+  document.querySelectorAll("input[name='fbclid']").forEach(function(el){ el.value = fbclid; });
   document.querySelectorAll("input[name='referrer']").forEach(function(el){ el.value = window.location.href; });
 })();
 </script>
