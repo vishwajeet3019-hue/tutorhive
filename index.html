@@ -788,8 +788,7 @@ src="https://www.facebook.com/tr?id=2403385750188307&ev=PageView&noscript=1"/>
         <input type="hidden" id="bottomUserIp" name="userIp">
         <input type="hidden" id="recaptchaTokenBottom" name="recaptchaToken" value="">
         <input type="hidden" name="trafficSource" value="">
-        <input type="hidden" name="gclid" value="">
-        <input type="hidden" name="fbclid" value="">
+        <input type="hidden" name="adClickId" value="">
         <input type="hidden" name="referrer" value="">
         <select name='role' class='input' required><option value=''>Are you a parent or student?</option><option>Parent</option><option>Student</option></select>
         <input class='input' name='parent' placeholder='Your name' required>
@@ -876,8 +875,7 @@ src="https://www.facebook.com/tr?id=2403385750188307&ev=PageView&noscript=1"/>
           <input type="hidden" id="userIp" name="userIp">
           <input type="hidden" id="recaptchaToken" name="recaptchaToken" value="">
           <input type="hidden" name="trafficSource" value="">
-          <input type="hidden" name="gclid" value="">
-          <input type="hidden" name="fbclid" value="">
+          <input type="hidden" name="adClickId" value="">
           <input type="hidden" name="referrer" value="">
           <select name='role' class='input' required><option value=''>Are you a parent or student?</option><option>Parent</option><option>Student</option></select>
           <input class='input' name='parent' placeholder='Your name' required>
@@ -1194,19 +1192,19 @@ fetch("https://api.ipify.org?format=json")
 <script>
 (function() {
   var params = new URLSearchParams(window.location.search);
-  var gclid = params.get("gclid") || sessionStorage.getItem("gclid") || "";
-  if (params.get("gclid")) sessionStorage.setItem("gclid", params.get("gclid"));
-  var fbclid = params.get("fbclid") || sessionStorage.getItem("fbclid") || "";
-  if (params.get("fbclid")) sessionStorage.setItem("fbclid", params.get("fbclid"));
-  var ref = document.referrer || "";
-  var source = gclid ? "Google Ads"
-    : fbclid ? "Meta Ads"
-    : ref.indexOf("google") !== -1 ? "Google Organic"
-    : ref === "" ? "Direct"
-    : "Referral";
+  var clickIds = { gclid: "Google Ads", fbclid: "Meta Ads", ttclid: "TikTok Ads", msclkid: "Microsoft Ads" };
+  var adClickId = "", source = "";
+  for (var key in clickIds) {
+    var val = params.get(key) || sessionStorage.getItem(key) || "";
+    if (params.get(key)) sessionStorage.setItem(key, params.get(key));
+    if (val && !adClickId) { adClickId = key + "=" + val; source = clickIds[key]; }
+  }
+  if (!source) {
+    var ref = document.referrer || "";
+    source = ref.indexOf("google") !== -1 ? "Google Organic" : ref === "" ? "Direct" : "Referral";
+  }
   document.querySelectorAll("input[name='trafficSource']").forEach(function(el){ el.value = source; });
-  document.querySelectorAll("input[name='gclid']").forEach(function(el){ el.value = gclid; });
-  document.querySelectorAll("input[name='fbclid']").forEach(function(el){ el.value = fbclid; });
+  document.querySelectorAll("input[name='adClickId']").forEach(function(el){ el.value = adClickId; });
   document.querySelectorAll("input[name='referrer']").forEach(function(el){ el.value = window.location.href; });
 })();
 </script>
