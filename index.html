@@ -878,7 +878,6 @@ src="https://www.facebook.com/tr?id=2403385750188307&ev=PageView&noscript=1"/>
           <input type="hidden" name="trafficSource" value="">
           <input type="hidden" name="gclid" value="">
           <input type="hidden" name="referrer" value="">
-          <input type="hidden" name="pageUrl" value="">
           <select name='role' class='input' required><option value=''>Are you a parent or student?</option><option>Parent</option><option>Student</option></select>
           <input class='input' name='parent' placeholder='Your name' required>
           <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Phone' required>
@@ -1203,8 +1202,7 @@ fetch("https://api.ipify.org?format=json")
     : "Referral";
   document.querySelectorAll("input[name='trafficSource']").forEach(function(el){ el.value = source; });
   document.querySelectorAll("input[name='gclid']").forEach(function(el){ el.value = gclid; });
-  document.querySelectorAll("input[name='referrer']").forEach(function(el){ el.value = ref; });
-  document.querySelectorAll("input[name='pageUrl']").forEach(function(el){ el.value = window.location.href; });
+  document.querySelectorAll("input[name='referrer']").forEach(function(el){ el.value = window.location.href; });
 })();
 </script>
 
