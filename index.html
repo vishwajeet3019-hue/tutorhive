@@ -1205,7 +1205,7 @@ fetch("https://api.ipify.org?format=json")
   }
   document.querySelectorAll("input[name='trafficSource']").forEach(function(el){ el.value = source; });
   document.querySelectorAll("input[name='adClickId']").forEach(function(el){ el.value = adClickId; });
-  document.querySelectorAll("input[name='referrer']").forEach(function(el){ el.value = window.location.href; });
+  document.querySelectorAll("input[name='referrer']").forEach(function(el){ el.value = window.location.origin + window.location.pathname; });
 })();
 </script>
 
