@@ -1205,7 +1205,11 @@ fetch("https://api.ipify.org?format=json")
   }
   document.querySelectorAll("input[name='trafficSource']").forEach(function(el){ el.value = source; });
   document.querySelectorAll("input[name='adClickId']").forEach(function(el){ el.value = adClickId; });
-  document.querySelectorAll("input[name='referrer']").forEach(function(el){ el.value = window.location.origin + window.location.pathname; });
+  var extRef = document.referrer || "";
+  var pageRef = extRef.indexOf("tutorhive.in") !== -1
+    ? extRef.split("?")[0].split("#")[0]
+    : window.location.origin + window.location.pathname;
+  document.querySelectorAll("input[name='referrer']").forEach(function(el){ el.value = pageRef; });
 })();
 </script>
 
