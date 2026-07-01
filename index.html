@@ -1208,7 +1208,7 @@ fetch("https://api.ipify.org?format=json")
   var extRef = document.referrer || "";
   var pageRef = extRef.indexOf("tutorhive.in") !== -1
     ? extRef.split("?")[0].split("#")[0]
-    : window.location.origin + window.location.pathname;
+    : window.location.href.split("#")[0];
   document.querySelectorAll("input[name='referrer']").forEach(function(el){ el.value = pageRef; });
 })();
 </script>
