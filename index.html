@@ -367,7 +367,11 @@
         .phone-cc-panel.open{display:flex}
         .phone-cc-search{box-sizing:border-box;width:100%;flex:0 0 auto;margin-bottom:6px;padding:9px 10px;border:1px solid #dbe8ec;border-radius:9px;font-size:14px;font-family:inherit}
         .phone-cc-search:focus{outline:0;border-color:#14b8a6}
-        .phone-cc-list{overflow:auto}
+        .phone-cc-list{overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:#b9c4cc transparent}
+        .phone-cc-list::-webkit-scrollbar{width:8px}
+        .phone-cc-list::-webkit-scrollbar-thumb{background:#c3ced4;border-radius:8px}
+        .phone-cc-list::-webkit-scrollbar-thumb:hover{background:#a7b3bc}
+        .phone-cc-list::-webkit-scrollbar-track{background:transparent}
         .phone-cc-option{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:9px;font-size:14px;color:#0b1228;cursor:pointer}
         .phone-cc-option img{width:20px;height:15px;border-radius:2px;object-fit:cover;flex:0 0 auto}
         .phone-cc-option .cc-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -1195,7 +1199,10 @@ const phoneCC = {
   }
 };
 document.addEventListener("click", ()=> phoneCC.closeOpen());
-window.addEventListener("scroll", ()=> phoneCC.closeOpen(), true);
+window.addEventListener("scroll", (e)=>{
+  if(phoneCC.openPanel && phoneCC.openPanel.contains(e.target)) return;
+  phoneCC.closeOpen();
+}, true);
 window.addEventListener("resize", ()=> phoneCC.closeOpen());
 
 function initPhoneField(wrap){
