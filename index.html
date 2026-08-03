@@ -795,7 +795,7 @@ src="https://www.facebook.com/tr?id=2403385750188307&ev=PageView&noscript=1"/>
         </div>
         <div class='contact-info reveal'>
           <h3>Contact TutorHive</h3>
-          <p class='small'>Email: <strong>contact@tutorhive.in</strong></p>
+          <p class='small'>Email: <strong>support@tutorhive.in</strong></p>
         </div>
       </div>
       <form id="bottomTrialForm" class="form card contact-form-card reveal">
@@ -807,7 +807,7 @@ src="https://www.facebook.com/tr?id=2403385750188307&ev=PageView&noscript=1"/>
         <input type="hidden" name="referrer" value="">
         <select name='role' class='input' required><option value=''>Are you a parent or student?</option><option>Parent</option><option>Student</option></select>
         <input class='input' name='parent' placeholder='Your name' required>
-        <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Phone' required>
+        <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Phone (with country code if outside India)' required>
         <input class='input' name='email' type='email' autocomplete='email' placeholder='Email address'>
         <select name='studentClass' class='input' required><option value=''>Student class</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option></select>
         <select name='board' class='input' required><option value=''>Board / curriculum</option><option>CBSE</option><option>ICSE</option><option>IB</option><option>IGCSE</option><option>State Board</option><option>Other / Not sure</option></select>
@@ -894,7 +894,7 @@ src="https://www.facebook.com/tr?id=2403385750188307&ev=PageView&noscript=1"/>
           <input type="hidden" name="referrer" value="">
           <select name='role' class='input' required><option value=''>Are you a parent or student?</option><option>Parent</option><option>Student</option></select>
           <input class='input' name='parent' placeholder='Your name' required>
-          <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Phone' required>
+          <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Phone (with country code if outside India)' required>
           <input class='input' name='email' type='email' autocomplete='email' placeholder='Email address'>
           <div class='trial-field-row'>
             <select name='studentClass' class='input' required><option value=''>Student class</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option></select>
@@ -975,7 +975,7 @@ src="https://www.facebook.com/tr?id=2403385750188307&ev=PageView&noscript=1"/>
       <div class='footer-column footer-contact'>
         <h3>Contact</h3>
         <p class='small'>Bangalore, Karnataka, India</p>
-        <p class='small'><a href='mailto:contact@tutorhive.in'>contact@tutorhive.in</a></p>
+        <p class='small'><a href='mailto:support@tutorhive.in'>support@tutorhive.in</a></p>
         <div class='social-links' aria-label='Social links'>
           <a class='social-link facebook' href='' aria-label='Facebook'>
             <svg viewBox='0 0 24 24' aria-hidden='true'><path d='M14.2 8.1V6.7c0-.7.5-.9.9-.9h2.3V2h-3.2c-3.5 0-4.3 2.6-4.3 4.3v1.8H7v3.9h2.9v10h4.3V12h3.1l.5-3.9h-3.6z'/></svg>
@@ -1096,30 +1096,22 @@ const formSuccessOverlay = document.getElementById("formSuccessOverlay");
 document.getElementById("formSuccessClose")?.addEventListener("click",()=>formSuccessOverlay?.classList.remove("active"));
 formSuccessOverlay?.addEventListener("click",(event)=>{ if(event.target === formSuccessOverlay) formSuccessOverlay.classList.remove("active"); });
 
-function normalizeIndianPhone(value){
+function normalizePhone(value){
+  const hasPlus = /^\s*\+/.test(String(value || ""));
   let digits = String(value || "").replace(/\D/g, "");
-  if(digits.length === 11 && digits.startsWith("0")) digits = digits.slice(1);
-  if(digits.length === 12 && digits.startsWith("91")) digits = digits.slice(2);
-  return /^[6-9]\d{9}$/.test(digits) ? digits : "";
+  if(!hasPlus && digits.length === 11 && digits.startsWith("0")) digits = digits.slice(1);
+  return /^\d{7,15}$/.test(digits) ? digits : "";
 }
 
 function isLikelyRealPhone(digits){
   if(!digits) return false;
-  const commonFakeNumbers = new Set([
-    "9876543210",
-    "9123456789",
-    "9999999999",
-    "8888888888",
-    "7777777777",
-    "6666666666"
-  ]);
   const ascending = "0123456789";
   const descending = "9876543210";
-  if(commonFakeNumbers.has(digits)) return false;
-  if(/^(\d)\1{9}$/.test(digits)) return false;
+  if(/^0+$/.test(digits)) return false;
+  if(/^(\d)\1+$/.test(digits)) return false;
   if(ascending.includes(digits) || descending.includes(digits)) return false;
-  if(/(\d)\1{5,}/.test(digits)) return false;
-  return new Set(digits).size >= 4;
+  if(/(\d)\1{6,}/.test(digits)) return false;
+  return new Set(digits).size >= 3;
 }
 
 function wireForm(formId){
@@ -1149,9 +1141,9 @@ function wireForm(formId){
     }
     const data = Object.fromEntries(new FormData(form).entries());
     if(data.role) { data.parent = (data.parent || "").trim() + " (" + data.role + ")"; delete data.role; }
-    const verifiedPhone = normalizeIndianPhone(data.phone);
+    const verifiedPhone = normalizePhone(data.phone);
     if(!isLikelyRealPhone(verifiedPhone)){
-      phoneInput?.setCustomValidity("Please enter a real 10-digit Indian mobile number for WhatsApp or call follow-up.");
+      phoneInput?.setCustomValidity("Please enter a valid phone number (with country code if outside India) for WhatsApp or call follow-up.");
       phoneInput?.reportValidity();
       phoneInput?.focus();
       return;
