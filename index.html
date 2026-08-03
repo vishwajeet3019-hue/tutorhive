@@ -355,6 +355,26 @@
         .hive-select-option{padding:11px 12px;border-radius:9px;font-size:15px;line-height:1.3;color:#0b1228;cursor:pointer}
         .hive-select-option:hover,.hive-select-option:focus{background:#ecfdfa;color:#0f766e;outline:0}
         .hive-select-option.selected{font-weight:800;color:#0f766e;background:rgba(20,184,166,.08)}
+        .phone-field{display:flex;align-items:stretch;min-height:52px;border:1px solid #e4e8ee;border-radius:11px;background:#f7fbfb;box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
+        .phone-field:focus-within{border-color:#14b8a6;box-shadow:0 0 0 4px rgba(20,184,166,.1)}
+        .phone-cc-trigger{display:flex;align-items:center;gap:6px;flex:0 0 auto;padding:0 10px;border:0;border-right:1px solid #e4e8ee;background:transparent;cursor:pointer;font:inherit;font-size:15px;font-weight:800;color:#0b1228;-webkit-appearance:none;appearance:none}
+        .phone-cc-trigger:focus-visible{outline:0;background:#ecfdfa}
+        .phone-cc-flag{width:20px;height:15px;border-radius:2px;object-fit:cover;display:block;flex:0 0 auto}
+        .phone-cc-trigger .hive-select-arrow{margin-left:1px}
+        .phone-number-input{flex:1;min-width:0;border:0;background:transparent;padding:0 14px;font:inherit;font-size:15px;color:#0b1228}
+        .phone-number-input:focus{outline:0}
+        .phone-cc-panel{position:fixed;z-index:1000;display:none;flex-direction:column;overflow:hidden;padding:8px;border:1px solid rgba(219,232,236,.9);border-radius:14px;background:#fff;box-shadow:0 22px 50px rgba(15,23,42,.16)}
+        .phone-cc-panel.open{display:flex}
+        .phone-cc-search{box-sizing:border-box;width:100%;flex:0 0 auto;margin-bottom:6px;padding:9px 10px;border:1px solid #dbe8ec;border-radius:9px;font-size:14px;font-family:inherit}
+        .phone-cc-search:focus{outline:0;border-color:#14b8a6}
+        .phone-cc-list{overflow:auto}
+        .phone-cc-option{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:9px;font-size:14px;color:#0b1228;cursor:pointer}
+        .phone-cc-option img{width:20px;height:15px;border-radius:2px;object-fit:cover;flex:0 0 auto}
+        .phone-cc-option .cc-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        .phone-cc-option .cc-dial{color:#5b6675;font-weight:700}
+        .phone-cc-option:hover,.phone-cc-option.active{background:#ecfdfa;color:#0f766e}
+        .phone-cc-empty{padding:10px;font-size:14px;color:#8a94a6;text-align:center}
+        @media(max-width:640px){.phone-field{min-height:46px}.phone-number-input{padding:0 12px}.phone-cc-trigger{padding:0 8px}}
         .story-page{position:relative;overflow:hidden;background:linear-gradient(180deg,#ffffff 0%,#fff 58%,#f8fbfb 100%)}
         .story-page::before{content:"";position:absolute;left:-76px;bottom:38px;width:300px;height:180px;border-radius:38px;background:linear-gradient(135deg,rgba(20,184,166,.07),rgba(20,184,166,.1));transform:rotate(-10deg);pointer-events:none}
         .story-page::after{content:"";position:absolute;right:7%;top:54px;width:210px;height:150px;background-image:url("data:image/svg+xml,%3Csvg width='190' height='140' viewBox='0 0 190 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%2314b8a6' stroke-width='3' opacity='.2'%3E%3Cpath d='M38 14 62 28v28L38 70 14 56V28z'/%3E%3Cpath d='M86 42 110 56v28L86 98 62 84V56z'/%3E%3Cpath d='M134 14 158 28v28l-24 14-24-14V28z'/%3E%3C/g%3E%3C/svg%3E");background-size:190px 140px;background-repeat:no-repeat;pointer-events:none}
@@ -807,7 +827,10 @@ src="https://www.facebook.com/tr?id=2403385750188307&ev=PageView&noscript=1"/>
         <input type="hidden" name="referrer" value="">
         <select name='role' class='input' required><option value=''>Are you a parent or student?</option><option>Parent</option><option>Student</option></select>
         <input class='input' name='parent' placeholder='Your name' required>
-        <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='WhatsApp / phone number' required>
+        <div class='phone-field'>
+          <button type='button' class='phone-cc-trigger' aria-haspopup='listbox' aria-expanded='false'></button>
+          <input class='phone-number-input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='WhatsApp / phone number' required>
+        </div>
         <input class='input' name='email' type='email' autocomplete='email' placeholder='Email address'>
         <select name='studentClass' class='input' required><option value=''>Student class</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option></select>
         <select name='board' class='input' required><option value=''>Board / curriculum</option><option>CBSE</option><option>ICSE</option><option>IB</option><option>IGCSE</option><option>State Board</option><option>Other / Not sure</option></select>
@@ -894,7 +917,10 @@ src="https://www.facebook.com/tr?id=2403385750188307&ev=PageView&noscript=1"/>
           <input type="hidden" name="referrer" value="">
           <select name='role' class='input' required><option value=''>Are you a parent or student?</option><option>Parent</option><option>Student</option></select>
           <input class='input' name='parent' placeholder='Your name' required>
-          <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='WhatsApp / phone number' required>
+          <div class='phone-field'>
+            <button type='button' class='phone-cc-trigger' aria-haspopup='listbox' aria-expanded='false'></button>
+            <input class='phone-number-input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='WhatsApp / phone number' required>
+          </div>
           <input class='input' name='email' type='email' autocomplete='email' placeholder='Email address'>
           <div class='trial-field-row'>
             <select name='studentClass' class='input' required><option value=''>Student class</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option></select>
@@ -1114,43 +1140,185 @@ function isLikelyRealPhone(digits){
   return new Set(digits).size >= 3;
 }
 
-const TIMEZONE_DIAL_CODES = {
-  "Asia/Kolkata":"+91","Asia/Calcutta":"+91",
-  "Asia/Dubai":"+971",
-  "Europe/London":"+44",
+const PHONE_COUNTRIES = [
+  ["in","91","India"],["ae","971","United Arab Emirates"],["gb","44","United Kingdom"],["us","1","United States"],
+  ["sa","966","Saudi Arabia"],["qa","974","Qatar"],["kw","965","Kuwait"],["om","968","Oman"],["bh","973","Bahrain"],
+  ["sg","65","Singapore"],["my","60","Malaysia"],["au","61","Australia"],["ca","1","Canada"],["nz","64","New Zealand"],
+  ["ie","353","Ireland"],["de","49","Germany"],["fr","33","France"],["es","34","Spain"],["it","39","Italy"],
+  ["nl","31","Netherlands"],["ch","41","Switzerland"],["se","46","Sweden"],["no","47","Norway"],["dk","45","Denmark"],
+  ["fi","358","Finland"],["pt","351","Portugal"],["pl","48","Poland"],["at","43","Austria"],["be","32","Belgium"],
+  ["gr","30","Greece"],["ru","7","Russia"],["tr","90","Turkey"],["za","27","South Africa"],["ng","234","Nigeria"],
+  ["ke","254","Kenya"],["eg","20","Egypt"],["il","972","Israel"],["jo","962","Jordan"],["lb","961","Lebanon"],
+  ["iq","964","Iraq"],["jp","81","Japan"],["kr","82","South Korea"],["cn","86","China"],["hk","852","Hong Kong"],
+  ["tw","886","Taiwan"],["th","66","Thailand"],["id","62","Indonesia"],["ph","63","Philippines"],["vn","84","Vietnam"],
+  ["pk","92","Pakistan"],["bd","880","Bangladesh"],["lk","94","Sri Lanka"],["np","977","Nepal"],["mm","95","Myanmar"],
+  ["br","55","Brazil"],["mx","52","Mexico"],["ar","54","Argentina"],["cl","56","Chile"],["co","57","Colombia"]
+];
+function flagUrl(iso2){ return "https://flagcdn.com/24x18/" + iso2 + ".png"; }
+
+const TIMEZONE_COUNTRY = {
+  "Asia/Kolkata":"in","Asia/Calcutta":"in",
+  "Asia/Dubai":"ae",
+  "Europe/London":"gb",
 };
-function guessDialCodeFromTimezone(){
+function guessCountryFromTimezone(){
   const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
-  if(TIMEZONE_DIAL_CODES[tz]) return TIMEZONE_DIAL_CODES[tz];
-  if(tz.startsWith("America/")) return "+1";
-  return "+91";
+  if(TIMEZONE_COUNTRY[tz]) return TIMEZONE_COUNTRY[tz];
+  if(tz.startsWith("America/")) return "us";
+  return "in";
 }
-let dialCodePromise = null;
-function detectDialCode(){
-  if(dialCodePromise) return dialCodePromise;
-  dialCodePromise = (async () => {
+let countryPromise = null;
+function detectCountry(){
+  if(countryPromise) return countryPromise;
+  countryPromise = (async () => {
     try{
       const controller = new AbortController();
       const timeout = setTimeout(()=>controller.abort(), 2500);
       const res = await fetch("https://ipwho.is/", { signal: controller.signal });
       clearTimeout(timeout);
       const json = await res.json();
-      if(json && json.success !== false && json.calling_code) return "+" + json.calling_code;
+      if(json && json.success !== false && json.country_code) return String(json.country_code).toLowerCase();
     }catch(err){}
-    return guessDialCodeFromTimezone();
+    return guessCountryFromTimezone();
   })();
-  return dialCodePromise;
+  return countryPromise;
 }
-function prefillDialCode(phoneInput){
-  if(!phoneInput) return;
-  let touched = false;
-  phoneInput.addEventListener("input", ()=>{ touched = true; }, { once: true });
-  detectDialCode().then(dialCode => {
-    if(touched || phoneInput.value.trim() !== "") return;
-    phoneInput.value = dialCode + " ";
-    const end = phoneInput.value.length;
-    phoneInput.setSelectionRange?.(end, end);
+
+const phoneCC = {
+  openPanel: null,
+  openTrigger: null,
+  closeOpen(){
+    if(this.openPanel) this.openPanel.classList.remove("open");
+    if(this.openTrigger) this.openTrigger.setAttribute("aria-expanded", "false");
+    this.openPanel = null;
+    this.openTrigger = null;
+  }
+};
+document.addEventListener("click", ()=> phoneCC.closeOpen());
+window.addEventListener("scroll", ()=> phoneCC.closeOpen(), true);
+window.addEventListener("resize", ()=> phoneCC.closeOpen());
+
+function initPhoneField(wrap){
+  const trigger = wrap.querySelector(".phone-cc-trigger");
+  const numberInput = wrap.querySelector(".phone-number-input");
+  if(!trigger || !numberInput) return;
+
+  function renderTrigger(country){
+    trigger.dataset.iso2 = country[0];
+    trigger.dataset.dial = country[1];
+    trigger.innerHTML = "";
+    const img = document.createElement("img");
+    img.className = "phone-cc-flag";
+    img.src = flagUrl(country[0]);
+    img.alt = "";
+    img.loading = "lazy";
+    const code = document.createElement("span");
+    code.textContent = "+" + country[1];
+    const arrow = document.createElement("span");
+    arrow.className = "hive-select-arrow";
+    arrow.setAttribute("aria-hidden", "true");
+    trigger.appendChild(img);
+    trigger.appendChild(code);
+    trigger.appendChild(arrow);
+  }
+  renderTrigger(PHONE_COUNTRIES[0]);
+
+  detectCountry().then(iso2 => {
+    if(trigger.dataset.userSelected) return;
+    const match = PHONE_COUNTRIES.find(c => c[0] === iso2);
+    if(match) renderTrigger(match);
   });
+
+  const panel = document.createElement("div");
+  panel.className = "phone-cc-panel";
+  panel.setAttribute("role", "listbox");
+  const search = document.createElement("input");
+  search.type = "text";
+  search.className = "phone-cc-search";
+  search.placeholder = "Search country or code";
+  const list = document.createElement("div");
+  list.className = "phone-cc-list";
+  panel.appendChild(search);
+  panel.appendChild(list);
+  document.body.appendChild(panel);
+
+  const optionEls = PHONE_COUNTRIES.map(country => {
+    const item = document.createElement("div");
+    item.className = "phone-cc-option";
+    item.setAttribute("role", "option");
+    item.tabIndex = -1;
+    const img = document.createElement("img");
+    img.src = flagUrl(country[0]);
+    img.alt = "";
+    img.loading = "lazy";
+    const name = document.createElement("span");
+    name.className = "cc-name";
+    name.textContent = country[2];
+    const dial = document.createElement("span");
+    dial.className = "cc-dial";
+    dial.textContent = "+" + country[1];
+    item.appendChild(img);
+    item.appendChild(name);
+    item.appendChild(dial);
+    item.addEventListener("click", ()=>{
+      trigger.dataset.userSelected = "1";
+      renderTrigger(country);
+      close();
+      numberInput.focus();
+    });
+    list.appendChild(item);
+    return { el: item, country };
+  });
+
+  function filter(){
+    const q = search.value.trim().toLowerCase();
+    optionEls.forEach(({el, country})=>{
+      const match = !q || country[2].toLowerCase().includes(q) || country[1].includes(q) || country[0].includes(q);
+      el.style.display = match ? "" : "none";
+    });
+  }
+  search.addEventListener("input", filter);
+  search.addEventListener("keydown", (e)=>{
+    if(e.key === "Escape"){ close(); trigger.focus(); }
+    else if(e.key === "Enter"){
+      e.preventDefault();
+      const firstVisible = optionEls.find(o => o.el.style.display !== "none");
+      if(firstVisible) firstVisible.el.click();
+    }
+  });
+
+  function position(){
+    const r = trigger.getBoundingClientRect();
+    panel.style.left = r.left + "px";
+    panel.style.top = (r.bottom + 6) + "px";
+    panel.style.width = Math.max(240, r.width) + "px";
+    const spaceBelow = window.innerHeight - r.bottom;
+    list.style.maxHeight = Math.max(140, Math.min(260, spaceBelow - 60)) + "px";
+  }
+
+  function open(){
+    if(phoneCC.openPanel === panel) return;
+    phoneCC.closeOpen();
+    position();
+    search.value = "";
+    filter();
+    panel.classList.add("open");
+    trigger.setAttribute("aria-expanded", "true");
+    phoneCC.openPanel = panel;
+    phoneCC.openTrigger = trigger;
+    setTimeout(()=> search.focus(), 0);
+  }
+  function close(){
+    if(phoneCC.openPanel === panel) phoneCC.closeOpen();
+  }
+
+  trigger.addEventListener("click", (e)=>{
+    e.stopPropagation();
+    if(phoneCC.openPanel === panel){ phoneCC.closeOpen(); } else { open(); }
+  });
+  panel.addEventListener("click", (e)=> e.stopPropagation());
+
+  wrap._phoneField = { getDialCode: () => trigger.dataset.dial || "91" };
 }
 
 function wireForm(formId){
@@ -1159,7 +1327,8 @@ function wireForm(formId){
   let submitted = false;
   const phoneInput = form.querySelector("[name='phone']");
   phoneInput?.addEventListener("input",()=>phoneInput.setCustomValidity(""));
-  prefillDialCode(phoneInput);
+  const phoneWrap = form.querySelector(".phone-field");
+  if(phoneWrap) initPhoneField(phoneWrap);
   form.addEventListener("submit", async (e)=>{
     e.preventDefault();
     if(submitted) return;
@@ -1181,9 +1350,10 @@ function wireForm(formId){
     }
     const data = Object.fromEntries(new FormData(form).entries());
     if(data.role) { data.parent = (data.parent || "").trim() + " (" + data.role + ")"; delete data.role; }
-    const verifiedPhone = normalizePhone(data.phone);
+    const dialCode = phoneWrap?._phoneField?.getDialCode() || "91";
+    const verifiedPhone = normalizePhone("+" + dialCode + (data.phone || ""));
     if(!isLikelyRealPhone(verifiedPhone)){
-      phoneInput?.setCustomValidity("Please enter a valid phone number (with country code if outside India) for WhatsApp or call follow-up.");
+      phoneInput?.setCustomValidity("Please enter a valid phone number for WhatsApp or call follow-up.");
       phoneInput?.reportValidity();
       phoneInput?.focus();
       return;
