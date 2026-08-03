@@ -807,7 +807,7 @@ src="https://www.facebook.com/tr?id=2403385750188307&ev=PageView&noscript=1"/>
         <input type="hidden" name="referrer" value="">
         <select name='role' class='input' required><option value=''>Are you a parent or student?</option><option>Parent</option><option>Student</option></select>
         <input class='input' name='parent' placeholder='Your name' required>
-        <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Phone (with country code if outside India)' required>
+        <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='WhatsApp / phone number' required>
         <input class='input' name='email' type='email' autocomplete='email' placeholder='Email address'>
         <select name='studentClass' class='input' required><option value=''>Student class</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option></select>
         <select name='board' class='input' required><option value=''>Board / curriculum</option><option>CBSE</option><option>ICSE</option><option>IB</option><option>IGCSE</option><option>State Board</option><option>Other / Not sure</option></select>
@@ -894,7 +894,7 @@ src="https://www.facebook.com/tr?id=2403385750188307&ev=PageView&noscript=1"/>
           <input type="hidden" name="referrer" value="">
           <select name='role' class='input' required><option value=''>Are you a parent or student?</option><option>Parent</option><option>Student</option></select>
           <input class='input' name='parent' placeholder='Your name' required>
-          <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='Phone (with country code if outside India)' required>
+          <input class='input' name='phone' type='tel' inputmode='tel' autocomplete='tel' placeholder='WhatsApp / phone number' required>
           <input class='input' name='email' type='email' autocomplete='email' placeholder='Email address'>
           <div class='trial-field-row'>
             <select name='studentClass' class='input' required><option value=''>Student class</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option></select>
@@ -1114,12 +1114,52 @@ function isLikelyRealPhone(digits){
   return new Set(digits).size >= 3;
 }
 
+const TIMEZONE_DIAL_CODES = {
+  "Asia/Kolkata":"+91","Asia/Calcutta":"+91",
+  "Asia/Dubai":"+971",
+  "Europe/London":"+44",
+};
+function guessDialCodeFromTimezone(){
+  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+  if(TIMEZONE_DIAL_CODES[tz]) return TIMEZONE_DIAL_CODES[tz];
+  if(tz.startsWith("America/")) return "+1";
+  return "+91";
+}
+let dialCodePromise = null;
+function detectDialCode(){
+  if(dialCodePromise) return dialCodePromise;
+  dialCodePromise = (async () => {
+    try{
+      const controller = new AbortController();
+      const timeout = setTimeout(()=>controller.abort(), 2500);
+      const res = await fetch("https://ipwho.is/", { signal: controller.signal });
+      clearTimeout(timeout);
+      const json = await res.json();
+      if(json && json.success !== false && json.calling_code) return "+" + json.calling_code;
+    }catch(err){}
+    return guessDialCodeFromTimezone();
+  })();
+  return dialCodePromise;
+}
+function prefillDialCode(phoneInput){
+  if(!phoneInput) return;
+  let touched = false;
+  phoneInput.addEventListener("input", ()=>{ touched = true; }, { once: true });
+  detectDialCode().then(dialCode => {
+    if(touched || phoneInput.value.trim() !== "") return;
+    phoneInput.value = dialCode + " ";
+    const end = phoneInput.value.length;
+    phoneInput.setSelectionRange?.(end, end);
+  });
+}
+
 function wireForm(formId){
   const form = document.getElementById(formId);
   if(!form) return;
   let submitted = false;
   const phoneInput = form.querySelector("[name='phone']");
   phoneInput?.addEventListener("input",()=>phoneInput.setCustomValidity(""));
+  prefillDialCode(phoneInput);
   form.addEventListener("submit", async (e)=>{
     e.preventDefault();
     if(submitted) return;
