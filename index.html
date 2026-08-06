@@ -1358,7 +1358,12 @@ function wireForm(formId){
     const data = Object.fromEntries(new FormData(form).entries());
     if(data.role) { data.parent = (data.parent || "").trim() + " (" + data.role + ")"; delete data.role; }
     const dialCode = phoneWrap?._phoneField?.getDialCode() || "91";
-    const verifiedPhone = normalizePhone("+" + dialCode + (data.phone || ""));
+    let rawPhoneDigits = String(data.phone || "").replace(/\D/g, "");
+    if(dialCode.length > 1 && rawPhoneDigits.startsWith(dialCode)){
+      const stripped = rawPhoneDigits.slice(dialCode.length);
+      if(stripped.length >= 6 && stripped.length <= 10) rawPhoneDigits = stripped;
+    }
+    const verifiedPhone = normalizePhone("+" + dialCode + rawPhoneDigits);
     if(!isLikelyRealPhone(verifiedPhone)){
       phoneInput?.setCustomValidity("Please enter a valid phone number for WhatsApp or call follow-up.");
       phoneInput?.reportValidity();
