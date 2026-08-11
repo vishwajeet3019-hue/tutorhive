@@ -46,25 +46,18 @@
     .price-card .btn.primary{background:#fff;color:#07142f;box-shadow:0 12px 26px rgba(0,0,0,.2)}
     .hero-flex{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:40px;align-items:center}
     .hero-visual{position:relative}
-    .hero-visual-card{position:relative;overflow:hidden;border-radius:26px;background:linear-gradient(135deg,#050b1f 0%,#07142f 58%,#14b8a6 165%);color:#fff;padding:26px;box-shadow:0 30px 70px rgba(7,20,47,.25)}
-    .hero-visual-card::before{content:"";position:absolute;right:-40px;bottom:-40px;width:200px;height:150px;background-image:url("data:image/svg+xml,%3Csvg width='190' height='140' viewBox='0 0 190 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='3' opacity='.14'%3E%3Cpath d='M38 14 62 28v28L38 70 14 56V28z'/%3E%3Cpath d='M86 42 110 56v28L86 98 62 84V56z'/%3E%3Cpath d='M134 14 158 28v28l-24 14-24-14V28z'/%3E%3C/g%3E%3C/svg%3E");background-size:200px 150px;background-repeat:no-repeat;pointer-events:none}
-    .hero-visual-card>*{position:relative;z-index:1}
-    .hero-visual-top{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:800;color:#d8f5f1;letter-spacing:.03em;text-transform:uppercase}
-    .hero-visual-dot{width:8px;height:8px;border-radius:50%;background:#5eead4;box-shadow:0 0 0 4px rgba(94,234,212,.25);animation:liveDot 2s ease-in-out infinite}
-    @keyframes liveDot{0%,100%{opacity:1}50%{opacity:.35}}
-    @media(prefers-reduced-motion:reduce){.hero-visual-dot{animation:none}}
-    .hero-visual-board{margin-top:16px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);padding:16px;display:flex;align-items:center;justify-content:center}
-    .hero-visual-board svg{width:100%;height:64px;stroke:#5eead4;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-    .hero-visual-seats{margin-top:18px}
-    .seat-row{display:flex;gap:8px}
-    .seat{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.35);display:grid;place-items:center;flex:0 0 auto}
-    .seat svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-    .seat-label{display:block;margin-top:10px;font-size:12.5px;font-weight:800;color:#d8f5f1}
-    .hero-visual-footer{display:flex;gap:10px;margin-top:20px}
-    .hero-visual-chip{flex:1;border-radius:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);padding:10px 12px}
-    .hero-visual-chip strong{display:block;font-size:18px;letter-spacing:-.01em}
-    .hero-visual-chip span{display:block;font-size:11px;color:#d8f5f1;font-weight:700;margin-top:2px}
-    @media(max-width:960px){.hero-flex{grid-template-columns:1fr}.hero-visual{max-width:420px;margin:28px auto 0}}
+    .hero-visual-shell{position:relative;padding:22px 0 16px 22px}
+    .hero-visual-shell::before{content:"";position:absolute;inset:28px 16px 0 70px;border-radius:26px;background:linear-gradient(145deg,rgba(45,212,191,.24),rgba(20,184,166,.08));transform:rotate(7deg);pointer-events:none}
+    .hero-visual-shell::after{content:"";position:absolute;inset:16px 0 22px 42px;border-radius:28px;background:radial-gradient(circle at 22% 24%,rgba(45,212,191,.2),transparent 34%),linear-gradient(135deg,rgba(20,184,166,.16),rgba(94,234,212,.06));transform:rotate(-4deg);pointer-events:none}
+    .hero-visual-card{position:relative;z-index:1;overflow:hidden;border:1px solid rgba(207,224,236,.72);border-radius:24px;box-shadow:0 24px 60px rgba(15,23,42,.1),0 0 40px rgba(45,212,191,.14);background:linear-gradient(135deg,#ffffff 0%,#ffffff 46%,#ecfdfa 100%)}
+    .hero-visual-card svg{display:block;width:100%;height:auto}
+    .hero-visual-card .float{animation:heroFloat 4.6s ease-in-out infinite}
+    .hero-visual-card .float.d1{animation-delay:.5s}
+    .hero-visual-card .float.d2{animation-delay:1s}
+    .hero-visual-card .float.d3{animation-delay:1.5s}
+    @keyframes heroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+    @media(prefers-reduced-motion:reduce){.hero-visual-card .float{animation:none}}
+    @media(max-width:960px){.hero-flex{grid-template-columns:1fr}.hero-visual{max-width:380px;margin:28px auto 0}}
     .stat-strip{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:26px;max-width:520px}
     .stat-item{display:flex;align-items:center;gap:10px;border:1px solid rgba(20,184,166,.25);background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 10px 24px rgba(15,23,42,.05)}
     .stat-icon{flex:0 0 auto;width:36px;height:36px;display:grid;place-items:center;border-radius:10px;background:#ecfdfa}
@@ -149,8 +142,8 @@
     <section class="hero"><div class="container"><div class="hero-flex">
       <div class="hero-copy">
         <div class="breadcrumbs"><a href="../">Home</a><span>/</span><span>Class 10 CBSE Maths</span></div>
-        <span class="eyebrow">CBSE Class 10 Maths · Live small-batch tuition</span>
-        <h1>Class 10 CBSE Maths Tuition With Just 6 Students Per Batch</h1>
+        <span class="eyebrow">Live small-batch tuition</span>
+        <h1>Class 10 CBSE Maths Tuition</h1>
         <p class="lede">Live online CBSE Class 10 Maths classes taught in batches of a maximum of 6 students, so your child gets real attention without paying 1:1 tuition prices. <strong>₹1,999/month</strong> gets <strong>12 live classes</strong>, weekly tests, individual doubt solving, and monthly progress tracking, priced like a group class and taught like a private one.</p>
         <div class="cta-row"><a class="btn primary" href="#trial">Book a Free Trial</a><a class="btn" href="#price">See what's included</a></div>
         <div class="stat-strip" role="list">
@@ -161,23 +154,35 @@
         </div>
       </div>
       <div class="hero-visual" aria-hidden="true">
-        <div class="hero-visual-card">
-          <div class="hero-visual-top"><span class="hero-visual-dot"></span>Live · Class 10 CBSE Maths</div>
-          <div class="hero-visual-board"><svg viewBox="0 0 200 60" preserveAspectRatio="none"><path d="M4 44 30 20 50 34 74 12 96 30 120 16 144 36 166 18 196 30"/></svg></div>
-          <div class="hero-visual-seats">
-            <div class="seat-row">
-              <span class="seat"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-              <span class="seat"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-              <span class="seat"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-              <span class="seat"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-              <span class="seat"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-              <span class="seat"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-            </div>
-            <span class="seat-label">Only 6 students in every batch</span>
-          </div>
-          <div class="hero-visual-footer">
-            <div class="hero-visual-chip"><strong>₹1,999</strong><span>per month</span></div>
-            <div class="hero-visual-chip"><strong>12</strong><span>live classes</span></div>
+        <div class="hero-visual-shell">
+          <div class="hero-visual-card">
+            <svg viewBox="0 0 400 460" xmlns="http://www.w3.org/2000/svg">
+              <path d="M56 356 C104 260 156 202 226 172 C284 148 322 122 344 74" fill="none" stroke="#07142f" stroke-width="2" opacity=".14" stroke-linecap="round"/>
+              <path d="M48 118 C118 158 186 148 246 198 C296 238 316 298 298 358" fill="none" stroke="#14b8a6" stroke-width="2" opacity=".26" stroke-linecap="round"/>
+              <g class="float">
+                <rect x="38" y="58" width="92" height="92" rx="26" fill="#fff" stroke="rgba(20,184,166,.22)" stroke-width="1.2"/>
+                <text x="84" y="120" text-anchor="middle" font-size="50" fill="#07142f" font-weight="500" font-family="Georgia,serif">π</text>
+              </g>
+              <g class="float d1">
+                <rect x="250" y="38" width="100" height="100" rx="28" fill="rgba(255,255,255,.92)" stroke="rgba(20,184,166,.3)" stroke-width="1.2"/>
+                <text x="300" y="106" text-anchor="middle" font-size="50" fill="#07142f" font-weight="500" font-family="Georgia,serif">Σ</text>
+              </g>
+              <g class="float d2">
+                <rect x="54" y="270" width="96" height="96" rx="26" fill="rgba(255,255,255,.92)" stroke="rgba(20,184,166,.24)" stroke-width="1.2"/>
+                <text x="102" y="332" text-anchor="middle" font-size="42" fill="#07142f" font-weight="500" font-family="Georgia,serif">√x</text>
+              </g>
+              <g class="float d3">
+                <rect x="246" y="254" width="104" height="96" rx="26" fill="rgba(255,255,255,.92)" stroke="rgba(20,184,166,.3)" stroke-width="1.2"/>
+                <text x="298" y="314" text-anchor="middle" font-size="42" fill="#07142f" font-weight="500" font-family="Georgia,serif">x²</text>
+              </g>
+              <g class="float d1" fill="none" stroke="#14b8a6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".8">
+                <path d="M160 402 200 424 240 402"/>
+                <path d="M200 424 200 382"/>
+              </g>
+              <circle cx="56" cy="356" r="5" fill="#14b8a6"/>
+              <circle cx="344" cy="74" r="4.5" fill="#14b8a6"/>
+              <circle cx="226" cy="172" r="4" fill="#0f766e"/>
+            </svg>
           </div>
         </div>
       </div>
