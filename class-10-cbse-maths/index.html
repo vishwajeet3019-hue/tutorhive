@@ -95,6 +95,12 @@
     .chip{display:inline-flex;align-items:center;border:1px solid var(--border);background:#fff;border-radius:999px;padding:7px 13px;font-size:13.5px;font-weight:700;color:var(--ink)}
     .inline-cta{display:inline-flex;align-items:center;gap:6px;color:var(--brand);font-weight:800}
     .inline-cta:hover{text-decoration:underline}
+    .faq-item{border:1px solid rgba(219,232,236,.9);border-radius:14px;background:linear-gradient(145deg,var(--glass-strong),var(--glass));box-shadow:0 10px 26px rgba(15,23,42,.04);overflow:hidden}
+    .faq-item summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;cursor:pointer;color:#0b1228;font-size:18px;font-weight:900;list-style:none}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:"";width:9px;height:9px;border:solid var(--brand2);border-width:0 2px 2px 0;transform:rotate(45deg);transition:transform .18s ease;flex:0 0 auto}
+    .faq-item[open] summary::after{transform:rotate(-135deg)}
+    .faq-item p{margin:0;padding:0 20px 18px}
     .trial-section{background:linear-gradient(180deg,#ecfdfa 0%,#f8fdfc 42%,#fff 100%)}
     .trial-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.9fr);gap:28px;align-items:start}
     .trial-form-box{position:relative;display:grid;gap:14px;padding:28px;border:2px solid rgba(20,184,166,.4);box-shadow:0 30px 70px rgba(7,20,47,.14),0 0 0 6px rgba(20,184,166,.1)}
@@ -365,13 +371,13 @@
     <section class="section"><div class="container"><div class="cta-band"><div><h2>Meet the tutor before you commit</h2><p>New batch starts 24 August, capped at 6 students. Book a free trial and see a real class first, no payment needed.</p></div><a class="btn primary" href="#trial">Book Free Trial</a></div></div></section>
 
     <section class="section alt"><div class="container"><h2>FAQs</h2><div class="faq">
-      <article><h3>What is included in the ₹1,999/month batch?</h3><p class="small">12 live online classes a month, weekly tests and practice, individual doubt solving, and a monthly progress update for parents.</p></article>
-      <article><h3>How many students are in each batch?</h3><p class="small">A maximum of 6 students per batch, so every student still gets individual attention and doubt-solving time.</p></article>
-      <article><h3>When does the new batch start?</h3><p class="small">The new Class 10 CBSE Maths batch starts 24 August. Seats are limited to 6 students per batch.</p></article>
-      <article><h3>How is this different from 1:1 tuition?</h3><p class="small">Same live, interactive teaching and doubt solving as 1:1 classes, but the cost is shared across up to 6 students, so it costs far less while still giving personal attention.</p></article>
-      <article><h3>Is a free trial available before joining?</h3><p class="small">Yes. Book a free trial class to see the live teaching format and meet the tutor before joining the batch.</p></article>
-      <article><h3>What topics does the Class 10 CBSE Maths batch cover?</h3><p class="small">The full CBSE Class 10 Maths syllabus, including Real Numbers, Polynomials, Quadratic Equations, Arithmetic Progressions, Triangles, Coordinate Geometry, Trigonometry, Circles, Mensuration, Statistics and Probability, taught chapter by chapter aligned to school pace.</p></article>
-      <article><h3>What happens during the free trial class?</h3><p class="small">Your child joins a real live class on Zoom where the tutor teaches an actual Class 10 Maths topic on the digital whiteboard. You get to see the teaching style and ask questions before deciding whether to join the paid batch.</p></article>
+      <details class="faq-item"><summary>What is included in the ₹1,999/month batch?</summary><p class="small">12 live online classes a month, weekly tests and practice, individual doubt solving, and a monthly progress update for parents.</p></details>
+      <details class="faq-item"><summary>How many students are in each batch?</summary><p class="small">A maximum of 6 students per batch, so every student still gets individual attention and doubt-solving time.</p></details>
+      <details class="faq-item"><summary>When does the new batch start?</summary><p class="small">The new Class 10 CBSE Maths batch starts 24 August. Seats are limited to 6 students per batch.</p></details>
+      <details class="faq-item"><summary>How is this different from 1:1 tuition?</summary><p class="small">Same live, interactive teaching and doubt solving as 1:1 classes, but the cost is shared across up to 6 students, so it costs far less while still giving personal attention.</p></details>
+      <details class="faq-item"><summary>Is a free trial available before joining?</summary><p class="small">Yes. Book a free trial class to see the live teaching format and meet the tutor before joining the batch.</p></details>
+      <details class="faq-item"><summary>What topics does the Class 10 CBSE Maths batch cover?</summary><p class="small">The full CBSE Class 10 Maths syllabus, including Real Numbers, Polynomials, Quadratic Equations, Arithmetic Progressions, Triangles, Coordinate Geometry, Trigonometry, Circles, Mensuration, Statistics and Probability, taught chapter by chapter aligned to school pace.</p></details>
+      <details class="faq-item"><summary>What happens during the free trial class?</summary><p class="small">Your child joins a real live class on Zoom where the tutor teaches an actual Class 10 Maths topic on the digital whiteboard. You get to see the teaching style and ask questions before deciding whether to join the paid batch.</p></details>
     </div></div></section>
   </main>
   <footer><div class="container footer-row"><strong>TutorHive</strong><span class="small"><a href="../online-maths-tuition/">Maths tuition</a> · <a href="../cbse-online-tuition/">CBSE tuition</a> · <a href="../">Home</a></span></div></footer>
