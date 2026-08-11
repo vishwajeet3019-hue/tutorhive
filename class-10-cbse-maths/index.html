@@ -44,9 +44,9 @@
     .price-list li{display:flex;align-items:center;gap:10px;font-weight:800}
     .price-list li::before{content:"✓";display:grid;place-items:center;width:22px;height:22px;flex:0 0 auto;border-radius:50%;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);color:#fff;font-size:12px;line-height:1}
     .price-card .btn.primary{background:#fff;color:#07142f;box-shadow:0 12px 26px rgba(0,0,0,.2)}
-    .hero-flex{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(240px,320px);gap:36px;align-items:center}
+    .hero-flex{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,420px);gap:36px;align-items:center}
     .hero-copy h1{color:#0f766e;font-size:clamp(30px,3.3vw,42px)}
-    .hero-visual{position:relative;justify-self:end;width:100%;max-width:320px}
+    .hero-visual{position:relative;justify-self:end;width:100%;max-width:420px}
     .hero-visual-shell{position:relative;padding:16px 0 12px 16px}
     .hero-visual-shell::before{content:"";position:absolute;inset:20px 12px 0 50px;border-radius:22px;background:linear-gradient(145deg,rgba(45,212,191,.24),rgba(20,184,166,.08));transform:rotate(7deg);pointer-events:none}
     .hero-visual-shell::after{content:"";position:absolute;inset:12px 0 16px 30px;border-radius:24px;background:radial-gradient(circle at 22% 24%,rgba(45,212,191,.2),transparent 34%),linear-gradient(135deg,rgba(20,184,166,.16),rgba(94,234,212,.06));transform:rotate(-4deg);pointer-events:none}
@@ -58,7 +58,7 @@
     .hero-visual-card .float.d3{animation-delay:1.5s}
     @keyframes heroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
     @media(prefers-reduced-motion:reduce){.hero-visual-card .float{animation:none}}
-    @media(max-width:960px){.hero-flex{grid-template-columns:1fr}.hero-visual{max-width:280px;margin:28px auto 0;justify-self:center}}
+    @media(max-width:960px){.hero-flex{grid-template-columns:1fr}.hero-visual{max-width:360px;margin:28px auto 0;justify-self:center}}
     .batch-note{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(20,184,166,.3);background:#fff;border-radius:999px;padding:10px 18px 10px 12px;margin-top:26px;box-shadow:0 10px 24px rgba(15,23,42,.05);animation:batchPulse 2.6s ease-in-out infinite}
     .batch-note .stat-icon{flex:0 0 auto;width:32px;height:32px;display:grid;place-items:center;border-radius:9px;background:#ecfdfa;animation:capWiggle 1.8s ease-in-out infinite}
     .batch-note .stat-icon svg{width:17px;height:17px;stroke:var(--brand);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
