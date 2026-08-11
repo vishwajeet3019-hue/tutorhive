@@ -58,18 +58,15 @@
     @keyframes heroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
     @media(prefers-reduced-motion:reduce){.hero-visual-card .float{animation:none}}
     @media(max-width:960px){.hero-flex{grid-template-columns:1fr}.hero-visual{max-width:380px;margin:28px auto 0}}
-    .stat-strip{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:26px;max-width:520px}
-    .stat-item{display:flex;align-items:center;gap:10px;border:1px solid rgba(20,184,166,.25);background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 10px 24px rgba(15,23,42,.05)}
-    .stat-icon{flex:0 0 auto;width:36px;height:36px;display:grid;place-items:center;border-radius:10px;background:#ecfdfa}
-    .stat-icon svg{width:18px;height:18px;stroke:var(--brand);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-    .stat-item strong{display:block;font-size:15px;line-height:1.15;color:var(--ink)}
-    .stat-item span{display:block;font-size:11.5px;color:var(--sub);font-weight:700;margin-top:2px}
-    .stat-item.pulse{animation:batchPulse 2.6s ease-in-out infinite}
-    .stat-item.pulse .stat-icon{animation:capWiggle 1.8s ease-in-out infinite}
+    .batch-note{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(20,184,166,.3);background:#fff;border-radius:999px;padding:10px 18px 10px 12px;margin-top:26px;box-shadow:0 10px 24px rgba(15,23,42,.05);animation:batchPulse 2.6s ease-in-out infinite}
+    .batch-note .stat-icon{flex:0 0 auto;width:32px;height:32px;display:grid;place-items:center;border-radius:9px;background:#ecfdfa;animation:capWiggle 1.8s ease-in-out infinite}
+    .batch-note .stat-icon svg{width:17px;height:17px;stroke:var(--brand);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+    .batch-note strong{color:var(--ink);font-weight:900}
+    .batch-note span{color:var(--sub);font-weight:700}
     @keyframes batchPulse{0%,100%{box-shadow:0 0 0 0 rgba(20,184,166,.3)}50%{box-shadow:0 0 0 7px rgba(20,184,166,0)}}
     @keyframes capWiggle{0%,100%{transform:rotate(0deg)}25%{transform:rotate(-10deg)}75%{transform:rotate(10deg)}}
-    @media(prefers-reduced-motion:reduce){.stat-item.pulse,.stat-item.pulse .stat-icon{animation:none}}
-    @media(max-width:480px){.stat-strip{grid-template-columns:1fr;max-width:100%}}
+    @media(prefers-reduced-motion:reduce){.batch-note,.batch-note .stat-icon{animation:none}}
+    @media(max-width:480px){.batch-note{width:100%;justify-content:center}}
     .positioning-line{margin:12px 0 0;padding-left:14px;border-left:3px solid rgba(255,255,255,.5);color:#fff;font-weight:800;font-style:italic;font-size:15px;line-height:1.4}
     .compare-wrap{overflow-x:auto;border-radius:18px;box-shadow:0 14px 34px rgba(15,23,42,.08);border:1px solid rgba(219,232,236,.88)}
     .compare-table{width:100%;border-collapse:separate;border-spacing:0;min-width:620px;background:#fff}
@@ -159,12 +156,7 @@
         <h1>Class 10 CBSE Maths Tuition</h1>
         <p class="lede">Live online CBSE Class 10 Maths classes taught in batches of a maximum of 6 students, so your child gets real attention without paying 1:1 tuition prices. <strong>₹1,999/month</strong> gets <strong>12 live classes</strong>, weekly tests, individual doubt solving, and monthly progress tracking, priced like a group class and taught like a private one.</p>
         <div class="cta-row"><a class="btn primary" href="#trial">Book a Free Trial</a><a class="btn" href="#price">See what's included</a></div>
-        <div class="stat-strip" role="list">
-          <div class="stat-item pulse" role="listitem"><span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.1 2.7 2 6 2s6-.9 6-2v-5"/><path d="M22 10v6"/></svg></span><div><strong>24 August</strong><span>New batch starts</span></div></div>
-          <div class="stat-item" role="listitem"><span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><div><strong>12 classes</strong><span>Live, every month</span></div></div>
-          <div class="stat-item" role="listitem"><span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2H3v9l10.29 10.29a1 1 0 0 0 1.42 0l7.58-7.58a1 1 0 0 0 0-1.42L12 2Z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></span><div><strong>₹1,999</strong><span>Per month</span></div></div>
-          <div class="stat-item" role="listitem"><span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><div><strong>Max 6</strong><span>Students per batch</span></div></div>
-        </div>
+        <div class="batch-note"><span class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.1 2.7 2 6 2s6-.9 6-2v-5"/><path d="M22 10v6"/></svg></span><strong>New batch starts 24 August</strong></div>
       </div>
       <div class="hero-visual" aria-hidden="true">
         <div class="hero-visual-shell">
