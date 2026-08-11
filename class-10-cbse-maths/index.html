@@ -71,12 +71,20 @@
     @media(prefers-reduced-motion:reduce){.stat-item.pulse,.stat-item.pulse .stat-icon{animation:none}}
     @media(max-width:480px){.stat-strip{grid-template-columns:1fr;max-width:100%}}
     .positioning-line{margin:12px 0 0;padding-left:14px;border-left:3px solid rgba(255,255,255,.5);color:#fff;font-weight:800;font-style:italic;font-size:15px;line-height:1.4}
-    .compare-wrap{overflow-x:auto;border-radius:18px;box-shadow:0 14px 34px rgba(15,23,42,.06);border:1px solid rgba(219,232,236,.88)}
-    .compare-table{width:100%;border-collapse:collapse;min-width:560px;background:#fff}
-    .compare-table th,.compare-table td{padding:14px 16px;text-align:left;font-size:14.5px;border-bottom:1px solid rgba(219,232,236,.7)}
-    .compare-table thead th{background:linear-gradient(120deg,var(--brand),var(--brand2));color:#fff;font-weight:900;font-size:14px;white-space:nowrap}
+    .compare-wrap{overflow-x:auto;border-radius:18px;box-shadow:0 14px 34px rgba(15,23,42,.08);border:1px solid rgba(219,232,236,.88)}
+    .compare-table{width:100%;border-collapse:separate;border-spacing:0;min-width:620px;background:#fff}
+    .compare-table th,.compare-table td{padding:16px 18px;text-align:center;font-size:14.5px;border-bottom:1px solid rgba(219,232,236,.6);vertical-align:middle}
+    .compare-table th:first-child,.compare-table td:first-child{text-align:left}
+    .compare-table thead th{background:var(--brand);color:#fff;font-weight:900;font-size:13.5px;letter-spacing:.01em;white-space:nowrap;border-bottom:0}
+    .compare-table thead th:first-child{background:transparent;border-top-left-radius:17px}
+    .compare-table thead th:last-child{border-top-right-radius:17px}
+    .compare-table thead th.compare-highlight{background:var(--brand2)}
+    .compare-table .recommended-tag{display:block;font-size:10px;letter-spacing:.07em;font-weight:900;color:#eafff9;text-transform:uppercase;margin-bottom:3px}
     .compare-table tbody th{font-weight:800;color:var(--ink);background:#f8fbfb;white-space:nowrap}
+    .compare-table tbody tr:nth-child(even) td:not(.compare-highlight),.compare-table tbody tr:nth-child(even) th{background:#fbfdfd}
     .compare-table tbody tr:last-child td,.compare-table tbody tr:last-child th{border-bottom:0}
+    .compare-table tbody tr:last-child th:first-child{border-bottom-left-radius:17px}
+    .compare-table tbody tr:last-child td:last-child{border-bottom-right-radius:17px}
     .compare-table td.compare-highlight,.compare-table th.compare-highlight{background:#ecfdfa;color:#0f766e;font-weight:900}
     .syllabus-grid{display:flex;flex-wrap:wrap;gap:16px}
     .syllabus-unit{flex:1 1 240px;border:1px solid rgba(219,232,236,.85);border-radius:14px;background:linear-gradient(145deg,var(--glass-strong),var(--glass));padding:16px 18px;box-shadow:0 10px 24px rgba(15,23,42,.04)}
@@ -217,11 +225,11 @@
     <section class="section"><div class="container">
       <span class="eyebrow">Compare</span>
       <h2 style="margin-top:12px">TutorHive batch vs. group tuition vs. 1:1 tuition</h2>
-      <p class="small">A quick look at where TutorHive's small batch sits between large group classes and private 1:1 tuition.</p>
+      <p class="small">A quick look at where TutorHive's small batch sits between traditional group tuition and private 1:1 tuition.</p>
       <div class="compare-wrap" style="margin-top:24px">
         <table class="compare-table">
           <thead>
-            <tr><th scope="col"></th><th scope="col">Large group tuition</th><th scope="col" class="compare-highlight">TutorHive small batch</th><th scope="col">1:1 private tuition</th></tr>
+            <tr><th scope="col"></th><th scope="col">Traditional / Other Group Tuition</th><th scope="col" class="compare-highlight"><span class="recommended-tag">Recommended</span>TutorHive Small Batch</th><th scope="col">1:1 Private Tuition</th></tr>
           </thead>
           <tbody>
             <tr><th scope="row">Batch size</th><td>15-30+ students</td><td class="compare-highlight">Max 6 students</td><td>1 student</td></tr>
