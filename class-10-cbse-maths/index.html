@@ -86,9 +86,14 @@
     .compare-table tbody tr:last-child th:first-child{border-bottom-left-radius:17px}
     .compare-table tbody tr:last-child td:last-child{border-bottom-right-radius:17px}
     .compare-table td.compare-highlight,.compare-table th.compare-highlight{background:#ecfdfa;color:#0f766e;font-weight:900}
-    .syllabus-grid{display:flex;flex-wrap:wrap;gap:16px}
-    .syllabus-unit{flex:1 1 240px;border:1px solid rgba(219,232,236,.85);border-radius:14px;background:linear-gradient(145deg,var(--glass-strong),var(--glass));padding:16px 18px;box-shadow:0 10px 24px rgba(15,23,42,.04)}
-    .syllabus-unit h3{margin:0 0 10px;font-size:13px;color:var(--brand);text-transform:uppercase;letter-spacing:.04em;font-weight:900}
+    .syllabus-grid{display:flex;flex-wrap:wrap;align-items:flex-start;gap:16px}
+    .syllabus-unit{flex:1 1 240px;position:relative;overflow:hidden;border:1px solid rgba(219,232,236,.85);border-radius:14px;background:linear-gradient(145deg,var(--glass-strong),var(--glass));padding:18px;box-shadow:0 10px 24px rgba(15,23,42,.04);transition:transform .2s ease,box-shadow .2s ease}
+    .syllabus-unit::before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--brand),var(--brand2))}
+    .syllabus-unit:hover{transform:translateY(-4px);box-shadow:0 18px 38px rgba(15,23,42,.1)}
+    .syllabus-unit-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+    .syllabus-icon{flex:0 0 auto;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:#ecfdfa;border:1px solid #99f6e4;color:var(--brand)}
+    .syllabus-icon svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+    .syllabus-unit h3{margin:0;font-size:12.5px;color:var(--brand);text-transform:uppercase;letter-spacing:.04em;font-weight:900}
     .chip-row{display:flex;flex-wrap:wrap;gap:8px}
     .chip{display:inline-flex;align-items:center;border:1px solid var(--border);background:#fff;border-radius:999px;padding:7px 13px;font-size:13.5px;font-weight:700;color:var(--ink)}
     .inline-cta{display:inline-flex;align-items:center;gap:6px;color:var(--brand);font-weight:800}
@@ -286,13 +291,34 @@
       <h2 style="margin-top:12px">Class 10 CBSE Maths topics covered</h2>
       <p class="small">The batch follows the current CBSE Class 10 Maths syllabus and is paced to match students' school learning.</p>
       <div class="syllabus-grid" style="margin-top:24px">
-        <div class="syllabus-unit"><h3>Number Systems</h3><div class="chip-row"><span class="chip">Real Numbers</span></div></div>
-        <div class="syllabus-unit"><h3>Algebra</h3><div class="chip-row"><span class="chip">Polynomials</span><span class="chip">Pair of Linear Equations in Two Variables</span><span class="chip">Quadratic Equations</span><span class="chip">Arithmetic Progressions</span></div></div>
-        <div class="syllabus-unit"><h3>Coordinate Geometry</h3><div class="chip-row"><span class="chip">Coordinate Geometry</span></div></div>
-        <div class="syllabus-unit"><h3>Geometry</h3><div class="chip-row"><span class="chip">Triangles</span><span class="chip">Circles</span></div></div>
-        <div class="syllabus-unit"><h3>Trigonometry</h3><div class="chip-row"><span class="chip">Introduction to Trigonometry</span><span class="chip">Some Applications of Trigonometry</span></div></div>
-        <div class="syllabus-unit"><h3>Mensuration</h3><div class="chip-row"><span class="chip">Areas Related to Circles</span><span class="chip">Surface Areas and Volumes</span></div></div>
-        <div class="syllabus-unit"><h3>Statistics and Probability</h3><div class="chip-row"><span class="chip">Statistics</span><span class="chip">Probability</span></div></div>
+        <div class="syllabus-unit">
+          <div class="syllabus-unit-head"><span class="syllabus-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg></span><h3>Number Systems</h3></div>
+          <div class="chip-row"><span class="chip">Real Numbers</span></div>
+        </div>
+        <div class="syllabus-unit">
+          <div class="syllabus-unit-head"><span class="syllabus-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="1"/><line x1="5" y1="12" x2="19" y2="12"/><circle cx="12" cy="18" r="1"/></svg></span><h3>Algebra</h3></div>
+          <div class="chip-row"><span class="chip">Polynomials</span><span class="chip">Pair of Linear Equations in Two Variables</span><span class="chip">Quadratic Equations</span><span class="chip">Arithmetic Progressions</span></div>
+        </div>
+        <div class="syllabus-unit">
+          <div class="syllabus-unit-head"><span class="syllabus-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><circle cx="16" cy="8" r="1.5"/></svg></span><h3>Coordinate Geometry</h3></div>
+          <div class="chip-row"><span class="chip">Coordinate Geometry</span></div>
+        </div>
+        <div class="syllabus-unit">
+          <div class="syllabus-unit-head"><span class="syllabus-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 3 20h18Z"/></svg></span><h3>Geometry</h3></div>
+          <div class="chip-row"><span class="chip">Triangles</span><span class="chip">Circles</span></div>
+        </div>
+        <div class="syllabus-unit">
+          <div class="syllabus-unit-head"><span class="syllabus-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4v16h16"/><path d="M4 12a8 8 0 0 1 8 8"/></svg></span><h3>Trigonometry</h3></div>
+          <div class="chip-row"><span class="chip">Introduction to Trigonometry</span><span class="chip">Some Applications of Trigonometry</span></div>
+        </div>
+        <div class="syllabus-unit">
+          <div class="syllabus-unit-head"><span class="syllabus-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M16 2 2 16l6 6L22 8Z"/><path d="m17.5 7.5-2 2M13.5 11.5l-2 2M9.5 15.5l-2 2"/></svg></span><h3>Mensuration</h3></div>
+          <div class="chip-row"><span class="chip">Areas Related to Circles</span><span class="chip">Surface Areas and Volumes</span></div>
+        </div>
+        <div class="syllabus-unit">
+          <div class="syllabus-unit-head"><span class="syllabus-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="6" y1="20" x2="6" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="18" y1="20" x2="18" y2="14"/></svg></span><h3>Statistics and Probability</h3></div>
+          <div class="chip-row"><span class="chip">Statistics</span><span class="chip">Probability</span></div>
+        </div>
       </div>
       <p class="small" style="margin-top:20px">Not sure which chapters your child needs the most help with? <a class="inline-cta" href="#trial">Book a free trial and we'll check <span aria-hidden="true">→</span></a></p>
     </div></section>
