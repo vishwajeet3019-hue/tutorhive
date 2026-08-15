@@ -690,6 +690,29 @@
     .catch(() => {});
   </script>
   <script>
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    var clickIds = { gclid: "Google Ads", fbclid: "Meta Ads", ttclid: "TikTok Ads", msclkid: "Microsoft Ads" };
+    var adClickId = "", source = "";
+    for (var key in clickIds) {
+      var val = params.get(key) || sessionStorage.getItem(key) || "";
+      if (params.get(key)) sessionStorage.setItem(key, params.get(key));
+      if (val && !adClickId) { adClickId = key + "=" + val; source = clickIds[key]; }
+    }
+    if (!source) {
+      var ref = document.referrer || "";
+      source = ref.indexOf("google") !== -1 ? "Google Organic" : ref === "" ? "Direct" : "Referral";
+    }
+    document.querySelectorAll("input[name='trafficSource']").forEach(function(el){ el.value = source; });
+    document.querySelectorAll("input[name='adClickId']").forEach(function(el){ el.value = adClickId; });
+    var extRef = document.referrer || "";
+    var pageRef = extRef.indexOf("tutorhive.in") !== -1
+      ? extRef.split("?")[0].split("#")[0]
+      : window.location.href.split("#")[0];
+    document.querySelectorAll("input[name='referrer']").forEach(function(el){ el.value = pageRef; });
+  })();
+  </script>
+  <script>
   (function(){
     function enhance(select){
       if(select.dataset.hiveEnhanced) return;
