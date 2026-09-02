@@ -101,6 +101,12 @@ footer{border-top:1px solid var(--border);padding:22px 0}
   .nav-row,.nav .row{grid-template-columns:auto 1fr}
   .menu{display:none}
   .nav-actions{justify-content:flex-end}
+  /* Blog posts keep their header CTA inside .menu (they have no separate
+     .nav-actions). Keep just that button visible on mobile and hide the
+     text links. Scoped to :has(> .btn) so landing-page menus are untouched;
+     browsers without :has() simply fall back to the hidden state above. */
+  .menu:has(> .btn){display:flex;justify-content:flex-end;gap:8px}
+  .menu:has(> .btn) a:not(.btn){display:none}
 }
 @media(max-width:800px){
   .container{width:min(100% - 32px,1180px)}
@@ -124,4 +130,5 @@ footer{border-top:1px solid var(--border);padding:22px 0}
   .about-hero-plain::before{left:-150px;bottom:18px;width:300px;height:180px}
   .about-hero-plain::after{right:-24px;top:112px;width:170px;height:124px;background-size:170px 124px}
   h1{font-size:clamp(34px,10.8vw,46px)}
+  .menu:has(> .btn){justify-content:center}
 }
