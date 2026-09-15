@@ -1,8 +1,23 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18159999181"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","AW-18159999181");</script>
+  <!-- Google tag (gtag.js) - loaded on first interaction to keep INP low -->
+  <script>
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+    gtag("js",new Date());gtag("config","AW-18159999181");
+    (function(){
+      function loadAdsTag(){
+        if(window.__adsTagLoaded)return;window.__adsTagLoaded=true;
+        var s=document.createElement("script");
+        s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id=AW-18159999181";
+        document.head.appendChild(s);
+      }
+      ["scroll","keydown","click","touchstart","mousemove"].forEach(function(evt){
+        addEventListener(evt,loadAdsTag,{once:true,passive:true});
+      });
+      setTimeout(loadAdsTag,5000);
+    })();
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Online Classes for Class 7 Students | TutorHive</title>
