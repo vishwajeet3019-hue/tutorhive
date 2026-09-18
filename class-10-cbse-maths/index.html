@@ -772,6 +772,16 @@
       button.disabled = true;
       button.textContent = "Sending...";
     }
+    const beaconSent = navigator.sendBeacon && navigator.sendBeacon(
+      SCRIPT_URL,
+      new Blob([body], {type: "application/x-www-form-urlencoded;charset=UTF-8"})
+    );
+    if(beaconSent){
+      submitted = true;
+      if(window.fbq) fbq('track', 'Lead');
+      window.location.href = "/trial-thank-you.html";
+      return;
+    }
     try{
       await fetch(SCRIPT_URL, {
         method: "POST",

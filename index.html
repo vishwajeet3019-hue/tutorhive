@@ -1389,13 +1389,25 @@ function wireForm(formId){
       button.disabled = true;
       button.textContent = "Sending...";
     }
+    const beaconSent = navigator.sendBeacon && navigator.sendBeacon(
+      SCRIPT_URL,
+      new Blob([body], {type: "application/x-www-form-urlencoded;charset=UTF-8"})
+    );
+    if(beaconSent && (formId === "trialForm" || formId === "bottomTrialForm")){
+      submitted = true;
+      if(window.fbq) fbq('track', 'Lead');
+      window.location.href = "trial-thank-you.html";
+      return;
+    }
     try{
-      await fetch(SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
-        body
-      });
+      if(!beaconSent){
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
+          body
+        });
+      }
       if(formId === "trialForm" || formId === "bottomTrialForm"){
         submitted = true;
         if(window.fbq) fbq('track', 'Lead');
